@@ -1,0 +1,3 @@
+[submodule "calctl"]
+	path = calctl
+	url = https://github.com/aeon022/calctl.git
