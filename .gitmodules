@@ -1,3 +1,15 @@
 [submodule "calctl"]
 	path = calctl
 	url = https://github.com/aeon022/calctl.git
+[submodule "mailctl"]
+	path = mailctl
+	url = https://github.com/aeon022/mailctl.git
+[submodule "budgetctl"]
+	path = budgetctl
+	url = https://github.com/aeon022/budgetctl.git
+[submodule "notectl"]
+	path = notectl
+	url = https://github.com/aeon022/notectl.git
+[submodule "taskctl"]
+	path = taskctl
+	url = https://github.com/aeon022/taskctl.git
