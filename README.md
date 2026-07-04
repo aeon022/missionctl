@@ -1,91 +1,307 @@
 # missionctl
 
-> Mission Control for your digital life.
+Terminal tools for people who want AI to actually do things, not just talk about them.
 
-missionctl is a suite of small, focused CLI/TUI tools for macOS power users.
-Each tool does one thing well, stores data locally, and exposes a clean interface
-that AI agents can call directly — no SaaS, no subscriptions, no cloud lock-in.
+missionctl is a suite of six focused CLI/TUI tools for macOS. Each manages one domain — email, calendar, tasks, notes, budget, social media — stores everything locally in SQLite, and exposes a clean MCP server so AI agents can read and write your real data.
 
----
-
-## The Idea
-
-AI is great at planning. It's bad at *doing* — because it has no hands.
-missionctl gives AI hands.
-
-```
-"Plan my October product launch"
-  → calctl finds free slots
-  → postctl writes and schedules 20 posts
-  → mailctl drafts the newsletter
-  → notectl documents the plan
-  → taskctl creates follow-up reminders
-```
-
-Every tool follows the same pattern:
-```
-AI writes Markdown → tool imports → tool executes
-```
+No SaaS. No cloud. No subscriptions. Your data stays on your machine.
 
 ---
 
-## Tools
+## The Suite
 
-| Tool       | What it does                              | Status    |
-|------------|-------------------------------------------|-----------|
-| postctl    | Schedule social media posts from Markdown | Existing  |
-| calctl     | Read/write Apple & Google Calendar        | Planned   |
-| mailctl    | Send and read email from Markdown         | Planned   |
-| budgetctl  | Track budget from bank CSV exports        | Planned   |
-| notectl    | Write/read Obsidian & Apple Notes         | Planned   |
-| taskctl    | Sync tasks across Apple/Google/Microsoft  | Planned   |
+| Tool | What it does | MCP tools | Data source |
+|------|-------------|-----------|-------------|
+| [mailctl](mailctl/) | Read inbox, compose and send email | 6 | Apple Mail (AppleScript) |
+| [calctl](calctl/) | Browse calendar, create events, find free slots | 7 | Apple Calendar (AppleScript) |
+| [taskctl](taskctl/) | Manage tasks, sync with Apple Reminders | 7 | Apple Reminders (EventKit) |
+| [notectl](notectl/) | Read and write Obsidian vault notes, daily notes | 7 | Obsidian vault (.md files) |
+| [budgetctl](budgetctl/) | Import bank exports, categorize, set goals, detect subscriptions | 9 | Bank CSV exports |
+| [postctl](https://github.com/aeon022/postctl) | Schedule and publish social media posts | 7 | Local SQLite + platform APIs |
 
----
-
-## Principles
-
-- **Local-first**: All data in SQLite on your machine
-- **Markdown-in**: AI writes Markdown, tools parse it
-- **JSON-out**: All read commands return JSON for AI consumption
-- **MCP-ready**: Every tool exposes an MCP server for direct AI tool use
-- **No SaaS**: No accounts, no subscriptions, no cloud dependency
+All tools share the same design: a Bubbletea TUI as the default command, a Cobra CLI for scripting, JSON output on every read command, and an MCP server over stdio for AI integration.
 
 ---
 
-## MCP Integration
+## Quick Start
 
-Each tool runs as an MCP server. Add to your Claude config:
+### Install all tools
+
+Each tool is a standalone Go binary with no runtime dependencies.
+
+```bash
+for repo in mailctl calctl taskctl notectl budgetctl; do
+  git clone https://github.com/aeon022/$repo && cd $repo && ./setup.sh && cd ..
+done
+```
+
+`setup.sh` builds the binary and installs it to `~/.local/bin/`. Make sure that directory is on your `$PATH`.
+
+### Initial sync
+
+Pull your existing data into the local SQLite caches:
+
+```bash
+mailctl sync        # inbox from Apple Mail
+calctl sync         # events from Apple Calendar
+taskctl sync        # tasks from Apple Reminders
+notectl sync        # index your Obsidian vault
+```
+
+budgetctl is import-driven — run `budgetctl import bank.csv` when you have a CSV export. postctl is self-contained.
+
+### Wire up Claude Desktop
+
+Add all six servers to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 ```json
 {
   "mcpServers": {
-    "postctl":   { "command": "postctl",   "args": ["mcp"] },
-    "calctl":    { "command": "calctl",    "args": ["mcp"] },
     "mailctl":   { "command": "mailctl",   "args": ["mcp"] },
-    "budgetctl": { "command": "budgetctl", "args": ["mcp"] },
+    "calctl":    { "command": "calctl",    "args": ["mcp"] },
+    "taskctl":   { "command": "taskctl",   "args": ["mcp"] },
     "notectl":   { "command": "notectl",   "args": ["mcp"] },
-    "taskctl":   { "command": "taskctl",   "args": ["mcp"] }
+    "budgetctl": { "command": "budgetctl", "args": ["mcp"] },
+    "postctl":   { "command": "postctl",   "args": ["mcp"] }
   }
 }
 ```
 
+Restart Claude Desktop. All 43 tools appear automatically.
+
 ---
 
-## Distribution
+## Cheatsheet
 
-Available on [polar.sh](https://polar.sh) — one-time purchase, no subscription.
+```
+# Email
+mailctl                                       Open TUI
+mailctl sync                                  Sync inbox from Apple Mail
+mailctl inbox [--unread] [--json]             List messages
+mailctl send draft.md                         Send from Markdown file
+mailctl search QUERY [--json]                 Search inbox
 
-- Individual tools: $9 each
-- Full bundle: $39 (all current + future tools)
-- Go Tutorial: $19 (learn Go by building these tools)
+# Calendar
+calctl                                        Open TUI
+calctl sync [--days N]                        Sync from Apple Calendar
+calctl list [--today] [--week] [--json]       List events
+calctl add TITLE --start DT --end DT          Create event
+calctl free [--from D] [--to D]               Find free slots
+
+# Tasks
+taskctl                                       Open TUI
+taskctl sync                                  Sync from Apple Reminders
+taskctl today [--json]                        Tasks due today + overdue
+taskctl week  [--json]                        Tasks due this week
+taskctl add TITLE [--due DATE] [--list NAME]  Create task
+taskctl done TITLE                            Complete task
+taskctl daemon --install                      Install background sync daemon
+
+# Notes
+notectl                                       Open TUI
+notectl sync                                  Index Obsidian vault
+notectl daily [--open]                        Open/create today's note
+notectl write TITLE [--body TEXT] [-f FOLDER] Create or update a note
+notectl read  TITLE [--json]                  Read a note
+notectl search QUERY [--json]                 Search notes
+
+# Budget
+budgetctl                                     Open TUI
+budgetctl import FILE [--account NAME]        Import bank CSV
+budgetctl summary [--month 2026-07] [--json]  Monthly summary
+budgetctl tag PATTERN --category NAME [--apply]  Create category rule
+budgetctl goal set CATEGORY AMOUNT            Set monthly budget goal
+budgetctl goal list [--month 2026-07]         Show goal progress
+budgetctl recurring                           Detect recurring payments
+budgetctl export [--year 2026] [-o FILE]      Export to CSV/JSON
+
+# Social
+postctl                                       Open TUI
+postctl list [--status draft] [--json]        List posts
+postctl post ID [--dry-run]                   Publish immediately
+postctl schedule ID --time DATETIME           Schedule a post
+postctl campaign list                         List campaigns
+postctl import FILE.md                        Import from Markdown
+```
+
+---
+
+## MCP Tools Reference
+
+43 tools across all six apps, available to Claude once all servers are configured.
+
+### mailctl (6)
+
+| Tool | Description |
+|------|-------------|
+| `inbox` | List recent inbox messages with sender, subject, preview |
+| `search_email` | Search by keyword across subject, sender, body |
+| `email_thread` | Get all messages in a thread matched by subject |
+| `send_email` | Send an email via Apple Mail |
+| `draft_email` | Save a composed message to Apple Mail Drafts |
+| `sync_inbox` | Sync from Apple Mail into local cache |
+
+### calctl (7)
+
+| Tool | Description |
+|------|-------------|
+| `list_events` | List events between two dates |
+| `today` | Today's events |
+| `this_week` | This week's events (Monday to Sunday) |
+| `sync` | Sync from Apple Calendar |
+| `find_free_slots` | Find free time within working hours |
+| `create_event` | Create a calendar event |
+| `delete_event` | Delete an event by title and date |
+
+### taskctl (7)
+
+| Tool | Description |
+|------|-------------|
+| `today_tasks` | Tasks due today or overdue |
+| `week_tasks` | Tasks due this week |
+| `list_tasks` | List tasks, filter by list or status |
+| `sync` | Sync from Apple Reminders |
+| `create_task` | Create task with title, list, due date, notes |
+| `complete_task` | Mark a task completed |
+| `delete_task` | Delete a task |
+
+### notectl (7)
+
+| Tool | Description |
+|------|-------------|
+| `list_notes` | List notes from cache (filter: folder, source) |
+| `read_note` | Read full note content by title |
+| `write_note` | Create or update a note in the vault |
+| `search_notes` | Keyword search across title and content |
+| `sync_notes` | Sync Obsidian vault into cache |
+| `get_daily_note` | Get today's daily note (creates from template if missing) |
+| `append_daily_note` | Append content under a named section |
+
+### budgetctl (9)
+
+| Tool | Description |
+|------|-------------|
+| `list_transactions` | List transactions, filter by month/category/query |
+| `budget_summary` | Monthly income/expenses/net with category breakdown |
+| `import_transactions` | Import from a bank CSV file |
+| `tag_transactions` | Create a category rule (pattern → category) |
+| `apply_category_rules` | Re-apply all rules to all transactions |
+| `list_budget_goals` | Goals with current-month spending progress |
+| `set_budget_goal` | Set a monthly spending limit for a category |
+| `delete_budget_goal` | Remove a goal |
+| `detect_recurring_payments` | Detect subscriptions and recurring charges |
+
+### postctl (7)
+
+| Tool | Description |
+|------|-------------|
+| `list_posts` | List posts, filter by platform/status/campaign |
+| `get_post` | Get a single post by ID with full content |
+| `create_post` | Create a draft or scheduled post |
+| `publish_post` | Publish a post immediately |
+| `schedule_post` | Update a post's scheduled time |
+| `list_campaigns` | List campaigns with post counts and status breakdown |
+| `get_campaign` | Get all posts in a campaign with full content |
+
+---
+
+## AI Workflows
+
+Things you can ask Claude once all six MCP servers are connected.
+
+**Morning briefing**
+
+> "Summarize my unread emails, today's calendar, and tasks due today. Flag anything urgent."
+
+`sync_inbox` → `inbox` → `today` → `today_tasks` → summary across all three.
+
+---
+
+**Weekly planning**
+
+> "Review my tasks for this week, find gaps in my calendar, and suggest which tasks to slot in where."
+
+`week_tasks` → `this_week` → `find_free_slots` → proposed schedule → optionally `create_event` per task.
+
+---
+
+**Meeting capture**
+
+> "I just had a product meeting. Here are my notes: [paste]. Create tasks for all action items, write a meeting note to my vault, and draft the follow-up email."
+
+`create_task` × N → `write_note` → `draft_email`.
+
+---
+
+**Launch campaign**
+
+> "Plan a two-week Twitter campaign for our product launch on July 15. Write 10 posts and schedule them across the two weeks."
+
+`create_post` × 10 → `schedule_post` × 10.
+
+---
+
+**Monthly financial review**
+
+> "Break down last month's spending by category, compare to my budget goals, and list any subscriptions worth cancelling."
+
+`budget_summary` → `list_budget_goals` → `detect_recurring_payments` → summary.
+
+---
+
+**Inbox zero**
+
+> "Go through my unread emails. For each one, draft a reply, create a follow-up task, or flag it as safe to delete."
+
+`inbox` → `email_thread` per message → `draft_email` or `create_task` per message.
+
+---
+
+## Design Principles
+
+**Local-first.** All data lives in SQLite on your machine. Nothing is sent to external servers except when you explicitly publish (postctl) or send (mailctl).
+
+**Markdown in, JSON out.** AI writes Markdown; tools parse and execute it. Every read command returns JSON so AI can process the output directly.
+
+**One binary per tool.** Each tool compiles to a single static Go binary with no runtime dependencies — no Docker, no Node, no Python. Copy it anywhere and it works.
+
+**MCP-native.** Every tool implements the Model Context Protocol over stdio. Plug into Claude Desktop, any MCP-compatible client, or your own pipelines.
+
+**Consistent UX.** All six TUIs share the same color palette, key conventions (`j/k` navigate, `/` search, `s` sync, `d` delete, `q` quit), and helpbar layout. Learn one, know all six.
 
 ---
 
 ## Tech Stack
 
-- Language: Go 1.23+
-- TUI: [Bubble Tea](https://github.com/charmbracelet/bubbletea)
-- CLI: [Cobra](https://github.com/spf13/cobra)
-- Storage: SQLite via `modernc.org/sqlite` (no CGo)
-- Styling: [Lip Gloss](https://github.com/charmbracelet/lipgloss)
-- MCP: `github.com/mark3labs/mcp-go`
+| Component | Library |
+|-----------|---------|
+| Language | Go 1.21+ |
+| TUI | [Bubble Tea](https://github.com/charmbracelet/bubbletea) |
+| CLI | [Cobra](https://github.com/spf13/cobra) |
+| Styling | [Lip Gloss](https://github.com/charmbracelet/lipgloss) |
+| Storage | SQLite via `modernc.org/sqlite` (pure Go, no CGo) |
+| MCP | `github.com/mark3labs/mcp-go` |
+| macOS bridge | AppleScript + Swift EventKit |
+
+**Requirements:** macOS for mailctl, calctl, taskctl. notectl and budgetctl also work on Linux.
+
+---
+
+## Architecture
+
+```
+Apple Mail / Calendar / Reminders
+        │ AppleScript / EventKit
+        ▼
+   Local SQLite cache  ◄──── bank CSV (budgetctl)
+        │                    Obsidian vault (notectl)
+   ┌────┴──────────┐         Markdown files (postctl)
+   │               │
+  TUI           MCP server (stdio)
+(Bubble Tea)        │
+                    ▼
+             Claude Desktop /
+             any MCP client
+```
+
+Each tool maintains its own SQLite database. The TUI and MCP server share the same file via WAL mode — both can run simultaneously without conflicts.
