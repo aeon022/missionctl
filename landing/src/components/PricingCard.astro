@@ -1,0 +1,119 @@
+---
+export interface Props {
+  title: string;
+  price: string;
+  features: string[];
+  ctaText: string;
+  ctaHref: string;
+  highlighted?: boolean;
+  badge?: string;
+  note?: string;
+}
+
+const { title, price, features, ctaText, ctaHref, highlighted = false, badge, note } = Astro.props;
+---
+
+<div style={`
+  background: ${highlighted ? 'rgba(0,217,126,0.04)' : '#111118'};
+  border: ${highlighted ? '2px solid rgba(0,217,126,0.4)' : '1px solid #1e1e2e'};
+  border-radius: 8px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  ${highlighted ? 'box-shadow: 0 0 40px rgba(0,217,126,0.08);' : ''}
+  transition: border-color 0.2s, box-shadow 0.2s;
+`} class="pricing-card">
+
+  <!-- Badge -->
+  {badge && (
+    <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%);">
+      <span style="
+        background: #00d97e;
+        color: #0a0a0f;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.2rem 0.75rem;
+        border-radius: 20px;
+        white-space: nowrap;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      ">{badge}</span>
+    </div>
+  )}
+
+  <!-- Title + Price -->
+  <div>
+    <h3 style={`
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1rem;
+      font-weight: 700;
+      color: ${highlighted ? '#00d97e' : '#e2e8f0'};
+      margin: 0 0 0.5rem;
+    `}>{title}</h3>
+    <div style="display: flex; align-items: baseline; gap: 0.25rem;">
+      <span style={`
+        font-size: 2rem;
+        font-weight: 800;
+        color: ${highlighted ? '#00d97e' : '#e2e8f0'};
+        line-height: 1;
+      `}>{price}</span>
+      <span style="color: #4a5568; font-size: 0.85rem;">USD</span>
+    </div>
+    <p style="color: #4a5568; font-size: 0.75rem; margin: 0.35rem 0 0; font-family: 'JetBrains Mono', monospace;">one-time purchase</p>
+  </div>
+
+  <!-- Features -->
+  <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.5rem; flex: 1;">
+    {features.map(f => (
+      <li style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; color: #a0aec0;">
+        <span style={`color: ${highlighted ? '#00d97e' : '#4a5568'}; font-family: monospace; flex-shrink: 0; margin-top: 1px;`}>&#x2713;</span>
+        {f}
+      </li>
+    ))}
+  </ul>
+
+  <!-- Note -->
+  {note && <p style="color: #4a5568; font-size: 0.75rem; margin: 0; font-style: italic;">{note}</p>}
+
+  <!-- CTA -->
+  <a
+    href={ctaHref}
+    target="_blank"
+    rel="noopener"
+    style={`
+      display: block;
+      text-align: center;
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      ${highlighted
+        ? 'background: #00d97e; color: #0a0a0f;'
+        : 'background: transparent; color: #e2e8f0; border: 1px solid #1e1e2e;'
+      }
+    `}
+    class={highlighted ? 'pricing-cta-primary' : 'pricing-cta-secondary'}
+  >
+    {ctaText}
+  </a>
+</div>
+
+<style>
+  .pricing-cta-primary:hover {
+    background: #00c070 !important;
+    transform: translateY(-1px);
+  }
+  .pricing-cta-secondary:hover {
+    border-color: rgba(0,217,126,0.4) !important;
+    color: #00d97e !important;
+  }
+  .pricing-card:not([style*="border: 2px"]):hover {
+    border-color: rgba(255,255,255,0.1) !important;
+  }
+</style>

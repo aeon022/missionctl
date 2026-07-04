@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-terminal-bg: #0a0a0f;
+  --color-terminal-surface: #111118;
+  --color-terminal-border: #1e1e2e;
+  --color-terminal-green: #00d97e;
+  --color-terminal-blue: #6366f1;
+  --color-terminal-amber: #f59e0b;
+  --color-terminal-red: #ef4444;
+  --color-terminal-muted: #4a5568;
+  --color-terminal-text: #e2e8f0;
+  --color-terminal-dim: #718096;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-sans: Inter, system-ui, sans-serif;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0f;
+  color: #e2e8f0;
+  font-family: Inter, system-ui, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  /* Subtle scanline effect */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 217, 126, 0.015) 2px,
+    rgba(0, 217, 126, 0.015) 4px
+  );
+}
+
+/* Subtle grid overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(30, 30, 46, 0.3) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(30, 30, 46, 0.3) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e1e2e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #00d97e40;
+}
+
+/* Selection color */
+::selection {
+  background-color: #00d97e30;
+  color: #00d97e;
+}
+
+/* Utility classes */
+.font-mono {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+/* Glow effects */
+.glow-green {
+  box-shadow: 0 0 20px rgba(0, 217, 126, 0.15), 0 0 40px rgba(0, 217, 126, 0.05);
+}
+
+.text-glow {
+  text-shadow: 0 0 20px rgba(0, 217, 126, 0.5);
+}
+
+/* Animations */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Relative positioning for content above grid overlay */
+main, header, footer, nav {
+  position: relative;
+  z-index: 1;
+}

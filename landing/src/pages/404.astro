@@ -1,0 +1,60 @@
+---
+import Layout from '../components/Layout.astro';
+---
+
+<Layout
+  title="404 — Page Not Found — missionctl"
+  description="This page doesn't exist. Return to missionctl.sh."
+>
+  <section style="min-height: calc(100vh - 56px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; text-align: center;">
+    <div style="max-width: 600px;">
+      <!-- Terminal window -->
+      <div style="background: #0d0d14; border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden; margin-bottom: 2.5rem; text-align: left; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+        <div style="background: #111118; border-bottom: 1px solid #1e1e2e; padding: 0.625rem 1rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #00d97e; display: inline-block;"></span>
+          <span style="margin-left: 0.5rem; font-size: 0.7rem; color: #4a5568; font-family: 'JetBrains Mono', monospace;">bash</span>
+        </div>
+        <div style="padding: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; line-height: 1.8;">
+          <p style="margin: 0; color: #e2e8f0;">
+            <span style="color: #4a5568">$ </span>cd /this-page
+          </p>
+          <p style="margin: 0; color: #ef4444;">
+            bash: cd: /this-page: No such file or directory
+          </p>
+          <p style="margin: 0.5rem 0 0; color: #e2e8f0;">
+            <span style="color: #4a5568">$ </span>echo $?
+          </p>
+          <p style="margin: 0; color: #e2e8f0;">1</p>
+          <p style="margin: 0.5rem 0 0; color: #e2e8f0;">
+            <span style="color: #4a5568">$ </span><span class="cursor-blink" style="color: #00d97e;">&#x2588;</span>
+          </p>
+        </div>
+      </div>
+
+      <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 4rem; font-weight: 900; color: #00d97e; margin: 0 0 0.5rem; line-height: 1;">404</h1>
+      <p style="color: #718096; font-size: 1rem; margin: 0 0 2rem; line-height: 1.6;">
+        This page doesn't exist. It may have moved, or you may have followed a broken link.
+      </p>
+
+      <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+        <a href="/"
+          style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+          class="home-link">
+          &larr; Go home
+        </a>
+        <a href="/#apps"
+          style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+          class="apps-link">
+          Browse apps
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .home-link:hover { background: #00c070 !important; transform: translateY(-2px); }
+  .apps-link:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
+</style>

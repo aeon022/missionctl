@@ -1,0 +1,176 @@
+---
+import Layout from '../components/Layout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+
+const mcpTools = [
+  { name: "budget_list_transactions", desc: "List transactions with filters: date range, category, amount range, merchant" },
+  { name: "budget_get_transaction", desc: "Get details of a specific transaction" },
+  { name: "budget_categorize", desc: "Assign or update the category for a transaction" },
+  { name: "budget_summary", desc: "Get a monthly spending summary grouped by category" },
+  { name: "budget_list_goals", desc: "List all budget goals and current progress" },
+  { name: "budget_set_goal", desc: "Set or update a monthly spending goal for a category" },
+  { name: "budget_list_rules", desc: "List all auto-categorization rules" },
+  { name: "budget_add_rule", desc: "Add a new regex-based categorization rule" },
+  { name: "budget_detect_recurring", desc: "Detect recurring payment patterns across transaction history" },
+];
+const features = [
+  { title: "Bank CSV Import", desc: "Import CSV exports from N26, ING, DKB, and other banks. Auto-detects the format and maps columns." },
+  { title: "Category Rules", desc: "Define regex-based categorization rules. Transactions are auto-categorized on import. Rules persist in SQLite." },
+  { title: "Budget Goals", desc: "Set monthly spending limits per category. Visual progress bars show how you're tracking against each goal." },
+  { title: "Recurring Detection", desc: "Automatically detect recurring payments (subscriptions, rent, utilities) based on transaction patterns." },
+];
+---
+
+<Layout
+  title="budgetctl — Budget tracking from your Terminal"
+  description="budgetctl — Import bank CSVs, categorize transactions, track budget goals. Works on macOS and Linux. 9 MCP tools for Claude Desktop."
+  type="software"
+  appName="budgetctl"
+  appPrice="9"
+>
+  <!-- HERO -->
+  <section style="padding: 5rem 1.5rem 4rem; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+          missionctl suite &middot; macOS &amp; Linux
+        </div>
+        <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
+          <span style="font-family: 'JetBrains Mono', monospace; color: #00d97e;">budgetctl</span>
+        </h1>
+        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Budget tracking from your Terminal</p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Import bank CSV files, categorize transactions, set budget goals, and detect recurring payments. Works on macOS and Linux. 9 MCP tools.</p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+            class="cta-primary">
+            Get budgetctl &mdash; $9
+          </a>
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+            class="cta-secondary">
+            Bundle &mdash; $39
+          </a>
+        </div>
+      </div>
+      <div>
+        <TerminalWindow title="budgetctl — monthly summary" content={`<span style="color:#4a5568">$ </span>budgetctl summary --month 2026-07
+
+<span style="color:#a0aec0">July 2026</span>
+<span style="color:#4a5568">&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;</span>
+<span style="color:#a0aec0">Income      </span><span style="color:#00d97e">+&#x20ac;4,200.00</span>
+<span style="color:#a0aec0">Expenses    </span><span style="color:#ef4444">-&#x20ac;2,847.35</span>
+<span style="color:#a0aec0">Saved       </span><span style="color:#00d97e">+&#x20ac;1,352.65</span>
+
+<span style="color:#a0aec0">Top categories:</span>
+  <span style="color:#f59e0b">Housing</span>       <span style="color:#e2e8f0">&#x20ac;1,200</span>  <span style="color:#4a5568">42%</span>
+  <span style="color:#f59e0b">Food</span>          <span style="color:#e2e8f0">&#x20ac;487</span>   <span style="color:#4a5568">17%</span>
+  <span style="color:#f59e0b">Transport</span>     <span style="color:#e2e8f0">&#x20ac;243</span>   <span style="color:#4a5568">9%</span>
+
+<span style="color:#00d97e">&#x2713;</span> <span style="color:#4a5568">3 recurring payments detected</span><span class="cursor-blink" style="color:#00d97e">&#x2588;</span>`} />
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;">Features</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
+        {features.map((feat: {title: string; desc: string}) => (
+          <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #00d97e; margin: 0 0 0.5rem;">{feat.title}</h3>
+            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEATSHEET -->
+  <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;">Command Reference</h2>
+    <TerminalWindow title="budgetctl — cheatsheet" content={`<span style="color:#4a5568"># Import bank CSV</span>
+<span style="color:#4a5568">$ </span>budgetctl import --file n26-export.csv
+<span style="color:#4a5568">$ </span>budgetctl import --file ing-2026-07.csv --bank ing
+
+<span style="color:#4a5568"># Monthly summary</span>
+<span style="color:#4a5568">$ </span>budgetctl summary --month 2026-07
+
+<span style="color:#4a5568"># List transactions</span>
+<span style="color:#4a5568">$ </span>budgetctl list --month 2026-07
+<span style="color:#4a5568">$ </span>budgetctl list --category food
+
+<span style="color:#4a5568"># Set budget goals</span>
+<span style="color:#4a5568">$ </span>budgetctl goal set food 500
+<span style="color:#4a5568">$ </span>budgetctl goal list
+
+<span style="color:#4a5568"># Categorize a transaction</span>
+<span style="color:#4a5568">$ </span>budgetctl categorize --id 42 --category dining
+
+<span style="color:#4a5568"># Add a category rule</span>
+<span style="color:#4a5568">$ </span>budgetctl rule add <span style="color:#a0aec0">"Spotify"</span> entertainment
+
+<span style="color:#4a5568"># Detect recurring payments</span>
+<span style="color:#4a5568">$ </span>budgetctl recurring
+
+<span style="color:#4a5568"># Start MCP server</span>
+<span style="color:#4a5568">$ </span>budgetctl mcp`} />
+  </section>
+
+  <!-- MCP TOOLS -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #00d97e;">budgetctl mcp</code></p>
+      <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;">Tool</th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
+              <tr style={`background: ${i % 2 === 0 ? '#111118' : '#0d0d14'}; border-bottom: 1px solid #1e1e2e;`}>
+                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00d97e;">{tool.name}</td>
+                <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: #718096;">{tool.desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="padding: 5rem 1.5rem; text-align: center; max-width: 600px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">Ready to give your AI hands?</h2>
+    <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
+      One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.
+    </p>
+    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
+        class="cta-primary">
+        Get budgetctl &mdash; $9
+      </a>
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+        class="cta-secondary">
+        Or get the Bundle &mdash; $39
+      </a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .features-grid { grid-template-columns: 1fr !important; }
+  }
+  .cta-primary:hover { background: #00c070 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important; }
+  .cta-secondary:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
+  .feature-card:hover { border-color: rgba(0,217,126,0.2) !important; }
+</style>

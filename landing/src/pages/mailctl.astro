@@ -1,0 +1,171 @@
+---
+import Layout from '../components/Layout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+
+const mcpTools = [
+  { name: "mail_list_messages", desc: "List messages from the inbox with optional filters (unread, sender, date range)" },
+  { name: "mail_get_message", desc: "Get the full content of a specific message by ID" },
+  { name: "mail_search", desc: "Full-text search across all synced messages" },
+  { name: "mail_compose", desc: "Compose and send a new email via Apple Mail" },
+  { name: "mail_reply", desc: "Reply to an existing email thread" },
+  { name: "mail_sync", desc: "Trigger a sync of the Apple Mail inbox to the local database" },
+];
+const features = [
+  { title: "TUI Inbox", desc: "Full-featured terminal UI for browsing, threading, and managing your inbox. Keyboard-driven, fast, no mouse required." },
+  { title: "Compose & Reply", desc: "Compose new emails or reply to threads directly from the terminal. Supports template variables for personalization." },
+  { title: "Apple Mail Sync", desc: "Syncs your Apple Mail inbox to a local SQLite database. All data stays on your machine — no IMAP credentials sent anywhere." },
+  { title: "MCP Server", desc: "6 MCP tools expose your email to Claude Desktop. AI can read, search, compose, and send — with your approval." },
+];
+---
+
+<Layout
+  title="mailctl — Email from your Terminal"
+  description="mailctl — Read, compose, and send email from your terminal. Syncs Apple Mail to SQLite. 6 MCP tools for Claude Desktop."
+  type="software"
+  appName="mailctl"
+  appPrice="9"
+>
+  <!-- HERO -->
+  <section style="padding: 5rem 1.5rem 4rem; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+          missionctl suite &middot; macOS
+        </div>
+        <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
+          <span style="font-family: 'JetBrains Mono', monospace; color: #00d97e;">mailctl</span>
+        </h1>
+        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Email from your Terminal</p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Read, compose, and send email. Syncs your Apple Mail inbox to a local SQLite database. 6 MCP tools for AI-powered email workflows.</p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+            class="cta-primary">
+            Get mailctl &mdash; $9
+          </a>
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+            class="cta-secondary">
+            Bundle &mdash; $39
+          </a>
+        </div>
+      </div>
+      <div>
+        <TerminalWindow title="mailctl — inbox" content={`<span style="color:#4a5568">$ </span>mailctl inbox --unread
+<span style="color:#a0aec0">Inbox (12 unread)</span>
+
+  <span style="color:#f59e0b">Alice Chen</span>           <span style="color:#4a5568">Today 09:12</span>
+  <span style="color:#718096">  Q3 budget review — need your approval</span>
+
+  <span style="color:#f59e0b">GitHub</span>                <span style="color:#4a5568">Today 08:47</span>
+  <span style="color:#718096">  [missionctl] PR #42 merged</span>
+
+  <span style="color:#f59e0b">Polar.sh</span>              <span style="color:#4a5568">Today 07:30</span>
+  <span style="color:#718096">  New purchase: missionctl Bundle</span>
+
+<span style="color:#4a5568">$ </span>mailctl reply --id 1 --body <span style="color:#a0aec0">"Approved!"</span>
+<span style="color:#00d97e">&#x2713;</span> <span style="color:#a0aec0">Reply sent via Apple Mail</span><span class="cursor-blink" style="color:#00d97e">&#x2588;</span>`} />
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;">Features</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
+        {features.map((feat: {title: string; desc: string}) => (
+          <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #00d97e; margin: 0 0 0.5rem;">{feat.title}</h3>
+            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEATSHEET -->
+  <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;">Command Reference</h2>
+    <TerminalWindow title="mailctl — cheatsheet" content={`<span style="color:#4a5568"># Sync inbox</span>
+<span style="color:#4a5568">$ </span>mailctl sync
+
+<span style="color:#4a5568"># Browse inbox (TUI)</span>
+<span style="color:#4a5568">$ </span>mailctl inbox
+<span style="color:#4a5568">$ </span>mailctl inbox --unread
+
+<span style="color:#4a5568"># Read a message</span>
+<span style="color:#4a5568">$ </span>mailctl read --id 42
+
+<span style="color:#4a5568"># Search</span>
+<span style="color:#4a5568">$ </span>mailctl search <span style="color:#a0aec0">"budget Q3"</span>
+
+<span style="color:#4a5568"># Compose new email</span>
+<span style="color:#4a5568">$ </span>mailctl compose --to <span style="color:#a0aec0">alice@example.com</span>
+
+<span style="color:#4a5568"># Reply to thread</span>
+<span style="color:#4a5568">$ </span>mailctl reply --id 42
+
+<span style="color:#4a5568"># Start MCP server</span>
+<span style="color:#4a5568">$ </span>mailctl mcp`} />
+  </section>
+
+  <!-- MCP TOOLS -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #00d97e;">mailctl mcp</code></p>
+      <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;">Tool</th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
+              <tr style={`background: ${i % 2 === 0 ? '#111118' : '#0d0d14'}; border-bottom: 1px solid #1e1e2e;`}>
+                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00d97e;">{tool.name}</td>
+                <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: #718096;">{tool.desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING CTA -->
+  <section style="padding: 5rem 1.5rem; text-align: center; max-width: 600px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
+      Ready to give your AI hands?
+    </h2>
+    <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
+      One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.
+    </p>
+    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
+        class="cta-primary">
+        Get mailctl &mdash; $9
+      </a>
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+        class="cta-secondary">
+        Or get the Bundle &mdash; $39
+      </a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .features-grid { grid-template-columns: 1fr !important; }
+  }
+  .cta-primary:hover { background: #00c070 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important; }
+  .cta-secondary:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
+  .feature-card:hover { border-color: rgba(0,217,126,0.2) !important; }
+</style>

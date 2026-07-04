@@ -1,0 +1,50 @@
+---
+export interface Props {
+  title: string;
+  content: string;
+}
+
+const { title, content } = Astro.props;
+---
+
+<div style="
+  background: #0d0d14;
+  border: 1px solid #1e1e2e;
+  border-radius: 8px;
+  overflow: hidden;
+  font-family: 'JetBrains Mono', monospace;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,217,126,0.05);
+">
+  <!-- Title bar -->
+  <div style="
+    background: #111118;
+    border-bottom: 1px solid #1e1e2e;
+    padding: 0.625rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  ">
+    <!-- Traffic lights -->
+    <span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444; display: inline-block; opacity: 0.8;"></span>
+    <span style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; display: inline-block; opacity: 0.8;"></span>
+    <span style="width: 10px; height: 10px; border-radius: 50%; background: #00d97e; display: inline-block; opacity: 0.8;"></span>
+    <span style="
+      margin-left: 0.5rem;
+      font-size: 0.7rem;
+      color: #4a5568;
+      letter-spacing: 0.02em;
+    ">{title}</span>
+  </div>
+
+  <!-- Content -->
+  <div style="padding: 1.25rem 1.5rem; overflow-x: auto;">
+    <pre style="
+      margin: 0;
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: #00d97e;
+      white-space: pre;
+      tab-size: 2;
+    "><Fragment set:html={content} /></pre>
+  </div>
+</div>

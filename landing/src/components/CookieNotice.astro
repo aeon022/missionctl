@@ -1,0 +1,62 @@
+---
+// CookieNotice.astro - minimal, non-intrusive
+---
+
+<div id="cookie-notice" style="
+  display: none;
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  background: #111118;
+  border: 1px solid #1e1e2e;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 520px;
+  width: calc(100% - 2rem);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+" id="cookie-banner">
+  <p style="color: #718096; font-size: 0.8rem; margin: 0; flex: 1; line-height: 1.5;">
+    We use essential cookies only. No tracking or analytics.
+    <a href="/cookies" style="color: #00d97e; text-decoration: none;">Learn more</a>
+  </p>
+  <button
+    id="cookie-accept"
+    style="
+      background: #00d97e;
+      color: #0a0a0f;
+      border: none;
+      border-radius: 4px;
+      padding: 0.4rem 0.875rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      font-family: 'JetBrains Mono', monospace;
+      transition: background 0.15s;
+    "
+  >
+    OK
+  </button>
+</div>
+
+<script>
+  (function () {
+    var banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+    if (!localStorage.getItem('cookie-accepted')) {
+      banner.style.display = 'flex';
+    }
+    var btn = document.getElementById('cookie-accept');
+    if (btn) {
+      btn.addEventListener('click', function () {
+        localStorage.setItem('cookie-accepted', '1');
+        banner.style.display = 'none';
+      });
+    }
+  })();
+</script>

@@ -1,0 +1,78 @@
+---
+const apps = [
+  { name: 'mailctl', href: '/mailctl' },
+  { name: 'calctl', href: '/calctl' },
+  { name: 'taskctl', href: '/taskctl' },
+  { name: 'notectl', href: '/notectl' },
+  { name: 'budgetctl', href: '/budgetctl' },
+];
+---
+
+<footer style="background: #111118; border-top: 1px solid #1e1e2e; padding: 3rem 1.5rem 2rem; position: relative; z-index: 1;">
+  <div style="max-width: 1200px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem;" class="footer-grid">
+
+      <!-- Brand -->
+      <div>
+        <a href="/" style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #00d97e; text-decoration: none; display: block; margin-bottom: 0.75rem;">
+          <span style="color: #e2e8f0;">mission</span>ctl
+        </a>
+        <p style="color: #718096; font-size: 0.85rem; line-height: 1.6; margin: 0 0 1rem;">
+          43 MCP tools across 6 terminal apps.<br>
+          Local-first. No subscriptions.
+        </p>
+        <p style="color: #4a5568; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;">
+          Built with Go, Bubbletea, and Claude.
+        </p>
+      </div>
+
+      <!-- Apps -->
+      <div>
+        <h3 style="color: #e2e8f0; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 1rem;">Apps</h3>
+        <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
+          {apps.map(app => (
+            <a href={app.href} style="color: #718096; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; transition: color 0.15s;" class="footer-link">
+              {app.name}
+            </a>
+          ))}
+          <a href="https://postctl.sh" target="_blank" rel="noopener" style="color: #718096; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; transition: color 0.15s;" class="footer-link">
+            postctl ↗
+          </a>
+        </nav>
+      </div>
+
+      <!-- Legal -->
+      <div>
+        <h3 style="color: #e2e8f0; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 1rem;">Legal</h3>
+        <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <a href="/privacy" style="color: #718096; text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link">Privacy Policy</a>
+          <a href="/cookies" style="color: #718096; text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link">Cookie Policy</a>
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener" style="color: #718096; text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link">Purchase ↗</a>
+        </nav>
+      </div>
+
+    </div>
+
+    <!-- Bottom bar -->
+    <div style="border-top: 1px solid #1e1e2e; padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <p style="color: #4a5568; font-size: 0.75rem; margin: 0;">
+        &copy; 2026 missionctl. All rights reserved.
+      </p>
+      <p style="color: #4a5568; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; margin: 0;">
+        One-time purchase &middot; No subscriptions &middot; Your data stays local
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-link:hover {
+    color: #00d97e !important;
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+</style>

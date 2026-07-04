@@ -1,0 +1,171 @@
+---
+import Layout from '../components/Layout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+
+const mcpTools = [
+  { name: "note_list", desc: "List notes in the vault with optional tag or folder filters" },
+  { name: "note_get", desc: "Read the full content of a note by title or path" },
+  { name: "note_create", desc: "Create a new note with title, content, tags, and frontmatter" },
+  { name: "note_update", desc: "Update or append to an existing note" },
+  { name: "note_delete", desc: "Delete a note from the vault" },
+  { name: "note_search", desc: "Full-text search across the entire vault" },
+  { name: "note_daily", desc: "Get or create today's daily note" },
+];
+const features = [
+  { title: "Obsidian Vault Support", desc: "Works directly with your existing Obsidian vault. No migration, no sync conflicts — reads and writes standard Markdown files." },
+  { title: "Daily Notes", desc: "Auto-create and open today's daily note with your template. AI can append to your daily log via MCP." },
+  { title: "Full-text Search", desc: "Search across your entire vault instantly. Returns ranked results with context snippets." },
+  { title: "Tag-based Filtering", desc: "Filter notes by Obsidian tags, links, or frontmatter fields. Great for project-scoped AI workflows." },
+];
+---
+
+<Layout
+  title="notectl — Notes from your Terminal"
+  description="notectl — Obsidian vault notes and daily notes from your terminal. 7 MCP tools for Claude Desktop. Works on macOS and Linux."
+  type="software"
+  appName="notectl"
+  appPrice="9"
+>
+  <!-- HERO -->
+  <section style="padding: 5rem 1.5rem 4rem; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+          missionctl suite &middot; macOS
+        </div>
+        <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
+          <span style="font-family: 'JetBrains Mono', monospace; color: #00d97e;">notectl</span>
+        </h1>
+        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Notes from your Terminal</p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Obsidian vault notes and daily notes via MCP. Works on macOS and Linux. 7 MCP tools for AI-powered note-taking.</p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+            class="cta-primary">
+            Get notectl &mdash; $9
+          </a>
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+            class="cta-secondary">
+            Bundle &mdash; $39
+          </a>
+        </div>
+      </div>
+      <div>
+        <TerminalWindow title="notectl — daily note" content={`<span style="color:#4a5568">$ </span>notectl daily
+<span style="color:#00d97e">&#x2713;</span> <span style="color:#a0aec0">Opened daily note: 2026-07-04.md</span>
+
+<span style="color:#4a5568">$ </span>notectl write <span style="color:#a0aec0">"Meeting notes"</span> --tags meeting,q3
+<span style="color:#00d97e">&#x2713;</span> <span style="color:#a0aec0">Created: vault/notes/Meeting notes.md</span>
+
+<span style="color:#4a5568">$ </span>notectl search <span style="color:#a0aec0">"Q3 budget"</span>
+<span style="color:#a0aec0">Found 4 notes:</span>
+  <span style="color:#6366f1">vault/notes/Q3 Budget Review.md</span>
+  <span style="color:#6366f1">vault/daily/2026-06-28.md</span>
+  <span style="color:#6366f1">vault/notes/Finance Goals.md</span>
+  <span style="color:#6366f1">vault/notes/Meeting notes.md</span><span class="cursor-blink" style="color:#00d97e">&#x2588;</span>`} />
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;">Features</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
+        {features.map((feat: {title: string; desc: string}) => (
+          <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #00d97e; margin: 0 0 0.5rem;">{feat.title}</h3>
+            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEATSHEET -->
+  <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;">Command Reference</h2>
+    <TerminalWindow title="notectl — cheatsheet" content={`<span style="color:#4a5568"># Open today's daily note</span>
+<span style="color:#4a5568">$ </span>notectl daily
+
+<span style="color:#4a5568"># Write a new note</span>
+<span style="color:#4a5568">$ </span>notectl write <span style="color:#a0aec0">"Meeting notes"</span>
+<span style="color:#4a5568">$ </span>notectl write <span style="color:#a0aec0">"Ideas"</span> --tags project,ideas
+
+<span style="color:#4a5568"># Read a note</span>
+<span style="color:#4a5568">$ </span>notectl read <span style="color:#a0aec0">"Meeting notes"</span>
+
+<span style="color:#4a5568"># Search vault</span>
+<span style="color:#4a5568">$ </span>notectl search <span style="color:#a0aec0">"Q3 budget"</span>
+<span style="color:#4a5568">$ </span>notectl search --tag meeting
+
+<span style="color:#4a5568"># List recent notes</span>
+<span style="color:#4a5568">$ </span>notectl list --recent 10
+
+<span style="color:#4a5568"># Append to daily note</span>
+<span style="color:#4a5568">$ </span>notectl append --daily <span style="color:#a0aec0">"- Fixed the login bug"</span>
+
+<span style="color:#4a5568"># Start MCP server</span>
+<span style="color:#4a5568">$ </span>notectl mcp`} />
+  </section>
+
+  <!-- MCP TOOLS -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #00d97e;">notectl mcp</code></p>
+      <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;">Tool</th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
+              <tr style={`background: ${i % 2 === 0 ? '#111118' : '#0d0d14'}; border-bottom: 1px solid #1e1e2e;`}>
+                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00d97e;">{tool.name}</td>
+                <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: #718096;">{tool.desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING CTA -->
+  <section style="padding: 5rem 1.5rem; text-align: center; max-width: 600px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
+      Ready to give your AI hands?
+    </h2>
+    <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
+      One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.
+    </p>
+    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
+        class="cta-primary">
+        Get notectl &mdash; $9
+      </a>
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+        class="cta-secondary">
+        Or get the Bundle &mdash; $39
+      </a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .features-grid { grid-template-columns: 1fr !important; }
+  }
+  .cta-primary:hover { background: #00c070 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important; }
+  .cta-secondary:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
+  .feature-card:hover { border-color: rgba(0,217,126,0.2) !important; }
+</style>

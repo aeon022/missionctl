@@ -1,0 +1,81 @@
+---
+const apps = [
+  { name: 'mailctl', href: '/mailctl' },
+  { name: 'calctl', href: '/calctl' },
+  { name: 'taskctl', href: '/taskctl' },
+  { name: 'notectl', href: '/notectl' },
+  { name: 'budgetctl', href: '/budgetctl' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header style="position: fixed; top: 0; left: 0; right: 0; z-index: 50; background: rgba(10,10,15,0.95); backdrop-filter: blur(10px); border-bottom: 1px solid #1e1e2e;">
+  <nav style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 56px;">
+    <!-- Logo -->
+    <a href="/" style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #00d97e; text-decoration: none; letter-spacing: -0.02em;">
+      <span style="color: #e2e8f0;">mission</span>ctl
+    </a>
+
+    <!-- App links (desktop) -->
+    <div style="display: flex; gap: 0.25rem; align-items: center;" class="nav-apps">
+      {apps.map(app => (
+        <a
+          href={app.href}
+          style={`
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: all 0.15s ease;
+            color: ${currentPath === app.href ? '#00d97e' : '#718096'};
+            background: ${currentPath === app.href ? 'rgba(0,217,126,0.08)' : 'transparent'};
+          `}
+          class="nav-link"
+        >
+          {app.name}
+        </a>
+      ))}
+      <a
+        href="https://postctl.sh"
+        target="_blank"
+        rel="noopener"
+        style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; padding: 0.35rem 0.75rem; border-radius: 4px; text-decoration: none; transition: all 0.15s ease; color: #718096;"
+        class="nav-link"
+      >
+        postctl ↗
+      </a>
+    </div>
+
+    <!-- Buy button -->
+    <a
+      href="/#pricing"
+      style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 600; padding: 0.5rem 1rem; background: #00d97e; color: #0a0a0f; border-radius: 4px; text-decoration: none; transition: all 0.15s ease; white-space: nowrap;"
+      class="nav-buy"
+    >
+      Buy
+    </a>
+  </nav>
+</header>
+
+<!-- Spacer for fixed nav -->
+<div style="height: 56px;"></div>
+
+<style>
+  @media (max-width: 768px) {
+    .nav-apps {
+      display: none !important;
+    }
+  }
+
+  .nav-link:hover {
+    color: #e2e8f0 !important;
+    background: rgba(255,255,255,0.04) !important;
+  }
+
+  .nav-buy:hover {
+    background: #00c070 !important;
+    transform: translateY(-1px);
+  }
+</style>

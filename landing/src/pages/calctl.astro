@@ -1,0 +1,169 @@
+---
+import Layout from '../components/Layout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+
+const mcpTools = [
+  { name: "cal_list_events", desc: "List events for a given date or date range across selected calendars" },
+  { name: "cal_get_event", desc: "Get full details of a specific event by ID" },
+  { name: "cal_create_event", desc: "Create a new event in Apple Calendar with title, time, duration, and notes" },
+  { name: "cal_update_event", desc: "Update an existing event — change time, title, or notes" },
+  { name: "cal_delete_event", desc: "Delete an event from Apple Calendar" },
+  { name: "cal_find_free_slots", desc: "Find free time slots in a date range, optionally filtered by minimum duration" },
+  { name: "cal_list_calendars", desc: "List all available calendars and their colors" },
+];
+const features = [
+  { title: "TUI Week View", desc: "Full-featured terminal calendar with week and month views. See all your calendars color-coded in the terminal." },
+  { title: "Apple Calendar Sync", desc: "Reads directly from Apple Calendar via EventKit. No third-party calendar access — your data stays local." },
+  { title: "Free Slot Finder", desc: "Scan any date range and surface available time blocks across all your calendars. Essential for scheduling." },
+  { title: "Event Creation", desc: "Create events from the terminal or via MCP. Supports duration, location, notes, and calendar selection." },
+];
+---
+
+<Layout
+  title="calctl — Calendar from your Terminal"
+  description="calctl — Browse calendar, create events, find free slots via Apple Calendar. 7 MCP tools for Claude Desktop."
+  type="software"
+  appName="calctl"
+  appPrice="9"
+>
+  <!-- HERO -->
+  <section style="padding: 5rem 1.5rem 4rem; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+          missionctl suite &middot; macOS
+        </div>
+        <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
+          <span style="font-family: 'JetBrains Mono', monospace; color: #00d97e;">calctl</span>
+        </h1>
+        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Calendar from your Terminal</p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Browse calendar, create events, and find free slots via Apple Calendar. 7 MCP tools for AI-powered scheduling.</p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+            class="cta-primary">
+            Get calctl &mdash; $9
+          </a>
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+            class="cta-secondary">
+            Bundle &mdash; $39
+          </a>
+        </div>
+      </div>
+      <div>
+        <TerminalWindow title="calctl — free slots" content={`<span style="color:#4a5568">$ </span>calctl free --from today --to friday
+<span style="color:#a0aec0">Scanning: Work, Personal, Shared</span>
+
+<span style="color:#a0aec0">Free slots this week:</span>
+  <span style="color:#f59e0b">Mon</span>  <span style="color:#00d97e">09:00-11:00</span>  <span style="color:#4a5568">2h</span>
+  <span style="color:#f59e0b">Mon</span>  <span style="color:#00d97e">14:30-17:00</span>  <span style="color:#4a5568">2h30m</span>
+  <span style="color:#f59e0b">Wed</span>  <span style="color:#00d97e">10:00-12:00</span>  <span style="color:#4a5568">2h</span>
+  <span style="color:#f59e0b">Fri</span>  <span style="color:#00d97e">13:00-17:00</span>  <span style="color:#4a5568">4h</span>
+
+<span style="color:#4a5568">$ </span>calctl add <span style="color:#a0aec0">"Team sync"</span> --start <span style="color:#a0aec0">"Mon 10:00"</span> --dur 1h
+<span style="color:#00d97e">&#x2713;</span> <span style="color:#a0aec0">Created in Apple Calendar</span><span class="cursor-blink" style="color:#00d97e">&#x2588;</span>`} />
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;">Features</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
+        {features.map((feat: {title: string; desc: string}) => (
+          <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #00d97e; margin: 0 0 0.5rem;">{feat.title}</h3>
+            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEATSHEET -->
+  <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;">Command Reference</h2>
+    <TerminalWindow title="calctl — cheatsheet" content={`<span style="color:#4a5568"># Show today's events</span>
+<span style="color:#4a5568">$ </span>calctl today
+
+<span style="color:#4a5568"># Week view (TUI)</span>
+<span style="color:#4a5568">$ </span>calctl week
+
+<span style="color:#4a5568"># Find free slots</span>
+<span style="color:#4a5568">$ </span>calctl free --from today --to +7d
+<span style="color:#4a5568">$ </span>calctl free --from today --to friday --min-dur 2h
+
+<span style="color:#4a5568"># List events for a date</span>
+<span style="color:#4a5568">$ </span>calctl list --date 2026-07-10
+
+<span style="color:#4a5568"># Create event</span>
+<span style="color:#4a5568">$ </span>calctl add <span style="color:#a0aec0">"Team sync"</span> --start <span style="color:#a0aec0">"Mon 10:00"</span> --dur 1h
+
+<span style="color:#4a5568"># Delete event</span>
+<span style="color:#4a5568">$ </span>calctl delete --id abc123
+
+<span style="color:#4a5568"># Start MCP server</span>
+<span style="color:#4a5568">$ </span>calctl mcp`} />
+  </section>
+
+  <!-- MCP TOOLS -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #00d97e;">calctl mcp</code></p>
+      <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;">Tool</th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
+              <tr style={`background: ${i % 2 === 0 ? '#111118' : '#0d0d14'}; border-bottom: 1px solid #1e1e2e;`}>
+                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00d97e;">{tool.name}</td>
+                <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: #718096;">{tool.desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING CTA -->
+  <section style="padding: 5rem 1.5rem; text-align: center; max-width: 600px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
+      Ready to give your AI hands?
+    </h2>
+    <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
+      One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.
+    </p>
+    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
+        class="cta-primary">
+        Get calctl &mdash; $9
+      </a>
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+        class="cta-secondary">
+        Or get the Bundle &mdash; $39
+      </a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .features-grid { grid-template-columns: 1fr !important; }
+  }
+  .cta-primary:hover { background: #00c070 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important; }
+  .cta-secondary:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
+  .feature-card:hover { border-color: rgba(0,217,126,0.2) !important; }
+</style>

@@ -1,0 +1,463 @@
+---
+import Layout from '../components/Layout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+import AppCard from '../components/AppCard.astro';
+import PricingCard from '../components/PricingCard.astro';
+
+const apps = [
+  {
+    name: 'mailctl',
+    href: '/mailctl',
+    description: 'Read inbox, compose and send email via Apple Mail. Syncs to local SQLite database.',
+    mcpCount: 6,
+    features: ['TUI inbox with threading', 'Compose & reply with templates', 'Full-text search', 'MCP server for AI access'],
+  },
+  {
+    name: 'calctl',
+    href: '/calctl',
+    description: 'Browse calendar, create events, find free slots via Apple Calendar.',
+    mcpCount: 7,
+    features: ['TUI week/month view', 'Apple Calendar sync', 'Free slot finder', 'Event creation from Markdown'],
+  },
+  {
+    name: 'taskctl',
+    href: '/taskctl',
+    description: 'Manage tasks with Apple Reminders sync, Pomodoro timer, and background daemon.',
+    mcpCount: 7,
+    features: ['Apple Reminders sync', 'Built-in Pomodoro timer', 'Batch task operations', 'Background daemon mode'],
+  },
+  {
+    name: 'notectl',
+    href: '/notectl',
+    description: 'Obsidian vault notes and daily notes via MCP. Works on macOS and Linux.',
+    mcpCount: 7,
+    features: ['Obsidian vault support', 'Daily note automation', 'Full-text search', 'Tag-based filtering'],
+  },
+  {
+    name: 'budgetctl',
+    href: '/budgetctl',
+    description: 'Import bank CSV, categorize transactions, set budget goals, detect recurring payments. Works on macOS and Linux.',
+    mcpCount: 9,
+    features: ['N26, ING, DKB CSV import', 'Smart category rules', 'Budget goals with progress', 'Recurring payment detection'],
+  },
+  {
+    name: 'postctl',
+    href: 'https://postctl.sh',
+    description: 'Schedule social media posts to Twitter, LinkedIn, and Threads from your terminal.',
+    mcpCount: 7,
+    features: ['Twitter, LinkedIn, Threads', 'Post scheduling queue', 'Draft management', 'MCP tools for AI posting'],
+  },
+];
+
+const mcpConfig = `{
+  "mcpServers": {
+    "mailctl": {
+      "command": "mailctl",
+      "args": ["mcp"]
+    },
+    "calctl": {
+      "command": "calctl",
+      "args": ["mcp"]
+    },
+    "taskctl": {
+      "command": "taskctl",
+      "args": ["mcp"]
+    },
+    "notectl": {
+      "command": "notectl",
+      "args": ["mcp"]
+    },
+    "budgetctl": {
+      "command": "budgetctl",
+      "args": ["mcp"]
+    },
+    "postctl": {
+      "command": "postctl",
+      "args": ["mcp"]
+    }
+  }
+}`;
+
+const terminalContent = `<span style="color:#4a5568">$ </span>mailctl sync <span style="color:#4a5568">&amp;&amp;</span> taskctl today
+<span style="color:#00d97e">&#x2713;</span> <span style="color:#a0aec0">Synced 12 messages</span>
+<span style="color:#00d97e">&#x2713;</span> <span style="color:#a0aec0">3 tasks due today</span>
+
+<span style="color:#4a5568">$ </span>calctl free <span style="color:#6366f1">--from</span> today <span style="color:#6366f1">--to</span> +7d
+<span style="color:#a0aec0">Free slots:</span>
+  <span style="color:#f59e0b">Mon</span> <span style="color:#e2e8f0">09:00&#x2013;11:00</span>
+  <span style="color:#f59e0b">Wed</span> <span style="color:#e2e8f0">14:00&#x2013;16:00</span>
+  <span style="color:#f59e0b">Fri</span> <span style="color:#e2e8f0">10:00&#x2013;12:00</span>
+
+<span style="color:#4a5568">$ </span>budgetctl summary <span style="color:#6366f1">--month</span> 2026-07
+<span style="color:#a0aec0">Income:   </span><span style="color:#00d97e">&#x20ac;4,200.00</span>
+<span style="color:#a0aec0">Expenses: </span><span style="color:#ef4444">&#x20ac;2,847.35</span>
+<span style="color:#a0aec0">Saved:    </span><span style="color:#00d97e">&#x20ac;1,352.65</span> <span style="color:#4a5568">(32.2%)</span><span class="cursor-blink" style="color:#00d97e">&#x2588;</span>`;
+
+const workflows = [
+  {
+    title: 'Morning Briefing',
+    cmd: 'AI + mailctl + calctl + taskctl',
+    description: 'AI reads your unread emails, checks today\'s calendar, and surfaces the 3 most important tasks — in one prompt.',
+  },
+  {
+    title: 'Weekly Planning',
+    cmd: 'AI + calctl + taskctl + notectl',
+    description: 'AI reviews your weekly notes, finds free slots, and drafts a prioritized task list synced to Apple Reminders.',
+  },
+  {
+    title: 'Monthly Finance Review',
+    cmd: 'AI + budgetctl',
+    description: 'Import your bank CSV, let AI categorize transactions and surface anomalies, then write a summary to your Obsidian vault.',
+  },
+];
+---
+
+<Layout
+  title="missionctl — Give your AI hands"
+  description="43 MCP tools across 6 terminal apps for macOS. Read email, manage calendar, tasks, notes, budget, and social posts. Local-first, no subscriptions."
+>
+  <!-- ======= HERO ======= -->
+  <section style="min-height: calc(100vh - 56px); display: flex; flex-direction: column; justify-content: center; padding: 4rem 1.5rem 5rem; max-width: 1200px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
+
+      <!-- Left: Text -->
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+          43 MCP tools &middot; 6 terminal apps &middot; macOS
+        </div>
+        <h1 style="font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1.25rem;">
+          Give your AI<br>
+          <span style="color: #00d97e; text-shadow: 0 0 40px rgba(0,217,126,0.3);">hands.</span>
+        </h1>
+        <p style="font-size: 1.125rem; color: #718096; line-height: 1.65; margin: 0 0 2rem; max-width: 480px;">
+          43 MCP tools across 6 terminal apps. Local-first. No subscriptions.
+          Your AI can now read email, manage your calendar, handle tasks, write notes, track spending, and schedule posts.
+        </p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a
+            href="https://polar.sh/aeon022"
+            target="_blank"
+            rel="noopener"
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 0.5rem;
+              padding: 0.875rem 1.5rem;
+              background: #00d97e;
+              color: #0a0a0f;
+              border-radius: 6px;
+              font-family: 'JetBrains Mono', monospace;
+              font-size: 0.875rem;
+              font-weight: 700;
+              text-decoration: none;
+              transition: all 0.15s ease;
+              box-shadow: 0 4px 20px rgba(0,217,126,0.2);
+            "
+            class="hero-cta-primary"
+          >
+            Get the Bundle &mdash; $39
+          </a>
+          <a
+            href="#apps"
+            style="
+              display: inline-flex;
+              align-items: center;
+              gap: 0.5rem;
+              padding: 0.875rem 1.5rem;
+              background: transparent;
+              color: #e2e8f0;
+              border-radius: 6px;
+              border: 1px solid #1e1e2e;
+              font-family: 'JetBrains Mono', monospace;
+              font-size: 0.875rem;
+              font-weight: 600;
+              text-decoration: none;
+              transition: all 0.15s ease;
+            "
+            class="hero-cta-secondary"
+          >
+            Browse Apps &darr;
+          </a>
+        </div>
+        <p style="color: #4a5568; font-size: 0.75rem; margin: 1.25rem 0 0; font-family: 'JetBrains Mono', monospace;">
+          One-time purchase &middot; Future updates included &middot; Your data stays on your machine
+        </p>
+      </div>
+
+      <!-- Right: Terminal -->
+      <div>
+        <TerminalWindow title="~ missionctl" content={terminalContent} />
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======= THE IDEA ======= -->
+  <section style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
+        AI is great at planning.<br>
+        <span style="color: #718096;">It's bad at doing — because it has no hands.</span>
+      </h2>
+      <p style="color: #718096; font-size: 1rem; line-height: 1.7; max-width: 600px; margin: 0 auto 3rem;">
+        missionctl gives your AI hands. Each app runs locally on your machine and exposes MCP tools that Claude (or any MCP client) can call directly — no cloud, no subscriptions, no data leaving your computer.
+      </p>
+
+      <!-- Workflow diagram -->
+      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <div style="
+          background: #0a0a0f;
+          border: 1px solid #1e1e2e;
+          border-radius: 8px;
+          padding: 1.25rem 1.75rem;
+          text-align: center;
+        ">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">&#x1F9E0;</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #6366f1; font-weight: 600;">AI plans</div>
+          <div style="font-size: 0.75rem; color: #4a5568; margin-top: 0.25rem;">Claude Desktop</div>
+        </div>
+
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: #00d97e;">&rarr;</div>
+
+        <div style="
+          background: rgba(0,217,126,0.04);
+          border: 1px solid rgba(0,217,126,0.2);
+          border-radius: 8px;
+          padding: 1.25rem 1.75rem;
+          text-align: center;
+        ">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">&#x26A1;</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00d97e; font-weight: 600;">missionctl executes</div>
+          <div style="font-size: 0.75rem; color: #4a5568; margin-top: 0.25rem;">43 MCP tools</div>
+        </div>
+
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: #00d97e;">&rarr;</div>
+
+        <div style="
+          background: #0a0a0f;
+          border: 1px solid #1e1e2e;
+          border-radius: 8px;
+          padding: 1.25rem 1.75rem;
+          text-align: center;
+        ">
+          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">&#x1F4BB;</div>
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #f59e0b; font-weight: 600;">data stays local</div>
+          <div style="font-size: 0.75rem; color: #4a5568; margin-top: 0.25rem;">SQLite on your machine</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= APPS GRID ======= -->
+  <section id="apps" style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+        Six apps. One config block.
+      </h2>
+      <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
+        Each tool stands alone or works together as part of the missionctl suite.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;" class="apps-grid">
+      {apps.map(app => (
+        <AppCard
+          name={app.name}
+          description={app.description}
+          href={app.href}
+          mcpCount={app.mcpCount}
+          features={app.features}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- ======= MCP SECTION ======= -->
+  <section style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 900px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+          43 tools. One config block.
+        </h2>
+        <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
+          Plug into Claude Desktop in 2 minutes. Add this to your <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; color: #00d97e;">claude_desktop_config.json</code> and restart.
+        </p>
+      </div>
+
+      <TerminalWindow title="claude_desktop_config.json" content={`<span style="color:#a0aec0">${mcpConfig.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>`} />
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;" class="mcp-stats-grid">
+        {[
+          { n: '43', label: 'MCP tools total' },
+          { n: '6', label: 'local-first apps' },
+          { n: '0', label: 'cloud dependencies' },
+        ].map(stat => (
+          <div style="text-align: center; padding: 1.25rem; background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 800; color: #00d97e;">{stat.n}</div>
+            <div style="color: #718096; font-size: 0.8rem; margin-top: 0.25rem;">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= AI WORKFLOWS ======= -->
+  <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+        Real AI workflows
+      </h2>
+      <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
+        Cross-app workflows that actually work — because the tools are already connected.
+      </p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" class="workflows-grid">
+      {workflows.map(w => (
+        <article style="
+          background: #111118;
+          border: 1px solid #1e1e2e;
+          border-radius: 8px;
+          padding: 1.5rem;
+          transition: border-color 0.2s;
+        " class="workflow-card">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #00d97e; margin-bottom: 0.75rem; letter-spacing: 0.05em;">
+            {w.cmd}
+          </div>
+          <h3 style="font-size: 1rem; font-weight: 700; color: #e2e8f0; margin: 0 0 0.75rem;">{w.title}</h3>
+          <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{w.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- ======= PRICING ======= -->
+  <section id="pricing" style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+          Simple pricing
+        </h2>
+        <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
+          One-time purchase. No subscriptions. Future updates included.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; align-items: start;" class="pricing-grid">
+
+        <PricingCard
+          title="Individual Tools"
+          price="$9"
+          features={[
+            'mailctl — email & Apple Mail',
+            'calctl — calendar & free slots',
+            'taskctl — tasks & Pomodoro',
+            'notectl — Obsidian notes',
+            'budgetctl — budget tracking',
+            'postctl — social scheduling',
+          ]}
+          note="Each tool sold separately at $9"
+          ctaText="Browse tools"
+          ctaHref="https://polar.sh/aeon022"
+        />
+
+        <PricingCard
+          title="missionctl Bundle"
+          price="$39"
+          features={[
+            'All 6 tools included',
+            'mailctl + calctl + taskctl',
+            'notectl + budgetctl + postctl',
+            '43 MCP tools total',
+            'One config block',
+            'Future updates included',
+          ]}
+          ctaText="Get the Bundle — $39"
+          ctaHref="https://polar.sh/aeon022"
+          highlighted={true}
+          badge="Best Value"
+        />
+
+        <PricingCard
+          title="Go Tutorial"
+          price="$19"
+          features={[
+            'Build a CLI/TUI app in Go',
+            'Cobra + Bubbletea + Lipgloss',
+            'MCP server implementation',
+            'SQLite with no CGo',
+            'Real-world project structure',
+          ]}
+          ctaText="Get the Tutorial"
+          ctaHref="https://polar.sh/aeon022"
+        />
+
+        <PricingCard
+          title="Tutorial + Bundle"
+          price="$49"
+          features={[
+            'Everything in the Bundle',
+            'Full Go tutorial included',
+            'Learn how it\'s built',
+            'Best for developers',
+            'Save $9 vs buying separate',
+          ]}
+          ctaText="Get Tutorial + Bundle"
+          ctaHref="https://polar.sh/aeon022"
+        />
+
+      </div>
+
+      <p style="text-align: center; color: #4a5568; font-size: 0.8rem; margin-top: 2rem; font-family: 'JetBrains Mono', monospace;">
+        Payments processed by polar.sh &middot; No subscription &middot; No refund needed — it works
+      </p>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .apps-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .pricing-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .workflows-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .mcp-stats-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+    }
+  }
+
+  @media (max-width: 580px) {
+    .apps-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .pricing-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .mcp-stats-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  .hero-cta-primary:hover {
+    background: #00c070 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important;
+  }
+
+  .hero-cta-secondary:hover {
+    border-color: rgba(0,217,126,0.3) !important;
+    color: #00d97e !important;
+  }
+
+  .workflow-card:hover {
+    border-color: rgba(0,217,126,0.2) !important;
+  }
+</style>
