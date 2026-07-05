@@ -1,0 +1,121 @@
+---
+// Sticky bottom CTA bar — appears when hero scrolls out of view,
+// hides when #pricing section is visible or when user dismisses it.
+---
+
+<div id="sticky-pricing-bar" role="complementary" aria-label="Pricing CTA">
+  <div style="display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 0;">
+    <span style="
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: #718096;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    ">
+      <span style="color: #e2e8f0; font-weight: 600;">missionctl Bundle</span>
+      <span style="color: #4a5568;"> &middot; 6 tools &middot; 43 MCP tools</span>
+    </span>
+  </div>
+
+  <div style="display: flex; align-items: center; gap: 0.75rem; flex-shrink: 0;">
+    <a
+      href="https://polar.sh/aeon022"
+      target="_blank"
+      rel="noopener"
+      id="sticky-bar-cta"
+      style="
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+        padding: 0.45rem 1rem;
+        background: #00d97e;
+        color: #0a0a0f;
+        border-radius: 4px;
+        text-decoration: none;
+        transition: background 0.15s, transform 0.15s;
+        white-space: nowrap;
+      "
+      class="sticky-bar-btn"
+    >
+      Get it &mdash; $39
+    </a>
+    <button
+      id="sticky-bar-close"
+      aria-label="Dismiss"
+      style="
+        background: none;
+        border: none;
+        color: #4a5568;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-family: 'JetBrains Mono', monospace;
+        padding: 0.25rem 0.35rem;
+        line-height: 1;
+        transition: color 0.15s;
+        flex-shrink: 0;
+      "
+      class="sticky-bar-x"
+    >&times;</button>
+  </div>
+</div>
+
+<style>
+  .sticky-bar-btn:hover { background: #00c070 !important; transform: translateY(-1px); }
+  .sticky-bar-x:hover { color: #e2e8f0 !important; }
+</style>
+
+<script>
+  const DISMISSED_KEY = 'missionctl_pricing_bar_closed';
+  const bar = document.getElementById('sticky-pricing-bar');
+  if (!bar) throw new Error('sticky bar missing');
+
+  // Already dismissed — bail out entirely
+  try {
+    if (localStorage.getItem(DISMISSED_KEY) === '1') {
+      // Keep bar hidden (transform: translateY(100%) by default in CSS)
+      // and don't set up observers
+    } else {
+      setupBar();
+    }
+  } catch (_) {
+    setupBar();
+  }
+
+  function setupBar() {
+    let heroGone = false;
+    let pricingVisible = false;
+
+    const update = () => {
+      const show = heroGone && !pricingVisible;
+      bar!.classList.toggle('visible', show);
+      document.body.classList.toggle('pricing-bar-visible', show);
+    };
+
+    // Watch hero (first section)
+    const hero = document.querySelector('main > section');
+    if (hero) {
+      const heroObs = new IntersectionObserver(([e]) => {
+        heroGone = !e.isIntersecting;
+        update();
+      }, { threshold: 0.1 });
+      heroObs.observe(hero);
+    }
+
+    // Watch pricing section — hide bar when pricing is visible
+    const pricing = document.getElementById('pricing');
+    if (pricing) {
+      const pricingObs = new IntersectionObserver(([e]) => {
+        pricingVisible = e.isIntersecting;
+        update();
+      }, { threshold: 0.1 });
+      pricingObs.observe(pricing);
+    }
+
+    document.getElementById('sticky-bar-close')?.addEventListener('click', () => {
+      try { localStorage.setItem(DISMISSED_KEY, '1'); } catch (_) {}
+      bar!.classList.remove('visible');
+      document.body.classList.remove('pricing-bar-visible');
+    });
+  }
+</script>

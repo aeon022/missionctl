@@ -1,0 +1,541 @@
+---
+import Layout from '../components/Layout.astro';
+
+const mcpConfig = `{
+  "mcpServers": {
+    "mailctl":   { "command": "mailctl",   "args": ["mcp"] },
+    "calctl":    { "command": "calctl",    "args": ["mcp"] },
+    "taskctl":   { "command": "taskctl",   "args": ["mcp"] },
+    "notectl":   { "command": "notectl",   "args": ["mcp"] },
+    "budgetctl": { "command": "budgetctl", "args": ["mcp"] },
+    "postctl":   { "command": "postctl",   "args": ["mcp"] }
+  }
+}`;
+
+const navSections = [
+  {
+    title: 'Getting Started',
+    links: [
+      { href: '#installation', label: 'Installation' },
+      { href: '#quick-setup', label: 'Quick Setup' },
+      { href: '#claude-config', label: 'Claude Desktop config' },
+    ],
+  },
+  {
+    title: 'Tools',
+    links: [
+      { href: '#mailctl', label: 'mailctl' },
+      { href: '#calctl', label: 'calctl' },
+      { href: '#taskctl', label: 'taskctl' },
+      { href: '#notectl', label: 'notectl' },
+      { href: '#budgetctl', label: 'budgetctl' },
+      { href: '#postctl', label: 'postctl' },
+    ],
+  },
+  {
+    title: 'Reference',
+    links: [
+      { href: '#mcp-reference', label: 'MCP Reference' },
+      { href: '#ai-workflows', label: 'AI Workflows' },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Documentation — missionctl"
+  description="Complete documentation for all 6 missionctl tools. Installation, CLI reference, TUI keybindings, and MCP tool reference for mailctl, calctl, taskctl, notectl, budgetctl, and postctl."
+>
+  <!-- Mobile sidebar nav -->
+  <details class="docs-mobile-nav">
+    <summary>Documentation <span style="color:#4a5568; font-size:0.7rem;">&#9660;</span></summary>
+    <nav>
+      {navSections.map(s => s.links.map(l => (
+        <a href={l.href}>{l.label}</a>
+      )))}
+    </nav>
+  </details>
+
+  <div class="docs-layout">
+    <!-- Sidebar -->
+    <aside class="docs-sidebar">
+      <div class="docs-sidebar-inner">
+        <nav class="docs-nav">
+          {navSections.map(section => (
+            <div class="docs-nav-section">
+              <p class="docs-nav-section-title">{section.title}</p>
+              <div class={section.title === 'Tools' ? 'docs-nav-sub' : ''}>
+                {section.links.map(link => (
+                  <a href={link.href} data-href={link.href}>{link.label}</a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <div class="docs-main">
+      <h1>missionctl Documentation</h1>
+      <p style="color:#718096; margin-bottom:2rem;">
+        43 MCP tools across 6 terminal apps. Local-first, no cloud, no subscriptions.
+      </p>
+
+      <!-- ── GETTING STARTED ───────────────── -->
+      <h2 id="getting-started">Getting Started</h2>
+
+      <h3 id="installation">Installation</h3>
+      <p>Clone and build each tool. Every repo has a <code>setup.sh</code> that compiles the binary and installs it to <code>~/.local/bin/</code>.</p>
+      <pre><code>{`for repo in mailctl calctl taskctl notectl budgetctl; do
+  git clone https://github.com/aeon022/$repo
+  cd $repo && ./setup.sh && cd ..
+done`}</code></pre>
+      <p>Make sure <code>~/.local/bin</code> is on your <code>$PATH</code>:</p>
+      <pre><code>{`export PATH="$HOME/.local/bin:$PATH"
+# add to ~/.zshrc or ~/.bashrc`}</code></pre>
+
+      <h3 id="quick-setup">Initial Sync</h3>
+      <p>After installing, run the initial sync for each tool to populate the local SQLite cache:</p>
+      <pre><code>{`mailctl sync      # Apple Mail → local cache
+calctl sync       # Apple Calendar → local cache
+taskctl sync      # Apple Reminders → local cache
+notectl sync      # Obsidian vault → local index`}</code></pre>
+      <p><strong>budgetctl</strong> is import-driven — there's no background sync:</p>
+      <pre><code>{`budgetctl import bank.csv --account checking`}</code></pre>
+
+      <h3 id="claude-config">Claude Desktop Config</h3>
+      <p>
+        Add all 6 tools to Claude Desktop in one config block. Edit
+        <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:
+      </p>
+      <pre><code set:text={mcpConfig}></code></pre>
+      <p>Restart Claude Desktop. All 43 MCP tools appear automatically in every conversation.</p>
+
+      <!-- ── MAILCTL ───────────────────────── -->
+      <h2 id="mailctl">mailctl</h2>
+      <p>
+        Apple Mail bridge with TUI inbox, full-text search, compose, and 6 MCP tools.
+        Syncs Apple Mail into a local SQLite database — all reads happen locally.
+      </p>
+
+      <h3>Install</h3>
+      <pre><code>{`git clone https://github.com/aeon022/mailctl
+cd mailctl && ./setup.sh`}</code></pre>
+
+      <h3>Sync</h3>
+      <pre><code>{`mailctl sync          # sync inbox
+mailctl sync --all    # sync all folders`}</code></pre>
+
+      <h3>CLI commands</h3>
+      <pre><code>{`mailctl inbox                    # open TUI inbox
+mailctl inbox --json             # JSON output
+mailctl search "from:alice"      # search emails
+mailctl send --to bob@x.com      # compose & send
+mailctl draft --subject "Hello"  # save to Drafts
+mailctl thread --subject "Re:"   # view thread
+mailctl accounts                 # list accounts
+mailctl mcp                      # start MCP server`}</code></pre>
+
+      <h3>TUI keybindings</h3>
+      <div class="docs-kbd-grid">
+        <kbd>j / k</kbd>     <span>Navigate up/down</span>
+        <kbd>Enter</kbd>     <span>Open selected email</span>
+        <kbd>n</kbd>         <span>Compose new email</span>
+        <kbd>s</kbd>         <span>Sync inbox</span>
+        <kbd>/</kbd>         <span>Search</span>
+        <kbd>d</kbd>         <span>Delete email</span>
+        <kbd>U</kbd>         <span>Unsubscribe</span>
+        <kbd>q</kbd>         <span>Quit</span>
+      </div>
+
+      <h3>MCP tools</h3>
+      <div>
+        <span class="docs-tool-tag">inbox</span>
+        <span class="docs-tool-tag">search_email</span>
+        <span class="docs-tool-tag">email_thread</span>
+        <span class="docs-tool-tag">send_email</span>
+        <span class="docs-tool-tag">draft_email</span>
+        <span class="docs-tool-tag">sync_inbox</span>
+      </div>
+
+      <!-- ── CALCTL ────────────────────────── -->
+      <h2 id="calctl">calctl</h2>
+      <p>
+        Apple Calendar bridge. Browse events, create events, find free slots.
+        Requires macOS — talks to Apple Calendar via AppleScript and EventKit.
+      </p>
+
+      <h3>Install</h3>
+      <pre><code>{`git clone https://github.com/aeon022/calctl
+cd calctl && ./setup.sh`}</code></pre>
+
+      <h3>Sync</h3>
+      <pre><code>{`calctl sync           # sync next 30 days
+calctl sync --days 90 # sync 90 days`}</code></pre>
+
+      <h3>CLI commands</h3>
+      <pre><code>{`calctl list                         # list upcoming events
+calctl list --from 2026-07-01       # events from date
+calctl add "Team sync" --time 14:00 # create event
+calctl free --from today --to +7d   # find free slots
+calctl sync                         # sync calendar
+calctl mcp                          # start MCP server`}</code></pre>
+
+      <h3>TUI keybindings</h3>
+      <div class="docs-kbd-grid">
+        <kbd>j / k</kbd>   <span>Navigate events</span>
+        <kbd>Enter</kbd>   <span>Open event detail</span>
+        <kbd>n</kbd>       <span>Create new event</span>
+        <kbd>s</kbd>       <span>Sync calendar</span>
+        <kbd>/</kbd>       <span>Search events</span>
+        <kbd>q</kbd>       <span>Quit</span>
+      </div>
+
+      <h3>MCP tools</h3>
+      <div>
+        <span class="docs-tool-tag">list_events</span>
+        <span class="docs-tool-tag">today</span>
+        <span class="docs-tool-tag">this_week</span>
+        <span class="docs-tool-tag">find_free_slots</span>
+        <span class="docs-tool-tag">create_event</span>
+        <span class="docs-tool-tag">delete_event</span>
+        <span class="docs-tool-tag">sync</span>
+      </div>
+
+      <!-- ── TASKCTL ───────────────────────── -->
+      <h2 id="taskctl">taskctl</h2>
+      <p>
+        Apple Reminders bridge with TUI task manager, built-in Pomodoro timer,
+        background sync daemon, and batch operations.
+      </p>
+
+      <h3>Install</h3>
+      <pre><code>{`git clone https://github.com/aeon022/taskctl
+cd taskctl && ./setup.sh`}</code></pre>
+
+      <h3>Sync</h3>
+      <pre><code>{`taskctl sync           # sync Apple Reminders
+taskctl daemon         # start background sync daemon`}</code></pre>
+
+      <h3>CLI commands</h3>
+      <pre><code>{`taskctl list                         # list all tasks
+taskctl today                        # today's tasks
+taskctl week                         # this week's tasks
+taskctl add "Review PR" --due today  # create task
+taskctl done <id>                    # mark complete
+taskctl lists                        # list reminder lists
+taskctl daemon                       # background daemon
+taskctl mcp                          # start MCP server`}</code></pre>
+
+      <h3>TUI keybindings</h3>
+      <div class="docs-kbd-grid">
+        <kbd>j / k</kbd>   <span>Navigate tasks</span>
+        <kbd>Space</kbd>   <span>Toggle task complete</span>
+        <kbd>n</kbd>       <span>New task</span>
+        <kbd>i</kbd>       <span>Inline edit title</span>
+        <kbd>e</kbd>       <span>Full edit</span>
+        <kbd>d</kbd>       <span>Delete task</span>
+        <kbd>s</kbd>       <span>Sync</span>
+        <kbd>t</kbd>       <span>Focus mode / Pomodoro</span>
+        <kbd>p</kbd>       <span>Pomodoro timer</span>
+        <kbd>A</kbd>       <span>Batch select</span>
+        <kbd>q</kbd>       <span>Quit</span>
+      </div>
+
+      <h3>MCP tools</h3>
+      <div>
+        <span class="docs-tool-tag">today_tasks</span>
+        <span class="docs-tool-tag">week_tasks</span>
+        <span class="docs-tool-tag">list_tasks</span>
+        <span class="docs-tool-tag">sync</span>
+        <span class="docs-tool-tag">create_task</span>
+        <span class="docs-tool-tag">complete_task</span>
+        <span class="docs-tool-tag">delete_task</span>
+      </div>
+
+      <!-- ── NOTECTL ───────────────────────── -->
+      <h2 id="notectl">notectl</h2>
+      <p>
+        Obsidian vault bridge. Sync notes to local SQLite, read/write notes, search,
+        and manage daily notes. Works on macOS and Linux.
+      </p>
+
+      <h3>Install</h3>
+      <pre><code>{`git clone https://github.com/aeon022/notectl
+cd notectl && ./setup.sh`}</code></pre>
+
+      <h3>Config</h3>
+      <p>Edit <code>~/.config/notectl/notectl.yaml</code>:</p>
+      <pre><code>{`vault_path: ~/Documents/Obsidian/MyVault
+source: obsidian`}</code></pre>
+
+      <h3>Sync</h3>
+      <pre><code>{`notectl sync      # index vault into SQLite cache`}</code></pre>
+
+      <h3>CLI commands</h3>
+      <pre><code>{`notectl list                    # list notes
+notectl read "Note title"       # read a note
+notectl write "New note"        # create/update note
+notectl search "keyword"        # full-text search
+notectl daily                   # open today's daily note
+notectl mcp                     # start MCP server`}</code></pre>
+
+      <h3>TUI keybindings</h3>
+      <div class="docs-kbd-grid">
+        <kbd>j / k</kbd>   <span>Navigate notes</span>
+        <kbd>Enter</kbd>   <span>Open note</span>
+        <kbd>n</kbd>       <span>New note</span>
+        <kbd>e</kbd>       <span>Edit note</span>
+        <kbd>d</kbd>       <span>Delete note</span>
+        <kbd>o</kbd>       <span>Open in $EDITOR</span>
+        <kbd>s</kbd>       <span>Sync vault</span>
+        <kbd>/</kbd>       <span>Search</span>
+        <kbd>Tab</kbd>     <span>Browse folders</span>
+        <kbd>q</kbd>       <span>Quit</span>
+      </div>
+
+      <h3>MCP tools</h3>
+      <div>
+        <span class="docs-tool-tag">list_notes</span>
+        <span class="docs-tool-tag">read_note</span>
+        <span class="docs-tool-tag">write_note</span>
+        <span class="docs-tool-tag">search_notes</span>
+        <span class="docs-tool-tag">sync_notes</span>
+        <span class="docs-tool-tag">get_daily_note</span>
+        <span class="docs-tool-tag">append_daily_note</span>
+      </div>
+
+      <!-- ── BUDGETCTL ─────────────────────── -->
+      <h2 id="budgetctl">budgetctl</h2>
+      <p>
+        Personal finance tool. Import bank CSVs, categorize transactions with rules,
+        set budget goals, and detect recurring payments. Works on macOS and Linux.
+      </p>
+
+      <h3>Install</h3>
+      <pre><code>{`git clone https://github.com/aeon022/budgetctl
+cd budgetctl && ./setup.sh`}</code></pre>
+
+      <h3>Import</h3>
+      <pre><code>{`budgetctl import bank.csv --account checking
+budgetctl import n26.csv --format n26
+# Supported: N26, ING, DKB, Generic CSV`}</code></pre>
+
+      <h3>CLI commands</h3>
+      <pre><code>{`budgetctl list                      # list transactions
+budgetctl list --month 2026-07      # filter by month
+budgetctl summary                   # income/expense summary
+budgetctl summary --month 2026-07   # monthly summary
+budgetctl tag "Netflix" --category subscriptions
+budgetctl apply-rules               # re-apply all rules
+budgetctl goal set --category food --limit 400
+budgetctl goal list                 # show goals + progress
+budgetctl goal delete --category food
+budgetctl recurring                 # detect recurring payments
+budgetctl export --format csv       # export data
+budgetctl mcp                       # start MCP server`}</code></pre>
+
+      <h3>TUI keybindings</h3>
+      <div class="docs-kbd-grid">
+        <kbd>j / k</kbd>         <span>Navigate transactions</span>
+        <kbd>s</kbd>             <span>Monthly summary</span>
+        <kbd>S</kbd>             <span>Sync / reimport</span>
+        <kbd>/</kbd>             <span>Search transactions</span>
+        <kbd>Tab / Shift+Tab</kbd> <span>Navigate months</span>
+        <kbd>q</kbd>             <span>Quit</span>
+      </div>
+
+      <h3>MCP tools</h3>
+      <div>
+        <span class="docs-tool-tag">list_transactions</span>
+        <span class="docs-tool-tag">budget_summary</span>
+        <span class="docs-tool-tag">import_transactions</span>
+        <span class="docs-tool-tag">tag_transactions</span>
+        <span class="docs-tool-tag">apply_category_rules</span>
+        <span class="docs-tool-tag">list_budget_goals</span>
+        <span class="docs-tool-tag">set_budget_goal</span>
+        <span class="docs-tool-tag">delete_budget_goal</span>
+        <span class="docs-tool-tag">detect_recurring_payments</span>
+      </div>
+
+      <!-- ── POSTCTL ───────────────────────── -->
+      <h2 id="postctl">postctl</h2>
+      <p>
+        Social media scheduling for Twitter, LinkedIn, and Threads. Manage posts,
+        campaigns, and drafts from your terminal.
+        Available at <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:#00d97e;">postctl.sh</a>.
+      </p>
+
+      <h3>Install</h3>
+      <pre><code>{`git clone https://github.com/aeon022/postctl
+cd postctl && ./setup.sh`}</code></pre>
+
+      <h3>CLI commands</h3>
+      <pre><code>{`postctl list                         # list posts
+postctl post "Hello world"           # create post
+postctl post --schedule "2026-07-05 09:00" "Hello"
+postctl campaign list                # list campaigns
+postctl import posts.csv             # import posts
+postctl mcp                          # start MCP server`}</code></pre>
+
+      <h3>MCP tools</h3>
+      <div>
+        <span class="docs-tool-tag">list_posts</span>
+        <span class="docs-tool-tag">get_post</span>
+        <span class="docs-tool-tag">create_post</span>
+        <span class="docs-tool-tag">publish_post</span>
+        <span class="docs-tool-tag">schedule_post</span>
+        <span class="docs-tool-tag">list_campaigns</span>
+        <span class="docs-tool-tag">get_campaign</span>
+      </div>
+
+      <!-- ── MCP REFERENCE ─────────────────── -->
+      <h2 id="mcp-reference">MCP Reference</h2>
+      <p>All 43 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</p>
+
+      {[
+        { app: 'mailctl', color: '#00d97e', tools: [
+          ['inbox', 'List recent inbox messages with sender, subject, preview'],
+          ['search_email', 'Search by keyword across subject, sender, body'],
+          ['email_thread', 'Get all messages in a thread matched by subject'],
+          ['send_email', 'Send an email via Apple Mail'],
+          ['draft_email', 'Save a composed message to Apple Mail Drafts'],
+          ['sync_inbox', 'Sync from Apple Mail into local cache'],
+        ]},
+        { app: 'calctl', color: '#6366f1', tools: [
+          ['list_events', 'List events between two dates'],
+          ['today', "Today's events"],
+          ['this_week', "This week's events (Monday to Sunday)"],
+          ['find_free_slots', 'Find free time within working hours'],
+          ['create_event', 'Create a calendar event'],
+          ['delete_event', 'Delete an event by title and date'],
+          ['sync', 'Sync from Apple Calendar into local cache'],
+        ]},
+        { app: 'taskctl', color: '#f59e0b', tools: [
+          ['today_tasks', 'Tasks due today or overdue'],
+          ['week_tasks', 'Tasks due this week'],
+          ['list_tasks', 'List tasks, filter by list or status'],
+          ['sync', 'Sync from Apple Reminders'],
+          ['create_task', 'Create task with title, list, due date, notes'],
+          ['complete_task', 'Mark a task completed'],
+          ['delete_task', 'Delete a task'],
+        ]},
+        { app: 'notectl', color: '#a78bfa', tools: [
+          ['list_notes', 'List notes from cache (filter: folder, source)'],
+          ['read_note', 'Read full note content by title'],
+          ['write_note', 'Create or update a note in the vault'],
+          ['search_notes', 'Keyword search across title and content'],
+          ['sync_notes', 'Sync Obsidian vault into cache'],
+          ['get_daily_note', "Get today's daily note (creates from template if missing)"],
+          ['append_daily_note', 'Append content under a named section'],
+        ]},
+        { app: 'budgetctl', color: '#10b981', tools: [
+          ['list_transactions', 'List transactions, filter by month/category/query'],
+          ['budget_summary', 'Monthly income/expenses/net with category breakdown'],
+          ['import_transactions', 'Import from a bank CSV file'],
+          ['tag_transactions', 'Create a category rule (pattern → category)'],
+          ['apply_category_rules', 'Re-apply all rules to all transactions'],
+          ['list_budget_goals', 'Goals with current-month spending progress'],
+          ['set_budget_goal', 'Set a monthly spending limit for a category'],
+          ['delete_budget_goal', 'Remove a goal'],
+          ['detect_recurring_payments', 'Detect subscriptions and recurring charges'],
+        ]},
+        { app: 'postctl', color: '#ec4899', tools: [
+          ['list_posts', 'List posts, filter by platform/status/campaign'],
+          ['get_post', 'Get a single post by ID with full content'],
+          ['create_post', 'Create a draft or scheduled post'],
+          ['publish_post', 'Publish a post immediately'],
+          ['schedule_post', "Update a post's scheduled time"],
+          ['list_campaigns', 'List campaigns with post counts and status breakdown'],
+          ['get_campaign', 'Get all posts in a campaign with full content'],
+        ]},
+      ].map(group => (
+        <div style="margin-bottom: 2rem;">
+          <h3 style={`color: ${group.color};`}>{group.app}</h3>
+          <table style="width:100%; border-collapse:collapse; font-size:0.83rem;">
+            {group.tools.map(([name, desc]) => (
+              <tr style="border-bottom: 1px solid #1e1e2e;">
+                <td style="padding: 0.5rem 0.75rem 0.5rem 0; white-space: nowrap;">
+                  <code style="font-family:'JetBrains Mono',monospace; font-size:0.8em; background:#111118; border:1px solid #1e1e2e; padding:0.1em 0.35em; border-radius:3px; color:#00d97e;">{name}</code>
+                </td>
+                <td style="padding: 0.5rem 0; color: #718096; line-height: 1.5;">{desc}</td>
+              </tr>
+            ))}
+          </table>
+        </div>
+      ))}
+
+      <!-- ── AI WORKFLOWS ──────────────────── -->
+      <h2 id="ai-workflows">AI Workflows</h2>
+      <p>
+        Once all tools are connected, Claude can orchestrate them together. A single
+        prompt can span multiple apps and execute a dozen tool calls automatically.
+      </p>
+
+      <h3>Morning briefing</h3>
+      <p>
+        Ask Claude: <em>"Give me my morning briefing"</em>. Claude calls
+        <code>inbox</code>, <code>today_tasks</code>, and <code>today</code>
+        to pull email summaries, overdue tasks, and today's events — then
+        synthesizes them into a prioritized briefing.
+      </p>
+
+      <h3>Weekly planning</h3>
+      <p>
+        Ask Claude: <em>"Help me plan my week"</em>. Claude uses
+        <code>this_week</code>, <code>week_tasks</code>, <code>find_free_slots</code>,
+        and <code>get_daily_note</code> to review your schedule and draft a plan
+        in your Obsidian daily note.
+      </p>
+
+      <h3>Monthly finance review</h3>
+      <p>
+        Ask Claude: <em>"Review my finances for June"</em>. Claude calls
+        <code>budget_summary</code>, <code>list_transactions</code>, and
+        <code>detect_recurring_payments</code>, then uses
+        <code>write_note</code> to save the analysis to your vault.
+      </p>
+
+      <h3>Email to task</h3>
+      <p>
+        Ask Claude: <em>"Turn important emails from this week into tasks"</em>.
+        Claude searches your inbox (<code>search_email</code>), identifies action items,
+        and creates tasks in Apple Reminders (<code>create_task</code>).
+      </p>
+
+      <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(0,217,126,0.04); border: 1px solid rgba(0,217,126,0.15); border-radius: 8px;">
+        <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #a0aec0;">
+          <span style="color: #00d97e; font-weight: 600;">Ready to start?</span>
+          &nbsp;&nbsp;
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener" style="color: #00d97e; text-decoration: none;">
+            Get the Bundle — $39 &rarr;
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  // Active sidebar link via IntersectionObserver on headings
+  const headings = document.querySelectorAll<HTMLElement>('.docs-main h2[id], .docs-main h3[id]');
+  const navLinks  = document.querySelectorAll<HTMLAnchorElement>('.docs-nav a[data-href]');
+
+  if (headings.length && navLinks.length) {
+    const obs = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            navLinks.forEach(link => {
+              link.classList.toggle('active', link.getAttribute('data-href') === `#${id}`);
+            });
+          }
+        });
+      },
+      { rootMargin: '-15% 0% -70% 0%', threshold: 0 }
+    );
+    headings.forEach(h => obs.observe(h));
+  }
+</script>

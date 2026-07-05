@@ -3,6 +3,8 @@ import '../styles/global.css';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import CookieNotice from './CookieNotice.astro';
+import AnnouncementBar from './AnnouncementBar.astro';
+import StickyPricingBar from './StickyPricingBar.astro';
 
 export interface Props {
   title: string;
@@ -58,6 +60,15 @@ const jsonLd = type === 'software' && appName ? {
   <head>
     <meta charset="UTF-8" />
 
+    <!-- Announcement bar flash prevention: set bar-closed class before paint -->
+    <script is:inline>
+      try {
+        if (localStorage.getItem('missionctl_bar_closed') === '1') {
+          document.documentElement.classList.add('bar-closed');
+        }
+      } catch (_) {}
+    </script>
+
     <!-- Preconnect for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -83,18 +94,146 @@ const jsonLd = type === 'software' && appName ? {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
 
-    <!-- Favicon placeholder -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body>
+    <AnnouncementBar />
     <Nav />
     <main>
       <slot />
     </main>
     <Footer />
     <CookieNotice />
+    <StickyPricingBar />
+
+    <!-- Back to top — circular scroll-progress ring -->
+    <button id="back-to-top" aria-label="Back to top">
+      <svg class="btt-ring" viewBox="0 0 46 46" aria-hidden="true">
+        <circle class="btt-track"    cx="23" cy="23" r="20" />
+        <circle class="btt-progress" cx="23" cy="23" r="20" />
+      </svg>
+      <span class="btt-icon">↑</span>
+    </button>
+
+    <script>
+      // ── Back to top with scroll-progress ring ─────────────────
+      const btt  = document.getElementById('back-to-top');
+      const ring = document.querySelector('.btt-progress') as SVGCircleElement | null;
+      const C    = 2 * Math.PI * 20; // circumference ≈ 125.66
+
+      if (btt && ring) {
+        ring.style.strokeDasharray  = String(C);
+        ring.style.strokeDashoffset = String(C);
+
+        let ticking = false;
+        const onScroll = () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              const scrollTop = window.scrollY;
+              const docH = document.documentElement.scrollHeight - window.innerHeight;
+              const pct  = docH > 0 ? Math.min(scrollTop / docH, 1) : 0;
+              btt.classList.toggle('visible', scrollTop > 120);
+              ring.style.strokeDashoffset = String(C * (1 - pct));
+              ticking = false;
+            });
+            ticking = true;
+          }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+
+        btt.addEventListener('click', () => {
+          btt.classList.add('pulsing');
+          btt.addEventListener('animationend', () => btt.classList.remove('pulsing'), { once: true });
+          const start = window.scrollY;
+          const startTime = performance.now();
+          const dur = Math.min(300 + start * 0.25, 900);
+          const ease = (t: number) => 1 - Math.pow(1 - t, 4);
+          const tick = (now: number) => {
+            const p = Math.min((now - startTime) / dur, 1);
+            window.scrollTo(0, start * (1 - ease(p)));
+            if (p < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        });
+      }
+
+      // ── Smooth anchor scroll ──────────────────────────────────
+      const easeOut = (t: number) => 1 - Math.pow(1 - t, 4);
+      const smoothTo = (target: number, dur = 600) => {
+        const start = window.scrollY;
+        const t0 = performance.now();
+        const tick = (now: number) => {
+          const p = Math.min((now - t0) / dur, 1);
+          window.scrollTo(0, start + (target - start) * easeOut(p));
+          if (p < 1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick);
+      };
+      document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+          const id = (a as HTMLAnchorElement).getAttribute('href')!.slice(1);
+          const el = document.getElementById(id);
+          if (el) {
+            e.preventDefault();
+            const navH = (document.getElementById('main-nav')?.offsetHeight ?? 56)
+              + parseInt(getComputedStyle(document.documentElement).getPropertyValue('--ann-bar-height') || '36');
+            smoothTo(el.getBoundingClientRect().top + window.scrollY - navH - 8);
+          }
+        });
+      });
+
+      // ── Scroll reveal ─────────────────────────────────────────
+      const revealObs = new IntersectionObserver(
+        entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-revealed');
+              revealObs.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.06, rootMargin: '0px 0px -40px 0px' }
+      );
+
+      const vh = window.innerHeight;
+      document.querySelectorAll('main > section').forEach((el, i) => {
+        const rect = el.getBoundingClientRect();
+        if (i === 0 || rect.top < vh * 0.9) {
+          el.classList.add('is-revealed');
+        } else {
+          el.classList.add('needs-reveal');
+          revealObs.observe(el);
+        }
+      });
+
+      // ── Copy buttons on all <pre> elements ───────────────────
+      document.querySelectorAll('pre').forEach(pre => {
+        const btn = document.createElement('button');
+        btn.className = 'copy-btn';
+        btn.textContent = 'Copy';
+        btn.setAttribute('aria-label', 'Copy code');
+        pre.appendChild(btn);
+
+        btn.addEventListener('click', async () => {
+          const text = pre.textContent?.replace('Copy', '').trim() ?? '';
+          try {
+            await navigator.clipboard.writeText(text);
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+              btn.textContent = 'Copy';
+              btn.classList.remove('copied');
+            }, 1500);
+          } catch (_) {
+            btn.textContent = 'Error';
+            setTimeout(() => { btn.textContent = 'Copy'; }, 1500);
+          }
+        });
+      });
+    </script>
   </body>
 </html>

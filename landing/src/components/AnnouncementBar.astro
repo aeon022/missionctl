@@ -1,0 +1,73 @@
+---
+// Slim fixed announcement bar — sits above the nav (z-index: 60)
+// Dismissed state is stored in localStorage under 'missionctl_bar_closed'
+// The bar-closed class on <html> is set by the inline head script in Layout.astro
+---
+
+<div
+  id="announcement-bar"
+  role="banner"
+  style="
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 36px;
+    z-index: 60;
+    background: rgba(0,217,126,0.07);
+    border-bottom: 1px solid rgba(0,217,126,0.12);
+    box-shadow: inset 3px 0 0 rgba(0,217,126,0.35), inset -3px 0 0 rgba(0,217,126,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0 3rem;
+  "
+>
+  <a
+    href="https://polar.sh/aeon022"
+    target="_blank"
+    rel="noopener"
+    class="ann-link"
+    style="color: #a0aec0; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.15s;"
+  >
+    <span style="color: #00d97e; font-weight: 600;">missionctl Bundle</span>
+    <span style="color: #4a5568;">—</span>
+    <span>all 6 tools &middot; $39 &middot; one-time</span>
+    <span style="color: #00d97e;">&rarr;</span>
+  </a>
+
+  <button
+    id="ann-close"
+    aria-label="Dismiss announcement"
+    class="ann-close-btn"
+    style="
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: #4a5568;
+      cursor: pointer;
+      font-size: 0.9rem;
+      padding: 0.2rem 0.4rem;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+      transition: color 0.15s;
+    "
+  >&times;</button>
+</div>
+
+<style>
+  .ann-link:hover { color: #e2e8f0 !important; }
+  .ann-close-btn:hover { color: #e2e8f0 !important; }
+</style>
+
+<script>
+  document.getElementById('ann-close')?.addEventListener('click', () => {
+    try { localStorage.setItem('missionctl_bar_closed', '1'); } catch (_) {}
+    document.documentElement.classList.add('bar-closed');
+  });
+</script>

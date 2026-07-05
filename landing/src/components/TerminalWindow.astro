@@ -2,19 +2,23 @@
 export interface Props {
   title: string;
   content: string;
+  id?: string;
 }
 
-const { title, content } = Astro.props;
+const { title, content, id } = Astro.props;
 ---
 
-<div style="
-  background: #0d0d14;
-  border: 1px solid #1e1e2e;
-  border-radius: 8px;
-  overflow: hidden;
-  font-family: 'JetBrains Mono', monospace;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,217,126,0.05);
-">
+<div
+  id={id}
+  style="
+    background: #0d0d14;
+    border: 1px solid #1e1e2e;
+    border-radius: 8px;
+    overflow: hidden;
+    font-family: 'JetBrains Mono', monospace;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,217,126,0.05);
+  "
+>
   <!-- Title bar -->
   <div style="
     background: #111118;

@@ -51,53 +51,20 @@ const apps = [
 
 const mcpConfig = `{
   "mcpServers": {
-    "mailctl": {
-      "command": "mailctl",
-      "args": ["mcp"]
-    },
-    "calctl": {
-      "command": "calctl",
-      "args": ["mcp"]
-    },
-    "taskctl": {
-      "command": "taskctl",
-      "args": ["mcp"]
-    },
-    "notectl": {
-      "command": "notectl",
-      "args": ["mcp"]
-    },
-    "budgetctl": {
-      "command": "budgetctl",
-      "args": ["mcp"]
-    },
-    "postctl": {
-      "command": "postctl",
-      "args": ["mcp"]
-    }
+    "mailctl":   { "command": "mailctl",   "args": ["mcp"] },
+    "calctl":    { "command": "calctl",    "args": ["mcp"] },
+    "taskctl":   { "command": "taskctl",   "args": ["mcp"] },
+    "notectl":   { "command": "notectl",   "args": ["mcp"] },
+    "budgetctl": { "command": "budgetctl", "args": ["mcp"] },
+    "postctl":   { "command": "postctl",   "args": ["mcp"] }
   }
 }`;
-
-const terminalContent = `<span style="color:#4a5568">$ </span>mailctl sync <span style="color:#4a5568">&amp;&amp;</span> taskctl today
-<span style="color:#00d97e">&#x2713;</span> <span style="color:#a0aec0">Synced 12 messages</span>
-<span style="color:#00d97e">&#x2713;</span> <span style="color:#a0aec0">3 tasks due today</span>
-
-<span style="color:#4a5568">$ </span>calctl free <span style="color:#6366f1">--from</span> today <span style="color:#6366f1">--to</span> +7d
-<span style="color:#a0aec0">Free slots:</span>
-  <span style="color:#f59e0b">Mon</span> <span style="color:#e2e8f0">09:00&#x2013;11:00</span>
-  <span style="color:#f59e0b">Wed</span> <span style="color:#e2e8f0">14:00&#x2013;16:00</span>
-  <span style="color:#f59e0b">Fri</span> <span style="color:#e2e8f0">10:00&#x2013;12:00</span>
-
-<span style="color:#4a5568">$ </span>budgetctl summary <span style="color:#6366f1">--month</span> 2026-07
-<span style="color:#a0aec0">Income:   </span><span style="color:#00d97e">&#x20ac;4,200.00</span>
-<span style="color:#a0aec0">Expenses: </span><span style="color:#ef4444">&#x20ac;2,847.35</span>
-<span style="color:#a0aec0">Saved:    </span><span style="color:#00d97e">&#x20ac;1,352.65</span> <span style="color:#4a5568">(32.2%)</span><span class="cursor-blink" style="color:#00d97e">&#x2588;</span>`;
 
 const workflows = [
   {
     title: 'Morning Briefing',
     cmd: 'AI + mailctl + calctl + taskctl',
-    description: 'AI reads your unread emails, checks today\'s calendar, and surfaces the 3 most important tasks — in one prompt.',
+    description: "AI reads your unread emails, checks today's calendar, and surfaces the 3 most important tasks — in one prompt.",
   },
   {
     title: 'Weekly Planning',
@@ -108,6 +75,114 @@ const workflows = [
     title: 'Monthly Finance Review',
     cmd: 'AI + budgetctl',
     description: 'Import your bank CSV, let AI categorize transactions and surface anomalies, then write a summary to your Obsidian vault.',
+  },
+];
+
+// Tool grid data
+const toolGroups = [
+  {
+    app: 'mailctl', count: 6, color: '#00d97e',
+    tools: [
+      { name: 'inbox',      desc: 'List recent inbox messages with sender, subject, preview' },
+      { name: 'search_email', desc: 'Search by keyword across subject, sender, body' },
+      { name: 'email_thread', desc: 'Get all messages in a thread matched by subject' },
+      { name: 'send_email', desc: 'Send an email via Apple Mail' },
+      { name: 'draft_email', desc: 'Save a composed message to Apple Mail Drafts' },
+      { name: 'sync_inbox', desc: 'Sync from Apple Mail into local cache' },
+    ],
+  },
+  {
+    app: 'calctl', count: 7, color: '#6366f1',
+    tools: [
+      { name: 'list_events',     desc: 'List events between two dates' },
+      { name: 'today',           desc: "Today's events" },
+      { name: 'this_week',       desc: "This week's events (Monday to Sunday)" },
+      { name: 'find_free_slots', desc: 'Find free time within working hours' },
+      { name: 'create_event',    desc: 'Create a calendar event' },
+      { name: 'delete_event',    desc: 'Delete an event by title and date' },
+      { name: 'sync',            desc: 'Sync from Apple Calendar into local cache' },
+    ],
+  },
+  {
+    app: 'taskctl', count: 7, color: '#f59e0b',
+    tools: [
+      { name: 'today_tasks', desc: 'Tasks due today or overdue' },
+      { name: 'week_tasks',  desc: 'Tasks due this week' },
+      { name: 'list_tasks',  desc: 'List tasks, filter by list or status' },
+      { name: 'sync',        desc: 'Sync from Apple Reminders into local cache' },
+      { name: 'create_task', desc: 'Create task with title, list, due date, notes' },
+      { name: 'complete_task', desc: 'Mark a task completed' },
+      { name: 'delete_task', desc: 'Delete a task' },
+    ],
+  },
+  {
+    app: 'notectl', count: 7, color: '#a78bfa',
+    tools: [
+      { name: 'list_notes',      desc: 'List notes from cache (filter: folder, source)' },
+      { name: 'read_note',       desc: 'Read full note content by title' },
+      { name: 'write_note',      desc: 'Create or update a note in the vault' },
+      { name: 'search_notes',    desc: 'Keyword search across title and content' },
+      { name: 'sync_notes',      desc: 'Sync Obsidian vault into cache' },
+      { name: 'get_daily_note',  desc: "Get today's daily note (creates from template if missing)" },
+      { name: 'append_daily_note', desc: 'Append content under a named section' },
+    ],
+  },
+  {
+    app: 'budgetctl', count: 9, color: '#10b981',
+    tools: [
+      { name: 'list_transactions', desc: 'List transactions, filter by month/category/query' },
+      { name: 'budget_summary',    desc: 'Monthly income/expenses/net with category breakdown' },
+      { name: 'import_transactions', desc: 'Import from a bank CSV file' },
+      { name: 'tag_transactions',  desc: 'Create a category rule (pattern → category)' },
+      { name: 'apply_category_rules', desc: 'Re-apply all rules to all transactions' },
+      { name: 'list_budget_goals', desc: 'Goals with current-month spending progress' },
+      { name: 'set_budget_goal',   desc: 'Set a monthly spending limit for a category' },
+      { name: 'delete_budget_goal', desc: 'Remove a goal' },
+      { name: 'detect_recurring_payments', desc: 'Detect subscriptions and recurring charges' },
+    ],
+  },
+  {
+    app: 'postctl', count: 7, color: '#ec4899',
+    tools: [
+      { name: 'list_posts',     desc: 'List posts, filter by platform/status/campaign' },
+      { name: 'get_post',       desc: 'Get a single post by ID with full content' },
+      { name: 'create_post',    desc: 'Create a draft or scheduled post' },
+      { name: 'publish_post',   desc: 'Publish a post immediately' },
+      { name: 'schedule_post',  desc: "Update a post's scheduled time" },
+      { name: 'list_campaigns', desc: 'List campaigns with post counts and status breakdown' },
+      { name: 'get_campaign',   desc: 'Get all posts in a campaign with full content' },
+    ],
+  },
+];
+
+const faqs = [
+  {
+    q: 'Do I need a Claude subscription?',
+    a: 'Yes, Claude Pro or Team. missionctl connects to Claude Desktop via MCP — no extra subscription needed beyond that.',
+  },
+  {
+    q: 'Does it work on Linux?',
+    a: 'notectl and budgetctl work on macOS and Linux. mailctl, calctl, and taskctl require macOS (they bridge Apple Mail, Calendar, and Reminders).',
+  },
+  {
+    q: 'Is my data safe?',
+    a: 'All data stays on your machine. missionctl never calls any external server. The only network calls are what you explicitly trigger (sending an email, publishing a post).',
+  },
+  {
+    q: "What if Apple Mail/Calendar isn't running?",
+    a: 'mailctl and calctl launch Apple Mail and Calendar in the background via AppleScript if they aren\'t open. No manual intervention needed.',
+  },
+  {
+    q: 'Can I use it without the TUI?',
+    a: 'Yes. Every tool has a full CLI (mailctl inbox --json, taskctl today, etc.). The TUI is the default but optional.',
+  },
+  {
+    q: 'How do I get updates?',
+    a: 'Updates are included with your purchase. Pull the latest from GitHub and re-run ./setup.sh.',
+  },
+  {
+    q: "What's the difference between buying individually vs. the bundle?",
+    a: 'The bundle ($39) includes all 6 tools. Buying individually costs $54 total. If you use more than 4 tools, the bundle saves money.',
   },
 ];
 ---
@@ -138,42 +213,14 @@ const workflows = [
             href="https://polar.sh/aeon022"
             target="_blank"
             rel="noopener"
-            style="
-              display: inline-flex;
-              align-items: center;
-              gap: 0.5rem;
-              padding: 0.875rem 1.5rem;
-              background: #00d97e;
-              color: #0a0a0f;
-              border-radius: 6px;
-              font-family: 'JetBrains Mono', monospace;
-              font-size: 0.875rem;
-              font-weight: 700;
-              text-decoration: none;
-              transition: all 0.15s ease;
-              box-shadow: 0 4px 20px rgba(0,217,126,0.2);
-            "
+            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s ease; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
             class="hero-cta-primary"
           >
             Get the Bundle &mdash; $39
           </a>
           <a
             href="#apps"
-            style="
-              display: inline-flex;
-              align-items: center;
-              gap: 0.5rem;
-              padding: 0.875rem 1.5rem;
-              background: transparent;
-              color: #e2e8f0;
-              border-radius: 6px;
-              border: 1px solid #1e1e2e;
-              font-family: 'JetBrains Mono', monospace;
-              font-size: 0.875rem;
-              font-weight: 600;
-              text-decoration: none;
-              transition: all 0.15s ease;
-            "
+            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s ease;"
             class="hero-cta-secondary"
           >
             Browse Apps &darr;
@@ -184,9 +231,9 @@ const workflows = [
         </p>
       </div>
 
-      <!-- Right: Terminal -->
+      <!-- Right: Terminal (typewriter) -->
       <div>
-        <TerminalWindow title="~ missionctl" content={terminalContent} />
+        <TerminalWindow id="hero-terminal" title="~ missionctl" content={`<span class="cursor-blink" style="color:#00d97e">&#x2588;</span>`} />
       </div>
 
     </div>
@@ -199,77 +246,129 @@ const workflows = [
         AI is great at planning.<br>
         <span style="color: #718096;">It's bad at doing — because it has no hands.</span>
       </h2>
-      <p style="color: #718096; font-size: 1rem; line-height: 1.7; max-width: 600px; margin: 0 auto 3rem;">
+      <p style="color: #718096; font-size: 1rem; line-height: 1.7; max-width: 600px; margin: 0 auto;">
         missionctl gives your AI hands. Each app runs locally on your machine and exposes MCP tools that Claude (or any MCP client) can call directly — no cloud, no subscriptions, no data leaving your computer.
       </p>
+    </div>
+  </section>
 
-      <!-- Workflow diagram -->
-      <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-        <div style="
-          background: #0a0a0f;
-          border: 1px solid #1e1e2e;
-          border-radius: 8px;
-          padding: 1.25rem 1.75rem;
-          text-align: center;
-        ">
-          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">&#x1F9E0;</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #6366f1; font-weight: 600;">AI plans</div>
-          <div style="font-size: 0.75rem; color: #4a5568; margin-top: 0.25rem;">Claude Desktop</div>
-        </div>
+  <!-- ======= HOW IT WORKS ======= -->
+  <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
+    <div style="text-align: center; margin-bottom: 3rem;">
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+        How it works
+      </h2>
+      <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
+        AI plans. missionctl executes. Your data stays local.
+      </p>
+    </div>
 
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: #00d97e;">&rarr;</div>
+    <!-- Steps -->
+    <div style="display: flex; align-items: stretch; justify-content: center; gap: 0; flex-wrap: wrap;" class="how-steps">
 
-        <div style="
-          background: rgba(0,217,126,0.04);
-          border: 1px solid rgba(0,217,126,0.2);
-          border-radius: 8px;
-          padding: 1.25rem 1.75rem;
-          text-align: center;
-        ">
-          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">&#x26A1;</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00d97e; font-weight: 600;">missionctl executes</div>
-          <div style="font-size: 0.75rem; color: #4a5568; margin-top: 0.25rem;">43 MCP tools</div>
-        </div>
-
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; color: #00d97e;">&rarr;</div>
-
-        <div style="
-          background: #0a0a0f;
-          border: 1px solid #1e1e2e;
-          border-radius: 8px;
-          padding: 1.25rem 1.75rem;
-          text-align: center;
-        ">
-          <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">&#x1F4BB;</div>
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #f59e0b; font-weight: 600;">data stays local</div>
-          <div style="font-size: 0.75rem; color: #4a5568; margin-top: 0.25rem;">SQLite on your machine</div>
-        </div>
+      <!-- Step 1 -->
+      <div class="how-card">
+        <div class="how-step-num">01</div>
+        <h3 class="how-title">You ask Claude</h3>
+        <p class="how-desc">
+          "Give me a morning briefing"<br>
+          "Schedule a launch campaign"
+        </p>
       </div>
+
+      <div class="how-arrow">──&rarr;</div>
+
+      <!-- Step 2 -->
+      <div class="how-card how-card--accent">
+        <div class="how-step-num">02</div>
+        <h3 class="how-title" style="color:#00d97e;">Claude calls MCP tools</h3>
+        <p class="how-desc">
+          43 tools across 6 apps,<br>running locally on your machine
+        </p>
+      </div>
+
+      <div class="how-arrow">──&rarr;</div>
+
+      <!-- Step 3 -->
+      <div class="how-card">
+        <div class="how-step-num">03</div>
+        <h3 class="how-title">missionctl acts</h3>
+        <p class="how-desc">
+          Reads Apple Mail, creates calendar events,<br>writes to your Obsidian vault
+        </p>
+      </div>
+
+      <div class="how-arrow">──&rarr;</div>
+
+      <!-- Step 4 -->
+      <div class="how-card">
+        <div class="how-step-num">04</div>
+        <h3 class="how-title" style="color:#f59e0b;">Apple APIs / Files</h3>
+        <p class="how-desc">
+          Mail, Calendar, Reminders,<br>Obsidian, CSV exports
+        </p>
+      </div>
+
     </div>
   </section>
 
   <!-- ======= APPS GRID ======= -->
-  <section id="apps" style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
+  <section id="apps" style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1200px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+          Six apps. One config block.
+        </h2>
+        <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
+          Each tool stands alone or works together as part of the missionctl suite.
+        </p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;" class="apps-grid">
+        {apps.map(app => (
+          <AppCard
+            name={app.name}
+            description={app.description}
+            href={app.href}
+            mcpCount={app.mcpCount}
+            features={app.features}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ======= 43-TOOL GRID ======= -->
+  <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-        Six apps. One config block.
+        43 tools. One config.
       </h2>
       <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-        Each tool stands alone or works together as part of the missionctl suite.
+        Hover any chip to see what it does. Every tool is callable from Claude Desktop.
       </p>
     </div>
 
-    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;" class="apps-grid">
-      {apps.map(app => (
-        <AppCard
-          name={app.name}
-          description={app.description}
-          href={app.href}
-          mcpCount={app.mcpCount}
-          features={app.features}
-        />
-      ))}
-    </div>
+    {toolGroups.map(group => (
+      <div style="margin-bottom: 2.5rem;">
+        <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.875rem;">
+          <span style={`font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: ${group.color};`}>
+            {group.app}
+          </span>
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #4a5568; background: #111118; border: 1px solid #1e1e2e; padding: 0.15rem 0.5rem; border-radius: 20px;">
+            {group.count} tools
+          </span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.4rem;">
+          {group.tools.map(tool => (
+            <span class={`tool-chip app-${group.app}`}>
+              {tool.name}
+              <span class="tool-tooltip">{tool.desc}</span>
+            </span>
+          ))}
+        </div>
+      </div>
+    ))}
   </section>
 
   <!-- ======= MCP SECTION ======= -->
@@ -277,10 +376,10 @@ const workflows = [
     <div style="max-width: 900px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-          43 tools. One config block.
+          Plug in in 2 minutes
         </h2>
         <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-          Plug into Claude Desktop in 2 minutes. Add this to your <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; color: #00d97e;">claude_desktop_config.json</code> and restart.
+          Add this to your <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; color: #00d97e;">claude_desktop_config.json</code> and restart Claude Desktop.
         </p>
       </div>
 
@@ -314,13 +413,7 @@ const workflows = [
 
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" class="workflows-grid">
       {workflows.map(w => (
-        <article style="
-          background: #111118;
-          border: 1px solid #1e1e2e;
-          border-radius: 8px;
-          padding: 1.5rem;
-          transition: border-color 0.2s;
-        " class="workflow-card">
+        <article style="background: #111118; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="workflow-card">
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #00d97e; margin-bottom: 0.75rem; letter-spacing: 0.05em;">
             {w.cmd}
           </div>
@@ -331,8 +424,33 @@ const workflows = [
     </div>
   </section>
 
+  <!-- ======= FAQ ======= -->
+  <section style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 720px; margin: 0 auto;">
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+          Frequently asked
+        </h2>
+      </div>
+
+      <div class="faq-list">
+        {faqs.map((item, i) => (
+          <div class="faq-item" data-index={i}>
+            <button class="faq-question" aria-expanded="false">
+              <span>{item.q}</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <p class="faq-answer-text">{item.a}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- ======= PRICING ======= -->
-  <section id="pricing" style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e;">
+  <section id="pricing" style="padding: 5rem 1.5rem; background: #0a0a0f; border-top: 1px solid #1e1e2e;">
     <div style="max-width: 1100px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
@@ -344,7 +462,6 @@ const workflows = [
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; align-items: start;" class="pricing-grid">
-
         <PricingCard
           title="Individual Tools"
           price="$9"
@@ -398,14 +515,13 @@ const workflows = [
           features={[
             'Everything in the Bundle',
             'Full Go tutorial included',
-            'Learn how it\'s built',
+            "Learn how it's built",
             'Best for developers',
             'Save $9 vs buying separate',
           ]}
           ctaText="Get Tutorial + Bundle"
           ctaHref="https://polar.sh/aeon022"
         />
-
       </div>
 
       <p style="text-align: center; color: #4a5568; font-size: 0.8rem; margin-top: 2rem; font-family: 'JetBrains Mono', monospace;">
@@ -416,48 +532,228 @@ const workflows = [
 </Layout>
 
 <style>
+  /* ── Responsive ── */
   @media (max-width: 900px) {
-    .hero-grid {
-      grid-template-columns: 1fr !important;
-    }
-    .apps-grid {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
-    .pricing-grid {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
-    .workflows-grid {
-      grid-template-columns: 1fr !important;
-    }
-    .mcp-stats-grid {
-      grid-template-columns: repeat(3, 1fr) !important;
-    }
+    .hero-grid      { grid-template-columns: 1fr !important; }
+    .apps-grid      { grid-template-columns: repeat(2, 1fr) !important; }
+    .pricing-grid   { grid-template-columns: repeat(2, 1fr) !important; }
+    .workflows-grid { grid-template-columns: 1fr !important; }
+    .mcp-stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
+    .how-steps      { flex-direction: column !important; align-items: flex-start !important; }
+    .how-arrow      { transform: rotate(90deg); margin-left: 1.5rem; }
   }
-
   @media (max-width: 580px) {
-    .apps-grid {
-      grid-template-columns: 1fr !important;
-    }
-    .pricing-grid {
-      grid-template-columns: 1fr !important;
-    }
-    .mcp-stats-grid {
-      grid-template-columns: 1fr !important;
-    }
+    .apps-grid    { grid-template-columns: 1fr !important; }
+    .pricing-grid { grid-template-columns: 1fr !important; }
+    .mcp-stats-grid { grid-template-columns: 1fr !important; }
   }
 
-  .hero-cta-primary:hover {
-    background: #00c070 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important;
+  /* ── Hero CTAs ── */
+  .hero-cta-primary:hover  { background: #00c070 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important; }
+  .hero-cta-secondary:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
+
+  /* ── Workflow cards ── */
+  .workflow-card:hover { border-color: rgba(0,217,126,0.2) !important; }
+
+  /* ── How it works ── */
+  .how-steps { align-items: center; }
+  .how-card {
+    background: #111118;
+    border: 1px solid #1e1e2e;
+    border-radius: 8px;
+    padding: 1.5rem;
+    flex: 1;
+    min-width: 160px;
+    max-width: 240px;
+    transition: border-color 0.2s;
+  }
+  .how-card--accent {
+    background: rgba(0,217,126,0.04);
+    border-color: rgba(0,217,126,0.2);
+  }
+  .how-card:hover { border-color: rgba(0,217,126,0.3) !important; }
+  .how-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: rgba(0,217,126,0.5);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.1em;
+  }
+  .how-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #e2e8f0;
+    margin: 0 0 0.5rem;
+  }
+  .how-desc {
+    font-size: 0.78rem;
+    color: #718096;
+    line-height: 1.55;
+    margin: 0;
+  }
+  .how-arrow {
+    font-family: 'JetBrains Mono', monospace;
+    color: #00d97e;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    padding: 0 0.25rem;
+    align-self: center;
   }
 
-  .hero-cta-secondary:hover {
-    border-color: rgba(0,217,126,0.3) !important;
-    color: #00d97e !important;
+  /* ── FAQ ── */
+  .faq-list { display: flex; flex-direction: column; gap: 0; }
+  .faq-item {
+    border: 1px solid #1e1e2e;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    background: #0a0a0f;
+    overflow: hidden;
+    transition: border-color 0.2s;
   }
-
-  .workflow-card:hover {
-    border-color: rgba(0,217,126,0.2) !important;
+  .faq-item.open { border-color: rgba(0,217,126,0.2); }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #e2e8f0;
+    transition: color 0.15s;
+  }
+  .faq-question:hover { color: #00d97e; }
+  .faq-icon {
+    font-size: 1.1rem;
+    color: rgba(0,217,126,0.6);
+    flex-shrink: 0;
+    font-family: 'JetBrains Mono', monospace;
+    transition: transform 0.25s;
+    line-height: 1;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-answer-text {
+    padding: 0 1.25rem 1.1rem;
+    color: #718096;
+    font-size: 0.875rem;
+    line-height: 1.65;
+    margin: 0;
   }
 </style>
+
+<script>
+  // ── Typewriter animation ────────────────────────────────────
+  interface Segment { text: string; color?: string; blink?: boolean; }
+
+  const lines: Segment[][] = [
+    [{ text: '$ ', color: '#4a5568' }, { text: 'mailctl sync && taskctl today', color: '#e2e8f0' }],
+    [{ text: '✓', color: '#00d97e' }, { text: ' Synced 12 messages', color: '#a0aec0' }],
+    [{ text: '✓', color: '#00d97e' }, { text: ' 3 tasks due today', color: '#a0aec0' }],
+    [],
+    [{ text: '$ ', color: '#4a5568' }, { text: 'calctl free ', color: '#e2e8f0' }, { text: '--from', color: '#6366f1' }, { text: ' today ', color: '#e2e8f0' }, { text: '--to', color: '#6366f1' }, { text: ' +7d', color: '#e2e8f0' }],
+    [{ text: 'Free slots:', color: '#a0aec0' }],
+    [{ text: '  Mon', color: '#f59e0b' }, { text: ' 09:00–11:00', color: '#e2e8f0' }],
+    [{ text: '  Wed', color: '#f59e0b' }, { text: ' 14:00–16:00', color: '#e2e8f0' }],
+    [],
+    [{ text: '$ ', color: '#4a5568' }, { text: 'budgetctl summary ', color: '#e2e8f0' }, { text: '--month', color: '#6366f1' }, { text: ' 2026-07', color: '#e2e8f0' }],
+    [{ text: 'Income:   ', color: '#a0aec0' }, { text: '€4,200.00', color: '#00d97e' }],
+    [{ text: 'Expenses: ', color: '#a0aec0' }, { text: '€2,847.35', color: '#ef4444' }],
+    [{ text: 'Saved:    ', color: '#a0aec0' }, { text: '€1,352.65 (32.2%)', color: '#00d97e' }, { text: '█', color: '#00d97e', blink: true }],
+  ];
+
+  function runTypewriter(pre: HTMLElement) {
+    // Clear initial cursor placeholder
+    pre.innerHTML = '';
+
+    let lineIdx = 0, segIdx = 0, charIdx = 0;
+    let currentSpan: HTMLElement | null = null;
+
+    function typeNext() {
+      if (lineIdx >= lines.length) return;
+
+      const line = lines[lineIdx];
+
+      if (line.length === 0) {
+        pre.appendChild(document.createTextNode('\n'));
+        lineIdx++;
+        segIdx = 0; charIdx = 0;
+        setTimeout(typeNext, 320 + Math.random() * 180);
+        return;
+      }
+
+      if (segIdx >= line.length) {
+        pre.appendChild(document.createTextNode('\n'));
+        lineIdx++;
+        segIdx = 0; charIdx = 0;
+        currentSpan = null;
+        setTimeout(typeNext, 280 + Math.random() * 200);
+        return;
+      }
+
+      const seg = line[segIdx];
+
+      if (charIdx === 0) {
+        currentSpan = document.createElement('span');
+        if (seg.color) currentSpan.style.color = seg.color;
+        if (seg.blink) currentSpan.className = 'cursor-blink';
+        pre.appendChild(currentSpan);
+      }
+
+      if (currentSpan) currentSpan.textContent += seg.text[charIdx];
+      charIdx++;
+
+      if (charIdx >= seg.text.length) {
+        segIdx++; charIdx = 0; currentSpan = null;
+      }
+
+      setTimeout(typeNext, 28 + Math.random() * 22);
+    }
+
+    typeNext();
+  }
+
+  // Start when terminal enters viewport
+  const terminal = document.getElementById('hero-terminal');
+  const pre = terminal?.querySelector('pre');
+
+  if (pre) {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          obs.disconnect();
+          setTimeout(() => runTypewriter(pre as HTMLElement), 400);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    obs.observe(terminal!);
+  }
+
+  // ── FAQ accordion ───────────────────────────────────────────
+  document.querySelectorAll<HTMLElement>('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest<HTMLElement>('.faq-item');
+      if (!item) return;
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        const q = i.querySelector('.faq-question');
+        if (q) q.setAttribute('aria-expanded', 'false');
+      });
+      // Toggle clicked
+      if (!wasOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
