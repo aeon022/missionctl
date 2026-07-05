@@ -15,7 +15,7 @@
 	url = https://github.com/aeon022/taskctl.git
 [submodule "diaryctl"]
 	path = diaryctl
-	url = /Users/gweiher/Developing/Projects/diaryctl
+	url = https://github.com/aeon022/diaryctl
 [submodule "timectl"]
 	path = timectl
-	url = /Users/gweiher/Developing/Projects/timectl
+	url = https://github.com/aeon022/timectl
