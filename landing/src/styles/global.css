@@ -21,7 +21,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto; /* custom easing used for back-to-top and anchor links */
 }
 
 body {
@@ -31,25 +31,39 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  /* Subtle scanline effect */
-  background-image: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(0, 217, 126, 0.015) 2px,
-    rgba(0, 217, 126, 0.015) 4px
-  );
 }
 
-/* Subtle grid overlay */
+/* Ambient monitor glow — soft green light bleeding from top */
 body::before {
   content: '';
   position: fixed;
+  top: -40%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120vw;
+  height: 80vh;
+  background: radial-gradient(
+    ellipse at 50% 20%,
+    rgba(0, 217, 126, 0.09) 0%,
+    rgba(99, 102, 241, 0.04) 35%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(80px);
+  will-change: transform;
+}
+
+/* Edge vignette — screen-like depth */
+body::after {
+  content: '';
+  position: fixed;
   inset: 0;
-  background-image:
-    linear-gradient(rgba(30, 30, 46, 0.3) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(30, 30, 46, 0.3) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background: radial-gradient(
+    ellipse at center,
+    transparent 45%,
+    rgba(0, 0, 6, 0.55) 100%
+  );
   pointer-events: none;
   z-index: 0;
 }
