@@ -19,3 +19,6 @@
 [submodule "timectl"]
 	path = timectl
 	url = https://github.com/aeon022/timectl
+[submodule "postctl"]
+	path = postctl
+	url = https://github.com/aeon022/postctl.git
