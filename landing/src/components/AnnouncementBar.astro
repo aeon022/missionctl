@@ -1,68 +1,145 @@
 ---
-// Slim fixed announcement bar — sits above the nav (z-index: 60)
-// Dismissed state is stored in localStorage under 'missionctl_bar_closed'
-// The bar-closed class on <html> is set by the inline head script in Layout.astro
+// Not fixed — sits inside #site-header wrapper in Layout.astro
 ---
 
-<div
-  id="announcement-bar"
-  role="banner"
-  style="
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 36px;
-    z-index: 60;
-    background: rgba(0,217,126,0.07);
-    border-bottom: 1px solid rgba(0,217,126,0.12);
-    box-shadow: inset 3px 0 0 rgba(0,217,126,0.35), inset -3px 0 0 rgba(0,217,126,0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.72rem;
-    padding: 0 3rem;
-  "
->
+<div id="announcement-bar" role="banner">
   <a
     href="https://polar.sh/aeon022"
     target="_blank"
     rel="noopener"
-    class="ann-link"
-    style="color: #a0aec0; text-decoration: none; display: flex; align-items: center; gap: 0.5rem; transition: color 0.15s;"
+    class="ann-inner"
   >
-    <span style="color: #00d97e; font-weight: 600;">missionctl Bundle</span>
-    <span style="color: #4a5568;">—</span>
-    <span>all 6 tools &middot; $39 &middot; one-time</span>
-    <span style="color: #00d97e;">&rarr;</span>
+    <span class="ann-dot"></span>
+    <span class="ann-text">
+      <strong>missionctl Bundle</strong>
+      <span class="ann-sep">·</span>
+      <span>all 8 tools</span>
+      <span class="ann-sep">·</span>
+      <span>one-time</span>
+      <span class="ann-price">$39</span>
+      <span class="ann-cta">Get it →</span>
+    </span>
   </a>
 
-  <button
-    id="ann-close"
-    aria-label="Dismiss announcement"
-    class="ann-close-btn"
-    style="
-      position: absolute;
-      right: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: #4a5568;
-      cursor: pointer;
-      font-size: 0.9rem;
-      padding: 0.2rem 0.4rem;
-      font-family: 'JetBrains Mono', monospace;
-      line-height: 1;
-      transition: color 0.15s;
-    "
-  >&times;</button>
+  <button id="ann-close" aria-label="Dismiss" class="ann-close">
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+      <path d="M1 1l8 8M9 1L1 9" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </button>
 </div>
 
 <style>
-  .ann-link:hover { color: #e2e8f0 !important; }
-  .ann-close-btn:hover { color: #e2e8f0 !important; }
+  #announcement-bar {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(0,217,126,0.05) 20%,
+      rgba(0,217,126,0.08) 50%,
+      rgba(0,217,126,0.05) 80%,
+      transparent 100%
+    );
+    border-bottom: 1px solid rgba(0,217,126,0.1);
+    overflow: hidden;
+  }
+
+  /* Shimmer sweep */
+  #announcement-bar::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255,255,255,0.03) 50%,
+      transparent 100%
+    );
+    background-size: 200% 100%;
+    animation: ann-shimmer 4s ease infinite;
+  }
+
+  @keyframes ann-shimmer {
+    0%   { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .ann-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .ann-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #00d97e;
+    box-shadow: 0 0 6px rgba(0,217,126,0.6);
+    animation: ann-pulse 2.5s ease infinite;
+    flex-shrink: 0;
+  }
+
+  @keyframes ann-pulse {
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(0,217,126,0.6); }
+    50%       { opacity: 0.7; box-shadow: 0 0 10px rgba(0,217,126,0.9); }
+  }
+
+  .ann-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: #718096;
+    transition: color 0.15s;
+  }
+  .ann-inner:hover .ann-text { color: #a0aec0; }
+
+  .ann-text strong { color: #e2e8f0; font-weight: 600; }
+  .ann-sep { color: #2d2d44; }
+  .ann-price {
+    color: #00d97e;
+    font-weight: 700;
+    background: rgba(0,217,126,0.08);
+    padding: 0.05rem 0.35rem;
+    border-radius: 3px;
+    border: 1px solid rgba(0,217,126,0.15);
+  }
+  .ann-cta {
+    color: #00d97e;
+    transition: gap 0.15s;
+    letter-spacing: 0.01em;
+  }
+  .ann-inner:hover .ann-cta { letter-spacing: 0.04em; }
+
+  .ann-close {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    background: none;
+    border: none;
+    color: #2d2d44;
+    cursor: pointer;
+    padding: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 3px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .ann-close:hover { color: #718096; background: rgba(255,255,255,0.04); }
+
+  /* Hidden via html.bar-closed */
+  :global(.bar-closed) #announcement-bar {
+    display: none;
+  }
 </style>
 
 <script>

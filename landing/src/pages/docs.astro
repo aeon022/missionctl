@@ -8,6 +8,8 @@ const mcpConfig = `{
     "taskctl":   { "command": "taskctl",   "args": ["mcp"] },
     "notectl":   { "command": "notectl",   "args": ["mcp"] },
     "budgetctl": { "command": "budgetctl", "args": ["mcp"] },
+    "diaryctl":  { "command": "diaryctl",  "args": ["mcp"] },
+    "timectl":   { "command": "timectl",   "args": ["mcp"] },
     "postctl":   { "command": "postctl",   "args": ["mcp"] }
   }
 }`;
@@ -29,6 +31,8 @@ const navSections = [
       { href: '#taskctl', label: 'taskctl' },
       { href: '#notectl', label: 'notectl' },
       { href: '#budgetctl', label: 'budgetctl' },
+      { href: '#diaryctl', label: 'diaryctl' },
+      { href: '#timectl', label: 'timectl' },
       { href: '#postctl', label: 'postctl' },
     ],
   },
@@ -44,7 +48,7 @@ const navSections = [
 
 <Layout
   title="Documentation — missionctl"
-  description="Complete documentation for all 6 missionctl tools. Installation, CLI reference, TUI keybindings, and MCP tool reference for mailctl, calctl, taskctl, notectl, budgetctl, and postctl."
+  description="Complete documentation for all 8 missionctl tools. Installation, CLI reference, TUI keybindings, and MCP tool reference for mailctl, calctl, taskctl, notectl, budgetctl, diaryctl, timectl, and postctl."
 >
   <!-- Mobile sidebar nav -->
   <details class="docs-mobile-nav">
@@ -79,7 +83,7 @@ const navSections = [
     <div class="docs-main">
       <h1>missionctl Documentation</h1>
       <p style="color:#718096; margin-bottom:2rem;">
-        43 MCP tools across 6 terminal apps. Local-first, no cloud, no subscriptions.
+        52 MCP tools across 8 terminal apps. Local-first, no cloud, no subscriptions.
       </p>
 
       <!-- ── GETTING STARTED ───────────────── -->
@@ -110,7 +114,7 @@ notectl sync      # Obsidian vault → local index`}</code></pre>
         <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:
       </p>
       <pre><code set:text={mcpConfig}></code></pre>
-      <p>Restart Claude Desktop. All 43 MCP tools appear automatically in every conversation.</p>
+      <p>Restart Claude Desktop. All 52 MCP tools appear automatically in every conversation.</p>
 
       <!-- ── MAILCTL ───────────────────────── -->
       <h2 id="mailctl">mailctl</h2>
@@ -390,9 +394,88 @@ postctl mcp                          # start MCP server`}</code></pre>
         <span class="docs-tool-tag">get_campaign</span>
       </div>
 
+      <!-- ── DIARYCTL ──────────────────────── -->
+      <h2 id="diaryctl">diaryctl</h2>
+      <p>
+        Developer diary from your terminal. Reads git history, completed tasks (taskctl),
+        calendar events (calctl), and time logs (timectl) to generate AI narrative diary entries.
+      </p>
+
+      <h3>Install</h3>
+      <pre><code>{`git clone https://github.com/aeon022/diaryctl
+cd diaryctl && ./setup.sh`}</code></pre>
+
+      <h3>Setup</h3>
+      <pre><code>{`diaryctl init ~/code/myproject --name "My Project"
+diaryctl repos   # list registered repos`}</code></pre>
+
+      <h3>CLI commands</h3>
+      <pre><code>{`diaryctl today               # generate today's entry
+diaryctl today --open        # open in $EDITOR
+diaryctl list                # list all entries
+diaryctl show 2026-07-04     # show a specific entry
+diaryctl stats --days 30     # coding stats for last 30 days
+diaryctl tui                 # open TUI (heatmap + list)
+diaryctl mcp                 # start MCP server`}</code></pre>
+
+      <h3>TUI keybindings</h3>
+      <pre><code>{`j/k     navigate entries
+enter   open entry
+n       generate today's entry
+e       edit in $EDITOR
+r       repos view
+v       stats view
+q       quit`}</code></pre>
+
+      <h3>MCP tools</h3>
+      <div>
+        <span class="docs-tool-tag">get_today_stats</span>
+        <span class="docs-tool-tag">get_diary_entry</span>
+        <span class="docs-tool-tag">write_diary_entry</span>
+        <span class="docs-tool-tag">get_coding_stats</span>
+        <span class="docs-tool-tag">list_diary_entries</span>
+      </div>
+
+      <!-- ── TIMECTL ──────────────────────── -->
+      <h2 id="timectl">timectl</h2>
+      <p>
+        Time tracking from your terminal. Start and stop timers, view a weekly bar chart,
+        and integrate time logs into diaryctl diary entries.
+      </p>
+
+      <h3>Install</h3>
+      <pre><code>{`git clone https://github.com/aeon022/timectl
+cd timectl && ./setup.sh`}</code></pre>
+
+      <h3>CLI commands</h3>
+      <pre><code>{`timectl start "Fix auth bug" --project myapp
+timectl stop
+timectl status               # check running timer
+timectl today                # time log for today
+timectl week                 # weekly bar chart
+timectl log --days 7         # last 7 days log
+timectl tui                  # open TUI
+timectl mcp                  # start MCP server`}</code></pre>
+
+      <h3>TUI keybindings</h3>
+      <pre><code>{`n       start new timer
+s       stop running timer
+j/k     navigate log
+w       week view
+v       stats view
+q       quit`}</code></pre>
+
+      <h3>MCP tools</h3>
+      <div>
+        <span class="docs-tool-tag">start_timer</span>
+        <span class="docs-tool-tag">stop_timer</span>
+        <span class="docs-tool-tag">get_time_log</span>
+        <span class="docs-tool-tag">get_time_stats</span>
+      </div>
+
       <!-- ── MCP REFERENCE ─────────────────── -->
       <h2 id="mcp-reference">MCP Reference</h2>
-      <p>All 43 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</p>
+      <p>All 52 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</p>
 
       {[
         { app: 'mailctl', color: '#00d97e', tools: [
@@ -440,6 +523,19 @@ postctl mcp                          # start MCP server`}</code></pre>
           ['set_budget_goal', 'Set a monthly spending limit for a category'],
           ['delete_budget_goal', 'Remove a goal'],
           ['detect_recurring_payments', 'Detect subscriptions and recurring charges'],
+        ]},
+        { app: 'diaryctl', color: '#f59e0b', tools: [
+          ['get_today_stats', 'Git commits, files changed, suite data (tasks, events, time tracked) for today'],
+          ['get_diary_entry', 'Read a diary entry by date (default: today)'],
+          ['write_diary_entry', 'Save or overwrite a diary entry — used by Claude to fill in the narrative'],
+          ['get_coding_stats', 'Aggregate stats for last N days: streak, commits, most active day, repo breakdown'],
+          ['list_diary_entries', 'List recent entries with date and preview'],
+        ]},
+        { app: 'timectl', color: '#6366f1', tools: [
+          ['start_timer', 'Start a timer with task name and optional project tag'],
+          ['stop_timer', 'Stop the running timer, returns task name and duration'],
+          ['get_time_log', 'Time entries for a date or date range with total duration'],
+          ['get_time_stats', 'Breakdown by task/project, daily average, streak for last N days'],
         ]},
         { app: 'postctl', color: '#ec4899', tools: [
           ['list_posts', 'List posts, filter by platform/status/campaign'],

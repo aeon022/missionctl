@@ -103,6 +103,60 @@ body::after {
   text-shadow: 0 0 20px rgba(0, 217, 126, 0.5);
 }
 
+/* ===== PAGE TRANSITION — GLITCH ===== */
+
+/* Old page tears apart */
+@keyframes page-glitch-out {
+  0%   { opacity: 1;   transform: none;                         filter: none; }
+  12%  { opacity: 1;   transform: translateX(-5px) skewX(-2deg); filter: brightness(1.8) hue-rotate(60deg); }
+  25%  { opacity: 0.9; transform: translateX(5px);               filter: brightness(2.5) saturate(3); }
+  38%  { opacity: 0.7; transform: translateX(-3px) skewX(1deg);  filter: invert(0.4) hue-rotate(120deg); }
+  52%  { opacity: 0.4; transform: translateX(4px);               filter: brightness(3) hue-rotate(200deg); }
+  66%  { opacity: 0.2; transform: translateX(-2px) scaleY(0.98); filter: brightness(0.3) saturate(0); }
+  80%  { opacity: 0.1; transform: translateX(1px);               filter: brightness(0.1); }
+  100% { opacity: 0;   transform: none;                         filter: none; }
+}
+
+/* New page materialises through noise */
+@keyframes page-glitch-in {
+  0%   { opacity: 0;   transform: none;                         filter: brightness(4) saturate(0); }
+  14%  { opacity: 0.5; transform: translateX(5px)  skewX(2deg);  filter: hue-rotate(180deg) saturate(3) brightness(2); }
+  28%  { opacity: 0.7; transform: translateX(-4px) skewX(-1deg); filter: brightness(2.5) invert(0.3); }
+  42%  { opacity: 0.8; transform: translateX(3px);               filter: brightness(1.8) hue-rotate(30deg); }
+  57%  { opacity: 0.9; transform: translateX(-2px) skewX(0.5deg);filter: brightness(1.3) saturate(1.5); }
+  72%  { opacity: 1;   transform: translateX(1px);               filter: brightness(1.1); }
+  86%  { opacity: 1;   transform: translateX(-0.5px);            filter: none; }
+  100% { opacity: 1;   transform: none;                         filter: none; }
+}
+
+/* Green flash between pages */
+@keyframes page-flash {
+  0%   { background: rgba(0,217,126,0); }
+  50%  { background: rgba(0,217,126,0.04); }
+  100% { background: rgba(0,217,126,0); }
+}
+
+::view-transition-old(root) {
+  animation: page-glitch-out 0.28s steps(7, end) both;
+}
+
+::view-transition-new(root) {
+  animation: page-glitch-in 0.32s steps(7, end) both;
+  animation-delay: 0.04s;
+}
+
+/* Overlay flash */
+::view-transition-image-pair(root) {
+  animation: page-flash 0.32s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none;
+  }
+}
+
 /* Animations */
 @keyframes blink {
   0%, 100% { opacity: 1; }
@@ -128,15 +182,21 @@ main, header, footer, nav {
   z-index: 1;
 }
 
-/* ===== ANNOUNCEMENT BAR ===== */
-:root {
-  --ann-bar-height: 36px;
+/* ===== SITE HEADER (fixed wrapper for bar + nav) ===== */
+#site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 60;
 }
-.bar-closed {
-  --ann-bar-height: 0px;
+
+/* Spacer so content starts below the fixed header */
+.nav-spacer {
+  height: calc(36px + 56px) !important; /* announcement bar + nav */
 }
-.bar-closed #announcement-bar {
-  display: none !important;
+.bar-closed .nav-spacer {
+  height: 56px !important;
 }
 
 /* ===== SCROLL REVEAL ===== */

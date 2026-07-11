@@ -22,3 +22,6 @@
 [submodule "postctl"]
 	path = postctl
 	url = https://github.com/aeon022/postctl.git
+[submodule "habctl"]
+	path = habctl
+	url = https://github.com/aeon022/habctl.git
