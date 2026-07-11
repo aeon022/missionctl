@@ -8,16 +8,16 @@ const apps = [
   {
     name: 'mailctl',
     href: '/mailctl',
-    description: 'Read inbox, compose and send email via Apple Mail. Syncs to local SQLite database.',
+    description: 'Read inbox, compose and send email via Apple Mail. AI draft replies with one keystroke.',
     mcpCount: 6,
-    features: ['TUI inbox with threading', 'Compose & reply with templates', 'Full-text search', 'MCP server for AI access'],
+    features: ['TUI inbox with threading', 'AI draft reply (a-key)', 'Full-text search', 'MCP server for AI access'],
   },
   {
     name: 'calctl',
     href: '/calctl',
-    description: 'Browse calendar, create events, find free slots via Apple Calendar.',
+    description: 'Browse calendar, create events, find free slots via Apple Calendar. Summarize meetings with Claude.',
     mcpCount: 7,
-    features: ['TUI week/month view', 'Apple Calendar sync', 'Free slot finder', 'Event creation from Markdown'],
+    features: ['TUI week/month view', 'Apple Calendar sync', 'Free slot finder', 'Meeting summaries via Claude'],
   },
   {
     name: 'taskctl',
@@ -36,9 +36,30 @@ const apps = [
   {
     name: 'budgetctl',
     href: '/budgetctl',
-    description: 'Import bank CSV, categorize transactions, set budget goals, detect recurring payments. Works on macOS and Linux.',
+    description: 'Import bank CSV, categorize transactions, set budget goals. Claude auto-categorizes with --ai flag.',
     mcpCount: 9,
-    features: ['N26, ING, DKB CSV import', 'Smart category rules', 'Budget goals with progress', 'Recurring payment detection'],
+    features: ['N26, ING, DKB CSV import', 'AI auto-categorization', 'Budget goals with progress', 'Recurring payment detection'],
+  },
+  {
+    name: 'diaryctl',
+    href: '/diaryctl',
+    description: 'Reads git history and generates AI narrative diary entries. Syncs back to Obsidian vault automatically.',
+    mcpCount: 5,
+    features: ['Git history reader', 'AI narrative entries', 'Obsidian write-back', 'Export for postctl pipeline'],
+  },
+  {
+    name: 'timectl',
+    href: '/timectl',
+    description: 'Start/stop timers, weekly bar chart, live TUI. Link timers to tasks, navigate days, generate invoices.',
+    mcpCount: 4,
+    features: ['taskctl integration (T-key)', 'Invoice export (--month)', 'Day navigation (←/→/t)', 'Daily goal bar'],
+  },
+  {
+    name: 'habctl',
+    href: '/habctl',
+    description: 'Track daily habits with streaks, check-ins, and automatic diary integration.',
+    mcpCount: 3,
+    features: ['Daily check-ins with streaks', '30-day progress bars', 'Diary template integration', 'MCP server for AI access'],
   },
   {
     name: 'postctl',
@@ -56,6 +77,9 @@ const mcpConfig = `{
     "taskctl":   { "command": "taskctl",   "args": ["mcp"] },
     "notectl":   { "command": "notectl",   "args": ["mcp"] },
     "budgetctl": { "command": "budgetctl", "args": ["mcp"] },
+    "diaryctl":  { "command": "diaryctl",  "args": ["mcp"] },
+    "timectl":   { "command": "timectl",   "args": ["mcp"] },
+    "habctl":    { "command": "habctl",    "args": ["mcp"] },
     "postctl":   { "command": "postctl",   "args": ["mcp"] }
   }
 }`;
@@ -75,6 +99,11 @@ const workflows = [
     title: 'Monthly Finance Review',
     cmd: 'AI + budgetctl',
     description: 'Import your bank CSV, let AI categorize transactions and surface anomalies, then write a summary to your Obsidian vault.',
+  },
+  {
+    title: 'End-of-Day Digest',
+    cmd: 'AI + diaryctl + timectl + habctl',
+    description: 'AI checks your time log, habit streaks, and git commits, then writes a diary entry and surfaces what to finish before tomorrow.',
   },
 ];
 
@@ -142,6 +171,33 @@ const toolGroups = [
     ],
   },
   {
+    app: 'diaryctl', count: 5, color: '#f59e0b',
+    tools: [
+      { name: 'get_today_stats',    desc: 'Git commits, files changed, suite data (tasks, events, time tracked) for today' },
+      { name: 'get_diary_entry',    desc: 'Read a diary entry by date (default: today)' },
+      { name: 'write_diary_entry',  desc: 'Save or overwrite a diary entry — used by Claude to fill in the narrative' },
+      { name: 'get_coding_stats',   desc: 'Aggregate stats for last N days: streak, commits, most active day, repo breakdown' },
+      { name: 'list_diary_entries', desc: 'List recent entries with date and preview' },
+    ],
+  },
+  {
+    app: 'timectl', count: 4, color: '#6366f1',
+    tools: [
+      { name: 'start_timer',    desc: 'Start a timer with task name and optional project tag' },
+      { name: 'stop_timer',     desc: 'Stop the running timer, returns task name and duration' },
+      { name: 'get_time_log',   desc: 'Time entries for a date or date range with total duration' },
+      { name: 'get_time_stats', desc: 'Breakdown by task/project, daily average, streak for last N days' },
+    ],
+  },
+  {
+    app: 'habctl', count: 3, color: '#f59e0b',
+    tools: [
+      { name: 'check_habit',     desc: 'Check in for a habit today (or a specific date)' },
+      { name: 'list_habits',     desc: 'List all habits with today\'s check-in status and current streak' },
+      { name: 'get_habit_stats', desc: 'Streak, longest streak, and 30-day completion rate for a habit' },
+    ],
+  },
+  {
     app: 'postctl', count: 7, color: '#ec4899',
     tools: [
       { name: 'list_posts',     desc: 'List posts, filter by platform/status/campaign' },
@@ -182,14 +238,14 @@ const faqs = [
   },
   {
     q: "What's the difference between buying individually vs. the bundle?",
-    a: 'The bundle ($39) includes all 6 tools. Buying individually costs $54 total. If you use more than 4 tools, the bundle saves money.',
+    a: 'The bundle ($39) includes all 9 tools. Buying individually costs $81 total. If you use more than 4 tools, the bundle saves money.',
   },
 ];
 ---
 
 <Layout
   title="missionctl — Give your AI hands"
-  description="43 MCP tools across 6 terminal apps for macOS. Read email, manage calendar, tasks, notes, budget, and social posts. Local-first, no subscriptions."
+  description="55 MCP tools across 9 terminal apps for macOS + Linux. Read email, manage calendar, tasks, notes, budget, track habits, log time, keep a diary, and schedule posts. Local-first, no subscriptions."
 >
   <!-- ======= HERO ======= -->
   <section style="min-height: calc(100vh - 56px); display: flex; flex-direction: column; justify-content: center; padding: 4rem 1.5rem 5rem; max-width: 1200px; margin: 0 auto;">
@@ -198,15 +254,15 @@ const faqs = [
       <!-- Left: Text -->
       <div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
-          43 MCP tools &middot; 6 terminal apps &middot; macOS
+          55 MCP tools &middot; 9 terminal apps &middot; macOS + Linux
         </div>
         <h1 style="font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1.25rem;">
           Give your AI<br>
           <span style="color: #00d97e; text-shadow: 0 0 40px rgba(0,217,126,0.3);">hands.</span>
         </h1>
         <p style="font-size: 1.125rem; color: #718096; line-height: 1.65; margin: 0 0 2rem; max-width: 480px;">
-          43 MCP tools across 6 terminal apps. Local-first. No subscriptions.
-          Your AI can now read email, manage your calendar, handle tasks, write notes, track spending, and schedule posts.
+          55 MCP tools across 9 terminal apps. Local-first. No subscriptions.
+          Your AI can now read email, manage your calendar, handle tasks, write notes, track spending, log time, track habits, keep a diary, and schedule posts.
         </p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a
@@ -283,7 +339,7 @@ const faqs = [
         <div class="how-step-num">02</div>
         <h3 class="how-title" style="color:#00d97e;">Claude calls MCP tools</h3>
         <p class="how-desc">
-          43 tools across 6 apps,<br>running locally on your machine
+          55 tools across 9 apps,<br>running locally on your machine
         </p>
       </div>
 
@@ -317,7 +373,7 @@ const faqs = [
     <div style="max-width: 1200px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-          Six apps. One config block.
+          Nine apps. One config block.
         </h2>
         <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
           Each tool stands alone or works together as part of the missionctl suite.
@@ -342,7 +398,7 @@ const faqs = [
   <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-        43 tools. One config.
+        55 tools. One config.
       </h2>
       <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
         Hover any chip to see what it does. Every tool is callable from Claude Desktop.
@@ -387,8 +443,8 @@ const faqs = [
 
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;" class="mcp-stats-grid">
         {[
-          { n: '43', label: 'MCP tools total' },
-          { n: '6', label: 'local-first apps' },
+          { n: '55', label: 'MCP tools total' },
+          { n: '9', label: 'local-first apps' },
           { n: '0', label: 'cloud dependencies' },
         ].map(stat => (
           <div style="text-align: center; padding: 1.25rem; background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px;">
@@ -471,6 +527,9 @@ const faqs = [
             'taskctl — tasks & Pomodoro',
             'notectl — Obsidian notes',
             'budgetctl — budget tracking',
+            'diaryctl — developer diary',
+            'timectl — time tracking',
+            'habctl — habit tracking',
             'postctl — social scheduling',
           ]}
           note="Each tool sold separately at $9"
@@ -482,10 +541,12 @@ const faqs = [
           title="missionctl Bundle"
           price="$39"
           features={[
-            'All 6 tools included',
+            'All 9 tools included',
             'mailctl + calctl + taskctl',
             'notectl + budgetctl + postctl',
-            '43 MCP tools total',
+            'diaryctl + timectl',
+            'habctl + habit tracking',
+            '55 MCP tools total',
             'One config block',
             'Future updates included',
           ]}

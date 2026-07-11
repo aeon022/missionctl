@@ -1,0 +1,171 @@
+---
+import Layout from '../components/Layout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+
+const mcpTools = [
+  { name: "start_timer",   desc: "Start a timer with task name and optional project tag" },
+  { name: "stop_timer",    desc: "Stop the running timer, returns task name and duration" },
+  { name: "get_time_log",  desc: "Time entries for a date or date range with total duration" },
+  { name: "get_time_stats", desc: "Breakdown by task/project, daily average, streak for last N days" },
+];
+const features = [
+  { title: "Start/Stop Timers", desc: "timectl start TASK and timectl stop. Errors clearly if a timer is already running. Simple, fast, no friction." },
+  { title: "Live TUI", desc: "Running timer updates every second in the header. Switch between today, week bar chart, and stats views with a single key." },
+  { title: "Weekly Bar Chart", desc: "Horizontal bar chart showing hours per day. See your rhythm across the week at a glance." },
+  { title: "diaryctl Integration", desc: "Time logs feed directly into your daily diary entry. \"You spent 3.5h on diaryctl, 1h in meetings.\"" },
+];
+---
+
+<Layout
+  title="timectl — Time Tracking from your Terminal"
+  description="timectl — Start/stop timers, track time per task and project, weekly breakdown. 4 MCP tools for Claude Desktop."
+  type="software"
+  appName="timectl"
+  appPrice="9"
+>
+  <!-- HERO -->
+  <section style="padding: 5rem 1.5rem 4rem; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+          missionctl suite &middot; macOS + Linux
+        </div>
+        <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
+          <span style="font-family: 'JetBrains Mono', monospace; color: #00d97e;">timectl</span>
+        </h1>
+        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Time Tracking from your Terminal</p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Start and stop timers from the terminal. Weekly bar chart. Pairs with diaryctl to show how you spent your day.</p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+            class="cta-primary">
+            Get timectl &mdash; $9
+          </a>
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+            class="cta-secondary">
+            Bundle &mdash; $39
+          </a>
+        </div>
+      </div>
+      <div>
+        <TerminalWindow title="timectl — today" content={`<span style="color:#4a5568">$ </span>timectl start <span style="color:#a0aec0">"Fix auth bug"</span> --project diaryctl
+<span style="color:#00d97e">▶</span> <span style="color:#a0aec0">Started: Fix auth bug (diaryctl)</span>
+  <span style="color:#4a5568">09:14:32 — running</span>
+
+<span style="color:#4a5568">$ </span>timectl stop
+<span style="color:#ef4444">■</span> <span style="color:#a0aec0">Stopped: Fix auth bug (diaryctl)</span>
+  <span style="color:#4a5568">09:14:32 → 11:03:17 — 1h 48m 45s</span>
+
+<span style="color:#4a5568">$ </span>timectl today
+  <span style="color:#4a5568">09:00–10:30</span>  <span style="color:#a0aec0">1h 30m</span>  Plan sprint       <span style="color:#4a5568">[work]</span>
+  <span style="color:#4a5568">10:45–12:00</span>  <span style="color:#a0aec0">1h 15m</span>  Fix auth bug      <span style="color:#4a5568">[diaryctl]</span>
+  <span style="color:#4a5568">14:00–15:45</span>  <span style="color:#a0aec0">1h 45m</span>  Write tests       <span style="color:#4a5568">[diaryctl]</span>
+  <span style="color:#718096">──────────────────────────────────────</span>
+  <span style="color:#00d97e">Total: 4h 30m</span><span class="cursor-blink" style="color:#00d97e">█</span>`} />
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;">Features</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
+        {features.map((feat: {title: string; desc: string}) => (
+          <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #00d97e; margin: 0 0 0.5rem;">{feat.title}</h3>
+            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEATSHEET -->
+  <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;">Command Reference</h2>
+    <TerminalWindow title="timectl — cheatsheet" content={`<span style="color:#4a5568"># Start a timer</span>
+<span style="color:#4a5568">$ </span>timectl start <span style="color:#a0aec0">"Fix auth bug"</span> --project myapp
+
+<span style="color:#4a5568"># Stop the running timer</span>
+<span style="color:#4a5568">$ </span>timectl stop
+
+<span style="color:#4a5568"># Check current timer</span>
+<span style="color:#4a5568">$ </span>timectl status
+
+<span style="color:#4a5568"># Time log for today</span>
+<span style="color:#4a5568">$ </span>timectl today
+
+<span style="color:#4a5568"># Week bar chart</span>
+<span style="color:#4a5568">$ </span>timectl week
+
+<span style="color:#4a5568"># Log last N days</span>
+<span style="color:#4a5568">$ </span>timectl log --days 7
+
+<span style="color:#4a5568"># TUI (live timer + views)</span>
+<span style="color:#4a5568">$ </span>timectl tui
+
+<span style="color:#4a5568"># Start MCP server</span>
+<span style="color:#4a5568">$ </span>timectl mcp`} />
+  </section>
+
+  <!-- MCP TOOLS -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #00d97e;">timectl mcp</code></p>
+      <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;">Tool</th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
+              <tr style={`background: ${i % 2 === 0 ? '#111118' : '#0d0d14'}; border-bottom: 1px solid #1e1e2e;`}>
+                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00d97e;">{tool.name}</td>
+                <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: #718096;">{tool.desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING CTA -->
+  <section style="padding: 5rem 1.5rem; text-align: center; max-width: 600px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
+      Know where your time goes.
+    </h2>
+    <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
+      One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.
+    </p>
+    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
+        class="cta-primary">
+        Get timectl &mdash; $9
+      </a>
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+        class="cta-secondary">
+        Or get the Bundle &mdash; $39
+      </a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .features-grid { grid-template-columns: 1fr !important; }
+  }
+  .cta-primary:hover { background: #00c070 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important; }
+  .cta-secondary:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
+  .feature-card:hover { border-color: rgba(0,217,126,0.2) !important; }
+</style>

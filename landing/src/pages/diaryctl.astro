@@ -1,0 +1,173 @@
+---
+import Layout from '../components/Layout.astro';
+import TerminalWindow from '../components/TerminalWindow.astro';
+
+const mcpTools = [
+  { name: "get_today_stats",    desc: "Git commits, files changed, additions/deletions, suite data (tasks, events, time tracked) for today" },
+  { name: "get_diary_entry",    desc: "Read a diary entry by date (default: today)" },
+  { name: "write_diary_entry",  desc: "Save or overwrite a diary entry — used by Claude to fill in the narrative" },
+  { name: "get_coding_stats",   desc: "Aggregate stats for last N days: streak, commits, most active day, repo breakdown" },
+  { name: "list_diary_entries", desc: "List recent entries with date and preview" },
+];
+const features = [
+  { title: "Git History Reader", desc: "Parses commits, diffs, and shortstat across multiple repos. Knows what you built, how long it took, and when you were in flow." },
+  { title: "AI Narrative Entries", desc: "Claude reads your commits and writes a personal diary entry. Not a report — a story. What was hard, what felt good, what you learned." },
+  { title: "Streak & Heatmap", desc: "30-day commit heatmap in the TUI. Track coding streaks and see your productivity patterns at a glance." },
+  { title: "Suite Integration", desc: "Pulls in completed tasks from taskctl, meetings from calctl, and time logs from timectl for a complete picture of your day." },
+];
+---
+
+<Layout
+  title="diaryctl — Developer Diary from your Terminal"
+  description="diaryctl — Track your coding day, generate AI narrative diary entries from git history. 5 MCP tools for Claude Desktop."
+  type="software"
+  appName="diaryctl"
+  appPrice="9"
+>
+  <!-- HERO -->
+  <section style="padding: 5rem 1.5rem 4rem; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
+      <div>
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+          missionctl suite &middot; macOS + Linux
+        </div>
+        <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
+          <span style="font-family: 'JetBrains Mono', monospace; color: #00d97e;">diaryctl</span>
+        </h1>
+        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Developer Diary from your Terminal</p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Reads your git commits, completed tasks, and calendar. AI generates narrative diary entries. Your coding story, told automatically.</p>
+        <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+            class="cta-primary">
+            Get diaryctl &mdash; $9
+          </a>
+          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+            class="cta-secondary">
+            Bundle &mdash; $39
+          </a>
+        </div>
+      </div>
+      <div>
+        <TerminalWindow title="diaryctl — today" content={`<span style="color:#4a5568">$ </span>diaryctl init ~/code/missionctl --name <span style="color:#a0aec0">"missionctl"</span>
+<span style="color:#00d97e">✓</span> <span style="color:#a0aec0">Registered: missionctl (~/code/missionctl)</span>
+
+<span style="color:#4a5568">$ </span>diaryctl today
+<span style="color:#e2e8f0"># 2026-07-05</span>
+
+<span style="color:#718096">## Stats</span>
+<span style="color:#a0aec0">- Commits: 7 · Files: 14 · +312 / -47</span>
+<span style="color:#a0aec0">- Time tracked: 4h 30m  ·  Streak: 12 days</span>
+
+<span style="color:#718096">## Commits</span>
+<span style="color:#a0aec0">- feat: add diaryctl suite integration</span>
+<span style="color:#a0aec0">- fix: timectl duration formatting</span>
+
+<span style="color:#4a5568">## Context</span>
+<span style="color:#4a5568">&lt;!-- AI: Write a narrative entry... --&gt;</span><span class="cursor-blink" style="color:#00d97e">█</span>`} />
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;">Features</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
+        {features.map((feat: {title: string; desc: string}) => (
+          <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #00d97e; margin: 0 0 0.5rem;">{feat.title}</h3>
+            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEATSHEET -->
+  <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;">Command Reference</h2>
+    <TerminalWindow title="diaryctl — cheatsheet" content={`<span style="color:#4a5568"># Register a git repo</span>
+<span style="color:#4a5568">$ </span>diaryctl init ~/code/project --name <span style="color:#a0aec0">"My Project"</span>
+
+<span style="color:#4a5568"># Generate today's diary entry</span>
+<span style="color:#4a5568">$ </span>diaryctl today
+<span style="color:#4a5568">$ </span>diaryctl today --open      <span style="color:#4a5568"># open in $EDITOR</span>
+
+<span style="color:#4a5568"># Browse entries</span>
+<span style="color:#4a5568">$ </span>diaryctl list
+<span style="color:#4a5568">$ </span>diaryctl show 2026-07-04
+
+<span style="color:#4a5568"># Coding stats</span>
+<span style="color:#4a5568">$ </span>diaryctl stats --days 30
+
+<span style="color:#4a5568"># Registered repos</span>
+<span style="color:#4a5568">$ </span>diaryctl repos
+
+<span style="color:#4a5568"># TUI (heatmap + entry list)</span>
+<span style="color:#4a5568">$ </span>diaryctl tui
+
+<span style="color:#4a5568"># Start MCP server</span>
+<span style="color:#4a5568">$ </span>diaryctl mcp`} />
+  </section>
+
+  <!-- MCP TOOLS -->
+  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #00d97e;">diaryctl mcp</code></p>
+      <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;">Tool</th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
+              <tr style={`background: ${i % 2 === 0 ? '#111118' : '#0d0d14'}; border-bottom: 1px solid #1e1e2e;`}>
+                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00d97e;">{tool.name}</td>
+                <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: #718096;">{tool.desc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING CTA -->
+  <section style="padding: 5rem 1.5rem; text-align: center; max-width: 600px; margin: 0 auto;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
+      Your coding story, told automatically.
+    </h2>
+    <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
+      One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.
+    </p>
+    <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
+        class="cta-primary">
+        Get diaryctl &mdash; $9
+      </a>
+      <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+        class="cta-secondary">
+        Or get the Bundle &mdash; $39
+      </a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  @media (max-width: 768px) {
+    .hero-grid { grid-template-columns: 1fr !important; }
+    .features-grid { grid-template-columns: 1fr !important; }
+  }
+  .cta-primary:hover { background: #00c070 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important; }
+  .cta-secondary:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
+  .feature-card:hover { border-color: rgba(0,217,126,0.2) !important; }
+</style>
