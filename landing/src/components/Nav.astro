@@ -5,6 +5,9 @@ const apps = [
   { name: 'taskctl', href: '/taskctl' },
   { name: 'notectl', href: '/notectl' },
   { name: 'budgetctl', href: '/budgetctl' },
+  { name: 'diaryctl', href: '/diaryctl' },
+  { name: 'timectl', href: '/timectl' },
+  { name: 'habctl', href: '/habctl' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -80,33 +83,41 @@ const currentPath = Astro.url.pathname;
 
 <style>
   .main-nav {
-    position: fixed;
-    top: var(--ann-bar-height, 36px);
-    left: 0;
-    right: 0;
-    z-index: 50;
-    background: rgba(10,10,15,0.6);
-    border-bottom: 1px solid rgba(30,30,46,0.3);
+    position: relative; /* fixed by #site-header wrapper */
+    background: rgba(10,10,15,0.0);
+    border-bottom: 1px solid rgba(30,30,46,0.0);
     transition: background 0.2s ease, backdrop-filter 0.2s ease, border-color 0.2s ease;
   }
 
   .main-nav.scrolled {
-    background: rgba(10,10,15,0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(30,30,46,0.8);
+    background: rgba(10,10,15,0.5);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(30,30,46,0.6);
   }
 
   .nav-spacer {
-    height: calc(56px + var(--ann-bar-height, 36px));
+    height: 56px; /* spacer for nav only; site-header is the fixed element */
   }
 
   @media (max-width: 768px) {
     .nav-apps { display: none !important; }
   }
 
+  /* ── Glitch + glow on hover ────────────────────────────── */
+  @keyframes nav-glitch {
+    0%   { text-shadow: -3px 0 #ff2d6e, 3px 0 #00d9ff; color: #a0aec0; }
+    17%  { text-shadow:  3px 0 #ff2d6e, -3px 0 #00d9ff; color: #a0aec0; }
+    34%  { text-shadow: -4px 0 #ff2d6e,  2px 0 #00d9ff; color: #c8fae6; }
+    51%  { text-shadow:  2px 0 #ff2d6e, -4px 0 #00d9ff; color: #00d97e; }
+    68%  { text-shadow:  0   0 12px rgba(0,217,126,0.9); color: #00d97e; }
+    85%  { text-shadow:  0   0 16px rgba(0,217,126,0.7), 0 0 32px rgba(0,217,126,0.2); color: #00d97e; }
+    100% { text-shadow:  0   0  8px rgba(0,217,126,0.45), 0 0 20px rgba(0,217,126,0.12); color: #00d97e; }
+  }
+
   .nav-link:hover {
-    color: #e2e8f0 !important;
-    background: rgba(255,255,255,0.04) !important;
+    color: #00d97e !important;
+    background: rgba(0,217,126,0.05) !important;
+    animation: nav-glitch 0.38s steps(6, end) forwards;
   }
 
   .nav-buy:hover {

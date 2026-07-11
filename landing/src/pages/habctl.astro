@@ -26,17 +26,17 @@ const features = [
   <section style="padding: 5rem 1.5rem 4rem; max-width: 1100px; margin: 0 auto;">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
       <div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #84cc16; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
           missionctl suite &middot; macOS + Linux
         </div>
         <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
-          <span style="font-family: 'JetBrains Mono', monospace; color: #f59e0b;">habctl</span>
+          <span style="font-family: 'JetBrains Mono', monospace; color: #84cc16;">habctl</span>
         </h1>
         <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Daily habit tracking for terminal people</p>
         <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Track daily habits with streaks, heatmaps, and check-ins — all from your terminal. Claude can log check-ins and pull your stats via 3 MCP tools.</p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
-            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #f59e0b; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #84cc16; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
             class="cta-primary">
             Get habctl &mdash; $9
           </a>
@@ -49,13 +49,13 @@ const features = [
       </div>
       <div>
         <TerminalWindow title="habctl — list" content={`<span style="color:#4a5568">$ </span>habctl list
-<span style="color:#f59e0b">Habits</span>                          <span style="color:#4a5568">streak  today  30d</span>
+<span style="color:#84cc16">Habits</span>                          <span style="color:#4a5568">streak  today  30d</span>
 <span style="color:#e2e8f0">Sport                           </span><span style="color:#00d97e">12 days</span>  <span style="color:#00d97e">✓</span>     <span style="color:#00d97e">███████████████░░░░░</span> 77%
 <span style="color:#e2e8f0">Read 30 min                     </span><span style="color:#00d97e"> 5 days</span>  <span style="color:#00d97e">✓</span>     <span style="color:#00d97e">█████████████░░░░░░░</span> 67%
-<span style="color:#e2e8f0">No sugar                        </span><span style="color:#f59e0b"> 2 days</span>  <span style="color:#718096">–</span>     <span style="color:#f59e0b">████████░░░░░░░░░░░░</span> 43%
+<span style="color:#e2e8f0">No sugar                        </span><span style="color:#84cc16"> 2 days</span>  <span style="color:#718096">–</span>     <span style="color:#84cc16">████████░░░░░░░░░░░░</span> 43%
 
 <span style="color:#4a5568">$ </span>habctl check <span style="color:#a0aec0">"No sugar"</span>
-<span style="color:#00d97e">✓</span> <span style="color:#a0aec0">Checked in: No sugar  (streak: 3 days)</span><span class="cursor-blink" style="color:#f59e0b">█</span>`} />
+<span style="color:#00d97e">✓</span> <span style="color:#a0aec0">Checked in: No sugar  (streak: 3 days)</span><span class="cursor-blink" style="color:#84cc16">█</span>`} />
       </div>
     </div>
   </section>
@@ -67,7 +67,7 @@ const features = [
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
         {features.map((feat: {title: string; desc: string}) => (
           <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
-            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #f59e0b; margin: 0 0 0.5rem;">{feat.title}</h3>
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #84cc16; margin: 0 0 0.5rem;">{feat.title}</h3>
             <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
           </div>
         ))}
@@ -101,7 +101,7 @@ const features = [
   <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
     <div style="max-width: 1100px; margin: 0 auto;">
       <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
-      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #f59e0b;">habctl mcp</code></p>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #84cc16;">habctl mcp</code></p>
       <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
@@ -113,7 +113,7 @@ const features = [
           <tbody>
             {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
               <tr style={`background: ${i % 2 === 0 ? '#111118' : '#0d0d14'}; border-bottom: 1px solid #1e1e2e;`}>
-                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #f59e0b;">{tool.name}</td>
+                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #84cc16;">{tool.name}</td>
                 <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: #718096;">{tool.desc}</td>
               </tr>
             ))}
@@ -133,7 +133,7 @@ const features = [
     </p>
     <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
       <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
-        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #f59e0b; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(245,158,11,0.2);"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #84cc16; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(132,204,22,0.2);"
         class="cta-primary">
         Get habctl &mdash; $9
       </a>
@@ -152,7 +152,7 @@ const features = [
     .hero-grid { grid-template-columns: 1fr !important; }
     .features-grid { grid-template-columns: 1fr !important; }
   }
-  .cta-primary:hover { background: #d97706 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(245,158,11,0.3) !important; }
-  .cta-secondary:hover { border-color: rgba(245,158,11,0.3) !important; color: #f59e0b !important; }
-  .feature-card:hover { border-color: rgba(245,158,11,0.2) !important; }
+  .cta-primary:hover { background: #65a30d !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(132,204,22,0.3) !important; }
+  .cta-secondary:hover { border-color: rgba(132,204,22,0.3) !important; color: #84cc16 !important; }
+  .feature-card:hover { border-color: rgba(132,204,22,0.2) !important; }
 </style>

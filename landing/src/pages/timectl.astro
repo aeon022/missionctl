@@ -27,17 +27,17 @@ const features = [
   <section style="padding: 5rem 1.5rem 4rem; max-width: 1100px; margin: 0 auto;">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
       <div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #22d3ee; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
           missionctl suite &middot; macOS + Linux
         </div>
         <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
-          <span style="font-family: 'JetBrains Mono', monospace; color: #00d97e;">timectl</span>
+          <span style="font-family: 'JetBrains Mono', monospace; color: #22d3ee;">timectl</span>
         </h1>
         <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Time Tracking from your Terminal</p>
         <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Start and stop timers from the terminal. Weekly bar chart. Pairs with diaryctl to show how you spent your day.</p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
-            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #22d3ee; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
             class="cta-primary">
             Get timectl &mdash; $9
           </a>
@@ -50,7 +50,7 @@ const features = [
       </div>
       <div>
         <TerminalWindow title="timectl — today" content={`<span style="color:#4a5568">$ </span>timectl start <span style="color:#a0aec0">"Fix auth bug"</span> --project diaryctl
-<span style="color:#00d97e">▶</span> <span style="color:#a0aec0">Started: Fix auth bug (diaryctl)</span>
+<span style="color:#22d3ee">▶</span> <span style="color:#a0aec0">Started: Fix auth bug (diaryctl)</span>
   <span style="color:#4a5568">09:14:32 — running</span>
 
 <span style="color:#4a5568">$ </span>timectl stop
@@ -62,7 +62,7 @@ const features = [
   <span style="color:#4a5568">10:45–12:00</span>  <span style="color:#a0aec0">1h 15m</span>  Fix auth bug      <span style="color:#4a5568">[diaryctl]</span>
   <span style="color:#4a5568">14:00–15:45</span>  <span style="color:#a0aec0">1h 45m</span>  Write tests       <span style="color:#4a5568">[diaryctl]</span>
   <span style="color:#718096">──────────────────────────────────────</span>
-  <span style="color:#00d97e">Total: 4h 30m</span><span class="cursor-blink" style="color:#00d97e">█</span>`} />
+  <span style="color:#22d3ee">Total: 4h 30m</span><span class="cursor-blink" style="color:#22d3ee">█</span>`} />
       </div>
     </div>
   </section>
@@ -74,7 +74,7 @@ const features = [
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
         {features.map((feat: {title: string; desc: string}) => (
           <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
-            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #00d97e; margin: 0 0 0.5rem;">{feat.title}</h3>
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #22d3ee; margin: 0 0 0.5rem;">{feat.title}</h3>
             <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
           </div>
         ))}
@@ -114,7 +114,7 @@ const features = [
   <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
     <div style="max-width: 1100px; margin: 0 auto;">
       <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
-      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #00d97e;">timectl mcp</code></p>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #22d3ee;">timectl mcp</code></p>
       <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
@@ -126,7 +126,7 @@ const features = [
           <tbody>
             {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
               <tr style={`background: ${i % 2 === 0 ? '#111118' : '#0d0d14'}; border-bottom: 1px solid #1e1e2e;`}>
-                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00d97e;">{tool.name}</td>
+                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #22d3ee;">{tool.name}</td>
                 <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: #718096;">{tool.desc}</td>
               </tr>
             ))}
@@ -146,7 +146,7 @@ const features = [
     </p>
     <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
       <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
-        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #22d3ee; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(34,211,238,0.2);"
         class="cta-primary">
         Get timectl &mdash; $9
       </a>
@@ -165,7 +165,7 @@ const features = [
     .hero-grid { grid-template-columns: 1fr !important; }
     .features-grid { grid-template-columns: 1fr !important; }
   }
-  .cta-primary:hover { background: #00c070 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important; }
-  .cta-secondary:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
-  .feature-card:hover { border-color: rgba(0,217,126,0.2) !important; }
+  .cta-primary:hover { background: #0891b2 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(34,211,238,0.3) !important; }
+  .cta-secondary:hover { border-color: rgba(34,211,238,0.3) !important; color: #22d3ee !important; }
+  .feature-card:hover { border-color: rgba(34,211,238,0.2) !important; }
 </style>
