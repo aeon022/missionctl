@@ -128,25 +128,31 @@ Feature-Matrix (Ist-Zustand):
 
 | Tool      | Suche | Help-Overlay | Confirm-Dialog | Spinner/Loading |
 |-----------|:-----:|:------------:|:--------------:|:---------------:|
-| mailctl   | ✅    | ✅           | ✅             | ❌              |
-| calctl    | ❌    | ⚠️ minimal   | ✅             | ❌              |
-| taskctl   | ✅    | ⚠️ minimal   | ✅             | ❌              |
-| notectl   | ✅    | ✅           | ✅             | ❌              |
-| budgetctl | ✅    | ⚠️ minimal   | ❌             | ❌              |
-| habctl    | ❌    | ✅           | ❌             | ❌              |
-| timectl   | ❌    | ❌           | ✅             | ❌              |
-| diaryctl  | ✅    | ✅           | ✅             | ❌              |
+| mailctl   | ✅    | ✅           | ✅             | ✅ (Sync + AI)  |
+| calctl    | ✅    | ✅           | ✅             | ✅ (Sync/Save)  |
+| taskctl   | ✅    | ✅           | ✅             | ✅ (Sync)       |
+| notectl   | ✅    | ✅           | ✅             | ✅ (Sync)       |
+| budgetctl | ✅    | ✅           | – (read-only)  | – (nur lokale Reads) |
+| habctl    | ✅    | ✅           | ✅             | ✅ (AI streamt live) |
+| timectl   | ✅    | ✅           | ✅             | ✅ (Timer-Spinner)   |
+| diaryctl  | ✅    | ✅           | ✅             | ✅ (AI streamt live) |
 
 Abarbeitung:
 
-- [ ] **3.1 Spinner bei Sync/AI-Calls (alle Tools)** — AppleScript-Syncs und AI-Requests
-  blocken das TUI kommentarlos. `bubbles/spinner` + `tea.Cmd`-Pattern einmal sauber
-  bauen, in alle Tools übernehmen. Größter gefühlter Qualitätssprung.
-- [ ] **3.2 Suche nachrüsten**: calctl, habctl, timectl — Pattern aus notectl/mailctl
-  kopieren und anpassen (`/` öffnet Filter-Input).
-- [ ] **3.3 Help-Overlay vereinheitlichen**: `?` öffnet überall dasselbe Overlay-Layout;
-  timectl (ganz ohne), calctl/taskctl/budgetctl (minimal) nachziehen.
-- [ ] **3.4 Confirm-Dialoge**: budgetctl + habctl vor delete/destruktiven Aktionen.
+- [x] **3.1 Spinner bei Sync/AI-Calls** — ✅ `bubbles/spinner` (MiniDot) in mailctl
+  (Sync + Claude-Draft), notectl, taskctl, calctl (Sync + Save). timectl hatte bereits
+  einen animierten Timer-Spinner, habctl/diaryctl streamen AI-Output live, budgetctl
+  hat keine blockierenden Calls. Hinweis: Die Syncs liefen schon asynchron (`tea.Cmd`),
+  es fehlte nur animiertes Feedback.
+- [x] **3.2 Suche nachgerüstet** — ✅ `/`-Live-Filter in calctl (Titel/Ort/Kalender/Notizen,
+  leere Tage werden beim Filtern ausgeblendet), habctl (Name/Beschreibung) und timectl
+  (Task/Projekt/Notizen). `esc` löscht den Filter überall.
+- [x] **3.3 Help-Overlays** — ✅ `?` öffnet jetzt in timectl, calctl, taskctl und
+  budgetctl ein vollständiges Overlay (Sektionen: Navigation/Aktionen/Views/Other),
+  Statusbars verweisen auf `?`.
+- [x] **3.4 Confirm-Dialoge** — ✅ habctl: generischer y/esc-Dialog vor allen vier
+  Delete-Aktionen (Habit, Gruppe, Chain, Archiv-Löschung). budgetctl-Befund korrigiert:
+  das TUI ist read-only, es gibt dort nichts Destruktives zu bestätigen.
 - [ ] **3.5 Einheitliche Keymap über alle Tools**:
   `/` Suche · `?` Hilfe · `r` Sync/Refresh · `a` Add/AI · `d` Delete · `q`/`esc` Quit.
   Einmal dokumentieren (Root-README „TUI conventions"), dann pro Tool angleichen.
@@ -215,6 +221,6 @@ stärkste Kaufgrund — Open-Core würde mehr konvertieren, wäre aber eine Abke
 | 3 | ~~Versioning in alle Tools~~ ✅ | erledigt | 1.3 |
 | 4 | ~~goreleaser + CI + Homebrew-Tap~~ ✅ (Secret + Tags offen) | erledigt | 1.2, 4.6 |
 | 5 | ~~Tests für Parser + Stores~~ ✅ (Minimum) | erledigt | 1.4 |
-| 6 | UI/UX-Runde (Spinner, Suche, Help, Confirm, Keymap) | mittel | 3.x |
+| 6 | ~~UI/UX-Runde (Spinner, Suche, Help, Confirm)~~ ✅ (Keymap-Doku + Empty States offen) | fast fertig | 3.x |
 | 7 | missionctl-core + Dashboard-TUI | groß | 4.1, 4.2 |
 | 8 | Monetarisierung | mittel | 5 |
