@@ -153,9 +153,10 @@ Abarbeitung:
 - [x] **3.4 Confirm-Dialoge** — ✅ habctl: generischer y/esc-Dialog vor allen vier
   Delete-Aktionen (Habit, Gruppe, Chain, Archiv-Löschung). budgetctl-Befund korrigiert:
   das TUI ist read-only, es gibt dort nichts Destruktives zu bestätigen.
-- [ ] **3.5 Einheitliche Keymap über alle Tools**:
-  `/` Suche · `?` Hilfe · `r` Sync/Refresh · `a` Add/AI · `d` Delete · `q`/`esc` Quit.
-  Einmal dokumentieren (Root-README „TUI conventions"), dann pro Tool angleichen.
+- [~] **3.5 Einheitliche Keymap** — Teilweise: `/` Suche, `?` Hilfe, `d` Delete (mit
+  Confirm), `q`/`esc` Quit sind jetzt überall konsistent und per `?`-Overlay
+  dokumentiert; Root-README nennt die Konventionen. Offen: Sync-Taste vereinheitlichen
+  (mailctl/notectl/taskctl/calctl: `s` — habctl nutzt `s` für AI-Suggest).
 - [ ] **3.6 Empty States** prüfen: Was zeigt jedes TUI vor dem ersten Sync/Import?
   Sollte den nächsten Befehl nennen („Noch keine Daten — führe `mailctl sync` aus").
 - [ ] **3.7 missionctl `status` → Dashboard-TUI** — siehe 4.2.
