@@ -5,3 +5,9 @@
 .idea/
 .vscode/
 *.swp
+# local-only
+.claude/
+# build artifacts from the deploy/landing branch checkout
+landing/
+# separate repo (github.com/aeon022/postctl), not a submodule
+postctl/
