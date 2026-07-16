@@ -2,7 +2,7 @@
 
 Terminal tools for people who want AI to actually do things, not just talk about them.
 
-missionctl is a suite of six focused CLI/TUI tools for macOS. Each manages one domain — email, calendar, tasks, notes, budget, social media — stores everything locally in SQLite, and exposes a clean MCP server so AI agents can read and write your real data.
+missionctl is a suite of nine focused CLI/TUI tools for macOS. Each manages one domain — email, calendar, tasks, notes, budget, habits, time tracking, developer diary, social media — stores everything locally in SQLite, and exposes a clean MCP server so AI agents can read and write your real data.
 
 No SaaS. No cloud. No subscriptions. Your data stays on your machine.
 
@@ -17,7 +17,12 @@ No SaaS. No cloud. No subscriptions. Your data stays on your machine.
 | [taskctl](taskctl/) | Manage tasks, sync with Apple Reminders | 7 | Apple Reminders (EventKit) |
 | [notectl](notectl/) | Read and write Obsidian vault notes, daily notes | 7 | Obsidian vault (.md files) |
 | [budgetctl](budgetctl/) | Import bank exports, categorize, set goals, detect subscriptions | 9 | Bank CSV exports |
+| [habctl](habctl/) | Track habits, streaks, AI coaching reviews | 12 | Local SQLite |
+| [timectl](timectl/) | Start/stop timers, weekly breakdown, invoice export | 4 | Local SQLite |
+| [diaryctl](diaryctl/) | Developer diary from git history, AI-written narrative | 5 | git repos + suite DBs |
 | [postctl](https://github.com/aeon022/postctl) | Schedule and publish social media posts | 7 | Local SQLite + platform APIs |
+
+Plus [missionctl](missionctl/), the umbrella CLI: `missionctl doctor` (installation check), `missionctl status` (daily briefing across all tool databases), `missionctl init` (setup wizard).
 
 All tools share the same design: a Bubbletea TUI as the default command, a Cobra CLI for scripting, JSON output on every read command, and an MCP server over stdio for AI integration.
 
@@ -30,7 +35,7 @@ All tools share the same design: a Bubbletea TUI as the default command, a Cobra
 Each tool is a standalone Go binary with no runtime dependencies.
 
 ```bash
-for repo in mailctl calctl taskctl notectl budgetctl; do
+for repo in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl; do
   git clone https://github.com/aeon022/$repo && cd $repo && ./setup.sh && cd ..
 done
 ```
@@ -52,7 +57,7 @@ budgetctl is import-driven — run `budgetctl import bank.csv` when you have a C
 
 ### Wire up Claude Desktop
 
-Add all six servers to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+Add all nine servers to `~/Library/Application Support/Claude/claude_desktop_config.json`:
 
 ```json
 {
@@ -62,12 +67,15 @@ Add all six servers to `~/Library/Application Support/Claude/claude_desktop_conf
     "taskctl":   { "command": "taskctl",   "args": ["mcp"] },
     "notectl":   { "command": "notectl",   "args": ["mcp"] },
     "budgetctl": { "command": "budgetctl", "args": ["mcp"] },
+    "habctl":    { "command": "habctl",    "args": ["mcp"] },
+    "timectl":   { "command": "timectl",   "args": ["mcp"] },
+    "diaryctl":  { "command": "diaryctl",  "args": ["mcp"] },
     "postctl":   { "command": "postctl",   "args": ["mcp"] }
   }
 }
 ```
 
-Restart Claude Desktop. All 43 tools appear automatically.
+Restart Claude Desktop. All 64 tools appear automatically.
 
 ---
 
@@ -115,6 +123,29 @@ budgetctl goal list [--month 2026-07]         Show goal progress
 budgetctl recurring                           Detect recurring payments
 budgetctl export [--year 2026] [-o FILE]      Export to CSV/JSON
 
+# Habits
+habctl                                        Open TUI
+habctl add NAME [--desc TEXT]                 Add a habit
+habctl check NAME                             Check in for today
+habctl today                                  Today's status
+habctl stats                                  Streaks & progress bars
+habctl review                                 AI weekly coaching review
+
+# Time
+timectl                                       Open TUI
+timectl start TASK [-p PROJECT]               Start a timer
+timectl stop [-n NOTES]                       Stop running timer
+timectl today [--json]                        Today's entries
+timectl week [--json]                         Weekly breakdown
+timectl invoice [-p PROJECT]                  Invoice export
+
+# Diary
+diaryctl                                      Open TUI (heatmap + editor)
+diaryctl init PATH --name NAME                Register a git repo
+diaryctl today                                Generate today's entry
+diaryctl daemon start                         Auto-write daily at 17:30
+diaryctl stats                                Coding stats
+
 # Social
 postctl                                       Open TUI
 postctl list [--status draft] [--json]        List posts
@@ -128,7 +159,7 @@ postctl import FILE.md                        Import from Markdown
 
 ## MCP Tools Reference
 
-43 tools across all six apps, available to Claude once all servers are configured.
+64 tools across all nine apps, available to Claude once all servers are configured.
 
 ### mailctl (6)
 
@@ -191,6 +222,42 @@ postctl import FILE.md                        Import from Markdown
 | `delete_budget_goal` | Remove a goal |
 | `detect_recurring_payments` | Detect subscriptions and recurring charges |
 
+### habctl (12)
+
+| Tool | Description |
+|------|-------------|
+| `list_habits` | All habits with today's status and streaks |
+| `check_habit` | Check in a habit for today |
+| `uncheck_habit` | Undo a check-in |
+| `add_habit` | Create a new habit |
+| `delete_habit` | Delete a habit and its history |
+| `get_habit_stats` | Streaks, completion rate, last-7-days for one habit |
+| `streak_at_risk` | Habits whose streak breaks if not checked today |
+| `get_weekly_summary` | Check-ins per habit for the current week |
+| `get_weekly_review` | Data briefing for AI coaching review |
+| `suggest_habits` | AI-powered habit suggestions |
+| `add_checkin_note` | Attach a note to today's check-in |
+| `list_chains` | Habit chains (habit → follow-up habit) |
+
+### timectl (4)
+
+| Tool | Description |
+|------|-------------|
+| `start_timer` | Start a timer (errors if one is running) |
+| `stop_timer` | Stop the running timer |
+| `get_time_log` | Entries for a date, optionally by project |
+| `get_time_stats` | Aggregated statistics over the last N days |
+
+### diaryctl (5)
+
+| Tool | Description |
+|------|-------------|
+| `get_today_stats` | Today's git commit stats across registered repos |
+| `get_diary_entry` | Diary entry body for a date |
+| `write_diary_entry` | Save or overwrite an entry |
+| `get_coding_stats` | Aggregate coding stats for the last N days |
+| `list_diary_entries` | List entries with date and preview |
+
 ### postctl (7)
 
 | Tool | Description |
@@ -207,7 +274,7 @@ postctl import FILE.md                        Import from Markdown
 
 ## AI Workflows
 
-Things you can ask Claude once all six MCP servers are connected.
+Things you can ask Claude once all nine MCP servers are connected.
 
 **Morning briefing**
 
@@ -257,6 +324,14 @@ Things you can ask Claude once all six MCP servers are connected.
 
 ---
 
+**End of day**
+
+> "Which of my streaks are at risk? Check in what I told you I did, stop my timer, and write today's diary entry."
+
+`streak_at_risk` → `check_habit` × N → `stop_timer` → `get_today_stats` → `write_diary_entry`.
+
+---
+
 ## Design Principles
 
 **Local-first.** All data lives in SQLite on your machine. Nothing is sent to external servers except when you explicitly publish (postctl) or send (mailctl).
@@ -267,7 +342,7 @@ Things you can ask Claude once all six MCP servers are connected.
 
 **MCP-native.** Every tool implements the Model Context Protocol over stdio. Plug into Claude Desktop, any MCP-compatible client, or your own pipelines.
 
-**Consistent UX.** All six TUIs share the same color palette, key conventions (`j/k` navigate, `/` search, `s` sync, `d` delete, `q` quit), and helpbar layout. Learn one, know all six.
+**Consistent UX.** All TUIs share the same color palette, key conventions (`j/k` navigate, `/` search, `s` sync, `d` delete, `q` quit), and helpbar layout. Learn one, know all nine.
 
 ---
 
@@ -283,7 +358,7 @@ Things you can ask Claude once all six MCP servers are connected.
 | MCP | `github.com/mark3labs/mcp-go` |
 | macOS bridge | AppleScript + Swift EventKit |
 
-**Requirements:** macOS for mailctl, calctl, taskctl. notectl and budgetctl also work on Linux.
+**Requirements:** macOS for mailctl, calctl, taskctl (AppleScript/EventKit) and the notification/daemon features of habctl and diaryctl. notectl, budgetctl, timectl also work on Linux.
 
 ---
 

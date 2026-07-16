@@ -13,3 +13,15 @@
 [submodule "taskctl"]
 	path = taskctl
 	url = https://github.com/aeon022/taskctl.git
+[submodule "habctl"]
+	path = habctl
+	url = https://github.com/aeon022/habctl.git
+[submodule "timectl"]
+	path = timectl
+	url = https://github.com/aeon022/timectl.git
+[submodule "diaryctl"]
+	path = diaryctl
+	url = https://github.com/aeon022/diaryctl.git
+[submodule "missionctl"]
+	path = missionctl
+	url = https://github.com/aeon022/missionctl-cli.git
