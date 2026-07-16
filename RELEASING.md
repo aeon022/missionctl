@@ -54,7 +54,5 @@ bei jedem Push auf `main` und jedem PR.
 ## Offene Punkte
 
 - [ ] `HOMEBREW_TAP_TOKEN` Secret setzen (siehe oben)
-- [ ] LICENSE-Entscheidung: Kein Repo hat aktuell eine LICENSE-Datei. Für den
-  Monetarisierungsplan (Open Source + bezahlte Binaries/Lizenz) bietet sich MIT an —
-  muss aber bewusst entschieden werden, bevor die Repos beworben werden.
+- [x] ~~LICENSE-Entscheidung~~ ✅ MIT in allen Repos + `license: MIT` in den Brew-Formulas.
 - [ ] Erste Tags setzen (Vorschlag: überall `v0.1.0` nach dem nächsten Commit)
