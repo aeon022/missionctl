@@ -16,7 +16,7 @@ No SaaS. No cloud. No subscriptions. Your data stays on your machine.
 | [calctl](calctl/) | Browse calendar, create events, find free slots | 7 | Apple Calendar (AppleScript) |
 | [taskctl](taskctl/) | Manage tasks, sync with Apple Reminders | 7 | Apple Reminders (EventKit) |
 | [notectl](notectl/) | Read and write Obsidian vault notes, daily notes | 7 | Obsidian vault (.md files) |
-| [budgetctl](budgetctl/) | Import bank exports, categorize, set goals, detect subscriptions | 9 | Bank CSV exports |
+| [budgetctl](budgetctl/) | Track income & expenses, import bank CSVs, goals, subscriptions | 11 | Manual entries + bank CSV |
 | [habctl](habctl/) | Track habits, streaks, AI coaching reviews | 12 | Local SQLite |
 | [timectl](timectl/) | Start/stop timers, weekly breakdown, invoice export | 4 | Local SQLite |
 | [diaryctl](diaryctl/) | Developer diary from git history, AI-written narrative | 5 | git repos + suite DBs |
@@ -53,7 +53,7 @@ taskctl sync        # tasks from Apple Reminders
 notectl sync        # index your Obsidian vault
 ```
 
-budgetctl is import-driven — run `budgetctl import bank.csv` when you have a CSV export. postctl is self-contained.
+budgetctl needs no sync — add entries manually (`budgetctl add` or `n` in the TUI) or import a CSV export with `budgetctl import bank.csv`. postctl is self-contained.
 
 ### Wire up Claude Desktop
 
@@ -75,7 +75,7 @@ Add all nine servers to `~/Library/Application Support/Claude/claude_desktop_con
 }
 ```
 
-Restart Claude Desktop. All 64 tools appear automatically.
+Restart Claude Desktop. All 66 tools appear automatically.
 
 ---
 
@@ -115,6 +115,7 @@ notectl search QUERY [--json]                 Search notes
 
 # Budget
 budgetctl                                     Open TUI
+budgetctl add DESC AMOUNT [-c CAT]            Add manual entry (neg = expense)
 budgetctl import FILE [--account NAME]        Import bank CSV
 budgetctl summary [--month 2026-07] [--json]  Monthly summary
 budgetctl tag PATTERN --category NAME [--apply]  Create category rule
@@ -159,7 +160,7 @@ postctl import FILE.md                        Import from Markdown
 
 ## MCP Tools Reference
 
-64 tools across all nine apps, available to Claude once all servers are configured.
+66 tools across all nine apps, available to Claude once all servers are configured.
 
 ### mailctl (6)
 
@@ -208,11 +209,13 @@ postctl import FILE.md                        Import from Markdown
 | `get_daily_note` | Get today's daily note (creates from template if missing) |
 | `append_daily_note` | Append content under a named section |
 
-### budgetctl (9)
+### budgetctl (11)
 
 | Tool | Description |
 |------|-------------|
 | `list_transactions` | List transactions, filter by month/category/query |
+| `add_transaction` | Add a manual income/expense entry |
+| `delete_transaction` | Delete a transaction by ID |
 | `budget_summary` | Monthly income/expenses/net with category breakdown |
 | `import_transactions` | Import from a bank CSV file |
 | `tag_transactions` | Create a category rule (pattern → category) |
