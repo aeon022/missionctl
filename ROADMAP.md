@@ -18,27 +18,21 @@ entire digital week planned, posted, scheduled, and tracked — without touching
 
 ## Aktueller Fahrplan (Stand 2026-07-20)
 
-1. **Bündel-Infrastruktur** — erledigt: Tests (Minimum), goreleaser+CI+Homebrew-Tap-Config
-   in allen 9 Repos, Versioning, LICENSE (MIT, überall gesetzt). Offen: `HOMEBREW_TAP_TOKEN`-
-   Secret + erste Tags (Publish-Schritt, siehe unten), MCP-Handler-Smoke-Tests, restliche
-   Store-Tests (mailctl/calctl/budgetctl).
-2. **Pro-Tool-Lücken** — nach Code-Verifikation größtenteils bereits erledigt (Suche, Help-
-   Overlay, Confirm-Dialog, Sync-Spinner sind in mailctl/calctl/taskctl/notectl/budgetctl/
-   habctl/timectl vorhanden). Real nachgezogen in dieser Runde: diaryctl-Help-Overlay (fehlte
-   komplett), Empty-State-Hinweise in calctl/taskctl, missionctl `status`/`update`/`install`,
-   habctl-Submodul-Registrierung repariert.
-3. **Architektur-Vorschläge** — CI pro Repo war schon fertig. Offen und groß: `missionctl-core`
-   Shared-Package + Dashboard-TUI (= Punkt 7), Landing-Workflow-Entscheidung, `doctor`-Ausbau,
-   README-Konsistenz.
-4. **postctl** — zurückgestellt, wird separat nachgezogen (siehe `POSTCTL_AUDIT.md`).
-5. **Monetarisierung** — startet erst, wenn 1–3 fertig und getestet sind (siehe
-   `MONETIZATION.md`). Kein Startdatum vor Abschluss der Punkte oben.
+**Fertig:** Bündel-Infrastruktur (Tests, Release-Config, Versioning, LICENSE), alle
+Pro-Tool-UI/UX-Lücken (Suche/Help/Confirm/Spinner/Empty-States — die meisten waren
+schon da, diaryctl-Help-Overlay + Empty-States in calctl/taskctl neu ergänzt), alle
+Architektur-Vorschläge (`missionctl-core` Shared-Package, missionctl Dashboard-TUI,
+`doctor`-Ausbau, README-Konsistenz, Landing-Workflow-Entscheidung, CI pro Repo),
+MCP-Handler-Smoke-Tests + restliche Store-Tests über alle 8 MCP-Tools.
 
-**Braucht eine Entscheidung/Freigabe, bevor es weitergehen kann:**
-- Erste Git-Tags pushen + `HOMEBREW_TAP_TOKEN` setzen → macht Releases öffentlich sichtbar,
-  nicht ohne Rückfrage ausgeführt.
-- `missionctl-core`: eigenes neues GitHub-Repo (wie die anderen Tools) oder Ordner in diesem
-  Monorepo? Neues Repo anzulegen ist ebenfalls ein nach außen sichtbarer Schritt.
+**Bewusst offen/zurückgestellt:**
+1. **Homebrew-Tap-Secret + erste Tags** — `HOMEBREW_TAP_TOKEN` ist in keinem Repo
+   gesetzt (per `gh secret list` geprüft), und das erste Tag-Push macht Releases
+   öffentlich sichtbar. Braucht eine bewusste Freigabe, wird nicht ungefragt gemacht.
+2. **postctl** — zurückgestellt, wird separat nachgezogen (siehe `POSTCTL_AUDIT.md`).
+3. **Monetarisierung** — startet erst, wenn 1–2 (Homebrew-Tap, postctl) entschieden
+   sind, siehe `MONETIZATION.md`. Hängt außerdem an externen Accounts (polar.sh), die
+   nur der Nutzer selbst anlegen kann.
 
 Laufender Fortschritt wird über die Task-Liste dieser Session getrackt (Tasks #1–27).
 
@@ -239,11 +233,15 @@ UI/UX (Suche, Help, Empty-State-Hinweis) ✅ vorhanden/nachgezogen.
 ## missionctl — Umbrella CLI
 
 - [x] `doctor`, `status`, `init` vorhanden
-- [x] `status` kennt jetzt auch habctl/notectl/mailctl (Task #14)
-- [x] `missionctl update` — git pull + setup.sh je Tool (Task #15)
-- [x] `missionctl install` — setup.sh für fehlende Tools, `--all` für Reinstall (Task #16)
-- [ ] `missionctl-core` Shared-Package (Task #19) — groß, noch offen
-- [ ] Dashboard-TUI ohne Argumente (Task #20) — groß, noch offen, baut auf #19 auf
+- [x] `status` kennt jetzt auch habctl/notectl/mailctl
+- [x] `missionctl update` — git pull + setup.sh je Tool
+- [x] `missionctl install` — setup.sh für fehlende Tools, `--all` für Reinstall
+- [x] `doctor` erweitert — MCP-Registrierung (~/.claude.json), DB-Aktualität, launchd-Status
+- [x] `missionctl-core` Shared-Package — theme, keymap (inkl. Standard-Keys), Spinner,
+  Config-Helper. Migration bestehender Tools bewusst schrittweise, nichts erzwungen.
+- [x] Dashboard-TUI ohne Argumente — `missionctl` zeigt Briefing wie `status`, 1-8/Enter
+  springt per `tea.ExecProcess` ins jeweilige Tool
+- [x] README ergänzt (fehlte komplett)
 
 ---
 
