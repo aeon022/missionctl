@@ -25,3 +25,6 @@
 [submodule "missionctl"]
 	path = missionctl
 	url = https://github.com/aeon022/missionctl-cli.git
+[submodule "missionctl-core"]
+	path = missionctl-core
+	url = https://github.com/aeon022/missionctl-core.git
