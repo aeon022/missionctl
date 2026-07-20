@@ -171,17 +171,57 @@ git commit -m "chore: remove feedctl submodule"
 
 ---
 
+## Landing Page (Astro)
+
+Die Landing-Source liegt bewusst auf dem **Branch `deploy/landing`** dieses Repos, nicht
+in einem eigenen Repo. Grund: `main` bleibt sauber (Build-Output ist seit
+`067c1c0` per `.gitignore` ausgeschlossen), und ein eigenes Repo hätte nur dann einen
+echten Vorteil, wenn dadurch ein unabhängiges Auto-Deploy (Vercel/Netlify) ermöglicht
+würde — das lässt sich aber genauso gut auf einen einzelnen Branch eines bestehenden
+Repos konfigurieren, ohne Migration.
+
+```bash
+# An der Landing arbeiten
+cd ~/Developing/Projects/missionctl
+git checkout deploy/landing
+cd landing
+npm install   # falls node_modules fehlt
+npm run dev
+
+# Änderungen committen + pushen
+git add landing
+git commit -m "feat: ..."
+git push origin deploy/landing
+
+# zurück zur normalen Arbeit
+cd ~/Developing/Projects/missionctl
+git checkout main
+```
+
+**Wichtig:** `git checkout deploy/landing` im Haupt-Arbeitsverzeichnis wechselt auch
+ROADMAP.md, SUITE_AUDIT.md etc. auf den (alten) Stand dieses Branches, weil er lange vor
+den aktuellen Docs abgezweigt ist. Danach immer mit `git checkout main` zurückwechseln,
+bevor an einem der CLI-Tools weitergearbeitet wird. Für parallele Arbeit ohne
+Branch-Wechsel: `git worktree add ../missionctl-landing deploy/landing`.
+
+---
+
 ## Repos auf einen Blick
 
 | Tool | Repo | Go Module |
 |------|------|-----------|
 | Bundle/Docs | github.com/aeon022/missionctl | — |
+| missionctl (Umbrella-CLI) | github.com/aeon022/missionctl-cli | `github.com/aeon022/missionctl-cli` |
+| missionctl-core (Shared-Package) | github.com/aeon022/missionctl-core | `github.com/aeon022/missionctl-core` |
 | calctl | github.com/aeon022/calctl | `github.com/aeon022/calctl` |
 | mailctl | github.com/aeon022/mailctl | `github.com/aeon022/mailctl` |
 | budgetctl | github.com/aeon022/budgetctl | `github.com/aeon022/budgetctl` |
 | notectl | github.com/aeon022/notectl | `github.com/aeon022/notectl` |
 | taskctl | github.com/aeon022/taskctl | `github.com/aeon022/taskctl` |
-| postctl | github.com/aeon022/postctl | `github.com/aeon022/postctl` |
+| habctl | github.com/aeon022/habctl | `github.com/aeon022/habctl` |
+| timectl | github.com/aeon022/timectl | `github.com/aeon022/timectl` |
+| diaryctl | github.com/aeon022/diaryctl | `github.com/aeon022/diaryctl` |
+| postctl | lokal only, kein Submodule (`postctl/` ist `.gitignore`-t auf `main`) | `github.com/aeon022/postctl` (Remote existiert, aber postctl-Arbeit ist zurückgestellt) |
 
 ---
 
