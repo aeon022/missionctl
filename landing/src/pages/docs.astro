@@ -366,7 +366,7 @@ budgetctl mcp                       # start MCP server`}</code></pre>
       <!-- ── POSTCTL ───────────────────────── -->
       <h2 id="postctl">postctl</h2>
       <p>
-        Social media scheduling for Twitter, LinkedIn, and Threads. Manage posts,
+        Social media scheduling for Threads, Bluesky, Mastodon, Twitter, LinkedIn, Telegram, and Discord. Manage posts,
         campaigns, and drafts from your terminal.
         Available at <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:#00d97e;">postctl.sh</a>.
       </p>
@@ -379,9 +379,39 @@ cd postctl && ./setup.sh`}</code></pre>
       <pre><code>{`postctl list                         # list posts
 postctl post "Hello world"           # create post
 postctl post --schedule "2026-07-05 09:00" "Hello"
+postctl publish <id>                 # publish post immediately
+postctl cancel <id>                  # cancel scheduled post
+postctl delete <id>                  # delete post locally & remotely
+postctl daemon                       # start scheduler daemon
 postctl campaign list                # list campaigns
 postctl import posts.csv             # import posts
 postctl mcp                          # start MCP server`}</code></pre>
+
+      <h3>TUI keybindings</h3>
+      <div class="docs-kbd-grid">
+        <kbd>j / k</kbd>   <span>Navigate posts/history</span>
+        <kbd>Space</kbd>   <span>Select / deselect post for bulk actions</span>
+        <kbd>p</kbd>       <span>Publish selected post(s) immediately</span>
+        <kbd>s</kbd>       <span>Schedule post to next queue slot</span>
+        <kbd>e</kbd>       <span>Edit post content</span>
+        <kbd>n</kbd>       <span>Create new post</span>
+        <kbd>d</kbd>       <span>Delete post locally and remotely</span>
+        <kbd>r</kbd>       <span>Repurpose post content via AI</span>
+        <kbd>f</kbd>       <span>Filter by campaign</span>
+        <kbd>x</kbd>       <span>Export history</span>
+        <kbd>R / F1</kbd>  <span>Open README documentation</span>
+        <kbd>q</kbd>       <span>Quit</span>
+      </div>
+
+      <h3>Safety &amp; Spam Protection</h3>
+      <p>
+        To avoid rate limits and account bans, <code>postctl</code> includes built-in safeguards:
+      </p>
+      <ul>
+        <li><strong>Queue spacing:</strong> Scheduled queue slots are spaced out automatically.</li>
+        <li><strong>Overdue protection:</strong> If multiple scheduled posts become overdue (e.g., system was offline), only the oldest is posted immediately. The subsequent posts are automatically rescheduled in 20-minute intervals.</li>
+        <li><strong>Safe remote deletion:</strong> Deleting a post locally automatically issues API delete calls to the remote platforms to keep feeds in sync.</li>
+      </ul>
 
       <h3>MCP tools</h3>
       <div>
