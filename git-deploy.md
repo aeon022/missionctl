@@ -193,12 +193,13 @@ gitignored ist:
 cd ~/Developing/Projects/missionctl
 git worktree add ./.worktree-landing deploy/landing
 
-# An der Landing arbeiten
-cd ~/Developing/Projects/missionctl/.worktree-landing
+# An der Landing arbeiten (Astro-Projekt liegt im Unterordner landing/)
+cd ~/Developing/Projects/missionctl/.worktree-landing/landing
 npm install   # falls node_modules fehlt
 npm run dev
 
-# Änderungen committen + pushen — NUR auf deploy/landing
+# Änderungen committen + pushen — NUR auf deploy/landing (von .worktree-landing aus)
+cd ~/Developing/Projects/missionctl/.worktree-landing
 git add landing
 git commit -m "feat: ..."
 git push origin deploy/landing
