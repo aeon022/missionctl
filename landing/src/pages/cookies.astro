@@ -23,22 +23,22 @@ import Layout from '../components/Layout.astro';
       <section style="margin-bottom: 2.5rem;">
         <h2 style="font-size: 1.2rem; font-weight: 700; color: #e2e8f0; margin: 0 0 1rem;">Cookies we use</h2>
 
-        <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden; margin-top: 1rem;">
-          <table style="width: 100%; border-collapse: collapse; font-size: 0.875rem;">
+        <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow-x: auto; margin-top: 1rem;">
+          <table style="width: 100%; min-width: 480px; border-collapse: collapse; font-size: 0.875rem; table-layout: fixed;">
             <thead>
               <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
-                <th style="text-align: left; padding: 0.75rem 1rem; color: #4a5568; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">Name</th>
-                <th style="text-align: left; padding: 0.75rem 1rem; color: #4a5568; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">Type</th>
-                <th style="text-align: left; padding: 0.75rem 1rem; color: #4a5568; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">Purpose</th>
-                <th style="text-align: left; padding: 0.75rem 1rem; color: #4a5568; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;">Expiry</th>
+                <th style="text-align: left; padding: 0.75rem 1rem; color: #4a5568; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; width: 22%;">Name</th>
+                <th style="text-align: left; padding: 0.75rem 1rem; color: #4a5568; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; width: 16%;">Type</th>
+                <th style="text-align: left; padding: 0.75rem 1rem; color: #4a5568; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; width: 38%;">Purpose</th>
+                <th style="text-align: left; padding: 0.75rem 1rem; color: #4a5568; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; width: 24%;">Expiry</th>
               </tr>
             </thead>
             <tbody>
               <tr style="border-bottom: 1px solid #1e1e2e; background: #111118;">
-                <td style="padding: 0.75rem 1rem; color: #00d97e; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">cookie-accepted</td>
-                <td style="padding: 0.75rem 1rem; color: #e2e8f0; font-size: 0.85rem;">Essential</td>
-                <td style="padding: 0.75rem 1rem; color: #718096;">Remembers that you acknowledged the cookie notice</td>
-                <td style="padding: 0.75rem 1rem; color: #718096; font-size: 0.85rem;">Persistent (localStorage)</td>
+                <td style="padding: 0.75rem 1rem; color: #00d97e; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-word;">cookie-accepted</td>
+                <td style="padding: 0.75rem 1rem; color: #e2e8f0; font-size: 0.85rem; word-break: break-word;">Essential</td>
+                <td style="padding: 0.75rem 1rem; color: #718096; word-break: break-word;">Remembers that you acknowledged the cookie notice</td>
+                <td style="padding: 0.75rem 1rem; color: #718096; font-size: 0.85rem; word-break: break-word;">Persistent (localStorage)</td>
               </tr>
             </tbody>
           </table>

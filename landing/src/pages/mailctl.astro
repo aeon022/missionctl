@@ -126,7 +126,7 @@ const features = [
           <tbody>
             {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
               <tr style={`background: ${i % 2 === 0 ? '#111118' : '#0d0d14'}; border-bottom: 1px solid #1e1e2e;`}>
-                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: #00d97e;">{tool.name}</td>
+                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-word; color: #00d97e;">{tool.name}</td>
                 <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: #718096;">{tool.desc}</td>
               </tr>
             ))}
