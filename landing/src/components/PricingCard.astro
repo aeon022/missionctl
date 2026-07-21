@@ -115,5 +115,19 @@ const { title, price, features, ctaText, ctaHref, highlighted = false, badge, no
   }
   .pricing-card:not([style*="border: 2px"]):hover {
     border-color: rgba(255,255,255,0.1) !important;
+    transform: translateY(-3px);
+  }
+  .pricing-card {
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s cubic-bezier(0.4,0,0.2,1);
+  }
+  .pricing-card[style*="border: 2px"] {
+    animation: pricing-glow-pulse 3.2s ease-in-out infinite;
+  }
+  @keyframes pricing-glow-pulse {
+    0%, 100% { box-shadow: 0 0 40px rgba(0,217,126,0.08); }
+    50%      { box-shadow: 0 0 56px rgba(0,217,126,0.16); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-card[style*="border: 2px"] { animation: none; }
   }
 </style>

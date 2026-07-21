@@ -3,13 +3,13 @@ import Layout from '../components/Layout.astro';
 import TerminalWindow from '../components/TerminalWindow.astro';
 
 const mcpTools = [
-  { name: "note_list", desc: "List notes in the vault with optional tag or folder filters" },
-  { name: "note_get", desc: "Read the full content of a note by title or path" },
-  { name: "note_create", desc: "Create a new note with title, content, tags, and frontmatter" },
-  { name: "note_update", desc: "Update or append to an existing note" },
-  { name: "note_delete", desc: "Delete a note from the vault" },
-  { name: "note_search", desc: "Full-text search across the entire vault" },
-  { name: "note_daily", desc: "Get or create today's daily note" },
+  { name: "list_notes", desc: "List notes from the local cache, sorted by most recently modified" },
+  { name: "read_note", desc: "Read the full content of a note by title" },
+  { name: "write_note", desc: "Write or update a note in the Obsidian vault" },
+  { name: "search_notes", desc: "Search notes by keyword across title and content" },
+  { name: "sync_notes", desc: "Sync the Obsidian vault into the local cache" },
+  { name: "get_daily_note", desc: "Get today's daily note, created from template if missing" },
+  { name: "append_daily_note", desc: "Append content to today's daily note under a named section" },
 ];
 const features = [
   { title: "Obsidian Vault Support", desc: "Works directly with your existing Obsidian vault. No migration, no sync conflicts — reads and writes standard Markdown files." },

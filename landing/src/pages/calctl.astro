@@ -3,13 +3,13 @@ import Layout from '../components/Layout.astro';
 import TerminalWindow from '../components/TerminalWindow.astro';
 
 const mcpTools = [
-  { name: "cal_list_events", desc: "List events for a given date or date range across selected calendars" },
-  { name: "cal_get_event", desc: "Get full details of a specific event by ID" },
-  { name: "cal_create_event", desc: "Create a new event in Apple Calendar with title, time, duration, and notes" },
-  { name: "cal_update_event", desc: "Update an existing event — change time, title, or notes" },
-  { name: "cal_delete_event", desc: "Delete an event from Apple Calendar" },
-  { name: "cal_find_free_slots", desc: "Find free time slots in a date range, optionally filtered by minimum duration" },
-  { name: "cal_list_calendars", desc: "List all available calendars and their colors" },
+  { name: "list_events", desc: "List calendar events between two dates, sorted by start time" },
+  { name: "today", desc: "List today's calendar events — shortcut for list_events" },
+  { name: "this_week", desc: "List this week's calendar events (Monday to Sunday)" },
+  { name: "find_free_slots", desc: "Find free time slots within working hours for a date range" },
+  { name: "create_event", desc: "Create a new event in Apple Calendar" },
+  { name: "delete_event", desc: "Delete a calendar event by title and date" },
+  { name: "sync", desc: "Sync events from Apple Calendar into the local cache" },
 ];
 const features = [
   { title: "TUI Week View", desc: "Full-featured terminal calendar with week and month views. See all your calendars color-coded in the terminal." },

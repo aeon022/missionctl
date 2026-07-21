@@ -37,7 +37,7 @@ const apps = [
     name: 'budgetctl',
     href: '/budgetctl',
     description: 'Import bank CSV, categorize transactions, set budget goals. Claude auto-categorizes with --ai flag.',
-    mcpCount: 9,
+    mcpCount: 11,
     features: ['N26, ING, DKB CSV import', 'AI auto-categorization', 'Budget goals with progress', 'Recurring payment detection'],
   },
   {
@@ -57,9 +57,9 @@ const apps = [
   {
     name: 'habctl',
     href: '/habctl',
-    description: 'Track daily habits with streaks, check-ins, and automatic diary integration.',
-    mcpCount: 3,
-    features: ['Daily check-ins with streaks', '30-day progress bars', 'Diary template integration', 'MCP server for AI access'],
+    description: 'Track daily habits with streaks, AI weekly coaching reviews, and habit chains.',
+    mcpCount: 12,
+    features: ['Daily check-ins with streaks', 'AI weekly coaching review', 'Habit chains & streak alerts', 'AI habit suggestions'],
   },
   {
     name: 'postctl',
@@ -157,11 +157,13 @@ const toolGroups = [
     ],
   },
   {
-    app: 'budgetctl', count: 9, color: '#10b981',
+    app: 'budgetctl', count: 11, color: '#10b981',
     tools: [
       { name: 'list_transactions', desc: 'List transactions, filter by month/category/query' },
-      { name: 'budget_summary',    desc: 'Monthly income/expenses/net with category breakdown' },
+      { name: 'add_transaction',   desc: 'Add a manual income or expense entry' },
+      { name: 'delete_transaction', desc: 'Delete a transaction by its ID' },
       { name: 'import_transactions', desc: 'Import from a bank CSV file' },
+      { name: 'budget_summary',    desc: 'Monthly income/expenses/net with category breakdown' },
       { name: 'tag_transactions',  desc: 'Create a category rule (pattern → category)' },
       { name: 'apply_category_rules', desc: 'Re-apply all rules to all transactions' },
       { name: 'list_budget_goals', desc: 'Goals with current-month spending progress' },
@@ -190,11 +192,20 @@ const toolGroups = [
     ],
   },
   {
-    app: 'habctl', count: 3, color: '#f59e0b',
+    app: 'habctl', count: 12, color: '#84cc16',
     tools: [
-      { name: 'check_habit',     desc: 'Check in for a habit today (or a specific date)' },
-      { name: 'list_habits',     desc: 'List all habits with today\'s check-in status and current streak' },
-      { name: 'get_habit_stats', desc: 'Streak, longest streak, and 30-day completion rate for a habit' },
+      { name: 'list_habits',        desc: "List all habits with current streak and today's status" },
+      { name: 'check_habit',        desc: 'Check in for a habit today (or a specific date)' },
+      { name: 'uncheck_habit',      desc: 'Undo a check-in — correct an accidental entry' },
+      { name: 'add_habit',          desc: 'Add a new habit to track' },
+      { name: 'delete_habit',       desc: 'Delete a habit and all its check-in history' },
+      { name: 'get_habit_stats',    desc: 'Streak, longest streak, and 30-day completion rate' },
+      { name: 'streak_at_risk',     desc: 'List active streaks not yet checked in today' },
+      { name: 'get_weekly_summary', desc: 'Habit completion summary for the last 7 days' },
+      { name: 'get_weekly_review',  desc: 'Per-habit 7/30-day data for an AI coaching briefing' },
+      { name: 'suggest_habits',     desc: 'AI-suggested new habits based on goals' },
+      { name: 'add_checkin_note',   desc: "Add a text note on a habit's check-in" },
+      { name: 'list_chains',        desc: 'List habit chains — finish one, get nudged to the next' },
     ],
   },
   {
@@ -245,7 +256,7 @@ const faqs = [
 
 <Layout
   title="missionctl — Give your AI hands"
-  description="55 MCP tools across 9 terminal apps for macOS + Linux. Read email, manage calendar, tasks, notes, budget, track habits, log time, keep a diary, and schedule posts. Local-first, no subscriptions."
+  description="66 MCP tools across 9 terminal apps for macOS + Linux. Read email, manage calendar, tasks, notes, budget, track habits, log time, keep a diary, and schedule posts. Local-first, no subscriptions."
 >
   <!-- ======= HERO ======= -->
   <section style="min-height: calc(100vh - 92px); display: flex; flex-direction: column; justify-content: center; padding: 10rem 1.5rem 6rem; max-width: 1200px; margin: 0 auto;">
@@ -254,14 +265,14 @@ const faqs = [
       <!-- Left: Text -->
       <div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
-          55 MCP tools &middot; 9 terminal apps &middot; macOS + Linux
+          66 MCP tools &middot; 9 terminal apps &middot; macOS + Linux
         </div>
         <h1 style="font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1.25rem;">
           Give your AI<br>
           <span style="color: #00d97e; text-shadow: 0 0 40px rgba(0,217,126,0.3);">hands.</span>
         </h1>
         <p style="font-size: 1.125rem; color: #718096; line-height: 1.65; margin: 0 0 2rem; max-width: 480px;">
-          55 MCP tools across 9 terminal apps. Local-first. No subscriptions.
+          66 MCP tools across 9 terminal apps. Local-first. No subscriptions.
           Your AI can now read email, manage your calendar, handle tasks, write notes, track spending, log time, track habits, keep a diary, and schedule posts.
         </p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
@@ -339,7 +350,7 @@ const faqs = [
         <div class="how-step-num">02</div>
         <h3 class="how-title" style="color:#00d97e;">Claude calls MCP tools</h3>
         <p class="how-desc">
-          55 tools across 9 apps,<br>running locally on your machine
+          66 tools across 9 apps,<br>running locally on your machine
         </p>
       </div>
 
@@ -398,7 +409,7 @@ const faqs = [
   <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-        55 tools. One config.
+        66 tools. One config.
       </h2>
       <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
         Hover any chip to see what it does. Every tool is callable from Claude Desktop.
@@ -443,12 +454,12 @@ const faqs = [
 
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;" class="mcp-stats-grid">
         {[
-          { n: '55', label: 'MCP tools total' },
+          { n: '66', label: 'MCP tools total' },
           { n: '9', label: 'local-first apps' },
           { n: '0', label: 'cloud dependencies' },
         ].map(stat => (
-          <div style="text-align: center; padding: 1.25rem; background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px;">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 800; color: #00d97e;">{stat.n}</div>
+          <div style="text-align: center; padding: 1.25rem; background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; transition: border-color 0.2s, transform 0.2s;" class="stat-tile">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 800; color: #00d97e;" class="stat-num" data-count={stat.n}>{stat.n}</div>
             <div style="color: #718096; font-size: 0.8rem; margin-top: 0.25rem;">{stat.label}</div>
           </div>
         ))}
@@ -546,7 +557,7 @@ const faqs = [
             'notectl + budgetctl + postctl',
             'diaryctl + timectl',
             'habctl + habit tracking',
-            '55 MCP tools total',
+            '66 MCP tools total',
             'One config block',
             'Future updates included',
           ]}
@@ -614,7 +625,17 @@ const faqs = [
   .hero-cta-secondary:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
 
   /* ── Workflow cards ── */
-  .workflow-card:hover { border-color: rgba(0,217,126,0.2) !important; }
+  .workflow-card { transition: border-color 0.2s, transform 0.2s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s; }
+  .workflow-card:hover {
+    border-color: rgba(0,217,126,0.25) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0,217,126,0.06);
+  }
+
+  /* ── Stat counters ── */
+  .stat-num { transition: text-shadow 0.3s; }
+  .stat-tile:hover { border-color: rgba(0,217,126,0.3) !important; transform: translateY(-2px); }
+  .stat-tile:hover .stat-num { text-shadow: 0 0 24px rgba(0,217,126,0.5); }
 
   /* ── How it works ── */
   .how-steps { align-items: center; }
@@ -632,7 +653,8 @@ const faqs = [
     background: rgba(0,217,126,0.04);
     border-color: rgba(0,217,126,0.2);
   }
-  .how-card:hover { border-color: rgba(0,217,126,0.3) !important; }
+  .how-card { transition: border-color 0.2s, transform 0.2s cubic-bezier(0.4,0,0.2,1); }
+  .how-card:hover { border-color: rgba(0,217,126,0.3) !important; transform: translateY(-3px); }
   .how-step-num {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.65rem;
@@ -816,5 +838,29 @@ const faqs = [
         btn.setAttribute('aria-expanded', 'true');
       }
     });
+  });
+
+  // ── Stat count-up ───────────────────────────────────────────
+  document.querySelectorAll<HTMLElement>('.stat-num').forEach(el => {
+    const target = parseInt(el.dataset.count || '0', 10);
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        obs.disconnect();
+        el.textContent = '0';
+        const duration = 900;
+        const start = performance.now();
+        function tick(now: number) {
+          const p = Math.min(1, (now - start) / duration);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = String(Math.round(target * eased));
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = String(target);
+        }
+        requestAnimationFrame(tick);
+      },
+      { threshold: 0.5 }
+    );
+    obs.observe(el);
   });
 </script>

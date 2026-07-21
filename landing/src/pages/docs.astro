@@ -10,6 +10,7 @@ const mcpConfig = `{
     "budgetctl": { "command": "budgetctl", "args": ["mcp"] },
     "diaryctl":  { "command": "diaryctl",  "args": ["mcp"] },
     "timectl":   { "command": "timectl",   "args": ["mcp"] },
+    "habctl":    { "command": "habctl",    "args": ["mcp"] },
     "postctl":   { "command": "postctl",   "args": ["mcp"] }
   }
 }`;
@@ -33,6 +34,7 @@ const navSections = [
       { href: '#budgetctl', label: 'budgetctl' },
       { href: '#diaryctl', label: 'diaryctl' },
       { href: '#timectl', label: 'timectl' },
+      { href: '#habctl', label: 'habctl' },
       { href: '#postctl', label: 'postctl' },
     ],
   },
@@ -48,7 +50,7 @@ const navSections = [
 
 <Layout
   title="Documentation — missionctl"
-  description="Complete documentation for all 8 missionctl tools. Installation, CLI reference, TUI keybindings, and MCP tool reference for mailctl, calctl, taskctl, notectl, budgetctl, diaryctl, timectl, and postctl."
+  description="Complete documentation for all 9 missionctl tools. Installation, CLI reference, TUI keybindings, and MCP tool reference for mailctl, calctl, taskctl, notectl, budgetctl, diaryctl, timectl, habctl, and postctl."
 >
   <!-- Mobile sidebar nav -->
   <details class="docs-mobile-nav">
@@ -83,7 +85,7 @@ const navSections = [
     <div class="docs-main">
       <h1>missionctl Documentation</h1>
       <p style="color:#718096; margin-bottom:2rem;">
-        52 MCP tools across 8 terminal apps. Local-first, no cloud, no subscriptions.
+        66 MCP tools across 9 terminal apps. Local-first, no cloud, no subscriptions.
       </p>
 
       <!-- ── GETTING STARTED ───────────────── -->
@@ -91,7 +93,7 @@ const navSections = [
 
       <h3 id="installation">Installation</h3>
       <p>Clone and build each tool. Every repo has a <code>setup.sh</code> that compiles the binary and installs it to <code>~/.local/bin/</code>.</p>
-      <pre><code>{`for repo in mailctl calctl taskctl notectl budgetctl; do
+      <pre><code>{`for repo in mailctl calctl taskctl notectl budgetctl diaryctl timectl habctl; do
   git clone https://github.com/aeon022/$repo
   cd $repo && ./setup.sh && cd ..
 done`}</code></pre>
@@ -110,11 +112,11 @@ notectl sync      # Obsidian vault → local index`}</code></pre>
 
       <h3 id="claude-config">Claude Desktop Config</h3>
       <p>
-        Add all 6 tools to Claude Desktop in one config block. Edit
+        Add all 9 tools to Claude Desktop in one config block. Edit
         <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:
       </p>
       <pre><code set:text={mcpConfig}></code></pre>
-      <p>Restart Claude Desktop. All 52 MCP tools appear automatically in every conversation.</p>
+      <p>Restart Claude Desktop. All 66 MCP tools appear automatically in every conversation.</p>
 
       <!-- ── MAILCTL ───────────────────────── -->
       <h2 id="mailctl">mailctl</h2>
@@ -353,6 +355,8 @@ budgetctl mcp                       # start MCP server`}</code></pre>
       <h3>MCP tools</h3>
       <div>
         <span class="docs-tool-tag">list_transactions</span>
+        <span class="docs-tool-tag">add_transaction</span>
+        <span class="docs-tool-tag">delete_transaction</span>
         <span class="docs-tool-tag">budget_summary</span>
         <span class="docs-tool-tag">import_transactions</span>
         <span class="docs-tool-tag">tag_transactions</span>
@@ -361,6 +365,58 @@ budgetctl mcp                       # start MCP server`}</code></pre>
         <span class="docs-tool-tag">set_budget_goal</span>
         <span class="docs-tool-tag">delete_budget_goal</span>
         <span class="docs-tool-tag">detect_recurring_payments</span>
+      </div>
+
+      <!-- ── HABCTL ────────────────────────── -->
+      <h2 id="habctl">habctl</h2>
+      <p>
+        Terminal-first habit tracker. Track daily habits with streaks, an AI weekly coaching
+        review, habit chains, and streak-at-risk alerts — all stored locally in SQLite.
+      </p>
+
+      <h3>Install</h3>
+      <pre><code>{`git clone https://github.com/aeon022/habctl
+cd habctl && ./setup.sh`}</code></pre>
+
+      <h3>CLI commands</h3>
+      <pre><code>{`habctl add "Meditate" --desc "10 minutes every morning"  # add a habit
+habctl check Meditate                # check in for today
+habctl today                         # today's habit status
+habctl list                          # list habits with streaks
+habctl stats                         # streaks + progress bars
+habctl review                        # AI weekly coaching review
+habctl suggest --goal "more focus"   # AI habit suggestions
+habctl remind                        # macOS notification for unchecked habits
+habctl mcp                           # start MCP server`}</code></pre>
+
+      <h3>TUI keybindings</h3>
+      <div class="docs-kbd-grid">
+        <kbd>j / k</kbd>   <span>Navigate habits</span>
+        <kbd>space</kbd>   <span>Check in / undo check-in</span>
+        <kbd>n</kbd>       <span>New habit</span>
+        <kbd>e</kbd>       <span>Edit habit</span>
+        <kbd>d</kbd>       <span>Delete habit</span>
+        <kbd>s</kbd>       <span>AI suggestions</span>
+        <kbd>r</kbd>       <span>AI weekly review</span>
+        <kbd>c</kbd>       <span>Manage habit chains</span>
+        <kbd>t</kbd>       <span>Stats — heatmap &amp; completion</span>
+        <kbd>q</kbd>       <span>Quit</span>
+      </div>
+
+      <h3>MCP tools</h3>
+      <div>
+        <span class="docs-tool-tag">list_habits</span>
+        <span class="docs-tool-tag">check_habit</span>
+        <span class="docs-tool-tag">uncheck_habit</span>
+        <span class="docs-tool-tag">add_habit</span>
+        <span class="docs-tool-tag">delete_habit</span>
+        <span class="docs-tool-tag">get_habit_stats</span>
+        <span class="docs-tool-tag">streak_at_risk</span>
+        <span class="docs-tool-tag">get_weekly_summary</span>
+        <span class="docs-tool-tag">get_weekly_review</span>
+        <span class="docs-tool-tag">suggest_habits</span>
+        <span class="docs-tool-tag">add_checkin_note</span>
+        <span class="docs-tool-tag">list_chains</span>
       </div>
 
       <!-- ── POSTCTL ───────────────────────── -->
@@ -505,7 +561,7 @@ q       quit`}</code></pre>
 
       <!-- ── MCP REFERENCE ─────────────────── -->
       <h2 id="mcp-reference">MCP Reference</h2>
-      <p>All 52 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</p>
+      <p>All 66 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</p>
 
       {[
         { app: 'mailctl', color: '#00d97e', tools: [
@@ -545,6 +601,8 @@ q       quit`}</code></pre>
         ]},
         { app: 'budgetctl', color: '#10b981', tools: [
           ['list_transactions', 'List transactions, filter by month/category/query'],
+          ['add_transaction', 'Add a manual income or expense entry'],
+          ['delete_transaction', 'Delete a transaction by its ID'],
           ['budget_summary', 'Monthly income/expenses/net with category breakdown'],
           ['import_transactions', 'Import from a bank CSV file'],
           ['tag_transactions', 'Create a category rule (pattern → category)'],
@@ -566,6 +624,20 @@ q       quit`}</code></pre>
           ['stop_timer', 'Stop the running timer, returns task name and duration'],
           ['get_time_log', 'Time entries for a date or date range with total duration'],
           ['get_time_stats', 'Breakdown by task/project, daily average, streak for last N days'],
+        ]},
+        { app: 'habctl', color: '#84cc16', tools: [
+          ['list_habits', "List all habits with current streak and today's status"],
+          ['check_habit', 'Check in for a habit today (or a specific date)'],
+          ['uncheck_habit', 'Undo a check-in — correct an accidental entry'],
+          ['add_habit', 'Add a new habit to track'],
+          ['delete_habit', 'Delete a habit and all its check-in history'],
+          ['get_habit_stats', 'Streak, longest streak, and 30-day completion rate'],
+          ['streak_at_risk', 'List active streaks not yet checked in today'],
+          ['get_weekly_summary', 'Habit completion summary for the last 7 days'],
+          ['get_weekly_review', 'Per-habit 7/30-day data for an AI coaching briefing'],
+          ['suggest_habits', 'AI-suggested new habits based on goals'],
+          ['add_checkin_note', "Add a text note on a habit's check-in"],
+          ['list_chains', 'List habit chains — finish one, get nudged to the next'],
         ]},
         { app: 'postctl', color: '#ec4899', tools: [
           ['list_posts', 'List posts, filter by platform/status/campaign'],

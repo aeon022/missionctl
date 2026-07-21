@@ -3,15 +3,17 @@ import Layout from '../components/Layout.astro';
 import TerminalWindow from '../components/TerminalWindow.astro';
 
 const mcpTools = [
-  { name: "budget_list_transactions", desc: "List transactions with filters: date range, category, amount range, merchant" },
-  { name: "budget_get_transaction", desc: "Get details of a specific transaction" },
-  { name: "budget_categorize", desc: "Assign or update the category for a transaction" },
-  { name: "budget_summary", desc: "Get a monthly spending summary grouped by category" },
-  { name: "budget_list_goals", desc: "List all budget goals and current progress" },
-  { name: "budget_set_goal", desc: "Set or update a monthly spending goal for a category" },
-  { name: "budget_list_rules", desc: "List all auto-categorization rules" },
-  { name: "budget_add_rule", desc: "Add a new regex-based categorization rule" },
-  { name: "budget_detect_recurring", desc: "Detect recurring payment patterns across transaction history" },
+  { name: "list_transactions", desc: "List transactions, filter by month, category, or search term" },
+  { name: "add_transaction", desc: "Add a manual income or expense entry" },
+  { name: "delete_transaction", desc: "Delete a transaction by its ID" },
+  { name: "import_transactions", desc: "Import transactions from a bank CSV file (N26, ING, DKB, generic)" },
+  { name: "budget_summary", desc: "Monthly income/expense summary with category breakdown" },
+  { name: "tag_transactions", desc: "Create a category rule — matching transactions get auto-tagged" },
+  { name: "apply_category_rules", desc: "Re-apply all saved category rules to every transaction" },
+  { name: "list_budget_goals", desc: "List budget goals with current-month spending progress" },
+  { name: "set_budget_goal", desc: "Set or update a monthly spending limit for a category" },
+  { name: "delete_budget_goal", desc: "Remove a budget goal for a category" },
+  { name: "detect_recurring_payments", desc: "Scan transactions for recurring payment patterns" },
 ];
 const features = [
   { title: "Bank CSV Import", desc: "Import CSV exports from N26, ING, DKB, and other banks. Auto-detects the format and maps columns." },
@@ -23,7 +25,7 @@ const features = [
 
 <Layout
   title="budgetctl — Budget tracking from your Terminal"
-  description="budgetctl — Import bank CSVs, categorize transactions, track budget goals. Works on macOS and Linux. 9 MCP tools for Claude Desktop."
+  description="budgetctl — Import bank CSVs, categorize transactions, track budget goals. Works on macOS and Linux. 11 MCP tools for Claude Desktop."
   type="software"
   appName="budgetctl"
   appPrice="9"
@@ -39,7 +41,7 @@ const features = [
           <span style="font-family: 'JetBrains Mono', monospace; color: #10b981;">budgetctl</span>
         </h1>
         <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Budget tracking from your Terminal</p>
-        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Import bank CSV files, categorize transactions, set budget goals, and detect recurring payments. Works on macOS and Linux. 9 MCP tools.</p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Import bank CSV files, categorize transactions, set budget goals, and detect recurring payments. Works on macOS and Linux. 11 MCP tools.</p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #10b981; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"

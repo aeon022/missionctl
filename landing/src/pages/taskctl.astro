@@ -3,13 +3,13 @@ import Layout from '../components/Layout.astro';
 import TerminalWindow from '../components/TerminalWindow.astro';
 
 const mcpTools = [
-  { name: "task_list", desc: "List tasks with optional filters: due date, priority, status, or list name" },
-  { name: "task_get", desc: "Get details of a specific task by ID including notes and subtasks" },
-  { name: "task_create", desc: "Create a new task with title, due date, priority, and notes" },
-  { name: "task_complete", desc: "Mark one or more tasks as complete" },
-  { name: "task_delete", desc: "Delete a task permanently" },
-  { name: "task_update", desc: "Update task title, due date, priority, or notes" },
-  { name: "task_sync", desc: "Trigger a sync with Apple Reminders" },
+  { name: "today_tasks", desc: "Get tasks due today or overdue — good for morning briefings" },
+  { name: "week_tasks", desc: "Get tasks due this week (Monday to Sunday)" },
+  { name: "list_tasks", desc: "List tasks from the local cache, filtered by list or status" },
+  { name: "create_task", desc: "Create a new task in Apple Reminders" },
+  { name: "complete_task", desc: "Mark a task as completed in Apple Reminders" },
+  { name: "delete_task", desc: "Delete a task from Apple Reminders" },
+  { name: "sync", desc: "Sync tasks from Apple Reminders into the local cache" },
 ];
 const features = [
   { title: "Apple Reminders Sync", desc: "Two-way sync with Apple Reminders. Your tasks stay in the Apple ecosystem, accessible from iPhone, iPad, and Mac." },

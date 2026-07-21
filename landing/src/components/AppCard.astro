@@ -79,9 +79,13 @@ const { name, description, href, mcpCount, features } = Astro.props;
 </article>
 
 <style>
+  .app-card {
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s cubic-bezier(0.4,0,0.2,1) !important;
+  }
   .app-card:hover {
-    border-color: rgba(0, 217, 126, 0.3) !important;
-    box-shadow: 0 0 20px rgba(0, 217, 126, 0.05) !important;
+    border-color: rgba(0, 217, 126, 0.35) !important;
+    box-shadow: 0 12px 32px rgba(0, 217, 126, 0.08), 0 0 0 1px rgba(0,217,126,0.1) !important;
+    transform: translateY(-4px);
   }
 
   .app-card:hover .card-link {

@@ -3,21 +3,30 @@ import Layout from '../components/Layout.astro';
 import TerminalWindow from '../components/TerminalWindow.astro';
 
 const mcpTools = [
-  { name: "check_habit",     desc: "Check in for a habit today (or a specific date)" },
-  { name: "list_habits",     desc: "List all habits with today's check-in status and current streak" },
-  { name: "get_habit_stats", desc: "Streak, longest streak, and 30-day completion rate for a habit" },
+  { name: "list_habits", desc: "List all habits with current streak and today's check-in status" },
+  { name: "check_habit", desc: "Check in a habit for today (or a specific date)" },
+  { name: "uncheck_habit", desc: "Undo a check-in — correct an accidental entry" },
+  { name: "add_habit", desc: "Add a new habit to track" },
+  { name: "delete_habit", desc: "Delete a habit and all its check-in history" },
+  { name: "get_habit_stats", desc: "Detailed statistics for one or all habits over a time window" },
+  { name: "streak_at_risk", desc: "List habits not yet checked in today that have an active streak" },
+  { name: "get_weekly_summary", desc: "Habit completion summary for the last 7 days" },
+  { name: "get_weekly_review", desc: "Per-habit data for 7 and 30 days — input for an AI coaching briefing" },
+  { name: "suggest_habits", desc: "AI-suggested new habits based on the user's goals and existing habits" },
+  { name: "add_checkin_note", desc: "Add or update a text note on a habit's check-in" },
+  { name: "list_chains", desc: "List habit chains — pairs where finishing one suggests the next" },
 ];
 const features = [
   { title: "Daily Check-ins with Streaks", desc: "Mark habits done each day. habctl tracks your current streak and longest streak automatically. Miss a day and the streak resets — simple accountability." },
-  { title: "30-Day Progress Bars", desc: "Visual progress bars in the TUI show your 30-day completion rate at a glance. Spot patterns and see which habits are sticking." },
-  { title: "Diary Template Integration", desc: "habctl list --format diary outputs a habit summary block ready to paste into your diaryctl entry. Feed it to Claude for automatic end-of-day digests." },
-  { title: "MCP Server for AI Access", desc: "Three MCP tools let Claude check your streaks, log a check-in, and pull habit stats — enabling fully automated morning briefings and end-of-day digests." },
+  { title: "AI Weekly Coaching Review", desc: "habctl review pulls 7 and 30-day completion data and has Claude (or GPT, Gemini, Ollama) write a coaching briefing — what's sticking, what's slipping, what to focus on next." },
+  { title: "Habit Chains & Streak Alerts", desc: "Link habits into chains so finishing one nudges the next. streak_at_risk flags active streaks you haven't checked in today, before you lose them." },
+  { title: "MCP Server for AI Access", desc: "12 MCP tools let Claude check streaks, log or undo check-ins, run weekly reviews, and suggest new habits — enabling fully automated coaching and digests." },
 ];
 ---
 
 <Layout
   title="habctl — Daily Habit Tracking for Terminal People"
-  description="habctl — Track daily habits with streaks, 30-day progress bars, and MCP integration for Claude Desktop. 3 MCP tools."
+  description="habctl — Track daily habits with streaks, AI weekly coaching reviews, and habit chains. 12 MCP tools for Claude Desktop."
   type="software"
   appName="habctl"
   appPrice="9"
@@ -33,7 +42,7 @@ const features = [
           <span style="font-family: 'JetBrains Mono', monospace; color: #84cc16;">habctl</span>
         </h1>
         <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Daily habit tracking for terminal people</p>
-        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Track daily habits with streaks, heatmaps, and check-ins — all from your terminal. Claude can log check-ins and pull your stats via 3 MCP tools.</p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Track daily habits with streaks, heatmaps, and AI weekly coaching reviews — all from your terminal. Claude can check in habits, flag at-risk streaks, and write a coaching briefing via 12 MCP tools.</p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #84cc16; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
@@ -92,6 +101,12 @@ const features = [
 
 <span style="color:#4a5568"># Detailed stats for a habit</span>
 <span style="color:#4a5568">$ </span>habctl stats <span style="color:#a0aec0">"Sport"</span>
+
+<span style="color:#4a5568"># AI weekly coaching review</span>
+<span style="color:#4a5568">$ </span>habctl review
+
+<span style="color:#4a5568"># AI habit suggestions</span>
+<span style="color:#4a5568">$ </span>habctl suggest <span style="color:#6366f1">--goal</span> <span style="color:#a0aec0">"more focus, less screen time"</span>
 
 <span style="color:#4a5568"># Start MCP server</span>
 <span style="color:#4a5568">$ </span>habctl mcp`} />

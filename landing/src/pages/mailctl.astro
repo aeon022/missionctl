@@ -3,12 +3,12 @@ import Layout from '../components/Layout.astro';
 import TerminalWindow from '../components/TerminalWindow.astro';
 
 const mcpTools = [
-  { name: "mail_list_messages", desc: "List messages from the inbox with optional filters (unread, sender, date range)" },
-  { name: "mail_get_message", desc: "Get the full content of a specific message by ID" },
-  { name: "mail_search", desc: "Full-text search across all synced messages" },
-  { name: "mail_compose", desc: "Compose and send a new email via Apple Mail" },
-  { name: "mail_reply", desc: "Reply to an existing email thread" },
-  { name: "mail_sync", desc: "Trigger a sync of the Apple Mail inbox to the local database" },
+  { name: "inbox", desc: "List recent inbox messages — sender, subject, date, read status, body preview" },
+  { name: "search_email", desc: "Search emails by keyword across subject, sender, and body" },
+  { name: "email_thread", desc: "Retrieve all messages in a thread, matched by subject" },
+  { name: "send_email", desc: "Send an email via Apple Mail (user confirms before sending)" },
+  { name: "draft_email", desc: "Save an email to Apple Mail Drafts for review before sending" },
+  { name: "sync_inbox", desc: "Sync the inbox from Apple Mail into the local cache" },
 ];
 const features = [
   { title: "TUI Inbox", desc: "Full-featured terminal UI for browsing, threading, and managing your inbox. Keyboard-driven, fast, no mouse required." },
