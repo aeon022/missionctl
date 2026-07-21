@@ -30,7 +30,16 @@ const {
 const siteUrl = 'https://missionctl.sh';
 const canonicalURL = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
 
-const jsonLd = type === 'software' && appName ? {
+const organizationLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'missionctl',
+  url: siteUrl,
+  logo: new URL('/android-chrome-512x512.png', siteUrl).href,
+  sameAs: ['https://postctl.sh'],
+};
+
+const primaryLd = type === 'software' && appName ? {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
   name: appName,
@@ -55,6 +64,24 @@ const jsonLd = type === 'software' && appName ? {
     'query-input': 'required name=search_term_string',
   },
 };
+
+// Auto breadcrumbs from the URL path — every non-root page gets one for free.
+const pathSegments = Astro.url.pathname.split('/').filter(Boolean);
+const breadcrumbLd = pathSegments.length > 0 ? {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+    ...pathSegments.map((seg, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: seg.charAt(0).toUpperCase() + seg.slice(1),
+      item: `${siteUrl}/${pathSegments.slice(0, i + 1).join('/')}`,
+    })),
+  ],
+} : null;
+
+const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
 ---
 <!doctype html>
 <html lang="en">
@@ -95,11 +122,22 @@ const jsonLd = type === 'software' && appName ? {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={new URL(ogImage, siteUrl).href} />
 
-    <!-- Favicon -->
+    <!-- Favicon / app icons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0a0a0f" />
 
     <!-- Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {jsonLdBlocks.map(block => (
+      <script type="application/ld+json" set:html={JSON.stringify(block)} />
+    ))}
+
+    <!-- LLM-readable site summary -->
+    <link rel="llms.txt" href="/llms.txt" />
 
     <!-- Page transitions -->
     <ClientRouter />

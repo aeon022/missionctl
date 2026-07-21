@@ -13,9 +13,9 @@
     <span class="ann-text">
       <strong>missionctl Bundle</strong>
       <span class="ann-sep">·</span>
-      <span>all 8 tools</span>
-      <span class="ann-sep">·</span>
-      <span>one-time</span>
+      <span class="ann-only-lg">all 9 tools</span>
+      <span class="ann-sep ann-only-lg">·</span>
+      <span class="ann-only-lg">one-time</span>
       <span class="ann-price">$39</span>
       <span class="ann-cta">Get it →</span>
     </span>
@@ -139,6 +139,14 @@
   /* Hidden via html.bar-closed */
   :global(.bar-closed) #announcement-bar {
     display: none;
+  }
+
+  /* ── Mobile: trim to the essentials so it never wraps/overflows ── */
+  @media (max-width: 480px) {
+    #announcement-bar { padding: 0 2.5rem; }
+    .ann-text { font-size: 0.66rem; gap: 0.3rem; }
+    .ann-only-lg { display: none; }
+    .ann-close { right: 0.6rem; }
   }
 </style>
 
