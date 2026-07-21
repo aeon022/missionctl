@@ -1,5 +1,5 @@
 # postctl — Roadmap Audit
-> Stand: 2026-07-15
+> Stand: 2026-07-21 (Retry-Standardisierung erledigt; Rest unverändert seit 2026-07-15)
 
 ---
 
@@ -10,7 +10,7 @@
 | Twitter/X, LinkedIn, Threads | ✓ fertig | Alle 3 Plattformen vollständig implementiert |
 | MCP-Server (`postctl mcp`) | ✓ fertig | 7 Tools: list, get, create, publish, schedule, campaign list/get |
 | `postctl list --json` | ✓ fertig | FormatFlag, strukturierte JSON-Schemas |
-| Error handling / Retry | ~ partial | Basis-Error-Paths vorhanden, aber kein zentrales Retry-Middleware; Threads hat eigene Retry-Loop, andere Plattformen inkonsistent |
+| Error handling / Retry | ✓ fertig | Zentrales `platforms.WithRetry` (2026-07-21): exponential Backoff + Jitter, max. 3 Versuche, nur bei transienten Fehlern (Netzwerk, HTTP 429/5xx); 4xx schlägt sofort fehl. Einziger Call-Path für alle Publish-Aufrufe (`scheduler.PublishPost`), Threads' eigene Container-Indexing-Retry-Loop bleibt unverändert bestehen (anderes Problem, liegt darunter) |
 | Brew formula / tap | ✗ fehlt | Keine .rb-Datei, kein Tap-Repo |
 
 **Fazit v1.0:** Feature-complete. Einziger Blocker für Distribution: Brew tap.
@@ -43,6 +43,7 @@
 ## Offene Punkte nach Priorität
 
 1. **Brew formula / tap** — Blocker für öffentlichen Release
-2. **Retry-Standardisierung** — zentrales Middleware statt Platform-spezifischer Lösungen
-3. **`postctl campaign plan`** — AI-Planning-Hook für v1.1
-4. **Approval workflow** — für v2.0 / Team-Nutzung
+2. **`postctl campaign plan`** — AI-Planning-Hook für v1.1
+3. **Approval workflow** — für v2.0 / Team-Nutzung
+
+~~Retry-Standardisierung~~ — erledigt am 2026-07-21, siehe v1.0-Tabelle oben.

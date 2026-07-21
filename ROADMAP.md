@@ -46,7 +46,9 @@ Laufender Fortschritt wird über die Task-Liste dieser Session getrackt (Tasks #
 - [x] Twitter/X, LinkedIn, Threads Integration — alle 3 Plattformen vollständig
 - [x] `postctl mcp` — MCP-Server, 7 Tools (list/get/create/publish/schedule/campaign list+get)
 - [x] `postctl list --json` — machine-readable output
-- [~] Robust error handling & retry logic — Basis vorhanden, kein zentrales Retry-Middleware
+- [x] Robust error handling & retry logic — zentrales Retry-Middleware (`platforms.WithRetry`,
+  exponential Backoff + Jitter, nur transiente Fehler: Netzwerk/429/5xx) für alle Publish-Pfade
+  (CLI, MCP, TUI single/bulk)
 - [ ] Brew formula via tap — einziger Blocker für Distribution
 
 ### v1.1 — Campaigns (Q4 2026)
