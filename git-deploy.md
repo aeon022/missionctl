@@ -180,29 +180,50 @@ echten Vorteil, wenn dadurch ein unabhängiges Auto-Deploy (Vercel/Netlify) erm�
 würde — das lässt sich aber genauso gut auf einen einzelnen Branch eines bestehenden
 Repos konfigurieren, ohne Migration.
 
+**Nie direkt im Hauptcheckout auf `deploy/landing` wechseln** (`git checkout
+deploy/landing` in `~/Developing/Projects/missionctl`) — das reißt ROADMAP.md,
+SUITE_AUDIT.md etc. auf den alten Stand dieses Branches und hinterlässt beim
+Zurückwechseln Cache-Müll (`landing/` mit `.astro`/`dist`/`node_modules`, aber ohne
+`src/`). Stattdessen **immer über den dauerhaften Worktree** `.worktree-landing/`
+arbeiten, der als Unterordner *im Projekt selbst* liegt (nicht daneben) und lokal
+gitignored ist:
+
 ```bash
-# An der Landing arbeiten
+# Einmalig anlegen (falls noch nicht vorhanden)
 cd ~/Developing/Projects/missionctl
-git checkout deploy/landing
-cd landing
+git worktree add ./.worktree-landing deploy/landing
+
+# An der Landing arbeiten
+cd ~/Developing/Projects/missionctl/.worktree-landing
 npm install   # falls node_modules fehlt
 npm run dev
 
-# Änderungen committen + pushen
+# Änderungen committen + pushen — NUR auf deploy/landing
 git add landing
 git commit -m "feat: ..."
 git push origin deploy/landing
-
-# zurück zur normalen Arbeit
-cd ~/Developing/Projects/missionctl
-git checkout main
 ```
 
-**Wichtig:** `git checkout deploy/landing` im Haupt-Arbeitsverzeichnis wechselt auch
-ROADMAP.md, SUITE_AUDIT.md etc. auf den (alten) Stand dieses Branches, weil er lange vor
-den aktuellen Docs abgezweigt ist. Danach immer mit `git checkout main` zurückwechseln,
-bevor an einem der CLI-Tools weitergearbeitet wird. Für parallele Arbeit ohne
-Branch-Wechsel: `git worktree add ../missionctl-landing deploy/landing`.
+Der Haupt-Worktree (`~/Developing/Projects/missionctl`) bleibt dabei durchgehend auf
+`main` — kein Branch-Wechsel, kein Hin- und Herspringen nötig.
+
+**Strukturregeln (verbindlich, gilt auch für postctl und jedes weitere Tool mit
+eigener Landing-Page):**
+
+1. Landing-Page-Änderungen werden **ausschließlich** auf den Branch `deploy/landing`
+   gepusht — nie auf `main`, nie auf einen Feature-/Agent-Branch.
+2. Der Arbeits-Worktree für `deploy/landing` heißt immer **`.worktree-landing/`** und
+   liegt **innerhalb** des jeweiligen Projektordners (z.B.
+   `missionctl/.worktree-landing/` oder `postctl/.worktree-landing/`) — niemals als
+   Geschwister-Ordner eine Ebene höher (also nicht `../missionctl-landing`,
+   nicht `../postctl-landing`). Ein Projekt bekommt genau einen solchen Ordner, keine
+   Zweit- oder Drittvariante.
+3. Nach jeder Agent-/Worktree-Session (z.B. `git worktree add` für einen
+   Hintergrund-Task) den Worktree UND den zugehörigen Branch wieder entfernen, sobald
+   die Arbeit gemerged oder verworfen ist — lokal (`git worktree remove`,
+   `git branch -D`) und falls gepusht auch remote
+   (`git push origin --delete <branch>`). Liegengebliebene `worktree-agent-*`-Branches
+   sind keine Landing-Page-Quelle und gehören nicht ins Repo.
 
 ---
 
@@ -221,7 +242,7 @@ Branch-Wechsel: `git worktree add ../missionctl-landing deploy/landing`.
 | habctl | github.com/aeon022/habctl | `github.com/aeon022/habctl` |
 | timectl | github.com/aeon022/timectl | `github.com/aeon022/timectl` |
 | diaryctl | github.com/aeon022/diaryctl | `github.com/aeon022/diaryctl` |
-| postctl | lokal only, kein Submodule (`postctl/` ist `.gitignore`-t auf `main`) | `github.com/aeon022/postctl` (Remote existiert, aber postctl-Arbeit ist zurückgestellt) |
+| postctl | lokal only, kein Submodule (`postctl/` ist `.gitignore`-t auf `main`) | `github.com/aeon022/postctl` — eigene Landing-Page auf `deploy/landing`, Worktree unter `postctl/.worktree-landing/` |
 
 ---
 
