@@ -229,7 +229,7 @@ const faqs = [
   },
   {
     q: 'Does it work on Linux?',
-    a: 'notectl and budgetctl work on macOS and Linux. mailctl, calctl, and taskctl require macOS (they bridge Apple Mail, Calendar, and Reminders).',
+    a: 'notectl, budgetctl, diaryctl, timectl, and habctl work on macOS and Linux. mailctl, calctl, and taskctl require macOS (they bridge Apple Mail, Calendar, and Reminders).',
   },
   {
     q: 'Is my data safe?',
@@ -252,15 +252,30 @@ const faqs = [
     a: 'The bundle ($39) includes all 9 tools. Buying individually costs $81 total. If you use more than 4 tools, the bundle saves money.',
   },
 ];
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map(f => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
 ---
 
 <Layout
   title="missionctl — Give your AI hands"
-  description="66 MCP tools across 9 terminal apps for macOS + Linux. Read email, manage calendar, tasks, notes, budget, track habits, log time, keep a diary, and schedule posts. Local-first, no subscriptions."
+  description="66 MCP tools, 9 local-first terminal apps. Email, calendar, tasks, notes, budget, habits, time, diary, and social posts. No subscriptions."
 >
   <!-- ======= HERO ======= -->
-  <section style="min-height: calc(100vh - 92px); display: flex; flex-direction: column; justify-content: center; padding: 10rem 1.5rem 6rem; max-width: 1200px; margin: 0 auto;">
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
+  <section style="position: relative; min-height: calc(100vh - 92px); display: flex; flex-direction: column; justify-content: center; padding: 10rem 1.5rem 6rem; max-width: 1200px; margin: 0 auto;" id="hero-section">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="hero-blob hero-blob-a"></div>
+      <div class="hero-blob hero-blob-b"></div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 1;" class="hero-grid">
 
       <!-- Left: Text -->
       <div>
@@ -493,6 +508,7 @@ const faqs = [
 
   <!-- ======= FAQ ======= -->
   <section style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+    <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
     <div style="max-width: 720px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
@@ -611,13 +627,71 @@ const faqs = [
     .pricing-grid   { grid-template-columns: repeat(2, 1fr) !important; }
     .workflows-grid { grid-template-columns: 1fr !important; }
     .mcp-stats-grid { grid-template-columns: repeat(3, 1fr) !important; }
-    .how-steps      { flex-direction: column !important; align-items: flex-start !important; }
-    .how-arrow      { transform: rotate(90deg); margin-left: 1.5rem; }
+    .how-steps      { flex-direction: column !important; align-items: center !important; }
+    .how-arrow      { transform: rotate(90deg); }
   }
   @media (max-width: 580px) {
     .apps-grid    { grid-template-columns: 1fr !important; }
     .pricing-grid { grid-template-columns: 1fr !important; }
     .mcp-stats-grid { grid-template-columns: 1fr !important; }
+  }
+
+  /* ── Hero interactive background: small, soft, color-shifting blobs ── */
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vw;
+    height: 100%;
+    transform: translateX(-50%);
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .hero-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(64px);
+    will-change: transform, border-radius;
+    transform: translate3d(0,0,0);
+  }
+  .hero-blob-a {
+    top: -6%;
+    left: 1%;
+    width: min(20vw, 260px);
+    height: min(20vw, 260px);
+    background: radial-gradient(circle, rgba(0,217,126,0.30), rgba(0,217,126,0) 72%);
+    animation: blob-morph-a 16s ease-in-out infinite alternate, blob-color-a 24s ease-in-out infinite;
+  }
+  .hero-blob-b {
+    bottom: -10%;
+    right: 1%;
+    width: min(16vw, 220px);
+    height: min(16vw, 220px);
+    background: radial-gradient(circle, rgba(99,102,241,0.26), rgba(99,102,241,0) 72%);
+    animation: blob-morph-b 20s ease-in-out infinite alternate, blob-color-b 28s ease-in-out infinite;
+  }
+  @keyframes blob-morph-a {
+    0%   { border-radius: 46% 54% 60% 40% / 50% 45% 55% 50%; }
+    100% { border-radius: 58% 42% 42% 58% / 44% 56% 44% 56%; }
+  }
+  @keyframes blob-morph-b {
+    0%   { border-radius: 52% 48% 44% 56% / 48% 52% 48% 52%; }
+    100% { border-radius: 42% 58% 56% 44% / 56% 44% 56% 44%; }
+  }
+  @keyframes blob-color-a {
+    0%, 100% { background: radial-gradient(circle, rgba(0,217,126,0.30), rgba(0,217,126,0) 72%); }
+    50%      { background: radial-gradient(circle, rgba(245,158,11,0.24), rgba(245,158,11,0) 72%); }
+  }
+  @keyframes blob-color-b {
+    0%, 100% { background: radial-gradient(circle, rgba(99,102,241,0.26), rgba(99,102,241,0) 72%); }
+    50%      { background: radial-gradient(circle, rgba(0,217,126,0.24), rgba(0,217,126,0) 72%); }
+  }
+  @media (max-width: 640px) {
+    .hero-blob-b { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-blob { animation-duration: 0s !important; }
   }
 
   /* ── Hero CTAs ── */
@@ -733,6 +807,48 @@ const faqs = [
 </style>
 
 <script>
+  // ── Hero background: mouse parallax + scroll drift on the blobs ──
+  (() => {
+    const section = document.getElementById('hero-section');
+    const blobA = section?.querySelector<HTMLElement>('.hero-blob-a');
+    const blobB = section?.querySelector<HTMLElement>('.hero-blob-b');
+    if (!section || !blobA || !blobB) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return;
+
+    let targetPx = 0, targetPy = 0;
+    let curPx = 0, curPy = 0;
+    let scrollShift = 0;
+
+    section.addEventListener('mousemove', (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      const nx = (e.clientX - rect.left) / rect.width;   // 0..1
+      const ny = (e.clientY - rect.top) / rect.height;   // 0..1
+      targetPx = (nx - 0.5) * 2; // -1..1
+      targetPy = (ny - 0.5) * 2;
+    }, { passive: true });
+
+    function onScroll() {
+      const rect = section.getBoundingClientRect();
+      const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
+      scrollShift = progress * 40; // px of upward drift as the hero scrolls away
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    function tick() {
+      curPx += (targetPx - curPx) * 0.05;
+      curPy += (targetPy - curPy) * 0.05;
+
+      blobA.style.transform = `translate3d(${curPx * 14}px, ${curPy * 12 - scrollShift}px, 0)`;
+      blobB.style.transform = `translate3d(${curPx * -18}px, ${curPy * -16 - scrollShift * 1.3}px, 0)`;
+
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+
   // ── Typewriter animation ────────────────────────────────────
   interface Segment { text: string; color?: string; blink?: boolean; }
 
