@@ -7,7 +7,7 @@
 *.swp
 # local-only
 .claude/
-# build artifacts from the deploy/landing branch checkout
-landing/
+# local worktree checkout of the deploy/landing branch (see git-deploy.md)
+/.worktree-landing/
 # separate repo (github.com/aeon022/postctl), not a submodule
 postctl/
