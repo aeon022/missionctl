@@ -16,6 +16,8 @@ const features = [
   { title: "Daily Notes", desc: "Auto-create and open today's daily note with your template. AI can append to your daily log via MCP." },
   { title: "Full-text Search", desc: "Search across your entire vault instantly. Returns ranked results with context snippets." },
   { title: "Tag-based Filtering", desc: "Filter notes by Obsidian tags, links, or frontmatter fields. Great for project-scoped AI workflows." },
+  { title: "Apple Notes Sync (macOS)", desc: "Optional source backend alongside Obsidian/Joplin/Markdown. Reads and writes native Apple Notes over AppleScript — no export step." },
+  { title: "Real Checklist State (macOS)", desc: "Checked/unchecked status for Apple Notes checklists isn't exposed by AppleScript at all — notectl reads it straight from Notes' own local database, so ☑ and ☐ in the terminal always match what you see in the Notes app." },
 ];
 ---
 
@@ -31,7 +33,7 @@ const features = [
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
       <div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #a78bfa; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
-          missionctl suite &middot; macOS
+          missionctl suite &middot; macOS + Linux
         </div>
         <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
           <span style="font-family: 'JetBrains Mono', monospace; color: #a78bfa;">notectl</span>
@@ -79,6 +81,37 @@ const features = [
             <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
           </div>
         ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLE NOTES CHECKLIST SHOWCASE -->
+  <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;" class="hero-grid">
+      <div>
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">Apple Notes checklists, done right</h2>
+        <p style="color: #718096; font-size: 0.95rem; line-height: 1.7; margin: 0 0 1rem;">
+          AppleScript's <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #a78bfa;">body of note</code> doesn't expose whether a list item is checked — or even whether it's a checklist at all. Most tools that bridge Apple Notes either can't show checkbox state or fake it.
+        </p>
+        <p style="color: #718096; font-size: 0.95rem; line-height: 1.7; margin: 0;">
+          notectl reads it straight from Notes' own local database instead, so the terminal always matches what's actually checked in the Notes app — no guessing, no stale state.
+        </p>
+      </div>
+      <div>
+        <TerminalWindow title="notectl — Product Launch Checklist" content={`<span style="color:#e2e8f0;font-weight:700">🚀 Product Launch Checklist</span>
+
+<span style="color:#a78bfa;font-weight:700">📋 Pre-Launch</span>
+<span style="color:#4a5568;text-decoration:line-through">☑ Finalize pricing page</span>
+<span style="color:#4a5568;text-decoration:line-through">☑ Write announcement blog post</span>
+<span style="color:#e2e8f0">☐ Record demo video</span>
+<span style="color:#e2e8f0">☐ Submit to Product Hunt</span>
+
+<span style="color:#a78bfa;font-weight:700">🎯 Launch Day</span>
+<span style="color:#e2e8f0">☐ Post on Twitter/X</span>
+<span style="color:#e2e8f0">☐ Send email to waitlist</span>
+<span style="color:#e2e8f0">☐ Monitor error logs</span>
+
+<span style="color:#4a5568">esc:back  e:edit  space:toggle checkbox  q:quit</span>`} />
       </div>
     </div>
   </section>
