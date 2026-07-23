@@ -62,8 +62,11 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   konnte kurz aufblitzen, bevor die erste Ladung durch war — jetzt korrekt
   unterschieden. budgetctl/timectl bewusst ausgelassen — rein lokale
   SQLite-Reads, Ladezeit nicht wahrnehmbar, kein Spinner-Unterbau vorhanden.
-- [ ] Command-Palette / `:`-Modus (wie k9s/lazygit) — schneller Aktions-Sprung statt
-  Einzeltasten auswendig lernen, besonders wertvoll bei habctl (~24 Views)
+- [~] Command-Palette / `:`-Modus (wie k9s/lazygit) — **Prototyp in habctl fertig**,
+  wartet auf Feedback vor Rollout auf die restliche Suite. `:` öffnet, Tippen
+  filtert live (Präfix-Treffer zuerst), ↑/↓ wählt, Enter führt aus. Dispatcht
+  über `handleList` (dieselbe Funktion wie jeder normale Tastendruck) statt
+  eigener Logik. Bisher nur aus der Haupt-Listenansicht erreichbar.
 
 ### Mittel
 - [ ] Fuzzy-Suche mit Highlighting der Treffer statt reinem Substring-Filter (aktuell
