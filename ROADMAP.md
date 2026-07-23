@@ -295,6 +295,22 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
   zweck-Text. `e` im Popup springt direkt ins Edit-Formular. Feldlängen
   werden von der echten Terminal-Höhe budgetiert (gleiche Fix-Klasse wie
   der Import-Popup-Overflow).
+- [x] Neue `Payee`-Spalte, getrennt von der Description/"Zweck" — Nutzer-
+  Wunsch, Buchungen "wie Tabelle: Name, Verwendungszweck" statt als ein
+  langer Blob. N26/ING/DKB bekommen Payee/Zweck bereits als getrennte
+  CSV-Spalten (wurden bisher nur zusammengeklebt) — direkt aufgeteilt,
+  kein Parsing nötig. Die österreichische "Umsatzliste" packt alles in
+  EINEN gelabelten Blob ("Zahlungsempfänger: X Verwendungszweck: Y IBAN
+  ..."), dafür ein neuer Best-Effort-Regex-Splitter (`splitATFields`),
+  IBAN/BIC/Mandat-Rauschen fällt raus (bleibt komplett im Raw-Feld /
+  Detail-Popup). Regel-Matching (`Categorize`/`ApplyRules`) prüft jetzt
+  Payee+Description zusammen, sonst hätten Regeln wie "rewe" aufgehört zu
+  greifen, sobald der Händlername in Payee statt Description landete.
+  Nebenbei einen latenten Bug gefixt: Spalten-Padding/-Truncation nutzte
+  Byte-Länge (`fmt`s `%-*s`, rohes String-Slicing) statt Rune-Anzahl — bei
+  einem Umlaut in Payee/Category (in diesen Daten die Regel, nicht die
+  Ausnahme) wären Spalten verrutscht bzw. UTF-8 hätte mitten im Rune
+  geschnitten werden können.
 
 UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown, Detail-Popup) ✅ vorhanden.
 
