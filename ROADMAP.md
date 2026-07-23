@@ -248,12 +248,23 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
   stillschweigend verworfen ("Imported 0 transactions", kein Fehler). Nur
   gefunden, weil ein echter End-to-End-CLI-Import gegen eine isolierte DB
   gefahren wurde statt sich auf Unit-Tests zu verlassen.
-- [x] Mehrere Bankkonten: Konto-Tab-Reihe unter den Monats-Tabs (nur sichtbar
-  ab 2+ Konten), `[`/`]` zum Durchschalten (auch per Mausklick), sowohl in
+- [x] Mehrere Bankkonten: Konto-Tab-Reihe unter den Monats-Tabs (sichtbar ab
+  1 getaggtem Konto — ursprünglich erst ab 2+, aber damit gab es nach dem
+  ersten Import keine sichtbare Bestätigung, dass das Tagging überhaupt
+  gegriffen hat), `[`/`]` zum Durchschalten (auch per Mausklick), sowohl in
   der Transaktionsliste als auch in der Summary-View. `Store.Summary`,
   `budgetctl summary --account`, und das MCP-Tool `summary` filtern jetzt
   optional auf ein Konto. Import-Vorschau zeigt das erkannte Konto (N26/ING/
   DKB/leer bei generisch) und erlaubt Umbenennen vor dem Import (`t`-Taste).
+  Statusleiste zeigte fälschlich "[/]:account" direkt neben "/:search" —
+  echte gemeldete Verwechslung — jetzt nur noch "]:account" (ein Key, wie
+  "tab:month" auch shift+tab nicht extra zeigt).
+- [x] `budgetctl reset [--account NAME] [--yes]` — alle (oder nur die eines
+  Kontos) Transaktionen löschen, um einen Import sauber neu zu machen.
+  Fragt interaktiv nach getipptem "yes" außer bei `--yes`. Bewusst NICHT
+  als MCP-Tool exponiert — Bulk-Löschung der Finanzdaten per Agent-Tool-Call
+  ohne sichtbaren Bestätigungsschritt ist ein anderes Risikoprofil als das
+  bestehende `delete_transaction` (löscht nur eine einzelne Transaktion).
 - [x] Drei echte Bugs gefunden über einen echten österreichischen Bank-CSV-
   Import (Steiermärkische Sparkasse "Umsatzliste", keine Header-Zeile, ';'-
   getrennt, UTF-8-BOM): (1) neuer dedizierter Parser dafür, da
