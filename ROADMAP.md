@@ -104,8 +104,16 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   mitgefixt (`helpReturnTo`). Alles mit erzwungenem ANSI-Color-Profile
   verifiziert, nicht nur am reinen Text-Output — die Bugs waren dort
   unsichtbar.
-- [ ] `bubbles/table` statt handformatierter Strings für Listen (taskctl, budgetctl,
-  calctl) — robusteres Spalten-Alignment quasi gratis
+- [x] ~~`bubbles/table` statt handformatierter Strings für Listen~~ — **geprüft und
+  verworfen**. `bubbles/table` truncated Zellwerte über `runewidth.Truncate`,
+  BEVOR sie gestylt werden, und rendert jede Zeile am Ende in einem einzigen
+  Style. Konkret getestet: ein grün gefärbter Betrag `"+42.50€"` wird bei
+  Truncation zu `"\x1b[32m…"` — Escape-Code bleibt offen, kein Reset, Inhalt
+  weg. Verträgt sich nicht mit Pro-Zelle-Farbcodierung (Beträge in budgetctl,
+  Priorität/Fälligkeit in taskctl, Kategorien in calctl). "Robusteres
+  Alignment quasi gratis" war die falsche Prämisse — der Preis wäre der
+  Verlust aller Farbcodierung gewesen. Aktuelle handformatierte Darstellung
+  bleibt.
 
 ### Aufwendig / spekulativ
 - [ ] Mausklick auf Zeilen/Tabs, nicht nur Scroll-Wheel
