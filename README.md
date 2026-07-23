@@ -34,13 +34,21 @@ All tools share the same design: a Bubbletea TUI as the default command, a Cobra
 
 Each tool is a standalone Go binary with no runtime dependencies.
 
+Already in this monorepo (submodules checked out)? Install everything, including `postctl` and `missionctl` itself, in one go:
+
 ```bash
-for repo in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl; do
+./setup.sh
+```
+
+Starting from scratch instead — clone each tool's own repo:
+
+```bash
+for repo in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl postctl missionctl; do
   git clone https://github.com/aeon022/$repo && cd $repo && ./setup.sh && cd ..
 done
 ```
 
-`setup.sh` builds the binary and installs it to `~/.local/bin/`. Make sure that directory is on your `$PATH`.
+Every tool's `setup.sh` builds the binary and installs it to `~/.local/bin/` — no `sudo` needed. Make sure that directory is on your `$PATH`. Run `missionctl doctor` afterwards to check installation, MCP registration, and DB sync status across the whole suite.
 
 ### Initial sync
 
