@@ -38,6 +38,44 @@ Laufender Fortschritt wird über die Task-Liste dieser Session getrackt (Tasks #
 
 ---
 
+## UI/UX-Optimierungsideen (2026-07-23)
+
+Ausgangspunkt: der `colorSubtle`-Kontrastbug (Divider unsichtbar auf dunklen Themes),
+identisch kopiert in 7 Tools — Anlass für eine breitere Bestandsaufnahme, was polierte
+TUIs (k9s, lazygit, yazi, btop) haben, was die Suite (noch) nicht hat. Wird der Reihe
+nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
+
+### Schnell
+- [x] `missionctl-core/theme.Subtle` Kontrastbug gefixt (`239`→`244`, synchron zum
+  Einzeltool-Fix)
+- [ ] `missionctl-core` (theme + keymap) tatsächlich adoptieren — existiert seit der
+  vorigen Session, aber **kein einziges Tool importiert es bisher**. Laut eigenem
+  README "adoptiert ein Tool es, wenn seine TUI ohnehin gerade angefasst wird" —
+  genau das ist jetzt der Fall (alle 7 TUIs gerade für Header+Divider-Fix anfasst).
+  Ersetzt die kopierte Farb-Palette + die handgerollten `key()/row()/section()`
+  Help-Overlay-Helfer in mailctl/calctl/taskctl/notectl/budgetctl/timectl/diaryctl.
+  habctl bleibt bewusst außen vor (eigene Palette by design).
+- [ ] Bessere Ladezustände — Spinner statt reinem "Loading…"-Text dort, wo noch
+  keiner läuft
+- [ ] Command-Palette / `:`-Modus (wie k9s/lazygit) — schneller Aktions-Sprung statt
+  Einzeltasten auswendig lernen, besonders wertvoll bei habctl (~24 Views)
+
+### Mittel
+- [ ] Fuzzy-Suche mit Highlighting der Treffer statt reinem Substring-Filter (aktuell
+  bei `/` überall in der Suite)
+- [ ] Transientes Help-Overlay statt Vollbild-Weg-Navigation — Kontext bleibt beim
+  Öffnen von `?` erhalten
+- [ ] `bubbles/table` statt handformatierter Strings für Listen (taskctl, budgetctl,
+  calctl) — robusteres Spalten-Alignment quasi gratis
+
+### Aufwendig / spekulativ
+- [ ] Mausklick auf Zeilen/Tabs, nicht nur Scroll-Wheel
+- [ ] Konfigurierbares Farbschema (`~/.config/missionctl/theme.yaml`), das alle Tools
+  teilen — baut auf `missionctl-core/theme` auf, sobald das adoptiert ist
+- [ ] Mehrstufiges Undo statt Einzel-Undo (aktuell nur taskctl mit `u`)
+
+---
+
 ## postctl — Social Media from Terminal
 
 **Status: Existing (Go, Bubble Tea) — zurückgestellt, Details in `POSTCTL_AUDIT.md`**
