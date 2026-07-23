@@ -226,7 +226,7 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
 ### v0.5 — Categories & TUI (Q1 2027)
 - [x] `budgetctl tag "Netflix" --category streaming`
 - [x] `budgetctl report --category --year 2026 --json`
-- [x] TUI: transaction list, category breakdown (Monats-Trendchart optional, nicht kritisch)
+- [x] TUI: transaction list, category breakdown, 6-Monats-Trend-Sparkline (Store.MonthlyTrend)
 - [x] Budget goals: `budgetctl goal set "dining" 200 --monthly`
 
 ### v1.0 — MCP + AI Analysis (Q2 2027)
@@ -254,6 +254,29 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
   `budgetctl summary --account`, und das MCP-Tool `summary` filtern jetzt
   optional auf ein Konto. Import-Vorschau zeigt das erkannte Konto (N26/ING/
   DKB/leer bei generisch) und erlaubt Umbenennen vor dem Import (`t`-Taste).
+- [x] Drei echte Bugs gefunden über einen echten österreichischen Bank-CSV-
+  Import (Steiermärkische Sparkasse "Umsatzliste", keine Header-Zeile, ';'-
+  getrennt, UTF-8-BOM): (1) neuer dedizierter Parser dafür, da
+  `parseGeneric`s Header-Keyword-Erkennung bei fehlender Header-Zeile
+  grundsätzlich nicht greifen kann; (2) ING-Erkennung matchte fälschlich auf
+  "ing " als Substring irgendwo im Dateiinhalt (traf z.B. den Namen
+  "Wanting" in einer Buchungsbeschreibung) — jetzt spezifisch auf die
+  echte `Bank;ING`-Präambelzeile eingeschränkt; (3) `Store.Summary` nettete
+  Income/Expenses PRO KATEGORIE bevor klassifiziert wurde — eine Kategorie
+  mit gemischtem Vorzeichen (fast immer "" uncategorized bei frischem
+  Import) konnte so Einkommen komplett verschlucken, wenn die Ausgaben in
+  derselben Kategorie überwogen. Jetzt pro Transaktion summiert.
+- [x] Zwei Overflow-Bugs über echte Screenshots gefunden: `renderList()` gab
+  `m.height+1` Zeilen aus (listH-Budget vergaß die Trenner-Zeile vor der
+  Statusleiste) — in Terminals ohne Reflow schob das den Header oben aus
+  dem sichtbaren Bereich. Der Import-Filepicker überlief sein Popup, weil
+  `bubbles/filepicker` lange Dateinamen nie kürzt und das äußere
+  `lipgloss.Width()` sie stattdessen umbrach (mehr physische Zeilen als
+  budgetiert) — jetzt vorab mit `ansi.Truncate` gekürzt, Footer zeigt jetzt
+  auch Navigations-Tasten (↑/↓, enter, esc) statt nur "esc: cancel".
+- [x] 6-Monats-Trend-Sparkline in der Summary-View (`Store.MonthlyTrend`,
+  farbcodierter Unicode-Block-Chart) — Nutzer-Feedback, dass die Summary
+  neben den bestehenden Kategorie-/Goal-Balken sonst "nicht fancy" wirkte.
 
 UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown) ✅ vorhanden.
 
@@ -360,6 +383,11 @@ UI/UX (Suche, Help, Empty-State-Hinweis) ✅ vorhanden/nachgezogen.
 - [x] Dashboard-TUI ohne Argumente — `missionctl` zeigt Briefing wie `status`, 1-8/Enter
   springt per `tea.ExecProcess` ins jeweilige Tool
 - [x] README ergänzt (fehlte komplett)
+- [x] Bug gefixt: `doctor`s MCP-Check sah nur user-scope-Registrierungen
+  (top-level `mcpServers` in `~/.claude.json`). `claude mcp add` registriert
+  standardmäßig aber project-scoped unter `projects[cwd].mcpServers` — 6 von
+  9 Tools waren so registriert und zeigten trotzdem "not registered". Check
+  schaut jetzt auch im project-scope-Eintrag für das aktuelle `cwd` nach.
 
 ---
 
