@@ -55,8 +55,13 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   postctl hat eigene Design-Sprache.
 - [ ] `missionctl-core/keymap` (Help-Overlay-Builder) adoptieren — ersetzt die
   handgerollten `key()/row()/section()`-Helfer, noch offen
-- [ ] Bessere Ladezustände — Spinner statt reinem "Loading…"-Text dort, wo noch
-  keiner läuft
+- [x] Bessere Ladezustände — animierter Spinner statt reinem "Loading…"-Text beim
+  initialen Laden in calctl, taskctl, mailctl, notectl (alle AppleScript-/
+  netzwerkgestützt, Ladezeit spürbar). mailctl + notectl hatten dabei einen
+  echten Bug: kein `loading`-Flag, "keine Nachrichten/Notizen"-Leerzustand
+  konnte kurz aufblitzen, bevor die erste Ladung durch war — jetzt korrekt
+  unterschieden. budgetctl/timectl bewusst ausgelassen — rein lokale
+  SQLite-Reads, Ladezeit nicht wahrnehmbar, kein Spinner-Unterbau vorhanden.
 - [ ] Command-Palette / `:`-Modus (wie k9s/lazygit) — schneller Aktions-Sprung statt
   Einzeltasten auswendig lernen, besonders wertvoll bei habctl (~24 Views)
 
