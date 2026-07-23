@@ -116,7 +116,14 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   bleibt.
 
 ### Aufwendig / spekulativ
-- [ ] Mausklick auf Zeilen/Tabs, nicht nur Scroll-Wheel
+- [~] Mausklick auf Zeilen/Tabs, nicht nur Scroll-Wheel — **Prototyp in budgetctl
+  fertig**. `WithMouseCellMotion()` + Scroll-Wheel liefen überall schon, Klick auf
+  Zeilen/Tabs nirgends (notectl hatte nur Editor-Cursor-Klicks). Klick auf
+  Monats-Tab wechselt Monat, Klick auf Transaktionszeile bewegt Cursor dorthin.
+  Hit-Testing nutzt exakt dieselbe Zeilen-Layout- und Scroll-Fenster-Logik wie
+  `renderList()` (`listStartRow()`), damit ein Klick immer auf die Zeile trifft,
+  die visuell darunter liegt — gegen den echten Render-Output verifiziert, nicht
+  nur isoliert getestet.
 - [ ] Mehrere Themes zur Auswahl (wie btop/starship) — aktuell nur EINE feste Palette
   in `missionctl-core/theme`. Idee: benannte Presets (Default, Dracula, Nord,
   Gruvbox, Solarized, …) + `~/.config/missionctl/theme.yaml` mit `name:`-Feld,
