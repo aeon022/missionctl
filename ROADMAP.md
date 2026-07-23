@@ -311,6 +311,26 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
   einem Umlaut in Payee/Category (in diesen Daten die Regel, nicht die
   Ausnahme) wären Spalten verrutscht bzw. UTF-8 hätte mitten im Rune
   geschnitten werden können.
+- [x] Bug gefixt: `Store.List()`s SELECT hatte die `raw`-Spalte nie
+  abgefragt — jede über die TUI geladene Buchung hatte `Raw=""`, obwohl
+  beim Import korrekt gespeichert (an allen 84 echten Zeilen verifiziert).
+  Das Raw-Fallback im Detail-Popup war dadurch faktisch tot — genau die
+  Stelle, an der man bei einer knappen Buchung wie "Zahlungsreferenz:
+  Nicht-Durchführung elektronisch" hätte nachsehen können, ob wirklich
+  nichts fehlt.
+- [x] Merchant-Namen aus AT-Umsatzliste-Kartenzahlungen extrahiert
+  (`extractMerchant`) — Kartenzahlungen (POS/ePayment) haben in diesem
+  Format KEIN Zahlungsempfänger-/Auftraggeber-Label, der Händlername
+  steckt nur im Verwendungszweck-Text ("APPLE.COM/BILL CORK UNKNOWN
+  Zahlungsreferenz: ePAYMENT ... Kartenfolge-Nr.: 1"), daher vorher immer
+  "—". "Kartenfolge-Nr." als zuverlässiges Gate: erscheint bei JEDER
+  Kartenzahlung, aber nie bei echten Bankgebühren (Sollzinsen,
+  Kontoführung, ...) — verhindert, dass Gebührenzeilen fälschlich einen
+  Händlernamen bekommen. Alias-Tabelle für bekannte Marken (Apple, Amazon,
+  PayPal, Google, McDonald's, Klarna, Audible, MoonPay) + generisches
+  Abschneiden von Referenznummern/Kartenterminal-Codes/Datum/Zeit für den
+  Rest. An allen 84 echten Buchungen verifiziert: 80 bekommen jetzt einen
+  sauberen Namen, die 4 echten Gebühren bleiben korrekt leer.
 
 UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown, Detail-Popup) ✅ vorhanden.
 
