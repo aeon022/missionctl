@@ -79,11 +79,14 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   statt zu verschachteln. Derselbe Bug lauert vermutlich überall sonst in der
   Suite, wo Styles verschachtelt gerendert werden — beim Rollout mitprüfen.
 - [x] Transientes Help-Overlay statt Vollbild-Weg-Navigation — ausgerollt auf
-  habctl (Prototyp), budgetctl, calctl, taskctl, timectl, diaryctl. Logik lebt
-  jetzt in `missionctl-core/overlay.Center(bg, popup, w, h, inset)`, von habctl
-  dorthin extrahiert und seither von allen sechs geteilt. notectl/mailctl
-  bewusst ausgenommen — haben nie einen eigenen Vollbild-Help-Screen gehabt
-  (nur eine permanente Ein-Zeilen-Hinweisleiste), also nichts zu konvertieren.
+  habctl (Prototyp), budgetctl, calctl, taskctl, timectl, diaryctl (Konvertierung
+  bestehender Vollbild-Help-Screens). Logik lebt in
+  `missionctl-core/overlay.Center(bg, popup, w, h, inset)`, von habctl dorthin
+  extrahiert und seither von allen geteilt. notectl und mailctl hatten nie einen
+  eigenen Vollbild-Help-Screen (nur eine permanente Ein-Zeilen-Hinweisleiste, die
+  nur ~12 von ~24 Tasten dokumentierte) — dort stattdessen ein komplett neues
+  `?`-Overlay ergänzt (permanente Leiste bleibt zusätzlich bestehen). Damit haben
+  jetzt alle 8 Tools mit TUI ein `?`-Overlay.
   Zwei echte Bugs unterwegs gefunden und am Ursprung (im shared Package)
   gefixt, nicht nur pro Tool umschifft:
   1. Border-Kollision (habctl) — Hintergrund ist selbst eine bildschirmfüllende
