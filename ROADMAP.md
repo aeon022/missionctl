@@ -69,8 +69,15 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   eigener Logik. Bisher nur aus der Haupt-Listenansicht erreichbar.
 
 ### Mittel
-- [ ] Fuzzy-Suche mit Highlighting der Treffer statt reinem Substring-Filter (aktuell
-  bei `/` überall in der Suite)
+- [~] Fuzzy-Suche mit Highlighting der Treffer statt reinem Substring-Filter —
+  **Prototyp in habctl fertig** (sahilm/fuzzy, Präfix-Ranking wie fzf/k9s,
+  Fallback auf Beschreibungs-Substring). Dabei einen echten Lipgloss-Bug
+  gefunden und gefixt: verschachtelte `Render()`-Aufrufe löschen den äußeren
+  Style nach dem ersten hervorgehobenen Zeichen (jeder `Render()`-Call setzt
+  am Ende einen vollen SGR-Reset) — empirisch mit erzwungenem Color-Profile
+  verifiziert vor dem Ausrollen. `highlightMatches` rendert jetzt pro Zeichen
+  statt zu verschachteln. Derselbe Bug lauert vermutlich überall sonst in der
+  Suite, wo Styles verschachtelt gerendert werden — beim Rollout mitprüfen.
 - [ ] Transientes Help-Overlay statt Vollbild-Weg-Navigation — Kontext bleibt beim
   Öffnen von `?` erhalten
 - [ ] `bubbles/table` statt handformatierter Strings für Listen (taskctl, budgetctl,
