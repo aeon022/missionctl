@@ -235,6 +235,26 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
 - [ ] Year-end tax report export (CSV/PDF)
 - [ ] Recurring payment detection
 
+### v1.1 — Import-Assistent & Mehrkonten (Q3 2026)
+- [x] In-TUI CSV-Import-Assistent (`i`): Filepicker → Vorschau (Datumsbereich,
+  Income/Expense, Sample-Zeilen) → optionales AI-Categorize → Import. CLI-
+  und TUI-Import-Pfad teilen sich jetzt `budget.ImportFile` statt duplizierter
+  Upsert/Categorize/AI-Logik.
+- [x] Dabei gefunden und gefixt: `parseGeneric` nahm bei mehreren
+  "amount"-artigen Spalten (z.B. N26-Header mit "Amount (EUR)" UND "Amount
+  (Foreign Currency)") die LETZTE statt die ERSTE Übereinstimmung — bei
+  Dateien ohne bankspezifischen Dateinamen (also über den generischen Parser)
+  landete man so auf der leeren Fremdwährungsspalte und JEDE Zeile wurde
+  stillschweigend verworfen ("Imported 0 transactions", kein Fehler). Nur
+  gefunden, weil ein echter End-to-End-CLI-Import gegen eine isolierte DB
+  gefahren wurde statt sich auf Unit-Tests zu verlassen.
+- [x] Mehrere Bankkonten: Konto-Tab-Reihe unter den Monats-Tabs (nur sichtbar
+  ab 2+ Konten), `[`/`]` zum Durchschalten (auch per Mausklick), sowohl in
+  der Transaktionsliste als auch in der Summary-View. `Store.Summary`,
+  `budgetctl summary --account`, und das MCP-Tool `summary` filtern jetzt
+  optional auf ein Konto. Import-Vorschau zeigt das erkannte Konto (N26/ING/
+  DKB/leer bei generisch) und erlaubt Umbenennen vor dem Import (`t`-Taste).
+
 UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown) ✅ vorhanden.
 
 ---
