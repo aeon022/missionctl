@@ -78,8 +78,12 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
 
 ### Aufwendig / spekulativ
 - [ ] Mausklick auf Zeilen/Tabs, nicht nur Scroll-Wheel
-- [ ] Konfigurierbares Farbschema (`~/.config/missionctl/theme.yaml`), das alle Tools
-  teilen — baut auf `missionctl-core/theme` auf, sobald das adoptiert ist
+- [ ] Mehrere Themes zur Auswahl (wie btop/starship) — aktuell nur EINE feste Palette
+  in `missionctl-core/theme`. Idee: benannte Presets (Default, Dracula, Nord,
+  Gruvbox, Solarized, …) + `~/.config/missionctl/theme.yaml` mit `name:`-Feld,
+  optional eigene Farb-Overrides. Jetzt entsperrt, da `theme` bereits in 7
+  Tools adoptiert ist (siehe "Schnell") — ein Preset-Wechsel würde automatisch
+  überall greifen.
 - [ ] Mehrstufiges Undo statt Einzel-Undo (aktuell nur taskctl mit `u`)
 
 ---
