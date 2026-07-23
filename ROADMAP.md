@@ -288,8 +288,15 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
 - [x] 6-Monats-Trend-Sparkline in der Summary-View (`Store.MonthlyTrend`,
   farbcodierter Unicode-Block-Chart) — Nutzer-Feedback, dass die Summary
   neben den bestehenden Kategorie-/Goal-Balken sonst "nicht fancy" wirkte.
+- [x] `enter` auf einer Zeile öffnet ein Detail-Popup (volle, ungekürzte
+  Description + Account/Category/Source/Raw) — `formatTxRow` kürzt die
+  Description auf Zeilenbreite, und echte Bank-Exports (v.a. die
+  österreichische "Umsatzliste") haben oft hunderte Zeichen Verwendungs-
+  zweck-Text. `e` im Popup springt direkt ins Edit-Formular. Feldlängen
+  werden von der echten Terminal-Höhe budgetiert (gleiche Fix-Klasse wie
+  der Import-Popup-Overflow).
 
-UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown) ✅ vorhanden.
+UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown, Detail-Popup) ✅ vorhanden.
 
 ---
 
