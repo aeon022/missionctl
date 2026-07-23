@@ -78,15 +78,29 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   verifiziert vor dem Ausrollen. `highlightMatches` rendert jetzt pro Zeichen
   statt zu verschachteln. Derselbe Bug lauert vermutlich überall sonst in der
   Suite, wo Styles verschachtelt gerendert werden — beim Rollout mitprüfen.
-- [~] Transientes Help-Overlay statt Vollbild-Weg-Navigation — **Prototyp in habctl
-  fertig**. Erster Versuch ignorierte, dass der Hintergrund (die Listen-Ansicht)
-  selbst eine bildschirmfüllende Border-Box ist — Popup kollidierte sichtbar mit
-  deren Rand ("╭──╭──╮──╮"). Gefixt: `overlayCenter(..., inset)` hält das Popup
-  strikt innerhalb des Hintergrund-Rands (via `ansi.Cut`, ANSI-sicheres
-  Spalten-Schneiden), Popup-Größe wird aus der TATSÄCHLICHEN Hintergrund-Höhe
-  berechnet (wenige Habits ⇒ kleines Budget), Inhalt scrollt per `bubbles/viewport`
-  statt abgeschnitten zu werden. Mit erzwungenem ANSI-Color-Profile verifiziert —
-  der Border-Kollisions-Bug war im reinen Text-Output unsichtbar.
+- [x] Transientes Help-Overlay statt Vollbild-Weg-Navigation — ausgerollt auf
+  habctl (Prototyp), budgetctl, calctl, taskctl, timectl, diaryctl. Logik lebt
+  jetzt in `missionctl-core/overlay.Center(bg, popup, w, h, inset)`, von habctl
+  dorthin extrahiert und seither von allen sechs geteilt. notectl/mailctl
+  bewusst ausgenommen — haben nie einen eigenen Vollbild-Help-Screen gehabt
+  (nur eine permanente Ein-Zeilen-Hinweisleiste), also nichts zu konvertieren.
+  Zwei echte Bugs unterwegs gefunden und am Ursprung (im shared Package)
+  gefixt, nicht nur pro Tool umschifft:
+  1. Border-Kollision (habctl) — Hintergrund ist selbst eine bildschirmfüllende
+     Border-Box, Popup kollidierte sichtbar mit deren Rand ("╭──╭──╮──╮").
+     Gefixt via `inset`-Parameter (hält Popup strikt innerhalb des Rands).
+  2. Spalten-Versatz bei kurzen Hintergrund-Zeilen (calctl) — `ansi.Cut` füllt
+     zu kurze Zeilen nicht auf, wodurch das Popup auf genau der Zeile mit z.B.
+     "No events yet" einen Spalten-Versatz bekam. Gefixt durch Zeilen-Padding
+     auf volle Breite vor dem Schneiden.
+  Popup-Größe wird immer aus der TATSÄCHLICHEN Hintergrund-Höhe berechnet
+  (nicht der Terminal-Höhe), Inhalt scrollt per `bubbles/viewport` statt
+  abgeschnitten zu werden. timectl hatte zusätzlich einen eigenständigen Bug:
+  `?` ist dort aus 3 Views erreichbar (nicht nur der Hauptliste), Schließen
+  landete aber immer fix auf der Hauptview statt der Ursprungsview zurück —
+  mitgefixt (`helpReturnTo`). Alles mit erzwungenem ANSI-Color-Profile
+  verifiziert, nicht nur am reinen Text-Output — die Bugs waren dort
+  unsichtbar.
 - [ ] `bubbles/table` statt handformatierter Strings für Listen (taskctl, budgetctl,
   calctl) — robusteres Spalten-Alignment quasi gratis
 
