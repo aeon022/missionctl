@@ -78,8 +78,15 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   verifiziert vor dem Ausrollen. `highlightMatches` rendert jetzt pro Zeichen
   statt zu verschachteln. Derselbe Bug lauert vermutlich überall sonst in der
   Suite, wo Styles verschachtelt gerendert werden — beim Rollout mitprüfen.
-- [ ] Transientes Help-Overlay statt Vollbild-Weg-Navigation — Kontext bleibt beim
-  Öffnen von `?` erhalten
+- [~] Transientes Help-Overlay statt Vollbild-Weg-Navigation — **Prototyp in habctl
+  fertig**. Erster Versuch ignorierte, dass der Hintergrund (die Listen-Ansicht)
+  selbst eine bildschirmfüllende Border-Box ist — Popup kollidierte sichtbar mit
+  deren Rand ("╭──╭──╮──╮"). Gefixt: `overlayCenter(..., inset)` hält das Popup
+  strikt innerhalb des Hintergrund-Rands (via `ansi.Cut`, ANSI-sicheres
+  Spalten-Schneiden), Popup-Größe wird aus der TATSÄCHLICHEN Hintergrund-Höhe
+  berechnet (wenige Habits ⇒ kleines Budget), Inhalt scrollt per `bubbles/viewport`
+  statt abgeschnitten zu werden. Mit erzwungenem ANSI-Color-Profile verifiziert —
+  der Border-Kollisions-Bug war im reinen Text-Output unsichtbar.
 - [ ] `bubbles/table` statt handformatierter Strings für Listen (taskctl, budgetctl,
   calctl) — robusteres Spalten-Alignment quasi gratis
 
