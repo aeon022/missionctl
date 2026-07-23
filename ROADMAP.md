@@ -48,13 +48,13 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
 ### Schnell
 - [x] `missionctl-core/theme.Subtle` Kontrastbug gefixt (`239`→`244`, synchron zum
   Einzeltool-Fix)
-- [ ] `missionctl-core` (theme + keymap) tatsächlich adoptieren — existiert seit der
-  vorigen Session, aber **kein einziges Tool importiert es bisher**. Laut eigenem
-  README "adoptiert ein Tool es, wenn seine TUI ohnehin gerade angefasst wird" —
-  genau das ist jetzt der Fall (alle 7 TUIs gerade für Header+Divider-Fix anfasst).
-  Ersetzt die kopierte Farb-Palette + die handgerollten `key()/row()/section()`
-  Help-Overlay-Helfer in mailctl/calctl/taskctl/notectl/budgetctl/timectl/diaryctl.
-  habctl bleibt bewusst außen vor (eigene Palette by design).
+- [x] `missionctl-core/theme` in mailctl/calctl/taskctl/notectl/budgetctl/timectl/
+  diaryctl adoptiert — lokale Farb-Vars zeigen jetzt auf `theme.X` statt die
+  Literale zu duplizieren, null visuelle Änderung, ein Ort für künftige
+  Palette-Fixes. habctl bleibt bewusst außen vor (eigene Palette by design),
+  postctl hat eigene Design-Sprache.
+- [ ] `missionctl-core/keymap` (Help-Overlay-Builder) adoptieren — ersetzt die
+  handgerollten `key()/row()/section()`-Helfer, noch offen
 - [ ] Bessere Ladezustände — Spinner statt reinem "Loading…"-Text dort, wo noch
   keiner läuft
 - [ ] Command-Palette / `:`-Modus (wie k9s/lazygit) — schneller Aktions-Sprung statt
