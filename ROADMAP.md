@@ -69,15 +69,41 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   eigener Logik. Bisher nur aus der Haupt-Listenansicht erreichbar.
 
 ### Mittel
-- [~] Fuzzy-Suche mit Highlighting der Treffer statt reinem Substring-Filter —
-  **Prototyp in habctl fertig** (sahilm/fuzzy, Präfix-Ranking wie fzf/k9s,
-  Fallback auf Beschreibungs-Substring). Dabei einen echten Lipgloss-Bug
-  gefunden und gefixt: verschachtelte `Render()`-Aufrufe löschen den äußeren
-  Style nach dem ersten hervorgehobenen Zeichen (jeder `Render()`-Call setzt
-  am Ende einen vollen SGR-Reset) — empirisch mit erzwungenem Color-Profile
-  verifiziert vor dem Ausrollen. `highlightMatches` rendert jetzt pro Zeichen
-  statt zu verschachteln. Derselbe Bug lauert vermutlich überall sonst in der
-  Suite, wo Styles verschachtelt gerendert werden — beim Rollout mitprüfen.
+- [x] Fuzzy-Suche mit Highlighting der Treffer statt reinem Substring-Filter —
+  **auf alle 8 Tools mit Suche ausgerollt** (habctl-Prototyp + timectl,
+  taskctl, calctl, diaryctl, budgetctl, mailctl, notectl). sahilm/fuzzy,
+  Treffer-Highlighting via `highlightMatches` (pro Zeichen gerendert statt
+  verschachtelt — siehe Lipgloss-Bug unten).
+  - **4 direkte Ports** (timectl, taskctl, calctl, diaryctl): filterten
+    bereits eine im Speicher gehaltene Liste — 1:1 wie habctl. taskctl und
+    calctl gruppieren aber nach Liste/Tag ("isHeader"-Zeilen) — anders als
+    habctl wird dort NICHT nach Match-Qualität umsortiert, sonst würde eine
+    einzelne Gruppe über nicht-zusammenhängende Positionen verstreut.
+    diaryctl fuzzy-matcht nur einzelne WÖRTER im Body, nicht den ganzen
+    Fließtext als eine Sequenz — sonst hätte praktisch jede kurze Anfrage
+    irgendeine Teilfolge im Absatz gefunden und alles gematcht.
+  - **3 Tools mit DB-Query-Suche** (budgetctl, mailctl, notectl — notectl
+    am schlimmsten: SQL-`LIKE`-Query bei JEDEM Tastendruck): umgebaut auf
+    denselben clientseitigen Ansatz. `loadCmd`/`loadMsgsCmd`/`loadNotesCmd`
+    laden jetzt ungefiltert (neues `allTxs`/`allMsgs`/`allNotes`-Feld),
+    Fuzzy-Filter läuft live im Speicher bei jedem Tastendruck — kein
+    DB-Roundtrip mehr, kein Enter zum Bestätigen nötig. `Store.Filter.Query`
+    (SQL `LIKE`) bleibt unangetastet und bedient weiterhin CLI/MCP
+    (`budgetctl list --query`, `mailctl search`, `notectl search`).
+  - Dabei **zwei echte, unabhängige Bugs gefunden und gefixt** (nicht nur
+    umschifft): (1) der ursprüngliche Lipgloss-Nesting-Bug aus dem
+    habctl-Prototyp — verschachtelte `Render()`-Aufrufe löschen den äußeren
+    Style nach dem ersten hervorgehobenen Zeichen. (2) In mailctl UND
+    notectl: die ganze zusammengesetzte Zeile wurde in EINEN äußeren
+    `styleSelected/styleRead/styleUnread.Render()`-Aufruf gewickelt, obwohl
+    sie bereits unabhängig gefärbte Segmente (Datum, Absender, Ordner/Tag)
+    enthielt — deren eigene Resets haben den äußeren Style für alles danach
+    gelöscht. Mit erzwungenem ANSI-Profil verifiziert: bei mailctl verlor
+    der Betreff seine Formatierung UND der Selected-Hintergrund endete
+    vorzeitig; bei notectl dasselbe. Beide Renderer bauen die Zeile jetzt
+    pro Segment, kein äußerer Wrap mehr — dadurch ist Highlighting jetzt
+    auch auf der Cursor-Zeile sicher (kein äußerer Wrap mehr, der geklaut
+    werden könnte).
 - [x] Transientes Help-Overlay statt Vollbild-Weg-Navigation — ausgerollt auf
   habctl (Prototyp), budgetctl, calctl, taskctl, timectl, diaryctl (Konvertierung
   bestehender Vollbild-Help-Screens). Logik lebt in
