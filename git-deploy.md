@@ -173,36 +173,50 @@ git commit -m "chore: remove feedctl submodule"
 
 ## Landing Page (Astro)
 
-Die Landing-Source liegt bewusst auf dem **Branch `deploy/landing`** dieses Repos, nicht
-in einem eigenen Repo. Grund: `main` bleibt sauber (Build-Output ist seit
-`067c1c0` per `.gitignore` ausgeschlossen), und ein eigenes Repo hätte nur dann einen
-echten Vorteil, wenn dadurch ein unabhängiges Auto-Deploy (Vercel/Netlify) ermöglicht
-würde — das lässt sich aber genauso gut auf einen einzelnen Branch eines bestehenden
-Repos konfigurieren, ohne Migration.
+Die Landing-Source liegt bewusst in diesem Repo, nicht in einem eigenen. Grund:
+`main` bleibt sauber (Build-Output ist per `.gitignore` ausgeschlossen), und ein
+eigenes Repo hätte nur dann einen echten Vorteil, wenn dadurch ein unabhängiges
+Auto-Deploy (Vercel/Netlify) ermöglicht würde — das lässt sich aber genauso gut auf
+einen Branch eines bestehenden Repos konfigurieren, ohne Migration.
 
-**Nie direkt im Hauptcheckout auf `deploy/landing` wechseln** (`git checkout
-deploy/landing` in `~/Developing/Projects/missionctl`) — das reißt ROADMAP.md,
-SUITE_AUDIT.md etc. auf den alten Stand dieses Branches und hinterlässt beim
-Zurückwechseln Cache-Müll (`landing/` mit `.astro`/`dist`/`node_modules`, aber ohne
-`src/`). Stattdessen **immer über den dauerhaften Worktree** `.worktree-landing/`
-arbeiten, der als Unterordner *im Projekt selbst* liegt (nicht daneben) und lokal
-gitignored ist:
+**Zwei Branches, zwei Zwecke** (seit der Umstellung 2026-07-25 — Grund: Plesk zieht
+per `git pull` den kompletten Branch-Inhalt als Document Root; auf dem alten
+Single-Branch-Setup landeten dadurch Source, Docs und Build-Artefakte gemeinsam auf
+dem Server):
+
+- **`deploy/landing-src`** — die Astro-Source (`landing/`-Unterordner). Hier wird editiert.
+- **`deploy/landing`** — **nur** die gebaute Seite (ehem. `landing/dist/`), flach im
+  Branch-Root. Das ist der Branch, den Plesk zieht — Document Root kann direkt auf
+  den Repo-Root zeigen, keine Unterordner-Konfiguration nötig.
+
+**Nie direkt im Hauptcheckout auf einen dieser Branches wechseln** (`git checkout
+deploy/landing[-src]` in `~/Developing/Projects/missionctl`) — das reißt ROADMAP.md,
+SUITE_AUDIT.md etc. auf den Stand des Branches und hinterlässt beim Zurückwechseln
+Cache-Müll. Stattdessen **immer über die zwei dauerhaften Worktrees** arbeiten, die
+als Unterordner *im Projekt selbst* liegen (nicht daneben) und lokal gitignored sind:
 
 ```bash
 # Einmalig anlegen (falls noch nicht vorhanden)
 cd ~/Developing/Projects/missionctl
-git worktree add ./.worktree-landing deploy/landing
+git worktree add ./.worktree-landing deploy/landing-src
+git worktree add ./.worktree-landing-publish deploy/landing
 
 # An der Landing arbeiten (Astro-Projekt liegt im Unterordner landing/)
 cd ~/Developing/Projects/missionctl/.worktree-landing/landing
 npm install   # falls node_modules fehlt
 npm run dev
 
-# Änderungen committen + pushen — NUR auf deploy/landing (von .worktree-landing aus)
-cd ~/Developing/Projects/missionctl/.worktree-landing
-git add landing
-git commit -m "feat: ..."
+# Bauen + in den Publish-Worktree synchronisieren
+./scripts/publish.sh
+# Diff prüfen, dann:
+cd ~/Developing/Projects/missionctl/.worktree-landing-publish
+git commit -m "build: ..."
 git push origin deploy/landing
+
+# Falls die Source-Änderung auch geteilt/gesichert werden soll (optional,
+# nicht nötig damit die Seite live geht):
+cd ~/Developing/Projects/missionctl/.worktree-landing
+git add landing && git commit -m "feat: ..." && git push origin deploy/landing-src
 ```
 
 Der Haupt-Worktree (`~/Developing/Projects/missionctl`) bleibt dabei durchgehend auf
@@ -211,14 +225,14 @@ Der Haupt-Worktree (`~/Developing/Projects/missionctl`) bleibt dabei durchgehend
 **Strukturregeln (verbindlich, gilt auch für postctl und jedes weitere Tool mit
 eigener Landing-Page):**
 
-1. Landing-Page-Änderungen werden **ausschließlich** auf den Branch `deploy/landing`
-   gepusht — nie auf `main`, nie auf einen Feature-/Agent-Branch.
-2. Der Arbeits-Worktree für `deploy/landing` heißt immer **`.worktree-landing/`** und
-   liegt **innerhalb** des jeweiligen Projektordners (z.B.
-   `missionctl/.worktree-landing/` oder `postctl/.worktree-landing/`) — niemals als
-   Geschwister-Ordner eine Ebene höher (also nicht `../missionctl-landing`,
-   nicht `../postctl-landing`). Ein Projekt bekommt genau einen solchen Ordner, keine
-   Zweit- oder Drittvariante.
+1. Landing-Page-Source-Änderungen werden **ausschließlich** auf `deploy/landing-src`
+   gepusht, der gebaute Output **ausschließlich** auf `deploy/landing` — nie auf
+   `main`, nie auf einen Feature-/Agent-Branch.
+2. Die Arbeits-Worktrees heißen immer **`.worktree-landing/`** (Source) und
+   **`.worktree-landing-publish/`** (Build-Output) und liegen **innerhalb** des
+   jeweiligen Projektordners (z.B. `missionctl/.worktree-landing/` oder
+   `postctl/.worktree-landing/`) — niemals als Geschwister-Ordner eine Ebene höher.
+   Ein Projekt bekommt genau ein Paar dieser Ordner, keine Zweit- oder Drittvariante.
 3. Nach jeder Agent-/Worktree-Session (z.B. `git worktree add` für einen
    Hintergrund-Task) den Worktree UND den zugehörigen Branch wieder entfernen, sobald
    die Arbeit gemerged oder verworfen ist — lokal (`git worktree remove`,
