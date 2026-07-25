@@ -17,32 +17,35 @@ const mcpConfig = `{
 
 const navSections = [
   {
-    title: 'Getting Started',
+    title_en: 'Getting Started',
+    title_de: 'Erste Schritte',
     links: [
-      { href: '#installation', label: 'Installation' },
-      { href: '#quick-setup', label: 'Quick Setup' },
-      { href: '#claude-config', label: 'Claude Desktop config' },
+      { href: '#installation', label_en: 'Installation', label_de: 'Installation' },
+      { href: '#quick-setup', label_en: 'Quick Setup', label_de: 'Schnelleinrichtung' },
+      { href: '#claude-config', label_en: 'Claude Desktop config', label_de: 'Claude-Desktop-Konfiguration' },
     ],
   },
   {
-    title: 'Tools',
+    title_en: 'Tools',
+    title_de: 'Tools',
     links: [
-      { href: '#mailctl', label: 'mailctl' },
-      { href: '#calctl', label: 'calctl' },
-      { href: '#taskctl', label: 'taskctl' },
-      { href: '#notectl', label: 'notectl' },
-      { href: '#budgetctl', label: 'budgetctl' },
-      { href: '#diaryctl', label: 'diaryctl' },
-      { href: '#timectl', label: 'timectl' },
-      { href: '#habctl', label: 'habctl' },
-      { href: '#postctl', label: 'postctl' },
+      { href: '#mailctl', label_en: 'mailctl', label_de: 'mailctl' },
+      { href: '#calctl', label_en: 'calctl', label_de: 'calctl' },
+      { href: '#taskctl', label_en: 'taskctl', label_de: 'taskctl' },
+      { href: '#notectl', label_en: 'notectl', label_de: 'notectl' },
+      { href: '#budgetctl', label_en: 'budgetctl', label_de: 'budgetctl' },
+      { href: '#diaryctl', label_en: 'diaryctl', label_de: 'diaryctl' },
+      { href: '#timectl', label_en: 'timectl', label_de: 'timectl' },
+      { href: '#habctl', label_en: 'habctl', label_de: 'habctl' },
+      { href: '#postctl', label_en: 'postctl', label_de: 'postctl' },
     ],
   },
   {
-    title: 'Reference',
+    title_en: 'Reference',
+    title_de: 'Referenz',
     links: [
-      { href: '#mcp-reference', label: 'MCP Reference' },
-      { href: '#ai-workflows', label: 'AI Workflows' },
+      { href: '#mcp-reference', label_en: 'MCP Reference', label_de: 'MCP-Referenz' },
+      { href: '#ai-workflows', label_en: 'AI Workflows', label_de: 'KI-Workflows' },
     ],
   },
 ];
@@ -54,10 +57,10 @@ const navSections = [
 >
   <!-- Mobile sidebar nav -->
   <details class="docs-mobile-nav">
-    <summary>Documentation <span style="color:#4a5568; font-size:0.7rem;">&#9660;</span></summary>
+    <summary><span class="lang-en">Documentation</span><span class="lang-de">Dokumentation</span> <span style="color:#4a5568; font-size:0.7rem;">&#9660;</span></summary>
     <nav>
       {navSections.map(s => s.links.map(l => (
-        <a href={l.href}>{l.label}</a>
+        <a href={l.href}><span class="lang-en">{l.label_en}</span><span class="lang-de">{l.label_de}</span></a>
       )))}
     </nav>
   </details>
@@ -69,10 +72,10 @@ const navSections = [
         <nav class="docs-nav">
           {navSections.map(section => (
             <div class="docs-nav-section">
-              <p class="docs-nav-section-title">{section.title}</p>
-              <div class={section.title === 'Tools' ? 'docs-nav-sub' : ''}>
+              <p class="docs-nav-section-title"><span class="lang-en">{section.title_en}</span><span class="lang-de">{section.title_de}</span></p>
+              <div class={section.title_en === 'Tools' ? 'docs-nav-sub' : ''}>
                 {section.links.map(link => (
-                  <a href={link.href} data-href={link.href}>{link.label}</a>
+                  <a href={link.href} data-href={link.href}><span class="lang-en">{link.label_en}</span><span class="lang-de">{link.label_de}</span></a>
                 ))}
               </div>
             </div>
@@ -83,57 +86,64 @@ const navSections = [
 
     <!-- Main content -->
     <div class="docs-main">
-      <h1>missionctl Documentation</h1>
+      <h1><span class="lang-en">missionctl Documentation</span><span class="lang-de">missionctl-Dokumentation</span></h1>
       <p style="color:#718096; margin-bottom:2rem;">
-        66 MCP tools across 9 terminal apps. Local-first, no cloud, no subscriptions.
+        <span class="lang-en">66 MCP tools across 9 terminal apps. Local-first, no cloud, no subscriptions.</span>
+        <span class="lang-de">66 MCP-Tools über 9 Terminal-Apps. Local-first, keine Cloud, keine Abos.</span>
       </p>
 
       <!-- ── GETTING STARTED ───────────────── -->
-      <h2 id="getting-started">Getting Started</h2>
+      <h2 id="getting-started"><span class="lang-en">Getting Started</span><span class="lang-de">Erste Schritte</span></h2>
 
-      <h3 id="installation">Installation</h3>
-      <p>Clone and build each tool. Every repo has a <code>setup.sh</code> that compiles the binary and installs it to <code>~/.local/bin/</code>.</p>
+      <h3 id="installation"><span class="lang-en">Installation</span><span class="lang-de">Installation</span></h3>
+      <p><span class="lang-en">Clone and build each tool. Every repo has a <code>setup.sh</code> that compiles the binary and installs it to <code>~/.local/bin/</code>.</span>
+      <span class="lang-de">Klone und baue jedes Tool. Jedes Repo hat ein <code>setup.sh</code>, das das Binary kompiliert und nach <code>~/.local/bin/</code> installiert.</span></p>
       <pre><code>{`for repo in mailctl calctl taskctl notectl budgetctl diaryctl timectl habctl; do
   git clone https://github.com/aeon022/$repo
   cd $repo && ./setup.sh && cd ..
 done`}</code></pre>
-      <p>Make sure <code>~/.local/bin</code> is on your <code>$PATH</code>:</p>
+      <p><span class="lang-en">Make sure <code>~/.local/bin</code> is on your <code>$PATH</code>:</span><span class="lang-de">Stelle sicher, dass <code>~/.local/bin</code> in deinem <code>$PATH</code> ist:</span></p>
       <pre><code>{`export PATH="$HOME/.local/bin:$PATH"
 # add to ~/.zshrc or ~/.bashrc`}</code></pre>
 
-      <h3 id="quick-setup">Initial Sync</h3>
-      <p>After installing, run the initial sync for each tool to populate the local SQLite cache:</p>
+      <h3 id="quick-setup"><span class="lang-en">Initial Sync</span><span class="lang-de">Erste Synchronisation</span></h3>
+      <p><span class="lang-en">After installing, run the initial sync for each tool to populate the local SQLite cache:</span>
+      <span class="lang-de">Führe nach der Installation für jedes Tool die erste Synchronisation aus, um den lokalen SQLite-Cache zu befüllen:</span></p>
       <pre><code>{`mailctl sync      # Apple Mail → local cache
 calctl sync       # Apple Calendar → local cache
 taskctl sync      # Apple Reminders → local cache
 notectl sync      # Obsidian vault → local index`}</code></pre>
-      <p><strong>budgetctl</strong> is import-driven — there's no background sync:</p>
+      <p><span class="lang-en"><strong>budgetctl</strong> is import-driven — there's no background sync:</span><span class="lang-de"><strong>budgetctl</strong> ist importgesteuert — es gibt keine Hintergrund-Synchronisation:</span></p>
       <pre><code>{`budgetctl import bank.csv --account checking`}</code></pre>
 
-      <h3 id="claude-config">Claude Desktop Config</h3>
+      <h3 id="claude-config"><span class="lang-en">Claude Desktop Config</span><span class="lang-de">Claude-Desktop-Konfiguration</span></h3>
       <p>
-        Add all 9 tools to Claude Desktop in one config block. Edit
-        <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:
+        <span class="lang-en">Add all 9 tools to Claude Desktop in one config block. Edit
+        <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:</span>
+        <span class="lang-de">Füge alle 9 Tools mit einem Config-Block zu Claude Desktop hinzu. Bearbeite
+        <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:</span>
       </p>
       <pre><code set:text={mcpConfig}></code></pre>
-      <p>Restart Claude Desktop. All 66 MCP tools appear automatically in every conversation.</p>
+      <p><span class="lang-en">Restart Claude Desktop. All 66 MCP tools appear automatically in every conversation.</span><span class="lang-de">Starte Claude Desktop neu. Alle 66 MCP-Tools erscheinen automatisch in jeder Unterhaltung.</span></p>
 
       <!-- ── MAILCTL ───────────────────────── -->
       <h2 id="mailctl">mailctl</h2>
       <p>
-        Apple Mail bridge with TUI inbox, full-text search, compose, and 6 MCP tools.
-        Syncs Apple Mail into a local SQLite database — all reads happen locally.
+        <span class="lang-en">Apple Mail bridge with TUI inbox, full-text search, compose, and 6 MCP tools.
+        Syncs Apple Mail into a local SQLite database — all reads happen locally.</span>
+        <span class="lang-de">Apple-Mail-Anbindung mit TUI-Posteingang, Volltextsuche, Verfassen und 6 MCP-Tools.
+        Synchronisiert Apple Mail in eine lokale SQLite-Datenbank — alle Lesevorgänge passieren lokal.</span>
       </p>
 
-      <h3>Install</h3>
+      <h3><span class="lang-en">Install</span><span class="lang-de">Installation</span></h3>
       <pre><code>{`git clone https://github.com/aeon022/mailctl
 cd mailctl && ./setup.sh`}</code></pre>
 
-      <h3>Sync</h3>
+      <h3><span class="lang-en">Sync</span><span class="lang-de">Synchronisation</span></h3>
       <pre><code>{`mailctl sync          # sync inbox
 mailctl sync --all    # sync all folders`}</code></pre>
 
-      <h3>CLI commands</h3>
+      <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`mailctl inbox                    # open TUI inbox
 mailctl inbox --json             # JSON output
 mailctl search "from:alice"      # search emails
@@ -143,7 +153,7 @@ mailctl thread --subject "Re:"   # view thread
 mailctl accounts                 # list accounts
 mailctl mcp                      # start MCP server`}</code></pre>
 
-      <h3>TUI keybindings</h3>
+      <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>     <span>Navigate up/down</span>
         <kbd>Enter</kbd>     <span>Open selected email</span>
@@ -155,7 +165,7 @@ mailctl mcp                      # start MCP server`}</code></pre>
         <kbd>q</kbd>         <span>Quit</span>
       </div>
 
-      <h3>MCP tools</h3>
+      <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
       <div>
         <span class="docs-tool-tag">inbox</span>
         <span class="docs-tool-tag">search_email</span>
@@ -168,19 +178,21 @@ mailctl mcp                      # start MCP server`}</code></pre>
       <!-- ── CALCTL ────────────────────────── -->
       <h2 id="calctl">calctl</h2>
       <p>
-        Apple Calendar bridge. Browse events, create events, find free slots.
-        Requires macOS — talks to Apple Calendar via AppleScript and EventKit.
+        <span class="lang-en">Apple Calendar bridge. Browse events, create events, find free slots.
+        Requires macOS — talks to Apple Calendar via AppleScript and EventKit.</span>
+        <span class="lang-de">Apple-Kalender-Anbindung. Termine durchsuchen, erstellen, freie Slots finden.
+        Benötigt macOS — spricht mit Apple Kalender über AppleScript und EventKit.</span>
       </p>
 
-      <h3>Install</h3>
+      <h3><span class="lang-en">Install</span><span class="lang-de">Installation</span></h3>
       <pre><code>{`git clone https://github.com/aeon022/calctl
 cd calctl && ./setup.sh`}</code></pre>
 
-      <h3>Sync</h3>
+      <h3><span class="lang-en">Sync</span><span class="lang-de">Synchronisation</span></h3>
       <pre><code>{`calctl sync           # sync next 30 days
 calctl sync --days 90 # sync 90 days`}</code></pre>
 
-      <h3>CLI commands</h3>
+      <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`calctl list                         # list upcoming events
 calctl list --from 2026-07-01       # events from date
 calctl add "Team sync" --time 14:00 # create event
@@ -188,7 +200,7 @@ calctl free --from today --to +7d   # find free slots
 calctl sync                         # sync calendar
 calctl mcp                          # start MCP server`}</code></pre>
 
-      <h3>TUI keybindings</h3>
+      <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate events</span>
         <kbd>Enter</kbd>   <span>Open event detail</span>
@@ -198,7 +210,7 @@ calctl mcp                          # start MCP server`}</code></pre>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
 
-      <h3>MCP tools</h3>
+      <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
       <div>
         <span class="docs-tool-tag">list_events</span>
         <span class="docs-tool-tag">today</span>
@@ -212,19 +224,21 @@ calctl mcp                          # start MCP server`}</code></pre>
       <!-- ── TASKCTL ───────────────────────── -->
       <h2 id="taskctl">taskctl</h2>
       <p>
-        Apple Reminders bridge with TUI task manager, built-in Pomodoro timer,
-        background sync daemon, and batch operations.
+        <span class="lang-en">Apple Reminders bridge with TUI task manager, built-in Pomodoro timer,
+        background sync daemon, and batch operations.</span>
+        <span class="lang-de">Apple-Erinnerungen-Anbindung mit TUI-Aufgabenmanager, eingebautem Pomodoro-Timer,
+        Hintergrund-Sync-Daemon und Stapelverarbeitung.</span>
       </p>
 
-      <h3>Install</h3>
+      <h3><span class="lang-en">Install</span><span class="lang-de">Installation</span></h3>
       <pre><code>{`git clone https://github.com/aeon022/taskctl
 cd taskctl && ./setup.sh`}</code></pre>
 
-      <h3>Sync</h3>
+      <h3><span class="lang-en">Sync</span><span class="lang-de">Synchronisation</span></h3>
       <pre><code>{`taskctl sync           # sync Apple Reminders
 taskctl daemon         # start background sync daemon`}</code></pre>
 
-      <h3>CLI commands</h3>
+      <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`taskctl list                         # list all tasks
 taskctl today                        # today's tasks
 taskctl week                         # this week's tasks
@@ -234,7 +248,7 @@ taskctl lists                        # list reminder lists
 taskctl daemon                       # background daemon
 taskctl mcp                          # start MCP server`}</code></pre>
 
-      <h3>TUI keybindings</h3>
+      <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate tasks</span>
         <kbd>Space</kbd>   <span>Toggle task complete</span>
@@ -249,7 +263,7 @@ taskctl mcp                          # start MCP server`}</code></pre>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
 
-      <h3>MCP tools</h3>
+      <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
       <div>
         <span class="docs-tool-tag">today_tasks</span>
         <span class="docs-tool-tag">week_tasks</span>
@@ -263,23 +277,25 @@ taskctl mcp                          # start MCP server`}</code></pre>
       <!-- ── NOTECTL ───────────────────────── -->
       <h2 id="notectl">notectl</h2>
       <p>
-        Obsidian vault bridge. Sync notes to local SQLite, read/write notes, search,
-        and manage daily notes. Works on macOS and Linux.
+        <span class="lang-en">Obsidian vault bridge. Sync notes to local SQLite, read/write notes, search,
+        and manage daily notes. Works on macOS and Linux.</span>
+        <span class="lang-de">Obsidian-Vault-Anbindung. Notizen nach lokalem SQLite synchronisieren, lesen/schreiben, durchsuchen,
+        und Daily Notes verwalten. Läuft unter macOS und Linux.</span>
       </p>
 
-      <h3>Install</h3>
+      <h3><span class="lang-en">Install</span><span class="lang-de">Installation</span></h3>
       <pre><code>{`git clone https://github.com/aeon022/notectl
 cd notectl && ./setup.sh`}</code></pre>
 
-      <h3>Config</h3>
-      <p>Edit <code>~/.config/notectl/notectl.yaml</code>:</p>
+      <h3><span class="lang-en">Config</span><span class="lang-de">Konfiguration</span></h3>
+      <p><span class="lang-en">Edit <code>~/.config/notectl/notectl.yaml</code>:</span><span class="lang-de">Bearbeite <code>~/.config/notectl/notectl.yaml</code>:</span></p>
       <pre><code>{`vault_path: ~/Documents/Obsidian/MyVault
 source: obsidian`}</code></pre>
 
-      <h3>Sync</h3>
+      <h3><span class="lang-en">Sync</span><span class="lang-de">Synchronisation</span></h3>
       <pre><code>{`notectl sync      # index vault into SQLite cache`}</code></pre>
 
-      <h3>CLI commands</h3>
+      <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`notectl list                    # list notes
 notectl read "Note title"       # read a note
 notectl write "New note"        # create/update note
@@ -287,7 +303,7 @@ notectl search "keyword"        # full-text search
 notectl daily                   # open today's daily note
 notectl mcp                     # start MCP server`}</code></pre>
 
-      <h3>TUI keybindings</h3>
+      <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate notes</span>
         <kbd>Enter</kbd>   <span>Open note</span>
@@ -301,7 +317,7 @@ notectl mcp                     # start MCP server`}</code></pre>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
 
-      <h3>MCP tools</h3>
+      <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
       <div>
         <span class="docs-tool-tag">list_notes</span>
         <span class="docs-tool-tag">read_note</span>
@@ -315,20 +331,22 @@ notectl mcp                     # start MCP server`}</code></pre>
       <!-- ── BUDGETCTL ─────────────────────── -->
       <h2 id="budgetctl">budgetctl</h2>
       <p>
-        Personal finance tool. Import bank CSVs, categorize transactions with rules,
-        set budget goals, and detect recurring payments. Works on macOS and Linux.
+        <span class="lang-en">Personal finance tool. Import bank CSVs, categorize transactions with rules,
+        set budget goals, and detect recurring payments. Works on macOS and Linux.</span>
+        <span class="lang-de">Persönliches Finanztool. Bank-CSVs importieren, Transaktionen per Regeln kategorisieren,
+        Budgetziele setzen und wiederkehrende Zahlungen erkennen. Läuft unter macOS und Linux.</span>
       </p>
 
-      <h3>Install</h3>
+      <h3><span class="lang-en">Install</span><span class="lang-de">Installation</span></h3>
       <pre><code>{`git clone https://github.com/aeon022/budgetctl
 cd budgetctl && ./setup.sh`}</code></pre>
 
-      <h3>Import</h3>
+      <h3><span class="lang-en">Import</span><span class="lang-de">Import</span></h3>
       <pre><code>{`budgetctl import bank.csv --account checking
 budgetctl import n26.csv --format n26
 # Supported: N26, ING, DKB, Generic CSV`}</code></pre>
 
-      <h3>CLI commands</h3>
+      <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`budgetctl list                      # list transactions
 budgetctl list --month 2026-07      # filter by month
 budgetctl summary                   # income/expense summary
@@ -342,7 +360,7 @@ budgetctl recurring                 # detect recurring payments
 budgetctl export --format csv       # export data
 budgetctl mcp                       # start MCP server`}</code></pre>
 
-      <h3>TUI keybindings</h3>
+      <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>         <span>Navigate transactions</span>
         <kbd>s</kbd>             <span>Monthly summary</span>
@@ -352,7 +370,7 @@ budgetctl mcp                       # start MCP server`}</code></pre>
         <kbd>q</kbd>             <span>Quit</span>
       </div>
 
-      <h3>MCP tools</h3>
+      <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
       <div>
         <span class="docs-tool-tag">list_transactions</span>
         <span class="docs-tool-tag">add_transaction</span>
@@ -370,15 +388,17 @@ budgetctl mcp                       # start MCP server`}</code></pre>
       <!-- ── HABCTL ────────────────────────── -->
       <h2 id="habctl">habctl</h2>
       <p>
-        Terminal-first habit tracker. Track daily habits with streaks, an AI weekly coaching
-        review, habit chains, and streak-at-risk alerts — all stored locally in SQLite.
+        <span class="lang-en">Terminal-first habit tracker. Track daily habits with streaks, an AI weekly coaching
+        review, habit chains, and streak-at-risk alerts — all stored locally in SQLite.</span>
+        <span class="lang-de">Terminal-first Habit-Tracker. Verfolge tägliche Gewohnheiten mit Streaks, einem KI-Wochen-Coaching-
+        Review, Habit-Chains und Streak-Risiko-Warnungen — alles lokal in SQLite gespeichert.</span>
       </p>
 
-      <h3>Install</h3>
+      <h3><span class="lang-en">Install</span><span class="lang-de">Installation</span></h3>
       <pre><code>{`git clone https://github.com/aeon022/habctl
 cd habctl && ./setup.sh`}</code></pre>
 
-      <h3>CLI commands</h3>
+      <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`habctl add "Meditate" --desc "10 minutes every morning"  # add a habit
 habctl check Meditate                # check in for today
 habctl today                         # today's habit status
@@ -389,7 +409,7 @@ habctl suggest --goal "more focus"   # AI habit suggestions
 habctl remind                        # macOS notification for unchecked habits
 habctl mcp                           # start MCP server`}</code></pre>
 
-      <h3>TUI keybindings</h3>
+      <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate habits</span>
         <kbd>space</kbd>   <span>Check in / undo check-in</span>
@@ -403,7 +423,7 @@ habctl mcp                           # start MCP server`}</code></pre>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
 
-      <h3>MCP tools</h3>
+      <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
       <div>
         <span class="docs-tool-tag">list_habits</span>
         <span class="docs-tool-tag">check_habit</span>
@@ -422,16 +442,19 @@ habctl mcp                           # start MCP server`}</code></pre>
       <!-- ── POSTCTL ───────────────────────── -->
       <h2 id="postctl">postctl</h2>
       <p>
-        Social media scheduling for Threads, Bluesky, Mastodon, Twitter, LinkedIn, Telegram, and Discord. Manage posts,
+        <span class="lang-en">Social media scheduling for Threads, Bluesky, Mastodon, Twitter, LinkedIn, Telegram, and Discord. Manage posts,
         campaigns, and drafts from your terminal.
-        Available at <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:#00d97e;">postctl.sh</a>.
+        Available at <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:#00d97e;">postctl.sh</a>.</span>
+        <span class="lang-de">Social-Media-Planung für Threads, Bluesky, Mastodon, Twitter, LinkedIn, Telegram und Discord. Verwalte Posts,
+        Kampagnen und Entwürfe direkt aus dem Terminal.
+        Verfügbar unter <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:#00d97e;">postctl.sh</a>.</span>
       </p>
 
-      <h3>Install</h3>
+      <h3><span class="lang-en">Install</span><span class="lang-de">Installation</span></h3>
       <pre><code>{`git clone https://github.com/aeon022/postctl
 cd postctl && ./setup.sh`}</code></pre>
 
-      <h3>CLI commands</h3>
+      <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`postctl list                         # list posts
 postctl post "Hello world"           # create post
 postctl post --schedule "2026-07-05 09:00" "Hello"
@@ -443,7 +466,7 @@ postctl campaign list                # list campaigns
 postctl import posts.csv             # import posts
 postctl mcp                          # start MCP server`}</code></pre>
 
-      <h3>TUI keybindings</h3>
+      <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate posts/history</span>
         <kbd>Space</kbd>   <span>Select / deselect post for bulk actions</span>
@@ -459,17 +482,18 @@ postctl mcp                          # start MCP server`}</code></pre>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
 
-      <h3>Safety &amp; Spam Protection</h3>
+      <h3><span class="lang-en">Safety &amp; Spam Protection</span><span class="lang-de">Sicherheit &amp; Spam-Schutz</span></h3>
       <p>
-        To avoid rate limits and account bans, <code>postctl</code> includes built-in safeguards:
+        <span class="lang-en">To avoid rate limits and account bans, <code>postctl</code> includes built-in safeguards:</span>
+        <span class="lang-de">Um Rate-Limits und Account-Sperren zu vermeiden, bringt <code>postctl</code> eingebaute Schutzmechanismen mit:</span>
       </p>
       <ul>
-        <li><strong>Queue spacing:</strong> Scheduled queue slots are spaced out automatically.</li>
-        <li><strong>Overdue protection:</strong> If multiple scheduled posts become overdue (e.g., system was offline), only the oldest is posted immediately. The subsequent posts are automatically rescheduled in 20-minute intervals.</li>
-        <li><strong>Safe remote deletion:</strong> Deleting a post locally automatically issues API delete calls to the remote platforms to keep feeds in sync.</li>
+        <li><span class="lang-en"><strong>Queue spacing:</strong> Scheduled queue slots are spaced out automatically.</span><span class="lang-de"><strong>Warteschlangen-Abstand:</strong> Geplante Slots werden automatisch zeitlich verteilt.</span></li>
+        <li><span class="lang-en"><strong>Overdue protection:</strong> If multiple scheduled posts become overdue (e.g., system was offline), only the oldest is posted immediately. The subsequent posts are automatically rescheduled in 20-minute intervals.</span><span class="lang-de"><strong>Überfälligkeitsschutz:</strong> Werden mehrere geplante Posts überfällig (z.B. weil das System offline war), wird nur der älteste sofort gepostet. Die restlichen werden automatisch in 20-Minuten-Intervallen neu geplant.</span></li>
+        <li><span class="lang-en"><strong>Safe remote deletion:</strong> Deleting a post locally automatically issues API delete calls to the remote platforms to keep feeds in sync.</span><span class="lang-de"><strong>Sichere Remote-Löschung:</strong> Das lokale Löschen eines Posts löst automatisch API-Löschaufrufe an die Plattformen aus, um die Feeds synchron zu halten.</span></li>
       </ul>
 
-      <h3>MCP tools</h3>
+      <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
       <div>
         <span class="docs-tool-tag">list_posts</span>
         <span class="docs-tool-tag">get_post</span>
@@ -483,19 +507,21 @@ postctl mcp                          # start MCP server`}</code></pre>
       <!-- ── DIARYCTL ──────────────────────── -->
       <h2 id="diaryctl">diaryctl</h2>
       <p>
-        Developer diary from your terminal. Reads git history, completed tasks (taskctl),
-        calendar events (calctl), and time logs (timectl) to generate AI narrative diary entries.
+        <span class="lang-en">Developer diary from your terminal. Reads git history, completed tasks (taskctl),
+        calendar events (calctl), and time logs (timectl) to generate AI narrative diary entries.</span>
+        <span class="lang-de">Entwicklertagebuch direkt aus dem Terminal. Liest Git-Historie, erledigte Aufgaben (taskctl),
+        Kalendertermine (calctl) und Zeitprotokolle (timectl), um KI-generierte Tagebucheinträge zu erstellen.</span>
       </p>
 
-      <h3>Install</h3>
+      <h3><span class="lang-en">Install</span><span class="lang-de">Installation</span></h3>
       <pre><code>{`git clone https://github.com/aeon022/diaryctl
 cd diaryctl && ./setup.sh`}</code></pre>
 
-      <h3>Setup</h3>
+      <h3><span class="lang-en">Setup</span><span class="lang-de">Einrichtung</span></h3>
       <pre><code>{`diaryctl init ~/code/myproject --name "My Project"
 diaryctl repos   # list registered repos`}</code></pre>
 
-      <h3>CLI commands</h3>
+      <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`diaryctl today               # generate today's entry
 diaryctl today --open        # open in $EDITOR
 diaryctl list                # list all entries
@@ -504,7 +530,7 @@ diaryctl stats --days 30     # coding stats for last 30 days
 diaryctl tui                 # open TUI (heatmap + list)
 diaryctl mcp                 # start MCP server`}</code></pre>
 
-      <h3>TUI keybindings</h3>
+      <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <pre><code>{`j/k     navigate entries
 enter   open entry
 n       generate today's entry
@@ -513,7 +539,7 @@ r       repos view
 v       stats view
 q       quit`}</code></pre>
 
-      <h3>MCP tools</h3>
+      <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
       <div>
         <span class="docs-tool-tag">get_today_stats</span>
         <span class="docs-tool-tag">get_diary_entry</span>
@@ -525,15 +551,17 @@ q       quit`}</code></pre>
       <!-- ── TIMECTL ──────────────────────── -->
       <h2 id="timectl">timectl</h2>
       <p>
-        Time tracking from your terminal. Start and stop timers, view a weekly bar chart,
-        and integrate time logs into diaryctl diary entries.
+        <span class="lang-en">Time tracking from your terminal. Start and stop timers, view a weekly bar chart,
+        and integrate time logs into diaryctl diary entries.</span>
+        <span class="lang-de">Zeiterfassung direkt aus dem Terminal. Timer starten und stoppen, Wochen-Balkendiagramm ansehen,
+        und Zeitprotokolle in diaryctl-Tagebucheinträge integrieren.</span>
       </p>
 
-      <h3>Install</h3>
+      <h3><span class="lang-en">Install</span><span class="lang-de">Installation</span></h3>
       <pre><code>{`git clone https://github.com/aeon022/timectl
 cd timectl && ./setup.sh`}</code></pre>
 
-      <h3>CLI commands</h3>
+      <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`timectl start "Fix auth bug" --project myapp
 timectl stop
 timectl status               # check running timer
@@ -543,7 +571,7 @@ timectl log --days 7         # last 7 days log
 timectl tui                  # open TUI
 timectl mcp                  # start MCP server`}</code></pre>
 
-      <h3>TUI keybindings</h3>
+      <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <pre><code>{`n       start new timer
 s       stop running timer
 j/k     navigate log
@@ -551,7 +579,7 @@ w       week view
 v       stats view
 q       quit`}</code></pre>
 
-      <h3>MCP tools</h3>
+      <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
       <div>
         <span class="docs-tool-tag">start_timer</span>
         <span class="docs-tool-tag">stop_timer</span>
@@ -560,8 +588,8 @@ q       quit`}</code></pre>
       </div>
 
       <!-- ── MCP REFERENCE ─────────────────── -->
-      <h2 id="mcp-reference">MCP Reference</h2>
-      <p>All 66 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</p>
+      <h2 id="mcp-reference"><span class="lang-en">MCP Reference</span><span class="lang-de">MCP-Referenz</span></h2>
+      <p><span class="lang-en">All 66 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</span><span class="lang-de">Alle 66 Tools nach App gruppiert. Jedes Tool ist aus Claude Desktop aufrufbar, sobald die Config eingerichtet ist.</span></p>
 
       {[
         { app: 'mailctl', color: '#00d97e', tools: [
@@ -665,49 +693,66 @@ q       quit`}</code></pre>
       ))}
 
       <!-- ── AI WORKFLOWS ──────────────────── -->
-      <h2 id="ai-workflows">AI Workflows</h2>
+      <h2 id="ai-workflows"><span class="lang-en">AI Workflows</span><span class="lang-de">KI-Workflows</span></h2>
       <p>
-        Once all tools are connected, Claude can orchestrate them together. A single
-        prompt can span multiple apps and execute a dozen tool calls automatically.
+        <span class="lang-en">Once all tools are connected, Claude can orchestrate them together. A single
+        prompt can span multiple apps and execute a dozen tool calls automatically.</span>
+        <span class="lang-de">Sobald alle Tools verbunden sind, kann Claude sie gemeinsam orchestrieren. Ein einzelner
+        Prompt kann mehrere Apps umfassen und automatisch ein Dutzend Tool-Aufrufe ausführen.</span>
       </p>
 
-      <h3>Morning briefing</h3>
+      <h3><span class="lang-en">Morning briefing</span><span class="lang-de">Morning Briefing</span></h3>
       <p>
-        Ask Claude: <em>"Give me my morning briefing"</em>. Claude calls
+        <span class="lang-en">Ask Claude: <em>"Give me my morning briefing"</em>. Claude calls
         <code>inbox</code>, <code>today_tasks</code>, and <code>today</code>
         to pull email summaries, overdue tasks, and today's events — then
-        synthesizes them into a prioritized briefing.
+        synthesizes them into a prioritized briefing.</span>
+        <span class="lang-de">Frag Claude: <em>"Gib mir mein Morning Briefing"</em>. Claude ruft
+        <code>inbox</code>, <code>today_tasks</code> und <code>today</code> auf,
+        um E-Mail-Zusammenfassungen, überfällige Aufgaben und heutige Termine zu holen — und
+        fasst sie zu einem priorisierten Briefing zusammen.</span>
       </p>
 
-      <h3>Weekly planning</h3>
+      <h3><span class="lang-en">Weekly planning</span><span class="lang-de">Wochenplanung</span></h3>
       <p>
-        Ask Claude: <em>"Help me plan my week"</em>. Claude uses
+        <span class="lang-en">Ask Claude: <em>"Help me plan my week"</em>. Claude uses
         <code>this_week</code>, <code>week_tasks</code>, <code>find_free_slots</code>,
         and <code>get_daily_note</code> to review your schedule and draft a plan
-        in your Obsidian daily note.
+        in your Obsidian daily note.</span>
+        <span class="lang-de">Frag Claude: <em>"Hilf mir, meine Woche zu planen"</em>. Claude nutzt
+        <code>this_week</code>, <code>week_tasks</code>, <code>find_free_slots</code>
+        und <code>get_daily_note</code>, um deinen Zeitplan zu prüfen und einen Plan
+        in deiner Obsidian Daily Note zu entwerfen.</span>
       </p>
 
-      <h3>Monthly finance review</h3>
+      <h3><span class="lang-en">Monthly finance review</span><span class="lang-de">Monatlicher Finanz-Review</span></h3>
       <p>
-        Ask Claude: <em>"Review my finances for June"</em>. Claude calls
+        <span class="lang-en">Ask Claude: <em>"Review my finances for June"</em>. Claude calls
         <code>budget_summary</code>, <code>list_transactions</code>, and
         <code>detect_recurring_payments</code>, then uses
-        <code>write_note</code> to save the analysis to your vault.
+        <code>write_note</code> to save the analysis to your vault.</span>
+        <span class="lang-de">Frag Claude: <em>"Prüfe meine Finanzen für Juni"</em>. Claude ruft
+        <code>budget_summary</code>, <code>list_transactions</code> und
+        <code>detect_recurring_payments</code> auf und nutzt dann
+        <code>write_note</code>, um die Analyse in deinem Vault zu speichern.</span>
       </p>
 
-      <h3>Email to task</h3>
+      <h3><span class="lang-en">Email to task</span><span class="lang-de">E-Mail zu Aufgabe</span></h3>
       <p>
-        Ask Claude: <em>"Turn important emails from this week into tasks"</em>.
+        <span class="lang-en">Ask Claude: <em>"Turn important emails from this week into tasks"</em>.
         Claude searches your inbox (<code>search_email</code>), identifies action items,
-        and creates tasks in Apple Reminders (<code>create_task</code>).
+        and creates tasks in Apple Reminders (<code>create_task</code>).</span>
+        <span class="lang-de">Frag Claude: <em>"Verwandle wichtige E-Mails dieser Woche in Aufgaben"</em>.
+        Claude durchsucht deinen Posteingang (<code>search_email</code>), identifiziert Handlungsbedarf
+        und erstellt Aufgaben in Apple Erinnerungen (<code>create_task</code>).</span>
       </p>
 
       <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(0,217,126,0.04); border: 1px solid rgba(0,217,126,0.15); border-radius: 8px;">
         <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #a0aec0;">
-          <span style="color: #00d97e; font-weight: 600;">Ready to start?</span>
+          <span style="color: #00d97e; font-weight: 600;"><span class="lang-en">Ready to start?</span><span class="lang-de">Bereit loszulegen?</span></span>
           &nbsp;&nbsp;
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener" style="color: #00d97e; text-decoration: none;">
-            Get the Bundle — $39 &rarr;
+            <span class="lang-en">Get the Bundle — $39</span><span class="lang-de">Bundle holen — $39</span> &rarr;
           </a>
         </p>
       </div>

@@ -12,12 +12,12 @@ const mcpTools = [
   { name: "append_daily_note", desc: "Append content to today's daily note under a named section" },
 ];
 const features = [
-  { title: "Obsidian Vault Support", desc: "Works directly with your existing Obsidian vault. No migration, no sync conflicts — reads and writes standard Markdown files." },
-  { title: "Daily Notes", desc: "Auto-create and open today's daily note with your template. AI can append to your daily log via MCP." },
-  { title: "Full-text Search", desc: "Search across your entire vault instantly. Returns ranked results with context snippets." },
-  { title: "Tag-based Filtering", desc: "Filter notes by Obsidian tags, links, or frontmatter fields. Great for project-scoped AI workflows." },
-  { title: "Apple Notes Sync (macOS)", desc: "Optional source backend alongside Obsidian/Joplin/Markdown. Reads and writes native Apple Notes over AppleScript — no export step." },
-  { title: "Real Checklist State (macOS)", desc: "Checked/unchecked status for Apple Notes checklists isn't exposed by AppleScript at all — notectl reads it straight from Notes' own local database, so ☑ and ☐ in the terminal always match what you see in the Notes app." },
+  { title: "Obsidian Vault Support", title_de: "Obsidian-Vault-Unterstützung", desc: "Works directly with your existing Obsidian vault. No migration, no sync conflicts — reads and writes standard Markdown files.", desc_de: "Funktioniert direkt mit deinem bestehenden Obsidian-Vault. Keine Migration, keine Sync-Konflikte — liest und schreibt Standard-Markdown-Dateien." },
+  { title: "Daily Notes", title_de: "Daily Notes", desc: "Auto-create and open today's daily note with your template. AI can append to your daily log via MCP.", desc_de: "Erstellt und öffnet automatisch die heutige Daily Note mit deinem Template. Die KI kann per MCP an dein Tagesprotokoll anhängen." },
+  { title: "Full-text Search", title_de: "Volltextsuche", desc: "Search across your entire vault instantly. Returns ranked results with context snippets.", desc_de: "Durchsuche deinen gesamten Vault sofort. Liefert bewertete Ergebnisse mit Kontext-Ausschnitten." },
+  { title: "Tag-based Filtering", title_de: "Tag-basierte Filterung", desc: "Filter notes by Obsidian tags, links, or frontmatter fields. Great for project-scoped AI workflows.", desc_de: "Filtere Notizen nach Obsidian-Tags, Links oder Frontmatter-Feldern. Ideal für projektbezogene KI-Workflows." },
+  { title: "Apple Notes Sync (macOS)", title_de: "Apple-Notizen-Sync (macOS)", desc: "Optional source backend alongside Obsidian/Joplin/Markdown. Reads and writes native Apple Notes over AppleScript — no export step.", desc_de: "Optionales Quell-Backend neben Obsidian/Joplin/Markdown. Liest und schreibt native Apple Notizen über AppleScript — kein Export-Schritt nötig." },
+  { title: "Real Checklist State (macOS)", title_de: "Echter Checklisten-Status (macOS)", desc: "Checked/unchecked status for Apple Notes checklists isn't exposed by AppleScript at all — notectl reads it straight from Notes' own local database, so ☑ and ☐ in the terminal always match what you see in the Notes app.", desc_de: "Der Ab-/Angehakt-Status von Apple-Notizen-Checklisten wird von AppleScript gar nicht bereitgestellt — notectl liest ihn direkt aus der lokalen Datenbank von Notizen, sodass ☑ und ☐ im Terminal immer exakt dem entsprechen, was in der Notizen-App zu sehen ist." },
 ];
 ---
 
@@ -38,18 +38,18 @@ const features = [
         <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
           <span style="font-family: 'JetBrains Mono', monospace; color: #a78bfa;">notectl</span>
         </h1>
-        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Notes from your Terminal</p>
-        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Obsidian vault notes and daily notes via MCP. Works on macOS and Linux. 7 MCP tools for AI-powered note-taking.</p>
+        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;"><span class="lang-en">Notes from your Terminal</span><span class="lang-de">Notizen aus deinem Terminal</span></p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Obsidian vault notes and daily notes via MCP. Works on macOS and Linux. 7 MCP tools for AI-powered note-taking.</span><span class="lang-de">Obsidian-Vault-Notizen und Daily Notes über MCP. Läuft unter macOS und Linux. 7 MCP-Tools für KI-gestütztes Notieren.</span></p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #a78bfa; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
             class="cta-primary">
-            Get notectl &mdash; $9
+            <span class="lang-en">Get notectl &mdash; $9</span><span class="lang-de">notectl holen &mdash; $9</span>
           </a>
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
             class="cta-secondary">
-            Bundle &mdash; $39
+            <span class="lang-en">Bundle &mdash; $39</span><span class="lang-de">Bundle &mdash; $39</span>
           </a>
         </div>
       </div>
@@ -73,12 +73,12 @@ const features = [
   <!-- FEATURES -->
   <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
     <div style="max-width: 1100px; margin: 0 auto;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;">Features</h2>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;"><span class="lang-en">Features</span><span class="lang-de">Funktionen</span></h2>
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
-        {features.map((feat: {title: string; desc: string}) => (
+        {features.map((feat: {title: string; title_de: string; desc: string; desc_de: string}) => (
           <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
-            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #a78bfa; margin: 0 0 0.5rem;">{feat.title}</h3>
-            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #a78bfa; margin: 0 0 0.5rem;"><span class="lang-en">{feat.title}</span><span class="lang-de">{feat.title_de}</span></h3>
+            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{feat.desc}</span><span class="lang-de">{feat.desc_de}</span></p>
           </div>
         ))}
       </div>
@@ -89,12 +89,14 @@ const features = [
   <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center;" class="hero-grid">
       <div>
-        <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">Apple Notes checklists, done right</h2>
+        <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;"><span class="lang-en">Apple Notes checklists, done right</span><span class="lang-de">Apple-Notizen-Checklisten, richtig gemacht</span></h2>
         <p style="color: #718096; font-size: 0.95rem; line-height: 1.7; margin: 0 0 1rem;">
-          AppleScript's <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #a78bfa;">body of note</code> doesn't expose whether a list item is checked — or even whether it's a checklist at all. Most tools that bridge Apple Notes either can't show checkbox state or fake it.
+          <span class="lang-en">AppleScript's <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #a78bfa;">body of note</code> doesn't expose whether a list item is checked — or even whether it's a checklist at all. Most tools that bridge Apple Notes either can't show checkbox state or fake it.</span>
+          <span class="lang-de">AppleScripts <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #a78bfa;">body of note</code> zeigt nicht, ob ein Listenpunkt angehakt ist — oder ob es überhaupt eine Checkliste ist. Die meisten Apple-Notizen-Anbindungen können den Checkbox-Status entweder nicht anzeigen oder täuschen ihn nur vor.</span>
         </p>
         <p style="color: #718096; font-size: 0.95rem; line-height: 1.7; margin: 0;">
-          notectl reads it straight from Notes' own local database instead, so the terminal always matches what's actually checked in the Notes app — no guessing, no stale state.
+          <span class="lang-en">notectl reads it straight from Notes' own local database instead, so the terminal always matches what's actually checked in the Notes app — no guessing, no stale state.</span>
+          <span class="lang-de">notectl liest ihn stattdessen direkt aus der lokalen Datenbank von Notizen, sodass das Terminal immer exakt dem entspricht, was in der Notizen-App tatsächlich angehakt ist — kein Raten, kein veralteter Zustand.</span>
         </p>
       </div>
       <div>
@@ -118,7 +120,7 @@ const features = [
 
   <!-- CHEATSHEET -->
   <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
-    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;">Command Reference</h2>
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;"><span class="lang-en">Command Reference</span><span class="lang-de">Befehlsreferenz</span></h2>
     <TerminalWindow title="notectl — cheatsheet" content={`<span style="color:#4a5568"># Open today's daily note</span>
 <span style="color:#4a5568">$ </span>notectl daily
 
@@ -146,14 +148,14 @@ const features = [
   <!-- MCP TOOLS -->
   <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
     <div style="max-width: 1100px; margin: 0 auto;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
-      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #a78bfa;">notectl mcp</code></p>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;"><span class="lang-en">MCP Tools</span><span class="lang-de">MCP-Tools</span></h2>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;"><span class="lang-en">Available via</span><span class="lang-de">Verfügbar über</span> <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #a78bfa;">notectl mcp</code></p>
       <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
-              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;">Tool</th>
-              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Description</th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;"><span class="lang-en">Tool</span><span class="lang-de">Tool</span></th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;"><span class="lang-en">Description</span><span class="lang-de">Beschreibung</span></th>
             </tr>
           </thead>
           <tbody>
@@ -172,21 +174,22 @@ const features = [
   <!-- PRICING CTA -->
   <section style="padding: 5rem 1.5rem; text-align: center; max-width: 600px; margin: 0 auto;">
     <h2 style="font-size: 1.75rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
-      Ready to give your AI hands?
+      <span class="lang-en">Ready to give your AI hands?</span><span class="lang-de">Bereit, deiner KI Hände zu geben?</span>
     </h2>
     <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
-      One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.
+      <span class="lang-en">One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.</span>
+      <span class="lang-de">Einmalkauf. Keine Abos. Zukünftige Updates inklusive. Deine Daten bleiben auf deinem Rechner.</span>
     </p>
     <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
       <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
         style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #a78bfa; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(167,139,250,0.2);"
         class="cta-primary">
-        Get notectl &mdash; $9
+        <span class="lang-en">Get notectl &mdash; $9</span><span class="lang-de">notectl holen &mdash; $9</span>
       </a>
       <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
         style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
         class="cta-secondary">
-        Or get the Bundle &mdash; $39
+        <span class="lang-en">Or get the Bundle &mdash; $39</span><span class="lang-de">Oder das Bundle holen &mdash; $39</span>
       </a>
     </div>
   </section>

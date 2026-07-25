@@ -97,6 +97,30 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
       } catch (_) {}
     </script>
 
+    <!-- EN/DE language toggle: set <html lang> before paint, and re-apply on
+         every ClientRouter transition (astro:page-load fires on first load
+         and on every subsequent SPA navigation alike). -->
+    <script is:inline>
+      function missionctlApplyLang() {
+        var saved = localStorage.getItem('missionctl_lang');
+        var browserLang = (navigator.language || navigator.userLanguage || '').startsWith('de') ? 'de' : 'en';
+        document.documentElement.setAttribute('lang', saved || browserLang);
+      }
+      missionctlApplyLang();
+      function missionctlToggleLang() {
+        var next = document.documentElement.getAttribute('lang') === 'en' ? 'de' : 'en';
+        localStorage.setItem('missionctl_lang', next);
+        document.documentElement.setAttribute('lang', next);
+      }
+      document.addEventListener('astro:page-load', function () {
+        missionctlApplyLang();
+        var btn = document.getElementById('lang-toggle');
+        if (btn) btn.addEventListener('click', missionctlToggleLang);
+        var btnMobile = document.getElementById('lang-toggle-mobile');
+        if (btnMobile) btnMobile.addEventListener('click', missionctlToggleLang);
+      });
+    </script>
+
     <!-- Preconnect for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

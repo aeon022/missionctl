@@ -9,64 +9,82 @@ const apps = [
     name: 'mailctl',
     href: '/mailctl',
     description: 'Read inbox, compose and send email via Apple Mail. AI draft replies with one keystroke.',
+    description_de: 'Posteingang lesen, E-Mails verfassen und senden über Apple Mail. KI-Antwortentwürfe mit einem Tastendruck.',
     mcpCount: 6,
     features: ['TUI inbox with threading', 'AI draft reply (a-key)', 'Full-text search', 'MCP server for AI access'],
+    features_de: ['TUI-Posteingang mit Threading', 'KI-Antwortentwurf (a-Taste)', 'Volltextsuche', 'MCP-Server für KI-Zugriff'],
   },
   {
     name: 'calctl',
     href: '/calctl',
     description: 'Browse calendar, create events, find free slots via Apple Calendar. Summarize meetings with Claude.',
+    description_de: 'Kalender durchsuchen, Termine erstellen, freie Slots finden über Apple Kalender. Meetings mit Claude zusammenfassen.',
     mcpCount: 7,
     features: ['TUI week/month view', 'Apple Calendar sync', 'Free slot finder', 'Meeting summaries via Claude'],
+    features_de: ['TUI Wochen-/Monatsansicht', 'Apple-Kalender-Sync', 'Freie-Slot-Finder', 'Meeting-Zusammenfassungen via Claude'],
   },
   {
     name: 'taskctl',
     href: '/taskctl',
     description: 'Manage tasks with Apple Reminders sync, Pomodoro timer, and background daemon.',
+    description_de: 'Aufgaben verwalten mit Apple-Erinnerungen-Sync, Pomodoro-Timer und Hintergrund-Daemon.',
     mcpCount: 7,
     features: ['Apple Reminders sync', 'Built-in Pomodoro timer', 'Batch task operations', 'Background daemon mode'],
+    features_de: ['Apple-Erinnerungen-Sync', 'Eingebauter Pomodoro-Timer', 'Stapelverarbeitung von Aufgaben', 'Hintergrund-Daemon-Modus'],
   },
   {
     name: 'notectl',
     href: '/notectl',
     description: 'Obsidian vault notes and daily notes via MCP. Works on macOS and Linux.',
+    description_de: 'Obsidian-Vault-Notizen und Daily Notes über MCP. Läuft unter macOS und Linux.',
     mcpCount: 7,
     features: ['Obsidian vault support', 'Daily note automation', 'Full-text search', 'Tag-based filtering'],
+    features_de: ['Unterstützung für Obsidian-Vaults', 'Daily-Note-Automatisierung', 'Volltextsuche', 'Tag-basierte Filterung'],
   },
   {
     name: 'budgetctl',
     href: '/budgetctl',
     description: 'Import bank CSV, categorize transactions, set budget goals. Claude auto-categorizes with --ai flag.',
+    description_de: 'Bank-CSV importieren, Transaktionen kategorisieren, Budgetziele setzen. Claude kategorisiert automatisch mit --ai-Flag.',
     mcpCount: 11,
     features: ['N26, ING, DKB CSV import', 'AI auto-categorization', 'Budget goals with progress', 'Recurring payment detection'],
+    features_de: ['N26-, ING-, DKB-CSV-Import', 'KI-Auto-Kategorisierung', 'Budgetziele mit Fortschritt', 'Erkennung wiederkehrender Zahlungen'],
   },
   {
     name: 'diaryctl',
     href: '/diaryctl',
     description: 'Reads git history and generates AI narrative diary entries. Syncs back to Obsidian vault automatically.',
+    description_de: 'Liest die Git-Historie und erstellt KI-generierte Tagebucheinträge. Synchronisiert automatisch zurück in den Obsidian-Vault.',
     mcpCount: 5,
     features: ['Git history reader', 'AI narrative entries', 'Obsidian write-back', 'Export for postctl pipeline'],
+    features_de: ['Git-Historie-Reader', 'KI-generierte Einträge', 'Obsidian-Rückschreibung', 'Export für postctl-Pipeline'],
   },
   {
     name: 'timectl',
     href: '/timectl',
     description: 'Start/stop timers, weekly bar chart, live TUI. Link timers to tasks, navigate days, generate invoices.',
+    description_de: 'Timer starten/stoppen, Wochen-Balkendiagramm, Live-TUI. Timer mit Aufgaben verknüpfen, Tage navigieren, Rechnungen erstellen.',
     mcpCount: 4,
     features: ['taskctl integration (T-key)', 'Invoice export (--month)', 'Day navigation (←/→/t)', 'Daily goal bar'],
+    features_de: ['taskctl-Integration (T-Taste)', 'Rechnungsexport (--month)', 'Tagesnavigation (←/→/t)', 'Tagesziel-Balken'],
   },
   {
     name: 'habctl',
     href: '/habctl',
     description: 'Track daily habits with streaks, AI weekly coaching reviews, and habit chains.',
+    description_de: 'Tägliche Gewohnheiten mit Streaks tracken, KI-Wochen-Coaching-Reviews und Habit-Chains.',
     mcpCount: 12,
     features: ['Daily check-ins with streaks', 'AI weekly coaching review', 'Habit chains & streak alerts', 'AI habit suggestions'],
+    features_de: ['Tägliche Check-ins mit Streaks', 'KI-Wochen-Coaching-Review', 'Habit-Chains & Streak-Warnungen', 'KI-Gewohnheitsvorschläge'],
   },
   {
     name: 'postctl',
     href: 'https://postctl.sh',
     description: 'Schedule social media posts to Threads, Bluesky, Mastodon, and other platforms from your terminal.',
+    description_de: 'Social-Media-Posts für Threads, Bluesky, Mastodon und weitere Plattformen direkt aus dem Terminal planen.',
     mcpCount: 7,
     features: ['Threads, Bluesky, Mastodon, X, LinkedIn', 'Safe remote post deletion', 'Spam/ban protection queue', 'MCP tools for AI posting'],
+    features_de: ['Threads, Bluesky, Mastodon, X, LinkedIn', 'Sichere Remote-Löschung von Posts', 'Spam-/Sperrschutz-Warteschlange', 'MCP-Tools für KI-Posting'],
   },
 ];
 
@@ -86,24 +104,32 @@ const mcpConfig = `{
 
 const workflows = [
   {
-    title: 'Morning Briefing',
+    title_en: 'Morning Briefing',
+    title_de: 'Morning Briefing',
     cmd: 'AI + mailctl + calctl + taskctl',
-    description: "AI reads your unread emails, checks today's calendar, and surfaces the 3 most important tasks — in one prompt.",
+    description_en: "AI reads your unread emails, checks today's calendar, and surfaces the 3 most important tasks — in one prompt.",
+    description_de: 'Die KI liest deine ungelesenen E-Mails, prüft den heutigen Kalender und zeigt die 3 wichtigsten Aufgaben — in einem einzigen Prompt.',
   },
   {
-    title: 'Weekly Planning',
+    title_en: 'Weekly Planning',
+    title_de: 'Wochenplanung',
     cmd: 'AI + calctl + taskctl + notectl',
-    description: 'AI reviews your weekly notes, finds free slots, and drafts a prioritized task list synced to Apple Reminders.',
+    description_en: 'AI reviews your weekly notes, finds free slots, and drafts a prioritized task list synced to Apple Reminders.',
+    description_de: 'Die KI durchsucht deine Wochennotizen, findet freie Zeitfenster und erstellt eine priorisierte Aufgabenliste, synchronisiert mit Apple Erinnerungen.',
   },
   {
-    title: 'Monthly Finance Review',
+    title_en: 'Monthly Finance Review',
+    title_de: 'Monatlicher Finanz-Review',
     cmd: 'AI + budgetctl',
-    description: 'Import your bank CSV, let AI categorize transactions and surface anomalies, then write a summary to your Obsidian vault.',
+    description_en: 'Import your bank CSV, let AI categorize transactions and surface anomalies, then write a summary to your Obsidian vault.',
+    description_de: 'Importiere deine Bank-CSV, lass die KI Transaktionen kategorisieren und Auffälligkeiten aufzeigen, und schreibe eine Zusammenfassung in deinen Obsidian-Vault.',
   },
   {
-    title: 'End-of-Day Digest',
+    title_en: 'End-of-Day Digest',
+    title_de: 'Tagesabschluss-Digest',
     cmd: 'AI + diaryctl + timectl + habctl',
-    description: 'AI checks your time log, habit streaks, and git commits, then writes a diary entry and surfaces what to finish before tomorrow.',
+    description_en: 'AI checks your time log, habit streaks, and git commits, then writes a diary entry and surfaces what to finish before tomorrow.',
+    description_de: 'Die KI prüft dein Zeitprotokoll, Habit-Streaks und Git-Commits, schreibt einen Tagebucheintrag und zeigt, was bis morgen noch zu erledigen ist.',
   },
 ];
 
@@ -224,32 +250,46 @@ const toolGroups = [
 
 const faqs = [
   {
-    q: 'Do I need a Claude subscription?',
-    a: 'Yes, Claude Pro or Team. missionctl connects to Claude Desktop via MCP — no extra subscription needed beyond that.',
+    q_en: 'Do I need a Claude subscription?',
+    q_de: 'Brauche ich ein Claude-Abo?',
+    a_en: 'Yes, Claude Pro or Team. missionctl connects to Claude Desktop via MCP — no extra subscription needed beyond that.',
+    a_de: 'Ja, Claude Pro oder Team. missionctl verbindet sich per MCP mit Claude Desktop — darüber hinaus ist kein zusätzliches Abo nötig.',
   },
   {
-    q: 'Does it work on Linux?',
-    a: 'notectl, budgetctl, diaryctl, timectl, and habctl work on macOS and Linux. mailctl, calctl, and taskctl require macOS (they bridge Apple Mail, Calendar, and Reminders).',
+    q_en: 'Does it work on Linux?',
+    q_de: 'Funktioniert es unter Linux?',
+    a_en: 'notectl, budgetctl, diaryctl, timectl, and habctl work on macOS and Linux. mailctl, calctl, and taskctl require macOS (they bridge Apple Mail, Calendar, and Reminders).',
+    a_de: 'notectl, budgetctl, diaryctl, timectl und habctl laufen unter macOS und Linux. mailctl, calctl und taskctl benötigen macOS (sie binden Apple Mail, Kalender und Erinnerungen an).',
   },
   {
-    q: 'Is my data safe?',
-    a: 'All data stays on your machine. missionctl never calls any external server. The only network calls are what you explicitly trigger (sending an email, publishing a post).',
+    q_en: 'Is my data safe?',
+    q_de: 'Sind meine Daten sicher?',
+    a_en: 'All data stays on your machine. missionctl never calls any external server. The only network calls are what you explicitly trigger (sending an email, publishing a post).',
+    a_de: 'Alle Daten bleiben auf deinem Rechner. missionctl ruft niemals einen externen Server auf. Die einzigen Netzwerkaufrufe sind die, die du explizit auslöst (eine E-Mail senden, einen Post veröffentlichen).',
   },
   {
-    q: "What if Apple Mail/Calendar isn't running?",
-    a: 'mailctl and calctl launch Apple Mail and Calendar in the background via AppleScript if they aren\'t open. No manual intervention needed.',
+    q_en: "What if Apple Mail/Calendar isn't running?",
+    q_de: 'Was, wenn Apple Mail/Kalender nicht läuft?',
+    a_en: 'mailctl and calctl launch Apple Mail and Calendar in the background via AppleScript if they aren\'t open. No manual intervention needed.',
+    a_de: 'mailctl und calctl starten Apple Mail und Kalender bei Bedarf automatisch im Hintergrund per AppleScript. Kein manuelles Eingreifen nötig.',
   },
   {
-    q: 'Can I use it without the TUI?',
-    a: 'Yes. Every tool has a full CLI (mailctl inbox --json, taskctl today, etc.). The TUI is the default but optional.',
+    q_en: 'Can I use it without the TUI?',
+    q_de: 'Kann ich es ohne die TUI nutzen?',
+    a_en: 'Yes. Every tool has a full CLI (mailctl inbox --json, taskctl today, etc.). The TUI is the default but optional.',
+    a_de: 'Ja. Jedes Tool hat eine vollständige CLI (mailctl inbox --json, taskctl today, usw.). Die TUI ist Standard, aber optional.',
   },
   {
-    q: 'How do I get updates?',
-    a: 'Updates are included with your purchase. Pull the latest from GitHub and re-run ./setup.sh.',
+    q_en: 'How do I get updates?',
+    q_de: 'Wie bekomme ich Updates?',
+    a_en: 'Updates are included with your purchase. Pull the latest from GitHub and re-run ./setup.sh.',
+    a_de: 'Updates sind im Kaufpreis inbegriffen. Hole dir den neuesten Stand von GitHub und führe ./setup.sh erneut aus.',
   },
   {
-    q: "What's the difference between buying individually vs. the bundle?",
-    a: 'The bundle ($39) includes all 9 tools. Buying individually costs $81 total. If you use more than 4 tools, the bundle saves money.',
+    q_en: "What's the difference between buying individually vs. the bundle?",
+    q_de: 'Was ist der Unterschied zwischen Einzelkauf und Bundle?',
+    a_en: 'The bundle ($39) includes all 9 tools. Buying individually costs $81 total. If you use more than 4 tools, the bundle saves money.',
+    a_de: 'Das Bundle ($39) enthält alle 9 Tools. Einzelkauf kostet insgesamt $81. Nutzt du mehr als 4 Tools, sparst du mit dem Bundle.',
   },
 ];
 
@@ -258,8 +298,8 @@ const faqLd = {
   '@type': 'FAQPage',
   mainEntity: faqs.map(f => ({
     '@type': 'Question',
-    name: f.q,
-    acceptedAnswer: { '@type': 'Answer', text: f.a },
+    name: f.q_en,
+    acceptedAnswer: { '@type': 'Answer', text: f.a_en },
   })),
 };
 ---
@@ -280,15 +320,17 @@ const faqLd = {
       <!-- Left: Text -->
       <div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
-          66 MCP tools &middot; 9 terminal apps &middot; macOS + Linux
+          <span class="lang-en">66 MCP tools &middot; 9 terminal apps &middot; macOS + Linux</span><span class="lang-de">66 MCP-Tools &middot; 9 Terminal-Apps &middot; macOS + Linux</span>
         </div>
         <h1 style="font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1.25rem;">
-          Give your AI<br>
-          <span style="color: #00d97e; text-shadow: 0 0 40px rgba(0,217,126,0.3);">hands.</span>
+          <span class="lang-en">Give your AI<br><span style="color: #00d97e; text-shadow: 0 0 40px rgba(0,217,126,0.3);">hands.</span></span>
+          <span class="lang-de">Gib deiner KI<br><span style="color: #00d97e; text-shadow: 0 0 40px rgba(0,217,126,0.3);">Hände.</span></span>
         </h1>
         <p style="font-size: 1.125rem; color: #718096; line-height: 1.65; margin: 0 0 2rem; max-width: 480px;">
-          66 MCP tools across 9 terminal apps. Local-first. No subscriptions.
-          Your AI can now read email, manage your calendar, handle tasks, write notes, track spending, log time, track habits, keep a diary, and schedule posts.
+          <span class="lang-en">66 MCP tools across 9 terminal apps. Local-first. No subscriptions.
+          Your AI can now read email, manage your calendar, handle tasks, write notes, track spending, log time, track habits, keep a diary, and schedule posts.</span>
+          <span class="lang-de">66 MCP-Tools über 9 Terminal-Apps. Local-first. Keine Abos.
+          Deine KI kann jetzt E-Mails lesen, deinen Kalender verwalten, Aufgaben erledigen, Notizen schreiben, Ausgaben verfolgen, Zeit erfassen, Gewohnheiten tracken, Tagebuch führen und Posts planen.</span>
         </p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a
@@ -298,18 +340,18 @@ const faqLd = {
             style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s ease; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
             class="hero-cta-primary"
           >
-            Get the Bundle &mdash; $39
+            <span class="lang-en">Get the Bundle &mdash; $39</span><span class="lang-de">Bundle holen &mdash; $39</span>
           </a>
           <a
             href="#apps"
             style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s ease;"
             class="hero-cta-secondary"
           >
-            Browse Apps &darr;
+            <span class="lang-en">Browse Apps &darr;</span><span class="lang-de">Apps ansehen &darr;</span>
           </a>
         </div>
         <p style="color: #4a5568; font-size: 0.75rem; margin: 1.25rem 0 0; font-family: 'JetBrains Mono', monospace;">
-          One-time purchase &middot; Future updates included &middot; Your data stays on your machine
+          <span class="lang-en">One-time purchase &middot; Future updates included &middot; Your data stays on your machine</span><span class="lang-de">Einmalkauf &middot; Zukünftige Updates inklusive &middot; Deine Daten bleiben auf deinem Rechner</span>
         </p>
       </div>
 
@@ -325,11 +367,12 @@ const faqLd = {
   <section style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
     <div style="max-width: 900px; margin: 0 auto; text-align: center;">
       <h2 style="font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
-        AI is great at planning.<br>
-        <span style="color: #718096;">It's bad at doing — because it has no hands.</span>
+        <span class="lang-en">AI is great at planning.<br><span style="color: #718096;">It's bad at doing — because it has no hands.</span></span>
+        <span class="lang-de">KI ist großartig im Planen.<br><span style="color: #718096;">Schlecht im Tun — weil sie keine Hände hat.</span></span>
       </h2>
       <p style="color: #718096; font-size: 1rem; line-height: 1.7; max-width: 600px; margin: 0 auto;">
-        missionctl gives your AI hands. Each app runs locally on your machine and exposes MCP tools that Claude (or any MCP client) can call directly — no cloud, no subscriptions, no data leaving your computer.
+        <span class="lang-en">missionctl gives your AI hands. Each app runs locally on your machine and exposes MCP tools that Claude (or any MCP client) can call directly — no cloud, no subscriptions, no data leaving your computer.</span>
+        <span class="lang-de">missionctl gibt deiner KI Hände. Jede App läuft lokal auf deinem Rechner und stellt MCP-Tools bereit, die Claude (oder jeder andere MCP-Client) direkt aufrufen kann — keine Cloud, keine Abos, keine Daten verlassen deinen Rechner.</span>
       </p>
     </div>
   </section>
@@ -338,10 +381,10 @@ const faqLd = {
   <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-        How it works
+        <span class="lang-en">How it works</span><span class="lang-de">So funktioniert's</span>
       </h2>
       <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-        AI plans. missionctl executes. Your data stays local.
+        <span class="lang-en">AI plans. missionctl executes. Your data stays local.</span><span class="lang-de">KI plant. missionctl führt aus. Deine Daten bleiben lokal.</span>
       </p>
     </div>
 
@@ -351,10 +394,10 @@ const faqLd = {
       <!-- Step 1 -->
       <div class="how-card">
         <div class="how-step-num">01</div>
-        <h3 class="how-title">You ask Claude</h3>
+        <h3 class="how-title"><span class="lang-en">You ask Claude</span><span class="lang-de">Du fragst Claude</span></h3>
         <p class="how-desc">
-          "Give me a morning briefing"<br>
-          "Schedule a launch campaign"
+          <span class="lang-en">"Give me a morning briefing"<br>"Schedule a launch campaign"</span>
+          <span class="lang-de">"Gib mir ein Morning Briefing"<br>"Plane eine Launch-Kampagne"</span>
         </p>
       </div>
 
@@ -363,9 +406,10 @@ const faqLd = {
       <!-- Step 2 -->
       <div class="how-card how-card--accent">
         <div class="how-step-num">02</div>
-        <h3 class="how-title" style="color:#00d97e;">Claude calls MCP tools</h3>
+        <h3 class="how-title" style="color:#00d97e;"><span class="lang-en">Claude calls MCP tools</span><span class="lang-de">Claude ruft MCP-Tools auf</span></h3>
         <p class="how-desc">
-          66 tools across 9 apps,<br>running locally on your machine
+          <span class="lang-en">66 tools across 9 apps,<br>running locally on your machine</span>
+          <span class="lang-de">66 Tools über 9 Apps,<br>laufen lokal auf deinem Rechner</span>
         </p>
       </div>
 
@@ -374,9 +418,10 @@ const faqLd = {
       <!-- Step 3 -->
       <div class="how-card">
         <div class="how-step-num">03</div>
-        <h3 class="how-title">missionctl acts</h3>
+        <h3 class="how-title"><span class="lang-en">missionctl acts</span><span class="lang-de">missionctl handelt</span></h3>
         <p class="how-desc">
-          Reads Apple Mail, creates calendar events,<br>writes to your Obsidian vault
+          <span class="lang-en">Reads Apple Mail, creates calendar events,<br>writes to your Obsidian vault</span>
+          <span class="lang-de">Liest Apple Mail, erstellt Kalendereinträge,<br>schreibt in deinen Obsidian-Vault</span>
         </p>
       </div>
 
@@ -385,9 +430,10 @@ const faqLd = {
       <!-- Step 4 -->
       <div class="how-card">
         <div class="how-step-num">04</div>
-        <h3 class="how-title" style="color:#f59e0b;">Apple APIs / Files</h3>
+        <h3 class="how-title" style="color:#f59e0b;"><span class="lang-en">Apple APIs / Files</span><span class="lang-de">Apple-APIs / Dateien</span></h3>
         <p class="how-desc">
-          Mail, Calendar, Reminders,<br>Obsidian, CSV exports
+          <span class="lang-en">Mail, Calendar, Reminders,<br>Obsidian, CSV exports</span>
+          <span class="lang-de">Mail, Kalender, Erinnerungen,<br>Obsidian, CSV-Exporte</span>
         </p>
       </div>
 
@@ -399,10 +445,10 @@ const faqLd = {
     <div style="max-width: 1200px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-          Nine apps. One config block.
+          <span class="lang-en">Nine apps. One config block.</span><span class="lang-de">Neun Apps. Ein Config-Block.</span>
         </h2>
         <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-          Each tool stands alone or works together as part of the missionctl suite.
+          <span class="lang-en">Each tool stands alone or works together as part of the missionctl suite.</span><span class="lang-de">Jedes Tool funktioniert für sich allein oder im Zusammenspiel als Teil der missionctl-Suite.</span>
         </p>
       </div>
 
@@ -411,9 +457,11 @@ const faqLd = {
           <AppCard
             name={app.name}
             description={app.description}
+            description_de={app.description_de}
             href={app.href}
             mcpCount={app.mcpCount}
             features={app.features}
+            features_de={app.features_de}
           />
         ))}
       </div>
@@ -424,10 +472,10 @@ const faqLd = {
   <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-        66 tools. One config.
+        <span class="lang-en">66 tools. One config.</span><span class="lang-de">66 Tools. Eine Config.</span>
       </h2>
       <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-        Hover any chip to see what it does. Every tool is callable from Claude Desktop.
+        <span class="lang-en">Hover any chip to see what it does. Every tool is callable from Claude Desktop.</span><span class="lang-de">Fahre über einen Chip, um zu sehen, was er tut. Jedes Tool ist aus Claude Desktop aufrufbar.</span>
       </p>
     </div>
 
@@ -458,10 +506,11 @@ const faqLd = {
     <div style="max-width: 900px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-          Plug in in 2 minutes
+          <span class="lang-en">Plug in in 2 minutes</span><span class="lang-de">In 2 Minuten einbinden</span>
         </h2>
         <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-          Add this to your <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; color: #00d97e;">claude_desktop_config.json</code> and restart Claude Desktop.
+          <span class="lang-en">Add this to your <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; color: #00d97e;">claude_desktop_config.json</code> and restart Claude Desktop.</span>
+          <span class="lang-de">Füge dies zu deiner <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; color: #00d97e;">claude_desktop_config.json</code> hinzu und starte Claude Desktop neu.</span>
         </p>
       </div>
 
@@ -469,13 +518,13 @@ const faqLd = {
 
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;" class="mcp-stats-grid">
         {[
-          { n: '66', label: 'MCP tools total' },
-          { n: '9', label: 'local-first apps' },
-          { n: '0', label: 'cloud dependencies' },
+          { n: '66', label_en: 'MCP tools total', label_de: 'MCP-Tools gesamt' },
+          { n: '9', label_en: 'local-first apps', label_de: 'local-first Apps' },
+          { n: '0', label_en: 'cloud dependencies', label_de: 'Cloud-Abhängigkeiten' },
         ].map(stat => (
           <div style="text-align: center; padding: 1.25rem; background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; transition: border-color 0.2s, transform 0.2s;" class="stat-tile">
             <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 800; color: #00d97e;" class="stat-num" data-count={stat.n}>{stat.n}</div>
-            <div style="color: #718096; font-size: 0.8rem; margin-top: 0.25rem;">{stat.label}</div>
+            <div style="color: #718096; font-size: 0.8rem; margin-top: 0.25rem;"><span class="lang-en">{stat.label_en}</span><span class="lang-de">{stat.label_de}</span></div>
           </div>
         ))}
       </div>
@@ -486,10 +535,10 @@ const faqLd = {
   <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-        Real AI workflows
+        <span class="lang-en">Real AI workflows</span><span class="lang-de">Echte KI-Workflows</span>
       </h2>
       <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-        Cross-app workflows that actually work — because the tools are already connected.
+        <span class="lang-en">Cross-app workflows that actually work — because the tools are already connected.</span><span class="lang-de">App-übergreifende Workflows, die wirklich funktionieren — weil die Tools bereits verbunden sind.</span>
       </p>
     </div>
 
@@ -499,8 +548,8 @@ const faqLd = {
           <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #00d97e; margin-bottom: 0.75rem; letter-spacing: 0.05em;">
             {w.cmd}
           </div>
-          <h3 style="font-size: 1rem; font-weight: 700; color: #e2e8f0; margin: 0 0 0.75rem;">{w.title}</h3>
-          <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{w.description}</p>
+          <h3 style="font-size: 1rem; font-weight: 700; color: #e2e8f0; margin: 0 0 0.75rem;"><span class="lang-en">{w.title_en}</span><span class="lang-de">{w.title_de}</span></h3>
+          <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{w.description_en}</span><span class="lang-de">{w.description_de}</span></p>
         </article>
       ))}
     </div>
@@ -512,7 +561,7 @@ const faqLd = {
     <div style="max-width: 720px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-          Frequently asked
+          <span class="lang-en">Frequently asked</span><span class="lang-de">Häufige Fragen</span>
         </h2>
       </div>
 
@@ -520,11 +569,11 @@ const faqLd = {
         {faqs.map((item, i) => (
           <div class="faq-item" data-index={i}>
             <button class="faq-question" aria-expanded="false">
-              <span>{item.q}</span>
+              <span><span class="lang-en">{item.q_en}</span><span class="lang-de">{item.q_de}</span></span>
               <span class="faq-icon" aria-hidden="true">+</span>
             </button>
             <div class="faq-answer">
-              <p class="faq-answer-text">{item.a}</p>
+              <p class="faq-answer-text"><span class="lang-en">{item.a_en}</span><span class="lang-de">{item.a_de}</span></p>
             </div>
           </div>
         ))}
@@ -537,10 +586,10 @@ const faqLd = {
     <div style="max-width: 1100px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-          Simple pricing
+          <span class="lang-en">Simple pricing</span><span class="lang-de">Einfache Preise</span>
         </h2>
         <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-          One-time purchase. No subscriptions. Future updates included.
+          <span class="lang-en">One-time purchase. No subscriptions. Future updates included.</span><span class="lang-de">Einmalkauf. Keine Abos. Zukünftige Updates inklusive.</span>
         </p>
       </div>
 
@@ -559,8 +608,21 @@ const faqLd = {
             'habctl — habit tracking',
             'postctl — social scheduling',
           ]}
+          features_de={[
+            'mailctl — E-Mail & Apple Mail',
+            'calctl — Kalender & freie Slots',
+            'taskctl — Aufgaben & Pomodoro',
+            'notectl — Obsidian-Notizen',
+            'budgetctl — Budgetverfolgung',
+            'diaryctl — Entwickler-Tagebuch',
+            'timectl — Zeiterfassung',
+            'habctl — Gewohnheiten-Tracking',
+            'postctl — Social-Media-Planung',
+          ]}
           note="Each tool sold separately at $9"
+          note_de="Jedes Tool einzeln für $9"
           ctaText="Browse tools"
+          ctaText_de="Tools ansehen"
           ctaHref="https://polar.sh/aeon022"
         />
 
@@ -577,10 +639,22 @@ const faqLd = {
             'One config block',
             'Future updates included',
           ]}
+          features_de={[
+            'Alle 9 Tools enthalten',
+            'mailctl + calctl + taskctl',
+            'notectl + budgetctl + postctl',
+            'diaryctl + timectl',
+            'habctl + Gewohnheiten-Tracking',
+            '66 MCP-Tools gesamt',
+            'Ein Config-Block',
+            'Zukünftige Updates inklusive',
+          ]}
           ctaText="Get the Bundle — $39"
+          ctaText_de="Bundle holen — $39"
           ctaHref="https://polar.sh/aeon022"
           highlighted={true}
           badge="Best Value"
+          badge_de="Bester Wert"
         />
 
         <PricingCard
@@ -593,7 +667,15 @@ const faqLd = {
             'SQLite with no CGo',
             'Real-world project structure',
           ]}
+          features_de={[
+            'Baue eine CLI/TUI-App in Go',
+            'Cobra + Bubbletea + Lipgloss',
+            'MCP-Server-Implementierung',
+            'SQLite ohne CGo',
+            'Praxisnahe Projektstruktur',
+          ]}
           ctaText="Get the Tutorial"
+          ctaText_de="Tutorial holen"
           ctaHref="https://polar.sh/aeon022"
         />
 
@@ -607,13 +689,21 @@ const faqLd = {
             'Best for developers',
             'Save $9 vs buying separate',
           ]}
+          features_de={[
+            'Alles aus dem Bundle',
+            'Komplettes Go-Tutorial inklusive',
+            'Lerne, wie es gebaut ist',
+            'Am besten für Entwickler',
+            '$9 sparen ggü. Einzelkauf',
+          ]}
           ctaText="Get Tutorial + Bundle"
+          ctaText_de="Tutorial + Bundle holen"
           ctaHref="https://polar.sh/aeon022"
         />
       </div>
 
       <p style="text-align: center; color: #4a5568; font-size: 0.8rem; margin-top: 2rem; font-family: 'JetBrains Mono', monospace;">
-        Payments processed by polar.sh &middot; No subscription &middot; No refund needed — it works
+        <span class="lang-en">Payments processed by polar.sh &middot; No subscription &middot; No refund needed — it works</span><span class="lang-de">Zahlungsabwicklung über polar.sh &middot; Kein Abo &middot; Keine Rückerstattung nötig — es funktioniert einfach</span>
       </p>
     </div>
   </section>

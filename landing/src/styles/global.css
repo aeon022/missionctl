@@ -25,6 +25,14 @@ html {
   overflow-x: hidden; /* safety net: no single overflowing child should cause page-wide horizontal scroll */
 }
 
+/* EN/DE language toggle. Pair markup like:
+     <span class="lang-en">Hello</span><span class="lang-de">Hallo</span>
+   Lives here (a real imported CSS file), not in a headless .astro
+   component's <style is:global> — Astro silently drops those when the
+   component renders no DOM output (see postctl.sh's LangToggle.astro bug). */
+html[lang="de"] .lang-en { display: none !important; }
+html[lang="en"] .lang-de { display: none !important; }
+
 body {
   background-color: #0a0a0f;
   color: #e2e8f0;

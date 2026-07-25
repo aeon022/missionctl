@@ -12,10 +12,10 @@ const mcpTools = [
   { name: "sync", desc: "Sync events from Apple Calendar into the local cache" },
 ];
 const features = [
-  { title: "TUI Week View", desc: "Full-featured terminal calendar with week and month views. See all your calendars color-coded in the terminal." },
-  { title: "Apple Calendar Sync", desc: "Reads directly from Apple Calendar via EventKit. No third-party calendar access — your data stays local." },
-  { title: "Free Slot Finder", desc: "Scan any date range and surface available time blocks across all your calendars. Essential for scheduling." },
-  { title: "Event Creation", desc: "Create events from the terminal or via MCP. Supports duration, location, notes, and calendar selection." },
+  { title: "TUI Week View", title_de: "TUI-Wochenansicht", desc: "Full-featured terminal calendar with week and month views. See all your calendars color-coded in the terminal.", desc_de: "Vollwertiger Terminal-Kalender mit Wochen- und Monatsansichten. Sieh alle deine Kalender farblich codiert im Terminal." },
+  { title: "Apple Calendar Sync", title_de: "Apple-Kalender-Sync", desc: "Reads directly from Apple Calendar via EventKit. No third-party calendar access — your data stays local.", desc_de: "Liest direkt aus Apple Kalender über EventKit. Kein Drittanbieter-Zugriff — deine Daten bleiben lokal." },
+  { title: "Free Slot Finder", title_de: "Freie-Slot-Finder", desc: "Scan any date range and surface available time blocks across all your calendars. Essential for scheduling.", desc_de: "Durchsuche jeden Zeitraum und finde freie Zeitblöcke über alle deine Kalender hinweg. Essenziell für Terminplanung." },
+  { title: "Event Creation", title_de: "Termine erstellen", desc: "Create events from the terminal or via MCP. Supports duration, location, notes, and calendar selection.", desc_de: "Erstelle Termine aus dem Terminal oder via MCP. Unterstützt Dauer, Ort, Notizen und Kalenderauswahl." },
 ];
 ---
 
@@ -36,18 +36,18 @@ const features = [
         <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
           <span style="font-family: 'JetBrains Mono', monospace; color: #6366f1;">calctl</span>
         </h1>
-        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Calendar from your Terminal</p>
-        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Browse calendar, create events, and find free slots via Apple Calendar. 7 MCP tools for AI-powered scheduling.</p>
+        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;"><span class="lang-en">Calendar from your Terminal</span><span class="lang-de">Kalender aus deinem Terminal</span></p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Browse calendar, create events, and find free slots via Apple Calendar. 7 MCP tools for AI-powered scheduling.</span><span class="lang-de">Kalender durchsuchen, Termine erstellen und freie Slots finden über Apple Kalender. 7 MCP-Tools für KI-gestützte Terminplanung.</span></p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #6366f1; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
             class="cta-primary">
-            Get calctl &mdash; $9
+            <span class="lang-en">Get calctl &mdash; $9</span><span class="lang-de">calctl holen &mdash; $9</span>
           </a>
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
             class="cta-secondary">
-            Bundle &mdash; $39
+            <span class="lang-en">Bundle &mdash; $39</span><span class="lang-de">Bundle &mdash; $39</span>
           </a>
         </div>
       </div>
@@ -70,12 +70,12 @@ const features = [
   <!-- FEATURES -->
   <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
     <div style="max-width: 1100px; margin: 0 auto;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;">Features</h2>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;"><span class="lang-en">Features</span><span class="lang-de">Funktionen</span></h2>
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
-        {features.map((feat: {title: string; desc: string}) => (
+        {features.map((feat: {title: string; title_de: string; desc: string; desc_de: string}) => (
           <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
-            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #6366f1; margin: 0 0 0.5rem;">{feat.title}</h3>
-            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #6366f1; margin: 0 0 0.5rem;"><span class="lang-en">{feat.title}</span><span class="lang-de">{feat.title_de}</span></h3>
+            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{feat.desc}</span><span class="lang-de">{feat.desc_de}</span></p>
           </div>
         ))}
       </div>
@@ -84,7 +84,7 @@ const features = [
 
   <!-- CHEATSHEET -->
   <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
-    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;">Command Reference</h2>
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;"><span class="lang-en">Command Reference</span><span class="lang-de">Befehlsreferenz</span></h2>
     <TerminalWindow title="calctl — cheatsheet" content={`<span style="color:#4a5568"># Show today's events</span>
 <span style="color:#4a5568">$ </span>calctl today
 
@@ -111,14 +111,14 @@ const features = [
   <!-- MCP TOOLS -->
   <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
     <div style="max-width: 1100px; margin: 0 auto;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
-      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #6366f1;">calctl mcp</code></p>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;"><span class="lang-en">MCP Tools</span><span class="lang-de">MCP-Tools</span></h2>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;"><span class="lang-en">Available via</span><span class="lang-de">Verfügbar über</span> <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #6366f1;">calctl mcp</code></p>
       <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
-              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;">Tool</th>
-              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Description</th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;"><span class="lang-en">Tool</span><span class="lang-de">Tool</span></th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;"><span class="lang-en">Description</span><span class="lang-de">Beschreibung</span></th>
             </tr>
           </thead>
           <tbody>
@@ -137,21 +137,22 @@ const features = [
   <!-- PRICING CTA -->
   <section style="padding: 5rem 1.5rem; text-align: center; max-width: 600px; margin: 0 auto;">
     <h2 style="font-size: 1.75rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
-      Ready to give your AI hands?
+      <span class="lang-en">Ready to give your AI hands?</span><span class="lang-de">Bereit, deiner KI Hände zu geben?</span>
     </h2>
     <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
-      One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.
+      <span class="lang-en">One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.</span>
+      <span class="lang-de">Einmalkauf. Keine Abos. Zukünftige Updates inklusive. Deine Daten bleiben auf deinem Rechner.</span>
     </p>
     <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
       <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
         style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #6366f1; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(99,102,241,0.2);"
         class="cta-primary">
-        Get calctl &mdash; $9
+        <span class="lang-en">Get calctl &mdash; $9</span><span class="lang-de">calctl holen &mdash; $9</span>
       </a>
       <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
         style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
         class="cta-secondary">
-        Or get the Bundle &mdash; $39
+        <span class="lang-en">Or get the Bundle &mdash; $39</span><span class="lang-de">Oder das Bundle holen &mdash; $39</span>
       </a>
     </div>
   </section>

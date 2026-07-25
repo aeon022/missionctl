@@ -3,14 +3,18 @@ export interface Props {
   title: string;
   price: string;
   features: string[];
+  features_de?: string[];
   ctaText: string;
+  ctaText_de?: string;
   ctaHref: string;
   highlighted?: boolean;
   badge?: string;
+  badge_de?: string;
   note?: string;
+  note_de?: string;
 }
 
-const { title, price, features, ctaText, ctaHref, highlighted = false, badge, note } = Astro.props;
+const { title, price, features, features_de, ctaText, ctaText_de, ctaHref, highlighted = false, badge, badge_de, note, note_de } = Astro.props;
 ---
 
 <div style={`
@@ -40,7 +44,7 @@ const { title, price, features, ctaText, ctaHref, highlighted = false, badge, no
         white-space: nowrap;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-      ">{badge}</span>
+      "><span class="lang-en">{badge}</span><span class="lang-de">{badge_de ?? badge}</span></span>
     </div>
   )}
 
@@ -62,21 +66,21 @@ const { title, price, features, ctaText, ctaHref, highlighted = false, badge, no
       `}>{price}</span>
       <span style="color: #4a5568; font-size: 0.85rem;">USD</span>
     </div>
-    <p style="color: #4a5568; font-size: 0.75rem; margin: 0.35rem 0 0; font-family: 'JetBrains Mono', monospace;">one-time purchase</p>
+    <p style="color: #4a5568; font-size: 0.75rem; margin: 0.35rem 0 0; font-family: 'JetBrains Mono', monospace;"><span class="lang-en">one-time purchase</span><span class="lang-de">Einmalkauf</span></p>
   </div>
 
   <!-- Features -->
   <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.5rem; flex: 1;">
-    {features.map(f => (
+    {features.map((f, i) => (
       <li style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; color: #a0aec0;">
         <span style={`color: ${highlighted ? '#00d97e' : '#4a5568'}; font-family: monospace; flex-shrink: 0; margin-top: 1px;`}>&#x2713;</span>
-        {f}
+        <span class="lang-en">{f}</span><span class="lang-de">{features_de?.[i] ?? f}</span>
       </li>
     ))}
   </ul>
 
   <!-- Note -->
-  {note && <p style="color: #4a5568; font-size: 0.75rem; margin: 0; font-style: italic;">{note}</p>}
+  {note && <p style="color: #4a5568; font-size: 0.75rem; margin: 0; font-style: italic;"><span class="lang-en">{note}</span><span class="lang-de">{note_de ?? note}</span></p>}
 
   <!-- CTA -->
   <a
@@ -100,7 +104,7 @@ const { title, price, features, ctaText, ctaHref, highlighted = false, badge, no
     `}
     class={highlighted ? 'pricing-cta-primary' : 'pricing-cta-secondary'}
   >
-    {ctaText}
+    <span class="lang-en">{ctaText}</span><span class="lang-de">{ctaText_de ?? ctaText}</span>
   </a>
 </div>
 

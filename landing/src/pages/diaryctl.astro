@@ -10,10 +10,10 @@ const mcpTools = [
   { name: "list_diary_entries", desc: "List recent entries with date and preview" },
 ];
 const features = [
-  { title: "Git History Reader", desc: "Parses commits, diffs, and shortstat across multiple repos. Knows what you built, how long it took, and when you were in flow." },
-  { title: "AI Narrative Entries", desc: "Claude reads your commits and writes a personal diary entry. Not a report — a story. What was hard, what felt good, what you learned." },
-  { title: "Streak & Heatmap", desc: "30-day commit heatmap in the TUI. Track coding streaks and see your productivity patterns at a glance." },
-  { title: "Suite Integration", desc: "Pulls in completed tasks from taskctl, meetings from calctl, and time logs from timectl for a complete picture of your day." },
+  { title: "Git History Reader", title_de: "Git-Historie-Reader", desc: "Parses commits, diffs, and shortstat across multiple repos. Knows what you built, how long it took, and when you were in flow.", desc_de: "Wertet Commits, Diffs und Shortstat über mehrere Repos hinweg aus. Weiß, was du gebaut hast, wie lange es gedauert hat und wann du im Flow warst." },
+  { title: "AI Narrative Entries", title_de: "KI-generierte Einträge", desc: "Claude reads your commits and writes a personal diary entry. Not a report — a story. What was hard, what felt good, what you learned.", desc_de: "Claude liest deine Commits und schreibt einen persönlichen Tagebucheintrag. Kein Report — eine Geschichte. Was schwer war, was sich gut angefühlt hat, was du gelernt hast." },
+  { title: "Streak & Heatmap", title_de: "Streak & Heatmap", desc: "30-day commit heatmap in the TUI. Track coding streaks and see your productivity patterns at a glance.", desc_de: "30-Tage-Commit-Heatmap in der TUI. Verfolge Coding-Streaks und sieh deine Produktivitätsmuster auf einen Blick." },
+  { title: "Suite Integration", title_de: "Suite-Integration", desc: "Pulls in completed tasks from taskctl, meetings from calctl, and time logs from timectl for a complete picture of your day.", desc_de: "Zieht erledigte Aufgaben aus taskctl, Termine aus calctl und Zeitprotokolle aus timectl für ein vollständiges Bild deines Tages." },
 ];
 ---
 
@@ -34,18 +34,18 @@ const features = [
         <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
           <span style="font-family: 'JetBrains Mono', monospace; color: #fb923c;">diaryctl</span>
         </h1>
-        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;">Developer Diary from your Terminal</p>
-        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">Reads your git commits, completed tasks, and calendar. AI generates narrative diary entries. Your coding story, told automatically.</p>
+        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;"><span class="lang-en">Developer Diary from your Terminal</span><span class="lang-de">Entwickler-Tagebuch aus deinem Terminal</span></p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Reads your git commits, completed tasks, and calendar. AI generates narrative diary entries. Your coding story, told automatically.</span><span class="lang-de">Liest deine Git-Commits, erledigten Aufgaben und deinen Kalender. Die KI erstellt erzählerische Tagebucheinträge. Deine Coding-Geschichte, automatisch erzählt.</span></p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #fb923c; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
             class="cta-primary">
-            Get diaryctl &mdash; $9
+            <span class="lang-en">Get diaryctl &mdash; $9</span><span class="lang-de">diaryctl holen &mdash; $9</span>
           </a>
           <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
             class="cta-secondary">
-            Bundle &mdash; $39
+            <span class="lang-en">Bundle &mdash; $39</span><span class="lang-de">Bundle &mdash; $39</span>
           </a>
         </div>
       </div>
@@ -73,12 +73,12 @@ const features = [
   <!-- FEATURES -->
   <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
     <div style="max-width: 1100px; margin: 0 auto;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;">Features</h2>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;"><span class="lang-en">Features</span><span class="lang-de">Funktionen</span></h2>
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
-        {features.map((feat: {title: string; desc: string}) => (
+        {features.map((feat: {title: string; title_de: string; desc: string; desc_de: string}) => (
           <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
-            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #fb923c; margin: 0 0 0.5rem;">{feat.title}</h3>
-            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{feat.desc}</p>
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #fb923c; margin: 0 0 0.5rem;"><span class="lang-en">{feat.title}</span><span class="lang-de">{feat.title_de}</span></h3>
+            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{feat.desc}</span><span class="lang-de">{feat.desc_de}</span></p>
           </div>
         ))}
       </div>
@@ -87,7 +87,7 @@ const features = [
 
   <!-- CHEATSHEET -->
   <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
-    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;">Command Reference</h2>
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;"><span class="lang-en">Command Reference</span><span class="lang-de">Befehlsreferenz</span></h2>
     <TerminalWindow title="diaryctl — cheatsheet" content={`<span style="color:#4a5568"># Register a git repo</span>
 <span style="color:#4a5568">$ </span>diaryctl init ~/code/project --name <span style="color:#a0aec0">"My Project"</span>
 
@@ -115,14 +115,14 @@ const features = [
   <!-- MCP TOOLS -->
   <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
     <div style="max-width: 1100px; margin: 0 auto;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;">MCP Tools</h2>
-      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;">Available via <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #fb923c;">diaryctl mcp</code></p>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;"><span class="lang-en">MCP Tools</span><span class="lang-de">MCP-Tools</span></h2>
+      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;"><span class="lang-en">Available via</span><span class="lang-de">Verfügbar über</span> <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #fb923c;">diaryctl mcp</code></p>
       <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
-              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;">Tool</th>
-              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;">Description</th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;"><span class="lang-en">Tool</span><span class="lang-de">Tool</span></th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;"><span class="lang-en">Description</span><span class="lang-de">Beschreibung</span></th>
             </tr>
           </thead>
           <tbody>
@@ -141,21 +141,22 @@ const features = [
   <!-- PRICING CTA -->
   <section style="padding: 5rem 1.5rem; text-align: center; max-width: 600px; margin: 0 auto;">
     <h2 style="font-size: 1.75rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
-      Your coding story, told automatically.
+      <span class="lang-en">Your coding story, told automatically.</span><span class="lang-de">Deine Coding-Geschichte, automatisch erzählt.</span>
     </h2>
     <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
-      One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.
+      <span class="lang-en">One-time purchase. No subscriptions. Future updates included. Your data stays on your machine.</span>
+      <span class="lang-de">Einmalkauf. Keine Abos. Zukünftige Updates inklusive. Deine Daten bleiben auf deinem Rechner.</span>
     </p>
     <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
       <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
         style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #fb923c; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(251,146,60,0.2);"
         class="cta-primary">
-        Get diaryctl &mdash; $9
+        <span class="lang-en">Get diaryctl &mdash; $9</span><span class="lang-de">diaryctl holen &mdash; $9</span>
       </a>
       <a href="https://polar.sh/aeon022" target="_blank" rel="noopener"
         style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
         class="cta-secondary">
-        Or get the Bundle &mdash; $39
+        <span class="lang-en">Or get the Bundle &mdash; $39</span><span class="lang-de">Oder das Bundle holen &mdash; $39</span>
       </a>
     </div>
   </section>

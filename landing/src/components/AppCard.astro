@@ -2,12 +2,14 @@
 export interface Props {
   name: string;
   description: string;
+  description_de?: string;
   href: string;
   mcpCount: number;
   features: string[];
+  features_de?: string[];
 }
 
-const { name, description, href, mcpCount, features } = Astro.props;
+const { name, description, description_de, href, mcpCount, features, features_de } = Astro.props;
 ---
 
 <article style="
@@ -46,18 +48,18 @@ const { name, description, href, mcpCount, features } = Astro.props;
       border-radius: 20px;
       color: #00d97e;
       white-space: nowrap;
-    ">{mcpCount} MCP tools</span>
+    "><span class="lang-en">{mcpCount} MCP tools</span><span class="lang-de">{mcpCount} MCP-Tools</span></span>
   </div>
 
   <!-- Description -->
-  <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;">{description}</p>
+  <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{description}</span><span class="lang-de">{description_de ?? description}</span></p>
 
   <!-- Features -->
   <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.4rem; flex: 1;">
-    {features.map(f => (
+    {features.map((f, i) => (
       <li style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.8rem; color: #4a5568;">
         <span style="color: #00d97e; font-family: monospace; flex-shrink: 0; margin-top: 1px;">&#x2713;</span>
-        <span style="color: #a0aec0;">{f}</span>
+        <span style="color: #a0aec0;"><span class="lang-en">{f}</span><span class="lang-de">{features_de?.[i] ?? f}</span></span>
       </li>
     ))}
   </ul>
@@ -74,7 +76,7 @@ const { name, description, href, mcpCount, features } = Astro.props;
     transition: gap 0.15s;
     margin-top: auto;
   " class="card-link">
-    Learn more <span>&rarr;</span>
+    <span class="lang-en">Learn more</span><span class="lang-de">Mehr erfahren</span> <span>&rarr;</span>
   </a>
 </article>
 

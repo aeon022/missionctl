@@ -31,7 +31,7 @@ const isAppPage = apps.some(a => a.href === currentPath);
         href="/"
         class={`nav-link${currentPath === '/' ? ' nav-link--active' : ''}`}
       >
-        home
+        <span class="lang-en">home</span><span class="lang-de">start</span>
       </a>
 
       <!-- Apps dropdown -->
@@ -72,7 +72,7 @@ const isAppPage = apps.some(a => a.href === currentPath);
         href="/docs"
         class={`nav-link${currentPath.startsWith('/docs') ? ' nav-link--active' : ''}`}
       >
-        docs
+        <span class="lang-en">docs</span><span class="lang-de">doku</span>
       </a>
 
     </div>
@@ -94,20 +94,28 @@ const isAppPage = apps.some(a => a.href === currentPath);
         </svg>
       </button>
 
+      <!-- Language toggle -->
+      <button id="lang-toggle" class="nav-lang-toggle" aria-label="Switch language" type="button">
+        <span class="lang-en">DE</span><span class="lang-de">EN</span>
+      </button>
+
       <!-- Buy button -->
       <a
         href="/#pricing"
         class="nav-buy"
       >
-        Buy
+        <span class="lang-en">Buy</span><span class="lang-de">Kaufen</span>
       </a>
     </div>
   </nav>
 
   <!-- Mobile menu panel -->
   <div class="mobile-menu-panel" id="mobile-menu-panel" role="menu">
-    <a href="/" class={`mobile-menu-link${currentPath === '/' ? ' mobile-menu-link--active' : ''}`} role="menuitem">home</a>
-    <a href="/docs" class={`mobile-menu-link${currentPath.startsWith('/docs') ? ' mobile-menu-link--active' : ''}`} role="menuitem">docs</a>
+    <a href="/" class={`mobile-menu-link${currentPath === '/' ? ' mobile-menu-link--active' : ''}`} role="menuitem"><span class="lang-en">home</span><span class="lang-de">start</span></a>
+    <a href="/docs" class={`mobile-menu-link${currentPath.startsWith('/docs') ? ' mobile-menu-link--active' : ''}`} role="menuitem"><span class="lang-en">docs</span><span class="lang-de">doku</span></a>
+    <button id="lang-toggle-mobile" class="mobile-menu-link" role="menuitem" type="button" style="background:none;border:none;text-align:left;cursor:pointer;width:100%;">
+      <span class="lang-en">Deutsch</span><span class="lang-de">English</span>
+    </button>
     <p class="mobile-menu-label">apps</p>
     <div class="mobile-apps-grid">
       {apps.map(app => (
@@ -165,6 +173,23 @@ const isAppPage = apps.some(a => a.href === currentPath);
   }
   .nav-link:hover,
   .nav-link--active {
+    color: #00d97e;
+    background: rgba(0,217,126,0.07);
+  }
+
+  /* ── Language toggle ────────────────────────────────────── */
+  .nav-lang-toggle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.6rem;
+    border-radius: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #718096;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .nav-lang-toggle:hover {
     color: #00d97e;
     background: rgba(0,217,126,0.07);
   }
