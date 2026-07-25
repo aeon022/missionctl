@@ -357,6 +357,16 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
   Abschneiden von Referenznummern/Kartenterminal-Codes/Datum/Zeit für den
   Rest. An allen 84 echten Buchungen verifiziert: 80 bekommen jetzt einen
   sauberen Namen, die 4 echten Gebühren bleiben korrekt leer.
+- [x] Bug gefixt: Monats-Tab-Leiste überlief bei vielen Monaten — mit 18
+  Monaten (Jan 2025 bis Jun 2026, echte Nutzerdaten) wurde die Tab-Zeile
+  unbedingt gerendert (~200 Spalten), ohne Möglichkeit, Monate zu
+  erreichen, die nicht in die Terminalbreite passten. `monthTabWindow`
+  scrollt das sichtbare Fenster jetzt so, dass `activeTab` immer sichtbar
+  bleibt (gleiche Technik wie das bestehende Scroll-Fenster der
+  Transaktionsliste), mit `‹`/`›`-Indikator auf der Seite mit
+  ausgeblendeten Monaten. `tabHitTest` spiegelt exakt dasselbe
+  Fenster-Layout, damit ein Klick auch im gescrollten Zustand auf den
+  richtigen Monat trifft.
 
 UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown, Detail-Popup) ✅ vorhanden.
 
