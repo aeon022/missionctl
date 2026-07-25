@@ -367,6 +367,16 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
   ausgeblendeten Monaten. `tabHitTest` spiegelt exakt dasselbe
   Fenster-Layout, damit ein Klick auch im gescrollten Zustand auf den
   richtigen Monat trifft.
+- [x] Jahres-Sprung (`y`/`Y`) und Kategorie-Filter (`f`) — direkte Folge
+  aus dem 18-Monats-Fund oben: einzelne Monate durchtabben wurde über 2
+  Jahre hinweg mühsam. `y`/`Y` springen zum nächsten/vorherigen
+  Jahreswechsel in den vorhandenen Daten (`adjacentYearTab`), in
+  Transaktionsliste UND Summary-View. `f` öffnet einen Fuzzy-Picker-Popup
+  über alle genutzten Kategorien (neues `Store.ListCategories`) —
+  „All categories" immer zuerst als Filter-Reset. Anders als bei
+  `filterTxs`/taskctl/calctl wird hier NACH Match-Qualität umsortiert
+  (fzf-Style) — der Picker ist eine Einmal-Auswahl, keine dauerhaft
+  chronologisch geordnete Liste, Umsortieren stört hier also nicht.
 
 UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown, Detail-Popup) ✅ vorhanden.
 
