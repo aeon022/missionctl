@@ -22,7 +22,7 @@ No SaaS. No cloud. No subscriptions. Your data stays on your machine.
 | [diaryctl](diaryctl/) | Developer diary from git history, AI-written narrative | 5 | git repos + suite DBs |
 | [postctl](https://github.com/aeon022/postctl) | Schedule and publish social media posts | 7 | Local SQLite + platform APIs |
 
-Plus [missionctl](missionctl/), the umbrella CLI: `missionctl doctor` (installation check), `missionctl status` (daily briefing across all tool databases), `missionctl init` (setup wizard).
+Plus [missionctl](missionctl/), the umbrella CLI: bare `missionctl` opens a live dashboard TUI (8 cards, one per tool, with quick actions, sync-all, and an in-place agenda view), `missionctl agenda` merges today's calendar events, due tasks, and timer sessions into one timeline, `missionctl status` is the plain-text daily briefing, `missionctl doctor` checks installation/MCP registration/DB sync health, `missionctl init` is the setup wizard.
 
 All tools share the same design: a Bubbletea TUI as the default command, a Cobra CLI for scripting, JSON output on every read command, and an MCP server over stdio for AI integration.
 
@@ -162,6 +162,12 @@ postctl post ID [--dry-run]                   Publish immediately
 postctl schedule ID --time DATETIME           Schedule a post
 postctl campaign list                         List campaigns
 postctl import FILE.md                        Import from Markdown
+
+# Mission Control (all tools at once)
+missionctl                                    Dashboard TUI — 8 cards, x quick action, s sync all, a agenda view
+missionctl agenda                             Today's calendar + tasks + timer, one timeline
+missionctl status                             Plain-text daily briefing across all 8 tools
+missionctl doctor                             Check install, MCP registration, DB sync health
 ```
 
 ---
