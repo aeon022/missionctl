@@ -1,0 +1,34 @@
+# Dracula theme for the missionctl suite.
+#
+# To use: copy this file to ~/.config/missionctl/theme.yaml (or symlink it).
+# Applies automatically on next launch to every tool that shares
+# missionctl-core/theme (all 8 except habctl, which keeps its own distinct
+# palette by design).
+#
+# Dracula has no official light variant, so only `dark:` is set below — in
+# a light-background terminal these fall back to the suite's own light
+# defaults rather than a fabricated "Dracula Light". See
+# https://draculatheme.com/contribute#color-palette for the source palette.
+
+blue:
+  dark: "#8be9fd"  # Cyan — closest Dracula accent to a "blue" role
+green:
+  dark: "#50fa7b"  # Green
+red:
+  dark: "#ff5555"  # Red
+amber:
+  dark: "#ffb86c"  # Orange
+muted:
+  dark: "#6272a4"  # Comment
+subtle:
+  dark: "#44475a"  # Current Line / Selection
+selected_bg:
+  dark: "#44475a"  # Current Line / Selection
+selected_fg:
+  dark: "#f8f8f2"  # Foreground
+hover_bg:
+  dark: "#4d5066"  # Derived — a lighter tint of Current Line; Dracula's
+                    # spec only defines one such tone, so this isn't one
+                    # of the official 8 colors, just close kin to it.
+on_accent:
+  dark: "#282a36"  # Background — dark text against the pastel Cyan accent

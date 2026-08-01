@@ -1,0 +1,33 @@
+# Nord theme for the missionctl suite.
+#
+# To use: copy this file to ~/.config/missionctl/theme.yaml (or symlink it).
+# Applies automatically on next launch to every tool that shares
+# missionctl-core/theme (all 8 except habctl, which keeps its own distinct
+# palette by design).
+#
+# Nord is designed as a single cohesive dark palette with no official light
+# variant, so only `dark:` is set below — in a light-background terminal
+# these fall back to the suite's own light defaults rather than a
+# fabricated "Nord Light". See https://www.nordtheme.com/docs/colors-and-palettes
+# for the source palette (nord0-nord15).
+
+blue:
+  dark: "#81a1c1"  # nord9 — Frost, the palette's standard "blue"
+green:
+  dark: "#a3be8c"  # nord14 — Aurora green
+red:
+  dark: "#bf616a"  # nord11 — Aurora red
+amber:
+  dark: "#ebcb8b"  # nord13 — Aurora yellow
+muted:
+  dark: "#4c566a"  # nord3
+subtle:
+  dark: "#434c5e"  # nord2
+selected_bg:
+  dark: "#434c5e"  # nord2
+selected_fg:
+  dark: "#eceff4"  # nord6
+hover_bg:
+  dark: "#3b4252"  # nord1
+on_accent:
+  dark: "#2e3440"  # nord0 — dark text against the mid-tone Frost blue

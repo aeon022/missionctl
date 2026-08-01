@@ -1,0 +1,42 @@
+# Gruvbox theme for the missionctl suite.
+#
+# To use: copy this file to ~/.config/missionctl/theme.yaml (or symlink it).
+# Applies automatically on next launch to every tool that shares
+# missionctl-core/theme (all 8 except habctl, which keeps its own distinct
+# palette by design).
+#
+# `dark:` uses Gruvbox Dark (bright variants), `light:` uses Gruvbox Light
+# (neutral variants) — lipgloss switches between them automatically based
+# on your terminal's background, so this one file covers both. See
+# https://github.com/morhetz/gruvbox#palette for the source palette.
+
+blue:
+  light: "#076678"  # Light neutral blue
+  dark: "#83a598"   # Dark bright blue
+green:
+  light: "#79740e"  # Light neutral green
+  dark: "#b8bb26"   # Dark bright green
+red:
+  light: "#9d0006"  # Light neutral red
+  dark: "#fb4934"   # Dark bright red
+amber:
+  light: "#b57614"  # Light neutral yellow
+  dark: "#fabd2f"   # Dark bright yellow
+muted:
+  light: "#7c6f64"  # Light fg4
+  dark: "#928374"   # Gray
+subtle:
+  light: "#a89984"  # Light bg4
+  dark: "#665c54"   # Dark bg3
+selected_bg:
+  light: "#d5c4a1"  # Light bg2
+  dark: "#504945"   # Dark bg2
+selected_fg:
+  light: "#3c3836"  # Light fg1
+  dark: "#ebdbb2"   # Dark fg1
+hover_bg:
+  light: "#ebdbb2"  # Light bg1
+  dark: "#3c3836"   # Dark bg1
+on_accent:
+  light: "#fbf1c7"  # Light bg0 — light text against the darker light-mode blue
+  dark: "#282828"   # Dark bg0 — dark text against the pastel dark-mode blue
