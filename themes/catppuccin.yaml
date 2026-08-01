@@ -1,0 +1,43 @@
+# Catppuccin theme for the missionctl suite.
+#
+# To use: copy this file to ~/.config/missionctl/theme.yaml (or symlink it).
+# Applies automatically on next launch to every tool that shares
+# missionctl-core/theme (all 8 except habctl, which keeps its own distinct
+# palette by design).
+#
+# `dark:` uses Catppuccin Mocha, `light:` uses Catppuccin Latte — lipgloss
+# switches between them automatically based on your terminal's background,
+# so this one file covers both modes. You only need to set the fields you
+# want to change; anything omitted keeps the suite's built-in default.
+# See https://catppuccin.com/palette for the full palette reference.
+
+blue:
+  light: "#1e66f5"  # Latte Blue
+  dark: "#89b4fa"   # Mocha Blue
+green:
+  light: "#40a02b"  # Latte Green
+  dark: "#a6e3a1"   # Mocha Green
+red:
+  light: "#d20f39"  # Latte Red
+  dark: "#f38ba8"   # Mocha Red
+amber:
+  light: "#df8e1d"  # Latte Yellow
+  dark: "#f9e2af"   # Mocha Yellow
+muted:
+  light: "#6c6f85"  # Latte Subtext0
+  dark: "#a6adc8"   # Mocha Subtext0
+subtle:
+  light: "#9ca0b0"  # Latte Overlay0
+  dark: "#6c7086"   # Mocha Overlay0
+selected_bg:
+  light: "#ccd0da"  # Latte Surface0
+  dark: "#313244"   # Mocha Surface0
+selected_fg:
+  light: "#4c4f69"  # Latte Text
+  dark: "#cdd6f4"   # Mocha Text
+hover_bg:
+  light: "#bcc0cc"  # Latte Surface1
+  dark: "#45475a"   # Mocha Surface1
+on_accent:
+  light: "#eff1f5"  # Latte Base — light text against the more saturated Latte Blue
+  dark: "#1e1e2e"   # Mocha Base — dark text against the pastel Mocha Blue
