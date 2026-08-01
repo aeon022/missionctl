@@ -1,0 +1,35 @@
+# One Dark theme for the missionctl suite (Atom's original syntax theme,
+# widely ported as "One Dark Pro" / onedark.vim / etc).
+#
+# To use: copy this file to ~/.config/missionctl/theme.yaml (or symlink it).
+# Applies automatically on next launch to every tool that shares
+# missionctl-core/theme (all 8 except habctl, which keeps its own distinct
+# palette by design).
+#
+# Only the dark variant is set here — "One Light" exists but is a much
+# less common secondary port with less consistent hex values across
+# implementations, so it's intentionally skipped rather than guessed at.
+# In a light terminal these fall back to the suite's own light defaults.
+
+blue:
+  dark: "#61afef"
+green:
+  dark: "#98c379"
+red:
+  dark: "#e06c75"
+amber:
+  dark: "#e5c07b"  # yellow
+muted:
+  dark: "#5c6370"  # comment gray
+subtle:
+  dark: "#4b5263"  # derived — a step lighter than muted, commonly used
+                    # for gutter/line-number text in One Dark ports
+selected_bg:
+  dark: "#3e4451"  # the original Atom theme's selection background
+selected_fg:
+  dark: "#abb2bf"  # foreground
+hover_bg:
+  dark: "#2c323c"  # derived — subtler than the full selection background,
+                    # commonly used as "active line" highlight in ports
+on_accent:
+  dark: "#282c34"  # background — dark text against the mid-tone blue accent

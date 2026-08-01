@@ -1,0 +1,33 @@
+# Tokyo Night theme for the missionctl suite.
+#
+# To use: copy this file to ~/.config/missionctl/theme.yaml (or symlink it).
+# Applies automatically on next launch to every tool that shares
+# missionctl-core/theme (all 8 except habctl, which keeps its own distinct
+# palette by design).
+#
+# Only the dark ("Night") variant is set here — Tokyo Night is used almost
+# exclusively as a dark theme, and this intentionally skips the much less
+# common "Tokyo Night Light" variant rather than guess at its palette. In
+# a light terminal these fall back to the suite's own light defaults. See
+# https://github.com/folke/tokyonight.nvim for the source palette.
+
+blue:
+  dark: "#7aa2f7"
+green:
+  dark: "#9ece6a"
+red:
+  dark: "#f7768e"
+amber:
+  dark: "#e0af68"  # yellow
+muted:
+  dark: "#565f89"  # comment
+subtle:
+  dark: "#3b4261"  # fg_gutter
+selected_bg:
+  dark: "#292e42"  # bg_highlight
+selected_fg:
+  dark: "#c0caf5"  # fg
+hover_bg:
+  dark: "#414868"  # terminal_black — subtler than bg_highlight
+on_accent:
+  dark: "#1a1b26"  # bg — dark text against the pastel blue accent

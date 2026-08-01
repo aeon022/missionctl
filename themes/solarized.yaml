@@ -1,0 +1,43 @@
+# Solarized theme for the missionctl suite.
+#
+# To use: copy this file to ~/.config/missionctl/theme.yaml (or symlink it).
+# Applies automatically on next launch to every tool that shares
+# missionctl-core/theme (all 8 except habctl, which keeps its own distinct
+# palette by design).
+#
+# Solarized's accent colors (blue/green/red/yellow) are precisely defined
+# to be identical hex values in both Light and Dark mode by design — only
+# the base/background tones swap. See
+# https://ethanschoonover.com/solarized/#the-values for the source
+# palette and its official light/dark usage table.
+
+blue:
+  light: "#268bd2"
+  dark: "#268bd2"
+green:
+  light: "#859900"
+  dark: "#859900"
+red:
+  light: "#dc322f"
+  dark: "#dc322f"
+amber:
+  light: "#b58900"  # Solarized yellow
+  dark: "#b58900"
+muted:
+  light: "#586e75"  # base01 — "comments/secondary content" in both modes
+  dark: "#586e75"
+subtle:
+  light: "#839496"  # base0 — light mode's "optional emphasized content"
+  dark: "#657b83"   # base00 — dark mode's "optional emphasized content"
+selected_bg:
+  light: "#93a1a1"  # base1
+  dark: "#586e75"   # base01
+selected_fg:
+  light: "#002b36"  # base03
+  dark: "#fdf6e3"   # base3
+hover_bg:
+  light: "#eee8d5"  # base2 — official "background highlights" tone (light)
+  dark: "#073642"   # base02 — official "background highlights" tone (dark)
+on_accent:
+  light: "#fdf6e3"  # base3 — light text reads fine against blue in both modes,
+  dark: "#fdf6e3"   # since Solarized's blue is the same medium hex either way
