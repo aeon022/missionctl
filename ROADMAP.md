@@ -210,7 +210,7 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
 
 ### v2.0 — Team Mode (Q2 2027)
 - [x] Bluesky & Mastodon support — ahead of schedule, beide voll implementiert
-- [ ] Shared SQLite over iCloud Drive (like utask pattern)
+- [x] Shared SQLite over iCloud Drive (like utask pattern) — mechanism now in place suite-wide via missionctl-core/syncdir; approval workflow below remains a separate, later feature
 - [ ] Approval workflow: draft → review → scheduled
 
 ---
