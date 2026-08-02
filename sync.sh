@@ -15,35 +15,42 @@ echo "↳ pulling missionctl..."
 git pull --ff-only
 
 echo "↳ updating submodules to their origin/main..."
-git submodule update --init --recursive
-
+# Deliberately NOT `git submodule update [--remote] --init --recursive` here:
+# that command checks each submodule out to whatever SHA the umbrella
+# repo's own index currently records for it, full stop — with or without
+# --remote, regardless of what's actually checked out. A submodule sitting
+# on local commits that were never pushed (this repo's own standing
+# workflow: commit locally, push only when asked) would get silently
+# detached back to the umbrella's stale recorded SHA, discarding that work
+# from the working tree (the commits themselves would survive on the
+# submodule's own local branch, but the umbrella would end up pointing at
+# a rollback — this happened in practice before this loop was written).
+# So each submodule is driven directly instead: init only if truly
+# missing, then fetch+checkout its own origin/main — but only when it has
+# no unpushed local commits to lose.
 BUMPED=()
 SKIPPED=()
-for path in $(git config --file .gitmodules --get-regexp path | awk '{print $2}'); do
-  git -C "$path" fetch origin --quiet
+for submod in $(git config --file .gitmodules --get-regexp path | awk '{print $2}'); do
+  if [ ! -e "$submod/.git" ]; then
+    git submodule update --init -- "$submod"
+  fi
 
-  # A submodule can carry local commits that were never pushed (this
-  # repo's own workflow: commit locally, push only when asked). Blindly
-  # doing `git submodule update --remote` here would detach HEAD onto
-  # origin/main's tip regardless, silently discarding those commits from
-  # the working tree — they'd still exist on the submodule's local branch,
-  # but the umbrella repo would end up pointing at a rollback. Skip any
-  # submodule that's currently ahead of its own origin/main instead of
-  # clobbering it.
-  ahead=$(git -C "$path" rev-list --count origin/main..HEAD 2>/dev/null || echo 0)
+  git -C "$submod" fetch origin --quiet
+
+  ahead=$(git -C "$submod" rev-list --count origin/main..HEAD 2>/dev/null || echo 0)
   if [ "$ahead" -gt 0 ]; then
-    echo "  ⚠ $path has $ahead local commit(s) not on its own origin/main — skipping, push it from within $path first."
-    SKIPPED+=("$path")
+    echo "  ⚠ $submod has $ahead local commit(s) not on its own origin/main — skipping, push it from within $submod first."
+    SKIPPED+=("$submod")
     continue
   fi
 
-  git -C "$path" checkout origin/main --quiet
+  git -C "$submod" checkout origin/main --quiet
 
-  if ! git diff --quiet -- "$path"; then
-    subject=$(git -C "$path" log -1 --format=%s)
-    git add "$path"
-    git commit -m "chore: bump $path submodule — $subject" >/dev/null
-    BUMPED+=("$path")
+  if ! git diff --quiet -- "$submod"; then
+    subject=$(git -C "$submod" log -1 --format=%s)
+    git add "$submod"
+    git commit -m "chore: bump $submod submodule — $subject" >/dev/null
+    BUMPED+=("$submod")
   fi
 done
 
