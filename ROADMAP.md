@@ -16,6 +16,35 @@ entire digital week planned, posted, scheduled, and tracked — without touching
 
 ---
 
+## Neue Tools (Vorschläge, 2026-08-02)
+
+Zwei neue Tool-Ideen wurden ausgeschrieben, nachdem der komplette "Reste"-Backlog
+(calctl Conflict-Detection+Timezone, notectl Link-Graph, diaryctl HTML/PDF-Export,
+timectl Invoice-Refinement, habctl Yearly-Heatmap+Correlations) fertig war. Beide sind
+**reine Design-Outlines, noch nicht implementiert** — kein Code, kein Repo, kein
+Submodule. Volle Ausschreibung liegt in `proposals/<name>/README.md`.
+
+- [ ] **healthctl** — Terminal-first Medikamenten-Planer (`proposals/healthctl/`).
+  Kernfrage: HealthKit hat *keine* AppleScript/EventKit-Bridge wie Calendar/
+  Reminders/Notes/Mail — Apple-Health-Sync braucht entweder eine native App, einen
+  Shortcuts-CLI-Spike, oder bleibt v1 ganz außen vor (empfohlen: v1 lokal-only,
+  Planer+Reminder+Adherence-Tracking steht als eigenständiger Wert). Name bewusst
+  breiter als "medctl" gewählt, falls später allgemeines Health-Tracking dazukommt —
+  das ist aber explizit nicht Teil von v1.
+- [ ] **investctl** — Aktien/Fonds-Tracking (`proposals/investctl/`), am
+  2026-07-30 bewusst von budgetctl abgegrenzt (kein Holdings/Kurs-Konzept im
+  `Transaction`-Modell). Kernfrage: erstes Tool der Suite mit echter
+  Drittanbieter-Netzwerk-Abhängigkeit (Kursdaten-API) — bricht bewusst mit dem
+  "local-first, nur Apple-Automation"-Muster aller anderen Tools. Empfehlung:
+  gecachte Preise, `sync` explizit nutzergetriggert statt Hintergrund-Polling.
+
+**Wie weiter:** beide brauchen vor Implementierung noch offene Entscheidungen (siehe
+Checklisten in den jeweiligen `proposals/`-READMEs) — insbesondere ob/wann ein
+echtes GitHub-Repo + Submodule angelegt wird. Keins von beiden ist aktuell
+priorisiert vor dem Homebrew-Tap/postctl-Track unten.
+
+---
+
 ## Aktueller Fahrplan (Stand 2026-07-20)
 
 **Fertig:** Bündel-Infrastruktur (Tests, Release-Config, Versioning, LICENSE), alle
