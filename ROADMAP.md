@@ -82,8 +82,14 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   Literale zu duplizieren, null visuelle Änderung, ein Ort für künftige
   Palette-Fixes. habctl bleibt bewusst außen vor (eigene Palette by design),
   postctl hat eigene Design-Sprache.
-- [ ] `missionctl-core/keymap` (Help-Overlay-Builder) adoptieren — ersetzt die
-  handgerollten `key()/row()/section()`-Helfer, noch offen
+- [x] `missionctl-core/keymap` (Help-Overlay-Builder) adoptieren — ersetzt die
+  handgerollten `key()/row()/section()`-Helfer. Ausgerollt auf dieselben 7
+  Tools wie der Theme-Rollout (mailctl/calctl/taskctl/notectl/budgetctl/
+  timectl/diaryctl) — habctl bleibt bewusst außen vor (eigene Palette,
+  26-Zeichen-Key-Spalte, vorgestylte Key-Strings), postctl eigene
+  Design-Sprache. Paket um `Bare()` (kein Auto-Titel, für budgetctl mit
+  eigenem `renderHeader`) und `Text()` (Freitext-Zeilen, für budgetctl
+  "Accounts"-Absatz) ergänzt.
 - [x] Bessere Ladezustände — animierter Spinner statt reinem "Loading…"-Text beim
   initialen Laden in calctl, taskctl, mailctl, notectl (alle AppleScript-/
   netzwerkgestützt, Ladezeit spürbar). mailctl + notectl hatten dabei einen
