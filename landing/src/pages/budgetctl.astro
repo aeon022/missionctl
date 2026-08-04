@@ -13,13 +13,14 @@ const mcpTools = [
   { name: "list_budget_goals", desc: "List budget goals with current-month spending progress" },
   { name: "set_budget_goal", desc: "Set or update a monthly spending limit for a category" },
   { name: "delete_budget_goal", desc: "Remove a budget goal for a category" },
-  { name: "detect_recurring_payments", desc: "Scan transactions for recurring payment patterns" },
+  { name: "detect_recurring_payments", desc: "Scan transactions for recurring payment patterns (missionctl Bundle)" },
 ];
 const features = [
   { title: "Bank CSV Import", title_de: "Bank-CSV-Import", desc: "Import CSV exports from N26, ING, DKB, and other banks. Auto-detects the format and maps columns.", desc_de: "Importiere CSV-Exporte von N26, ING, DKB und anderen Banken. Erkennt das Format automatisch und ordnet Spalten zu." },
   { title: "Category Rules", title_de: "Kategorie-Regeln", desc: "Define regex-based categorization rules. Transactions are auto-categorized on import. Rules persist in SQLite.", desc_de: "Definiere Regex-basierte Kategorisierungsregeln. Transaktionen werden beim Import automatisch kategorisiert. Regeln bleiben dauerhaft in SQLite gespeichert." },
+  { title: "AI Categorization (Bundle)", title_de: "KI-Kategorisierung (Bundle)", desc: "Import with --ai and Claude categorizes uncategorized transactions for you. Unlocks with the missionctl Bundle.", desc_de: "Importiere mit --ai und Claude kategorisiert unkategorisierte Transaktionen für dich. Schaltet mit dem missionctl-Bundle frei." },
   { title: "Budget Goals", title_de: "Budgetziele", desc: "Set monthly spending limits per category. Visual progress bars show how you're tracking against each goal.", desc_de: "Setze monatliche Ausgabenlimits pro Kategorie. Visuelle Fortschrittsbalken zeigen, wie du im Vergleich zu jedem Ziel liegst." },
-  { title: "Recurring Detection", title_de: "Erkennung wiederkehrender Zahlungen", desc: "Automatically detect recurring payments (subscriptions, rent, utilities) based on transaction patterns.", desc_de: "Erkennt automatisch wiederkehrende Zahlungen (Abos, Miete, Nebenkosten) anhand von Transaktionsmustern." },
+  { title: "Recurring Detection (Bundle)", title_de: "Erkennung wiederkehrender Zahlungen (Bundle)", desc: "Automatically detect recurring payments (subscriptions, rent, utilities) based on transaction patterns. Unlocks with the missionctl Bundle.", desc_de: "Erkennt automatisch wiederkehrende Zahlungen (Abos, Miete, Nebenkosten) anhand von Transaktionsmustern. Schaltet mit dem missionctl-Bundle frei." },
   { title: "Command Palette", title_de: "Befehlspalette", desc: "Press \":\" and type an action by name — new entry, import CSV, summary — instead of memorizing shortcuts. Live-filtered as you type.", desc_de: "Drücke \":\" und tippe eine Aktion nach Namen — neuer Eintrag, CSV-Import, Übersicht — statt Shortcuts auswendig zu lernen. Filtert live beim Tippen." },
 ];
 ---
@@ -41,7 +42,7 @@ const features = [
           <span style="font-family: 'JetBrains Mono', monospace; color: #10b981;">budgetctl</span>
         </h1>
         <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;"><span class="lang-en">Budget tracking from your Terminal</span><span class="lang-de">Budgetverfolgung aus deinem Terminal</span></p>
-        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Import bank CSV files, categorize transactions, set budget goals, and detect recurring payments. Works on macOS and Linux. 11 MCP tools.</span><span class="lang-de">Bank-CSV-Dateien importieren, Transaktionen kategorisieren, Budgetziele setzen und wiederkehrende Zahlungen erkennen. Läuft unter macOS und Linux. 11 MCP-Tools.</span></p>
+        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Import bank CSV files, categorize transactions, and set budget goals — free. AI categorization and recurring-payment detection unlock with the Bundle. Works on macOS and Linux. 11 MCP tools.</span><span class="lang-de">Bank-CSV-Dateien importieren, Transaktionen kategorisieren und Budgetziele setzen — kostenlos. KI-Kategorisierung und Erkennung wiederkehrender Zahlungen schaltet das Bundle frei. Läuft unter macOS und Linux. 11 MCP-Tools.</span></p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://github.com/aeon022/budgetctl/releases/latest" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #10b981; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
