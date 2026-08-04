@@ -157,11 +157,17 @@ mailctl mcp                      # start MCP server`}</code></pre>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>     <span>Navigate up/down</span>
         <kbd>Enter</kbd>     <span>Open selected email</span>
+        <kbd>Tab / Shift+Tab</kbd> <span>Switch account</span>
         <kbd>n</kbd>         <span>Compose new email</span>
+        <kbd>o</kbd>         <span>Open in Mail.app</span>
+        <kbd>d</kbd>         <span>Delete (press again to confirm)</span>
+        <kbd>y</kbd>         <span>Copy subject + sender</span>
+        <kbd>v</kbd>         <span>Select mode (batch actions)</span>
+        <kbd>u</kbd>         <span>Toggle unread-only filter</span>
         <kbd>s</kbd>         <span>Sync inbox</span>
         <kbd>/</kbd>         <span>Search</span>
-        <kbd>d</kbd>         <span>Delete email</span>
-        <kbd>U</kbd>         <span>Unsubscribe</span>
+        <kbd>:</kbd>         <span>Command palette</span>
+        <kbd>?</kbd>         <span>Help</span>
         <kbd>q</kbd>         <span>Quit</span>
       </div>
 
@@ -203,10 +209,18 @@ calctl mcp                          # start MCP server`}</code></pre>
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate events</span>
+        <kbd>h / l</kbd>   <span>Previous / next week</span>
+        <kbd>+ / -</kbd>   <span>Show more / fewer days</span>
         <kbd>Enter</kbd>   <span>Open event detail</span>
         <kbd>n</kbd>       <span>Create new event</span>
+        <kbd>e</kbd>       <span>Edit event</span>
+        <kbd>d</kbd>       <span>Delete event (asks to confirm)</span>
+        <kbd>f</kbd>       <span>Free slots</span>
+        <kbd>c</kbd>       <span>Set default calendar</span>
         <kbd>s</kbd>       <span>Sync calendar</span>
-        <kbd>/</kbd>       <span>Search events</span>
+        <kbd>/</kbd>       <span>Filter events</span>
+        <kbd>:</kbd>       <span>Command palette</span>
+        <kbd>?</kbd>       <span>Help</span>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
 
@@ -251,15 +265,26 @@ taskctl mcp                          # start MCP server`}</code></pre>
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate tasks</span>
+        <kbd>1-9</kbd>     <span>Jump to nth visible task</span>
         <kbd>Space</kbd>   <span>Toggle task complete</span>
+        <kbd>Enter</kbd>   <span>Task details</span>
         <kbd>n</kbd>       <span>New task</span>
-        <kbd>i</kbd>       <span>Inline edit title</span>
-        <kbd>e</kbd>       <span>Full edit</span>
-        <kbd>d</kbd>       <span>Delete task</span>
-        <kbd>s</kbd>       <span>Sync</span>
-        <kbd>t</kbd>       <span>Focus mode / Pomodoro</span>
+        <kbd>e</kbd>       <span>Edit task</span>
+        <kbd>d</kbd>       <span>Delete task (asks to confirm)</span>
+        <kbd>o</kbd>       <span>Open task URL</span>
+        <kbd>S</kbd>       <span>Postpone to tomorrow</span>
+        <kbd>y</kbd>       <span>Copy title</span>
+        <kbd>u</kbd>       <span>Undo last action</span>
+        <kbd>v</kbd>       <span>Select mode (batch actions)</span>
         <kbd>p</kbd>       <span>Pomodoro timer</span>
-        <kbd>A</kbd>       <span>Batch select</span>
+        <kbd>t</kbd>       <span>Focus mode (today &amp; overdue)</span>
+        <kbd>O</kbd>       <span>Filter: overdue only</span>
+        <kbd>c</kbd>       <span>Show / hide completed</span>
+        <kbd>i</kbd>       <span>Stats</span>
+        <kbd>s</kbd>       <span>Sync</span>
+        <kbd>/</kbd>       <span>Search</span>
+        <kbd>:</kbd>       <span>Command palette</span>
+        <kbd>?</kbd>       <span>Help</span>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
 
@@ -306,14 +331,22 @@ notectl mcp                     # start MCP server`}</code></pre>
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate notes</span>
+        <kbd>g / G</kbd>   <span>Jump to top / bottom</span>
         <kbd>Enter</kbd>   <span>Open note</span>
         <kbd>n</kbd>       <span>New note</span>
         <kbd>e</kbd>       <span>Edit note</span>
-        <kbd>d</kbd>       <span>Delete note</span>
-        <kbd>o</kbd>       <span>Open in $EDITOR</span>
+        <kbd>d</kbd>       <span>Delete note (asks to confirm)</span>
+        <kbd>o</kbd>       <span>Open in external app</span>
+        <kbd>y</kbd>       <span>Copy title</span>
+        <kbd>S</kbd>       <span>Toggle sort (date / title)</span>
+        <kbd>t</kbd>       <span>Browse tags</span>
+        <kbd>L</kbd>       <span>Link graph ([[wiki-links]])</span>
+        <kbd>p</kbd>       <span>Settings (vault path, source)</span>
         <kbd>s</kbd>       <span>Sync vault</span>
         <kbd>/</kbd>       <span>Search</span>
-        <kbd>Tab</kbd>     <span>Browse folders</span>
+        <kbd>Tab / Shift+Tab</kbd> <span>Browse folders</span>
+        <kbd>:</kbd>       <span>Command palette</span>
+        <kbd>?</kbd>       <span>Help</span>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
 
@@ -363,10 +396,23 @@ budgetctl mcp                       # start MCP server`}</code></pre>
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>         <span>Navigate transactions</span>
-        <kbd>s</kbd>             <span>Monthly summary</span>
-        <kbd>S</kbd>             <span>Sync / reimport</span>
+        <kbd>Tab / Shift+Tab</kbd> <span>Next / previous month</span>
+        <kbd>y / Y</kbd>         <span>Next / previous year</span>
+        <kbd>[ / ]</kbd>         <span>Cycle accounts</span>
+        <kbd>Enter</kbd>         <span>View full details</span>
+        <kbd>n</kbd>             <span>New entry (manual)</span>
+        <kbd>i</kbd>             <span>Import CSV</span>
+        <kbd>e</kbd>             <span>Edit selected entry</span>
+        <kbd>d</kbd>             <span>Delete entry (asks to confirm)</span>
+        <kbd>u</kbd>             <span>Undo last delete</span>
+        <kbd>c</kbd>             <span>Set category</span>
+        <kbd>v</kbd>             <span>Select mode (batch categorize)</span>
+        <kbd>f</kbd>             <span>Filter by category</span>
         <kbd>/</kbd>             <span>Search transactions</span>
-        <kbd>Tab / Shift+Tab</kbd> <span>Navigate months</span>
+        <kbd>s / S</kbd>         <span>Summary (categories, charts, goals)</span>
+        <kbd>o</kbd>             <span>Settings (sync across devices)</span>
+        <kbd>:</kbd>             <span>Command palette</span>
+        <kbd>?</kbd>             <span>Help</span>
         <kbd>q</kbd>             <span>Quit</span>
       </div>
 
@@ -534,9 +580,15 @@ diaryctl mcp                 # start MCP server`}</code></pre>
       <pre><code>{`j/k     navigate entries
 enter   open entry
 n       generate today's entry
-e       edit in $EDITOR
-r       repos view
-v       stats view
+e       edit entry
+d       delete entry (asks to confirm)
+y       copy title
+u       undo last delete
+g       open corresponding note in notectl
+r       browse tracked git repos
+/       search entries
+:       command palette
+?       help
 q       quit`}</code></pre>
 
       <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
@@ -572,11 +624,23 @@ timectl tui                  # open TUI
 timectl mcp                  # start MCP server`}</code></pre>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
-      <pre><code>{`n       start new timer
+      <pre><code>{`n       start new timer (task@project)
+T       start timer from an open taskctl task
 s       stop running timer
+r       restart selected entry's task
+c       copy selected entry into new-task input
 j/k     navigate log
+e       edit notes
+d       delete entry (asks to confirm)
+u       undo last delete
+y       copy task name
+g       open linked taskctl task
+←/→/t   browse previous/next day, back to today
 w       week view
 v       stats view
+/       filter by task, project, notes
+:       command palette
+?       help
 q       quit`}</code></pre>
 
       <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
