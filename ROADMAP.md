@@ -97,11 +97,22 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   konnte kurz aufblitzen, bevor die erste Ladung durch war — jetzt korrekt
   unterschieden. budgetctl/timectl bewusst ausgelassen — rein lokale
   SQLite-Reads, Ladezeit nicht wahrnehmbar, kein Spinner-Unterbau vorhanden.
-- [~] Command-Palette / `:`-Modus (wie k9s/lazygit) — **Prototyp in habctl fertig**,
-  wartet auf Feedback vor Rollout auf die restliche Suite. `:` öffnet, Tippen
-  filtert live (Präfix-Treffer zuerst), ↑/↓ wählt, Enter führt aus. Dispatcht
-  über `handleList` (dieselbe Funktion wie jeder normale Tastendruck) statt
-  eigener Logik. Bisher nur aus der Haupt-Listenansicht erreichbar.
+- [x] Command-Palette / `:`-Modus (wie k9s/lazygit) — Prototyp in habctl,
+  ausgerollt auf alle 7 anderen Tools (mailctl/calctl/taskctl/notectl/
+  budgetctl/timectl/diaryctl). `:` öffnet, Tippen filtert live (Präfix-
+  Treffer zuerst), ↑/↓ wählt, Enter führt aus. Dispatcht über den
+  bestehenden Key-Handler des jeweiligen Tools (kein separater
+  Action-Dispatch), Matching-Logik zentral in neuem
+  `missionctl-core/palette`. Zwei echte Bugs unterwegs gefunden und
+  gefixt: (1) taskctl/notectl/mailctl/budgetctl/calctl — die Liste
+  darunter wurde beim Öffnen der Palette nicht verkleinert, konnte bei
+  vollem Terminal die Eingabezeile selbst nach oben aus dem Bild
+  schieben. (2) calctl zusätzlich: Fensterung nach Zeilen-Anzahl statt
+  physischer Zeilen — Datums-Header kosten 2 Zeilen, nicht 1, das
+  Budget konnte trotz "richtiger" Kürzung überlaufen. Live mit tmux
+  gegen echte Terminals verifiziert, nicht nur Unit-Tests. habctl
+  bleibt der Prototyp (unverändert), postctl eigene Design-Sprache.
+  Nur aus der Haupt-Listenansicht erreichbar.
 
 ### Mittel
 - [x] Fuzzy-Suche mit Highlighting der Treffer statt reinem Substring-Filter —
