@@ -96,8 +96,12 @@ const navSections = [
       <h2 id="getting-started"><span class="lang-en">Getting Started</span><span class="lang-de">Erste Schritte</span></h2>
 
       <h3 id="installation"><span class="lang-en">Installation</span><span class="lang-de">Installation</span></h3>
-      <p><span class="lang-en">Clone and build each tool. Every repo has a <code>setup.sh</code> that compiles the binary and installs it to <code>~/.local/bin/</code>.</span>
-      <span class="lang-de">Klone und baue jedes Tool. Jedes Repo hat ein <code>setup.sh</code>, das das Binary kompiliert und nach <code>~/.local/bin/</code> installiert.</span></p>
+      <p><span class="lang-en">Fastest way — install via Homebrew. All 8 tools are free, MIT-licensed, and tapped from one repo:</span>
+      <span class="lang-de">Am schnellsten geht's über Homebrew. Alle 8 Tools sind kostenlos, MIT-lizenziert und aus einem Repo getappt:</span></p>
+      <pre><code>{`brew tap aeon022/tap https://github.com/aeon022/homebrew-tap
+brew install aeon022/tap/calctl   # repeat for any of: mailctl taskctl notectl budgetctl diaryctl timectl habctl`}</code></pre>
+      <p><span class="lang-en">Or clone and build from source. Every repo has a <code>setup.sh</code> that compiles the binary and installs it to <code>~/.local/bin/</code>:</span>
+      <span class="lang-de">Oder klone und baue aus dem Quellcode. Jedes Repo hat ein <code>setup.sh</code>, das das Binary kompiliert und nach <code>~/.local/bin/</code> installiert:</span></p>
       <pre><code>{`for repo in mailctl calctl taskctl notectl budgetctl diaryctl timectl habctl; do
   git clone https://github.com/aeon022/$repo
   cd $repo && ./setup.sh && cd ..
@@ -815,8 +819,8 @@ q       quit`}</code></pre>
         <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #a0aec0;">
           <span style="color: #00d97e; font-weight: 600;"><span class="lang-en">Ready to start?</span><span class="lang-de">Bereit loszulegen?</span></span>
           &nbsp;&nbsp;
-          <a href="https://polar.sh/aeon022" target="_blank" rel="noopener" style="color: #00d97e; text-decoration: none;">
-            <span class="lang-en">Get the Bundle — $39</span><span class="lang-de">Bundle holen — $39</span> &rarr;
+          <a href="https://github.com/aeon022/homebrew-tap" target="_blank" rel="noopener" style="color: #00d97e; text-decoration: none;">
+            <span class="lang-en">brew install — Free</span><span class="lang-de">brew install — Kostenlos</span> &rarr;
           </a>
         </p>
       </div>

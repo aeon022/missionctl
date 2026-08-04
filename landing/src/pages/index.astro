@@ -2,7 +2,6 @@
 import Layout from '../components/Layout.astro';
 import TerminalWindow from '../components/TerminalWindow.astro';
 import AppCard from '../components/AppCard.astro';
-import PricingCard from '../components/PricingCard.astro';
 
 const apps = [
   {
@@ -282,14 +281,8 @@ const faqs = [
   {
     q_en: 'How do I get updates?',
     q_de: 'Wie bekomme ich Updates?',
-    a_en: 'Updates are included with your purchase. Pull the latest from GitHub and re-run ./setup.sh.',
-    a_de: 'Updates sind im Kaufpreis inbegriffen. Hole dir den neuesten Stand von GitHub und führe ./setup.sh erneut aus.',
-  },
-  {
-    q_en: "What's the difference between buying individually vs. the bundle?",
-    q_de: 'Was ist der Unterschied zwischen Einzelkauf und Bundle?',
-    a_en: 'The bundle ($39) includes all 9 tools. Buying individually costs $81 total. If you use more than 4 tools, the bundle saves money.',
-    a_de: 'Das Bundle ($39) enthält alle 9 Tools. Einzelkauf kostet insgesamt $81. Nutzt du mehr als 4 Tools, sparst du mit dem Bundle.',
+    a_en: 'Updates are free. Run brew upgrade <tool>, or pull the latest from GitHub and re-run ./setup.sh.',
+    a_de: 'Updates sind kostenlos. Führe brew upgrade <tool> aus, oder hole dir den neuesten Stand von GitHub und führe ./setup.sh erneut aus.',
   },
 ];
 
@@ -334,13 +327,11 @@ const faqLd = {
         </p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a
-            href="https://polar.sh/aeon022"
-            target="_blank"
-            rel="noopener"
+            href="#pricing"
             style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s ease; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
             class="hero-cta-primary"
           >
-            <span class="lang-en">Get the Bundle &mdash; $39</span><span class="lang-de">Bundle holen &mdash; $39</span>
+            <span class="lang-en">Download &mdash; Free</span><span class="lang-de">Herunterladen &mdash; Kostenlos</span>
           </a>
           <a
             href="#apps"
@@ -351,7 +342,7 @@ const faqLd = {
           </a>
         </div>
         <p style="color: #4a5568; font-size: 0.75rem; margin: 1.25rem 0 0; font-family: 'JetBrains Mono', monospace;">
-          <span class="lang-en">One-time purchase &middot; Future updates included &middot; Your data stays on your machine</span><span class="lang-de">Einmalkauf &middot; Zukünftige Updates inklusive &middot; Deine Daten bleiben auf deinem Rechner</span>
+          <span class="lang-en">MIT licensed &middot; Free forever &middot; Your data stays on your machine</span><span class="lang-de">MIT-lizenziert &middot; Für immer kostenlos &middot; Deine Daten bleiben auf deinem Rechner</span>
         </p>
       </div>
 
@@ -581,129 +572,69 @@ const faqLd = {
     </div>
   </section>
 
-  <!-- ======= PRICING ======= -->
+  <!-- ======= DOWNLOAD ======= -->
   <section id="pricing" style="padding: 5rem 1.5rem; background: #0a0a0f; border-top: 1px solid #1e1e2e;">
     <div style="max-width: 1100px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
         <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
           <span class="lang-en">Simple pricing</span><span class="lang-de">Einfache Preise</span>
         </h2>
-        <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-          <span class="lang-en">One-time purchase. No subscriptions. Future updates included.</span><span class="lang-de">Einmalkauf. Keine Abos. Zukünftige Updates inklusive.</span>
+        <p style="color: #718096; font-size: 1rem; max-width: 560px; margin: 0 auto;">
+          <span class="lang-en">All 9 tools are free to download individually. Or get the lifetime Bundle — one-time payment, all future updates included.</span><span class="lang-de">Alle 9 Tools sind einzeln kostenlos herunterladbar. Oder hol dir das Lifetime-Bundle — Einmalzahlung, alle zukünftigen Updates inklusive.</span>
         </p>
       </div>
 
-      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; align-items: start;" class="pricing-grid">
-        <PricingCard
-          title="Individual Tools"
-          price="$9"
-          features={[
-            'mailctl — email & Apple Mail',
-            'calctl — calendar & free slots',
-            'taskctl — tasks & Pomodoro',
-            'notectl — Obsidian notes',
-            'budgetctl — budget tracking',
-            'diaryctl — developer diary',
-            'timectl — time tracking',
-            'habctl — habit tracking',
-            'postctl — social scheduling',
-          ]}
-          features_de={[
-            'mailctl — E-Mail & Apple Mail',
-            'calctl — Kalender & freie Slots',
-            'taskctl — Aufgaben & Pomodoro',
-            'notectl — Obsidian-Notizen',
-            'budgetctl — Budgetverfolgung',
-            'diaryctl — Entwickler-Tagebuch',
-            'timectl — Zeiterfassung',
-            'habctl — Gewohnheiten-Tracking',
-            'postctl — Social-Media-Planung',
-          ]}
-          note="Each tool sold separately at $9"
-          note_de="Jedes Tool einzeln für $9"
-          ctaText="Browse tools"
-          ctaText_de="Tools ansehen"
-          ctaHref="https://polar.sh/aeon022"
-        />
+      <!-- Bundle callout -->
+      <div style="background: linear-gradient(135deg, rgba(0,217,126,0.08), rgba(0,217,126,0.02)); border: 1px solid rgba(0,217,126,0.25); border-radius: 10px; padding: 2rem; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;" class="bundle-callout">
+        <div>
+          <div style="display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; color: #00d97e; background: rgba(0,217,126,0.1); border: 1px solid rgba(0,217,126,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;">
+            <span class="lang-en">Launch special &middot; -30% with code L4uNch26</span><span class="lang-de">Launch-Special &middot; -30% mit Code L4uNch26</span>
+          </div>
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.4rem;">missionctl Bundle</h3>
+          <p style="color: #718096; font-size: 0.9rem; margin: 0; line-height: 1.6;">
+            <span class="lang-en">All 9 tools, lifetime license, one-time payment. Future updates included.</span>
+            <span class="lang-de">Alle 9 Tools, lebenslange Lizenz, Einmalzahlung. Zukünftige Updates inklusive.</span>
+          </p>
+        </div>
+        <a href="https://buy.polar.sh/polar_cl_kf5owZpIIKKtLjfO6wU3ofmYHecAixqxVZrmr1GMGOd" target="_blank" rel="noopener"
+          style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
+          class="cta-primary">
+          <span class="lang-en">Get the Bundle &mdash; $39</span><span class="lang-de">Bundle holen &mdash; $39</span>
+        </a>
+      </div>
 
-        <PricingCard
-          title="missionctl Bundle"
-          price="$39"
-          features={[
-            'All 9 tools included',
-            'mailctl + calctl + taskctl',
-            'notectl + budgetctl + postctl',
-            'diaryctl + timectl',
-            'habctl + habit tracking',
-            '66 MCP tools total',
-            'One config block',
-            'Future updates included',
-          ]}
-          features_de={[
-            'Alle 9 Tools enthalten',
-            'mailctl + calctl + taskctl',
-            'notectl + budgetctl + postctl',
-            'diaryctl + timectl',
-            'habctl + Gewohnheiten-Tracking',
-            '66 MCP-Tools gesamt',
-            'Ein Config-Block',
-            'Zukünftige Updates inklusive',
-          ]}
-          ctaText="Get the Bundle — $39"
-          ctaText_de="Bundle holen — $39"
-          ctaHref="https://polar.sh/aeon022"
-          highlighted={true}
-          badge="Best Value"
-          badge_de="Bester Wert"
-        />
+      <p style="text-align: center; color: #4a5568; font-size: 0.8rem; margin: 0 0 1.5rem; font-family: 'JetBrains Mono', monospace;">
+        <span class="lang-en">Or grab any tool individually for free:</span><span class="lang-de">Oder hol dir jedes Tool einzeln kostenlos:</span>
+      </p>
 
-        <PricingCard
-          title="Go Tutorial"
-          price="$19"
-          features={[
-            'Build a CLI/TUI app in Go',
-            'Cobra + Bubbletea + Lipgloss',
-            'MCP server implementation',
-            'SQLite with no CGo',
-            'Real-world project structure',
-          ]}
-          features_de={[
-            'Baue eine CLI/TUI-App in Go',
-            'Cobra + Bubbletea + Lipgloss',
-            'MCP-Server-Implementierung',
-            'SQLite ohne CGo',
-            'Praxisnahe Projektstruktur',
-          ]}
-          ctaText="Get the Tutorial"
-          ctaText_de="Tutorial holen"
-          ctaHref="https://polar.sh/aeon022"
-        />
+      <div style="margin-bottom: 2.5rem;">
+        <TerminalWindow title="~ install" content={`<span style="color:#4a5568"># tap once, then install any of the 8 dev tools</span>
+<span style="color:#4a5568">$ </span>brew tap aeon022/tap https://github.com/aeon022/homebrew-tap
+<span style="color:#4a5568">$ </span>brew install aeon022/tap/calctl`} />
+      </div>
 
-        <PricingCard
-          title="Tutorial + Bundle"
-          price="$49"
-          features={[
-            'Everything in the Bundle',
-            'Full Go tutorial included',
-            "Learn how it's built",
-            'Best for developers',
-            'Save $9 vs buying separate',
-          ]}
-          features_de={[
-            'Alles aus dem Bundle',
-            'Komplettes Go-Tutorial inklusive',
-            'Lerne, wie es gebaut ist',
-            'Am besten für Entwickler',
-            '$9 sparen ggü. Einzelkauf',
-          ]}
-          ctaText="Get Tutorial + Bundle"
-          ctaText_de="Tutorial + Bundle holen"
-          ctaHref="https://polar.sh/aeon022"
-        />
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;" class="pricing-grid">
+        {apps.map((app) => (
+          app.name === 'postctl' ? (
+            <div style="background: #111118; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.25rem;">
+              <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #e2e8f0; margin: 0 0 0.5rem;">postctl</h3>
+              <p style="color: #718096; font-size: 0.8rem; margin: 0 0 0.75rem; line-height: 1.5;"><span class="lang-en">Own site &middot; free core, optional Pro license</span><span class="lang-de">Eigene Seite &middot; kostenloser Kern, optionale Pro-Lizenz</span></p>
+              <a href="https://postctl.sh" target="_blank" rel="noopener" style="color: #00d97e; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; text-decoration: none;">postctl.sh &rarr;</a>
+            </div>
+          ) : (
+            <div style="background: #111118; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.25rem;">
+              <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #e2e8f0; margin: 0 0 0.5rem;">{app.name}</h3>
+              <code style="display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #00d97e; background: #0a0a0f; padding: 0.4rem 0.6rem; border-radius: 4px; margin: 0 0 0.6rem; overflow-x: auto; white-space: nowrap;">brew install aeon022/tap/{app.name}</code>
+              <a href={`https://github.com/aeon022/${app.name}/releases/latest`} target="_blank" rel="noopener" style="color: #718096; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; text-decoration: none;">
+                <span class="lang-en">Direct download ↗</span><span class="lang-de">Direkter Download ↗</span>
+              </a>
+            </div>
+          )
+        ))}
       </div>
 
       <p style="text-align: center; color: #4a5568; font-size: 0.8rem; margin-top: 2rem; font-family: 'JetBrains Mono', monospace;">
-        <span class="lang-en">Payments processed by polar.sh &middot; No subscription &middot; No refund needed — it works</span><span class="lang-de">Zahlungsabwicklung über polar.sh &middot; Kein Abo &middot; Keine Rückerstattung nötig — es funktioniert einfach</span>
+        <span class="lang-en">MIT licensed &middot; Source on GitHub &middot; Build from source if you'd rather not use Homebrew</span><span class="lang-de">MIT-lizenziert &middot; Quellcode auf GitHub &middot; Baue aus dem Quellcode, falls du kein Homebrew nutzen willst</span>
       </p>
     </div>
   </section>
