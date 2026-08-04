@@ -171,6 +171,11 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
       <AnnouncementBar />
       <Nav />
     </div>
+    <!-- Spacer OUTSIDE the fixed #site-header — a spacer nested inside a
+         fixed-position ancestor contributes no height to document flow, so
+         this must live here, not inside Nav.astro, or every page's content
+         renders underneath the floating header. -->
+    <div class="nav-spacer"></div>
     <main>
       <slot />
     </main>

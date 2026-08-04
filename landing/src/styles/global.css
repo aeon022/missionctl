@@ -33,6 +33,12 @@ html {
 html[lang="de"] .lang-en { display: none !important; }
 html[lang="en"] .lang-de { display: none !important; }
 
+/* Announcement bar's actual rendered height (see AnnouncementBar.astro),
+   0 once dismissed (html.bar-closed). Read by .nav-spacer, the docs sidebar
+   sticky offset, and the smooth-anchor-scroll offset in Layout.astro. */
+:root { --ann-bar-height: 36px; }
+html.bar-closed { --ann-bar-height: 0px; }
+
 body {
   background-color: #0a0a0f;
   color: #e2e8f0;
@@ -203,10 +209,7 @@ main, header, footer, nav {
 
 /* Spacer so content starts below the fixed header */
 .nav-spacer {
-  height: calc(36px + 68px) !important; /* announcement bar + floating nav island */
-}
-.bar-closed .nav-spacer {
-  height: 68px !important;
+  height: calc(var(--ann-bar-height, 36px) + 68px); /* announcement bar + floating nav island */
 }
 
 /* ===== SCROLL REVEAL ===== */
@@ -395,7 +398,7 @@ pre { position: relative; }
 .docs-layout {
   display: grid;
   grid-template-columns: 240px 1fr;
-  min-height: calc(100vh - 68px);
+  min-height: calc(100vh - var(--ann-bar-height, 36px) - 68px);
   max-width: 1200px;
   margin: 0 auto;
 }

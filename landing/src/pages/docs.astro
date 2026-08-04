@@ -23,6 +23,9 @@ const navSections = [
       { href: '#installation', label_en: 'Installation', label_de: 'Installation' },
       { href: '#quick-setup', label_en: 'Quick Setup', label_de: 'Schnelleinrichtung' },
       { href: '#claude-config', label_en: 'Claude Desktop config', label_de: 'Claude-Desktop-Konfiguration' },
+      { href: '#sync-across-devices', label_en: 'Sync across devices', label_de: 'Sync über mehrere Geräte' },
+      { href: '#licensing', label_en: 'Licensing (Bundle features)', label_de: 'Lizenzierung (Bundle-Features)' },
+      { href: '#tutorial', label_en: 'Tutorial: first 10 minutes', label_de: 'Tutorial: die ersten 10 Minuten' },
     ],
   },
   {
@@ -129,6 +132,107 @@ notectl sync      # Obsidian vault → local index`}</code></pre>
       </p>
       <pre><code set:text={mcpConfig}></code></pre>
       <p><span class="lang-en">Restart Claude Desktop. All 66 MCP tools appear automatically in every conversation.</span><span class="lang-de">Starte Claude Desktop neu. Alle 66 MCP-Tools erscheinen automatisch in jeder Unterhaltung.</span></p>
+
+      <!-- ── SYNC ACROSS DEVICES ────────────── -->
+      <h2 id="sync-across-devices"><span class="lang-en">Sync Across Devices</span><span class="lang-de">Sync über mehrere Geräte</span></h2>
+      <p>
+        <span class="lang-en">By default, each tool keeps its SQLite database in a private directory (<code>~/.local/share/&lt;tool&gt;/</code> — <code>~/Library/Application Support/&lt;tool&gt;/</code> on some tools). That's fine for a single machine. To use the same data on a laptop and a desktop, point a tool's database at a folder you already sync yourself — iCloud Drive, Dropbox, Syncthing — via the <code>data_dir</code> config key or a <code>&lt;TOOL&gt;_DATA_DIR</code> environment variable. All 8 dev tools (not postctl, which has its own per-profile setup) support this the same way.</span>
+        <span class="lang-de">Standardmäßig legt jedes Tool seine SQLite-Datenbank in einem privaten Verzeichnis ab (<code>~/.local/share/&lt;tool&gt;/</code> — bei manchen Tools <code>~/Library/Application Support/&lt;tool&gt;/</code>). Für ein einzelnes Gerät reicht das. Um dieselben Daten auf Laptop und Desktop zu nutzen, zeigst du die Datenbank eines Tools auf einen Ordner, den du bereits selbst synchronisierst — iCloud Drive, Dropbox, Syncthing — über den Config-Key <code>data_dir</code> oder eine Umgebungsvariable <code>&lt;TOOL&gt;_DATA_DIR</code>. Alle 8 Entwickler-Tools (nicht postctl, das ein eigenes Profil-System hat) unterstützen das auf dieselbe Weise.</span>
+      </p>
+
+      <h3><span class="lang-en">Set it via config file</span><span class="lang-de">Über die Config-Datei setzen</span></h3>
+      <pre><code>{`# ~/.config/budgetctl/budgetctl.yaml
+data_dir: ~/Library/Mobile Documents/com~apple~CloudDocs/missionctl/budgetctl`}</code></pre>
+
+      <h3><span class="lang-en">Or via environment variable</span><span class="lang-de">Oder über eine Umgebungsvariable</span></h3>
+      <pre><code>{`export BUDGETCTL_DATA_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/missionctl/budgetctl"
+export NOTECTL_DATA_DIR="$HOME/Dropbox/missionctl/notectl"`}</code></pre>
+      <p>
+        <span class="lang-en"><strong>budgetctl</strong> also has a TUI settings screen for this — press <code>o</code> and set the sync folder without touching a config file by hand.</span>
+        <span class="lang-de"><strong>budgetctl</strong> hat dafür auch einen TUI-Einstellungsbildschirm — drücke <code>o</code> und setze den Sync-Ordner, ohne eine Config-Datei von Hand zu bearbeiten.</span>
+      </p>
+
+      <h3><span class="lang-en">What actually makes this safe</span><span class="lang-de">Was das wirklich sicher macht</span></h3>
+      <p>
+        <span class="lang-en">Pointing a SQLite file at a synced folder isn't automatically safe — three specific things can go wrong, and <code>missionctl-core/syncdir</code> (used by every tool) exists to close them:</span>
+        <span class="lang-de">Eine SQLite-Datei einfach in einen synchronisierten Ordner zu legen ist nicht automatisch sicher — drei konkrete Dinge können schiefgehen, und <code>missionctl-core/syncdir</code> (von jedem Tool genutzt) schließt genau diese Lücken:</span>
+      </p>
+      <ul>
+        <li><span class="lang-en"><strong>WAL journal mode splits state across up to 3 files</strong> (<code>.db</code>, <code>.db-wal</code>, <code>.db-shm</code>). A sync client uploads whichever one changed, whenever — with no guarantee the three land together. As soon as a tool is pointed at a user-configured directory, it switches to classic rollback-journal mode instead: one main file, plus a transient <code>-journal</code> sidecar that only exists mid-write and is gone the instant a transaction commits. The private default directory stays on WAL, untouched.</span>
+        <span class="lang-de"><strong>Der WAL-Journal-Modus teilt den Zustand auf bis zu 3 Dateien auf</strong> (<code>.db</code>, <code>.db-wal</code>, <code>.db-shm</code>). Ein Sync-Client lädt hoch, was sich gerade geändert hat — ohne Garantie, dass alle drei zusammen ankommen. Sobald ein Tool auf ein benutzerdefiniertes Verzeichnis zeigt, wechselt es stattdessen auf den klassischen Rollback-Journal-Modus: eine Hauptdatei plus eine kurzlebige <code>-journal</code>-Begleitdatei, die nur während eines aktiven Schreibvorgangs existiert. Das private Standardverzeichnis bleibt unangetastet bei WAL.</span></li>
+        <li><span class="lang-en"><strong>Two processes on the same machine</strong> (two terminal tabs, a crashed session that never let go) must not write at once. An advisory file lock (<code>flock</code>) enforces that — and releases itself automatically the moment the holding process exits, however it exits, so a crash can't leave the database stuck "locked" forever.</span>
+        <span class="lang-de"><strong>Zwei Prozesse auf demselben Gerät</strong> (zwei Terminal-Tabs, eine abgestürzte Session, die nie losgelassen hat) dürfen nicht gleichzeitig schreiben. Ein Advisory-File-Lock (<code>flock</code>) erzwingt das — und löst sich automatisch, sobald der haltende Prozess beendet wird, egal wie, sodass ein Absturz die Datenbank nicht dauerhaft "gesperrt" zurücklässt.</span></li>
+        <li><span class="lang-en"><strong>macOS can evict an iCloud Drive file</strong> to save local disk space ("Optimize Mac Storage"), replacing it with a zero-byte placeholder. Tools detect this and re-download the real file before touching it, instead of silently opening an empty database.</span>
+        <span class="lang-de"><strong>macOS kann eine iCloud-Drive-Datei auslagern</strong>, um lokalen Speicherplatz zu sparen ("Mac-Speicher optimieren"), und durch einen Null-Byte-Platzhalter ersetzen. Tools erkennen das und laden die echte Datei nach, statt stillschweigend eine leere Datenbank zu öffnen.</span></li>
+      </ul>
+
+      <!-- ── LICENSING ──────────────────────── -->
+      <h2 id="licensing"><span class="lang-en">Licensing (Bundle features)</span><span class="lang-de">Lizenzierung (Bundle-Features)</span></h2>
+      <p>
+        <span class="lang-en">All 9 tools are free and MIT licensed. A small number of features that cost real compute (AI calls) or add real complexity are part of the <a href="/#pricing" style="color:#00d97e;">missionctl Bundle</a> instead of the free core — everything else stays free forever:</span>
+        <span class="lang-de">Alle 9 Tools sind kostenlos und MIT-lizenziert. Eine kleine Zahl an Features, die echte Rechenkosten (KI-Aufrufe) verursachen oder echte Komplexität hinzufügen, gehören zum <a href="/#pricing" style="color:#00d97e;">missionctl Bundle</a> statt zum kostenlosen Kern — alles andere bleibt für immer kostenlos:</span>
+      </p>
+      <ul>
+        <li><span class="lang-en"><strong>budgetctl:</strong> AI transaction categorization (<code>--ai</code>) and recurring-payment detection (<code>budgetctl recurring</code>).</span><span class="lang-de"><strong>budgetctl:</strong> KI-Transaktionskategorisierung (<code>--ai</code>) und Erkennung wiederkehrender Zahlungen (<code>budgetctl recurring</code>).</span></li>
+        <li><span class="lang-en"><strong>notectl:</strong> more than one named vault (<code>notectl vault add</code>) — the free tier includes one.</span><span class="lang-de"><strong>notectl:</strong> mehr als ein benannter Vault (<code>notectl vault add</code>) — die kostenlose Version umfasst einen.</span></li>
+      </ul>
+      <p>
+        <span class="lang-en">Both use the same real Polar.sh license-key check postctl's Pro license already uses — no phone-home telemetry, just a one-time (or offline-cached) validation against your key:</span>
+        <span class="lang-de">Beide nutzen denselben echten Polar.sh-Lizenzschlüssel-Check, den postctls Pro-Lizenz bereits verwendet — keine Phone-Home-Telemetrie, nur eine einmalige (oder offline-zwischengespeicherte) Prüfung deines Schlüssels:</span>
+      </p>
+      <pre><code>{`budgetctl license activate <key>   # after buying the Bundle
+budgetctl license status           # check current status
+
+notectl license activate <key>
+notectl license status`}</code></pre>
+      <p>
+        <span class="lang-en">Without a license, gated commands print a short message pointing at the Bundle and — where it makes sense, like <code>--ai</code> import — fall back to the free behavior instead of failing outright.</span>
+        <span class="lang-de">Ohne Lizenz geben gesperrte Befehle eine kurze Meldung mit Verweis auf das Bundle aus und fallen — wo es sinnvoll ist, wie bei <code>--ai</code>-Import — auf das kostenlose Verhalten zurück, statt komplett fehlzuschlagen.</span>
+      </p>
+
+      <!-- ── TUTORIAL ───────────────────────── -->
+      <h2 id="tutorial"><span class="lang-en">Tutorial: First 10 Minutes</span><span class="lang-de">Tutorial: Die ersten 10 Minuten</span></h2>
+      <p>
+        <span class="lang-en">A concrete walkthrough for someone setting up missionctl for the first time — using calctl and taskctl as the example, but the pattern is the same for every tool.</span>
+        <span class="lang-de">Eine konkrete Anleitung für den ersten missionctl-Aufbau — am Beispiel calctl und taskctl, aber das Muster ist bei jedem Tool gleich.</span>
+      </p>
+
+      <h3><span class="lang-en">1. Install two tools to try</span><span class="lang-de">1. Zwei Tools zum Ausprobieren installieren</span></h3>
+      <pre><code>{`brew tap aeon022/tap https://github.com/aeon022/homebrew-tap
+brew install aeon022/tap/calctl
+brew install aeon022/tap/taskctl`}</code></pre>
+
+      <h3><span class="lang-en">2. Run the initial sync</span><span class="lang-de">2. Erste Synchronisation ausführen</span></h3>
+      <p><span class="lang-en">This reads from Apple Calendar / Apple Reminders into each tool's local SQLite cache. Nothing leaves your machine.</span><span class="lang-de">Das liest aus Apple Kalender / Apple Erinnerungen in den lokalen SQLite-Cache jedes Tools. Nichts verlässt deinen Rechner.</span></p>
+      <pre><code>{`calctl sync
+taskctl sync`}</code></pre>
+
+      <h3><span class="lang-en">3. Try the TUI</span><span class="lang-de">3. Die TUI ausprobieren</span></h3>
+      <pre><code>{`calctl        # opens the week view
+taskctl       # opens the task list`}</code></pre>
+      <p><span class="lang-en">Press <code>:</code> in either one and type a few letters — the command palette live-filters every available action, so you don't need to memorize keybindings up front.</span><span class="lang-de">Drücke in beiden <code>:</code> und tippe ein paar Buchstaben — die Befehlspalette filtert live alle verfügbaren Aktionen, du musst dir also keine Tastenkürzel vorher merken.</span></p>
+
+      <h3><span class="lang-en">4. Connect Claude Desktop</span><span class="lang-de">4. Claude Desktop verbinden</span></h3>
+      <p><span class="lang-en">Add both to <code>claude_desktop_config.json</code> (see <a href="#claude-config" style="color:#00d97e;">Claude Desktop config</a> above), then restart Claude Desktop.</span><span class="lang-de">Füge beide zu <code>claude_desktop_config.json</code> hinzu (siehe <a href="#claude-config" style="color:#00d97e;">Claude-Desktop-Konfiguration</a> oben), dann Claude Desktop neu starten.</span></p>
+      <pre><code>{`{
+  "mcpServers": {
+    "calctl":  { "command": "calctl",  "args": ["mcp"] },
+    "taskctl": { "command": "taskctl", "args": ["mcp"] }
+  }
+}`}</code></pre>
+
+      <h3><span class="lang-en">5. Ask Claude something that spans both</span><span class="lang-de">5. Claude etwas fragen, das beide betrifft</span></h3>
+      <p>
+        <span class="lang-en">Try: <em>"What's on my calendar tomorrow, and do I have any overdue tasks?"</em> Claude calls <code>calctl</code>'s <code>list_events</code> and <code>taskctl</code>'s <code>today_tasks</code> automatically — no explicit tool selection needed, it reads the descriptions and picks the right ones.</span>
+        <span class="lang-de">Probier: <em>"Was steht morgen in meinem Kalender, und habe ich überfällige Aufgaben?"</em> Claude ruft automatisch <code>list_events</code> von <code>calctl</code> und <code>today_tasks</code> von <code>taskctl</code> auf — keine explizite Tool-Auswahl nötig, Claude liest die Beschreibungen und wählt die richtigen aus.</span>
+      </p>
+
+      <h3><span class="lang-en">6. Next steps</span><span class="lang-de">6. Nächste Schritte</span></h3>
+      <ul>
+        <li><span class="lang-en">Install the rest of the suite the same way — see <a href="#installation" style="color:#00d97e;">Installation</a>.</span><span class="lang-de">Installiere den Rest der Suite genauso — siehe <a href="#installation" style="color:#00d97e;">Installation</a>.</span></li>
+        <li><span class="lang-en">Using more than one machine? Set up <a href="#sync-across-devices" style="color:#00d97e;">sync across devices</a>.</span><span class="lang-de">Nutzt du mehr als ein Gerät? Richte <a href="#sync-across-devices" style="color:#00d97e;">Sync über mehrere Geräte</a> ein.</span></li>
+        <li><span class="lang-en">Browse more multi-tool prompt ideas in <a href="#ai-workflows" style="color:#00d97e;">AI Workflows</a> below.</span><span class="lang-de">Weitere Multi-Tool-Prompt-Ideen findest du unten in <a href="#ai-workflows" style="color:#00d97e;">KI-Workflows</a>.</span></li>
+      </ul>
 
       <!-- ── MAILCTL ───────────────────────── -->
       <h2 id="mailctl">mailctl</h2>
@@ -330,7 +434,16 @@ notectl read "Note title"       # read a note
 notectl write "New note"        # create/update note
 notectl search "keyword"        # full-text search
 notectl daily                   # open today's daily note
+notectl license activate <key>  # activate missionctl Bundle
+notectl license status          # check license status
 notectl mcp                     # start MCP server`}</code></pre>
+
+      <h3><span class="lang-en">Multiple vaults</span><span class="lang-de">Mehrere Vaults</span></h3>
+      <p><span class="lang-en">The free tier includes one vault. Registering a second requires the <a href="/#pricing" style="color:#00d97e;">missionctl Bundle</a> — see <a href="#licensing" style="color:#00d97e;">Licensing</a>.</span><span class="lang-de">Die kostenlose Version umfasst einen Vault. Ein zweiter erfordert das <a href="/#pricing" style="color:#00d97e;">missionctl Bundle</a> — siehe <a href="#licensing" style="color:#00d97e;">Lizenzierung</a>.</span></p>
+      <pre><code>{`notectl vault add work ~/Documents/Obsidian/Work
+notectl vault add personal ~/Documents/Obsidian/Personal  # missionctl Bundle
+notectl vault list                                        # * marks the active vault
+notectl vault use work                                     # switch active vault`}</code></pre>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
@@ -381,6 +494,7 @@ cd budgetctl && ./setup.sh`}</code></pre>
       <h3><span class="lang-en">Import</span><span class="lang-de">Import</span></h3>
       <pre><code>{`budgetctl import bank.csv --account checking
 budgetctl import n26.csv --format n26
+budgetctl import bank.csv --ai       # AI categorization — missionctl Bundle
 # Supported: N26, ING, DKB, Generic CSV`}</code></pre>
 
       <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
@@ -393,9 +507,12 @@ budgetctl apply-rules               # re-apply all rules
 budgetctl goal set --category food --limit 400
 budgetctl goal list                 # show goals + progress
 budgetctl goal delete --category food
-budgetctl recurring                 # detect recurring payments
+budgetctl recurring                 # detect recurring payments — missionctl Bundle
 budgetctl export --format csv       # export data
+budgetctl license activate <key>    # activate missionctl Bundle
+budgetctl license status            # check license status
 budgetctl mcp                       # start MCP server`}</code></pre>
+      <p><span class="lang-en">See <a href="#licensing" style="color:#00d97e;">Licensing</a> above — everything except <code>--ai</code> and <code>recurring</code> is free.</span><span class="lang-de">Siehe <a href="#licensing" style="color:#00d97e;">Lizenzierung</a> oben — alles außer <code>--ai</code> und <code>recurring</code> ist kostenlos.</span></p>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
