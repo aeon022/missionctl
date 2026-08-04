@@ -97,6 +97,10 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   konnte kurz aufblitzen, bevor die erste Ladung durch war — jetzt korrekt
   unterschieden. budgetctl/timectl bewusst ausgelassen — rein lokale
   SQLite-Reads, Ladezeit nicht wahrnehmbar, kein Spinner-Unterbau vorhanden.
+  diaryctl war ursprünglich auch ausgelassen (git-history-basiert, hätte
+  einen eigenen Spinner gebraucht) — am 2026-08-04 nachgezogen, hatte
+  bis dahin gar keinen Ladezustand (kein "Loading…"-Text, keine
+  Unterscheidung von "noch am Laden" vs. "wirklich leer").
 - [x] Command-Palette / `:`-Modus (wie k9s/lazygit) — Prototyp in habctl,
   ausgerollt auf alle 7 anderen Tools (mailctl/calctl/taskctl/notectl/
   budgetctl/timectl/diaryctl). `:` öffnet, Tippen filtert live (Präfix-
