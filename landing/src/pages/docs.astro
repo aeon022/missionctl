@@ -175,19 +175,40 @@ export NOTECTL_DATA_DIR="$HOME/Dropbox/missionctl/notectl"`}</code></pre>
       <ul>
         <li><span class="lang-en"><strong>budgetctl:</strong> AI transaction categorization (<code>--ai</code>) and recurring-payment detection (<code>budgetctl recurring</code>).</span><span class="lang-de"><strong>budgetctl:</strong> KI-Transaktionskategorisierung (<code>--ai</code>) und Erkennung wiederkehrender Zahlungen (<code>budgetctl recurring</code>).</span></li>
         <li><span class="lang-en"><strong>notectl:</strong> more than one named vault (<code>notectl vault add</code>) — the free tier includes one.</span><span class="lang-de"><strong>notectl:</strong> mehr als ein benannter Vault (<code>notectl vault add</code>) — die kostenlose Version umfasst einen.</span></li>
+        <li><span class="lang-en"><strong>mailctl:</strong> AI draft reply (the <code>a</code> key in the detail view).</span><span class="lang-de"><strong>mailctl:</strong> KI-Antwortentwurf (die <code>a</code>-Taste in der Detailansicht).</span></li>
+        <li><span class="lang-en"><strong>calctl:</strong> AI meeting summaries (<code>calctl summarize</code>).</span><span class="lang-de"><strong>calctl:</strong> KI-Meeting-Zusammenfassungen (<code>calctl summarize</code>).</span></li>
+        <li><span class="lang-en"><strong>habctl:</strong> AI habit suggestions (<code>habctl suggest</code>, the <code>s</code> key) and the AI weekly review (<code>habctl review</code>, the <code>r</code> key).</span><span class="lang-de"><strong>habctl:</strong> KI-Gewohnheitsvorschläge (<code>habctl suggest</code>, die <code>s</code>-Taste) und der KI-Wochen-Review (<code>habctl review</code>, die <code>r</code>-Taste).</span></li>
       </ul>
       <p>
-        <span class="lang-en">Both use the same real Polar.sh license-key check postctl's Pro license already uses — no phone-home telemetry, just a one-time (or offline-cached) validation against your key:</span>
-        <span class="lang-de">Beide nutzen denselben echten Polar.sh-Lizenzschlüssel-Check, den postctls Pro-Lizenz bereits verwendet — keine Phone-Home-Telemetrie, nur eine einmalige (oder offline-zwischengespeicherte) Prüfung deines Schlüssels:</span>
+        <span class="lang-en">All five use the same real Polar.sh license-key check postctl's Pro license already uses — no phone-home telemetry, just a one-time (or offline-cached) validation against your key:</span>
+        <span class="lang-de">Alle fünf nutzen denselben echten Polar.sh-Lizenzschlüssel-Check, den postctls Pro-Lizenz bereits verwendet — keine Phone-Home-Telemetrie, nur eine einmalige (oder offline-zwischengespeicherte) Prüfung deines Schlüssels:</span>
       </p>
       <pre><code>{`budgetctl license activate <key>   # after buying the Bundle
-budgetctl license status           # check current status
-
 notectl license activate <key>
-notectl license status`}</code></pre>
+mailctl license activate <key>
+calctl license activate <key>
+habctl license activate <key>
+
+budgetctl license status           # ...and the same "status" subcommand for each`}</code></pre>
       <p>
         <span class="lang-en">Without a license, gated commands print a short message pointing at the Bundle and — where it makes sense, like <code>--ai</code> import — fall back to the free behavior instead of failing outright.</span>
         <span class="lang-de">Ohne Lizenz geben gesperrte Befehle eine kurze Meldung mit Verweis auf das Bundle aus und fallen — wo es sinnvoll ist, wie bei <code>--ai</code>-Import — auf das kostenlose Verhalten zurück, statt komplett fehlzuschlagen.</span>
+      </p>
+
+      <h3><span class="lang-en">Choosing an AI provider</span><span class="lang-de">KI-Provider auswählen</span></h3>
+      <p>
+        <span class="lang-en">Once a feature is unlocked, it still needs an LLM to actually call — and that doesn't have to mean a paid Anthropic key. mailctl, calctl, budgetctl, and habctl all auto-detect whichever of these is configured, in this order:</span>
+        <span class="lang-de">Sobald ein Feature freigeschaltet ist, braucht es trotzdem noch ein LLM, das den eigentlichen Aufruf macht — und das muss kein bezahlter Anthropic-Key sein. mailctl, calctl, budgetctl und habctl erkennen automatisch, was davon konfiguriert ist, in dieser Reihenfolge:</span>
+      </p>
+      <ul>
+        <li><span class="lang-en"><code>ANTHROPIC_API_KEY</code> — Claude, paid.</span><span class="lang-de"><code>ANTHROPIC_API_KEY</code> — Claude, kostenpflichtig.</span></li>
+        <li><span class="lang-en"><code>OPENAI_API_KEY</code> — GPT-4o mini, paid.</span><span class="lang-de"><code>OPENAI_API_KEY</code> — GPT-4o mini, kostenpflichtig.</span></li>
+        <li><span class="lang-en"><code>GEMINI_API_KEY</code> — free tier, no card required. Get one at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:#00d97e;">aistudio.google.com/apikey</a> in about 30 seconds.</span><span class="lang-de"><code>GEMINI_API_KEY</code> — kostenlose Stufe, keine Kreditkarte nötig. In etwa 30 Sekunden unter <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:#00d97e;">aistudio.google.com/apikey</a> erstellt.</span></li>
+        <li><span class="lang-en">A local <a href="https://ollama.com" target="_blank" rel="noopener" style="color:#00d97e;">Ollama</a> model — no key, no signup, nothing leaves your machine. The always-available fallback if nothing else is set.</span><span class="lang-de">Ein lokales <a href="https://ollama.com" target="_blank" rel="noopener" style="color:#00d97e;">Ollama</a>-Modell — kein Key, keine Anmeldung, nichts verlässt deinen Rechner. Der immer verfügbare Fallback, falls nichts anderes gesetzt ist.</span></li>
+      </ul>
+      <p>
+        <span class="lang-en">Override auto-detection with <code>&lt;TOOL&gt;_PROVIDER=anthropic|openai|gemini|ollama</code> (e.g. <code>MAILCTL_PROVIDER=ollama</code>). What's deliberately not supported: reusing a claude.ai or chatgpt.com browser session in place of an API key — both providers' terms of service prohibit programmatic reuse of a consumer web session, and it risks flagging your own account. Free-tier Gemini or local Ollama cover the "I don't want to pay or sign up for an API key" case without that risk.</span>
+        <span class="lang-de">Automatische Erkennung überschreiben mit <code>&lt;TOOL&gt;_PROVIDER=anthropic|openai|gemini|ollama</code> (z. B. <code>MAILCTL_PROVIDER=ollama</code>). Bewusst nicht unterstützt: eine claude.ai- oder chatgpt.com-Browser-Session anstelle eines API-Keys wiederzuverwenden — die Nutzungsbedingungen beider Anbieter verbieten die programmatische Wiederverwendung einer Konsumenten-Web-Session, und es riskiert eine Sperre des eigenen Accounts. Kostenloses Gemini oder lokales Ollama decken den Fall "ich will nicht bezahlen oder mich für einen API-Key anmelden" ab, ohne dieses Risiko.</span>
       </p>
 
       <!-- ── TUTORIAL ───────────────────────── -->
@@ -259,7 +280,10 @@ mailctl send --to bob@x.com      # compose & send
 mailctl draft --subject "Hello"  # save to Drafts
 mailctl thread --subject "Re:"   # view thread
 mailctl accounts                 # list accounts
+mailctl license activate <key>   # activate missionctl Bundle
+mailctl license status           # check license status
 mailctl mcp                      # start MCP server`}</code></pre>
+      <p><span class="lang-en">AI draft reply (the <code>a</code> key below) requires the <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — everything else here is free.</span><span class="lang-de">Der KI-Antwortentwurf (die <code>a</code>-Taste unten) erfordert das <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — alles andere hier ist kostenlos.</span></p>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
@@ -267,6 +291,8 @@ mailctl mcp                      # start MCP server`}</code></pre>
         <kbd>Enter</kbd>     <span>Open selected email</span>
         <kbd>Tab / Shift+Tab</kbd> <span>Switch account</span>
         <kbd>n</kbd>         <span>Compose new email</span>
+        <kbd>r</kbd>         <span>Reply (opens compose with quoted text)</span>
+        <kbd>a</kbd>         <span>AI draft reply (missionctl Bundle)</span>
         <kbd>o</kbd>         <span>Open in Mail.app</span>
         <kbd>d</kbd>         <span>Delete (press again to confirm)</span>
         <kbd>y</kbd>         <span>Copy subject + sender</span>
@@ -312,7 +338,11 @@ calctl list --from 2026-07-01       # events from date
 calctl add "Team sync" --time 14:00 # create event
 calctl free --from today --to +7d   # find free slots
 calctl sync                         # sync calendar
+calctl summarize --event-title "Standup"   # AI meeting summary — missionctl Bundle
+calctl license activate <key>       # activate missionctl Bundle
+calctl license status               # check license status
 calctl mcp                          # start MCP server`}</code></pre>
+      <p><span class="lang-en">AI meeting summaries (<code>calctl summarize</code>) require the <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — everything else here is free.</span><span class="lang-de">KI-Meeting-Zusammenfassungen (<code>calctl summarize</code>) erfordern das <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — alles andere hier ist kostenlos.</span></p>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
@@ -571,10 +601,13 @@ habctl check Meditate                # check in for today
 habctl today                         # today's habit status
 habctl list                          # list habits with streaks
 habctl stats                         # streaks + progress bars
-habctl review                        # AI weekly coaching review
-habctl suggest --goal "more focus"   # AI habit suggestions
+habctl review                        # AI weekly coaching review — missionctl Bundle
+habctl suggest --goal "more focus"   # AI habit suggestions — missionctl Bundle
 habctl remind                        # macOS notification for unchecked habits
+habctl license activate <key>        # activate missionctl Bundle
+habctl license status                # check license status
 habctl mcp                           # start MCP server`}</code></pre>
+      <p><span class="lang-en">AI suggestions and the AI weekly review require the <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — everything else here is free.</span><span class="lang-de">KI-Vorschläge und der KI-Wochen-Review erfordern das <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — alles andere hier ist kostenlos.</span></p>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
@@ -583,8 +616,8 @@ habctl mcp                           # start MCP server`}</code></pre>
         <kbd>n</kbd>       <span>New habit</span>
         <kbd>e</kbd>       <span>Edit habit</span>
         <kbd>d</kbd>       <span>Delete habit</span>
-        <kbd>s</kbd>       <span>AI suggestions</span>
-        <kbd>r</kbd>       <span>AI weekly review</span>
+        <kbd>s</kbd>       <span>AI suggestions (missionctl Bundle)</span>
+        <kbd>r</kbd>       <span>AI weekly review (missionctl Bundle)</span>
         <kbd>c</kbd>       <span>Manage habit chains</span>
         <kbd>t</kbd>       <span>Stats — heatmap &amp; completion</span>
         <kbd>q</kbd>       <span>Quit</span>
