@@ -188,9 +188,12 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   bleibt.
 
 ### Aufwendig / spekulativ
-- [~] Mausklick auf Zeilen/Tabs, nicht nur Scroll-Wheel — **Prototyp in budgetctl
-  fertig**. `WithMouseCellMotion()` + Scroll-Wheel liefen überall schon, Klick auf
-  Zeilen/Tabs nirgends (notectl hatte nur Editor-Cursor-Klicks). Klick auf
+- [x] Mausklick auf Zeilen/Tabs, nicht nur Scroll-Wheel — Prototyp in budgetctl,
+  **war bei Prüfung 2026-08-04 bereits auf alle 6 anderen Tools ausgerollt**
+  (eigene "feat: click-to-select..."-Commits pro Tool, unabhängig von dieser
+  Roadmap-Zeile — nur die Doku hier war stehen geblieben). `WithMouseCellMotion()`
+  + Scroll-Wheel liefen überall schon, Klick auf Zeilen/Tabs ebenfalls überall
+  vorhanden: `rowHitTest`, `hoverRow`, Doppelklick-Erkennung. Klick auf
   Monats-Tab wechselt Monat, Klick auf Transaktionszeile bewegt Cursor dorthin.
   Hit-Testing nutzt exakt dieselbe Zeilen-Layout- und Scroll-Fenster-Logik wie
   `renderList()` (`listStartRow()`), damit ein Klick immer auf die Zeile trifft,
