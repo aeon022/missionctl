@@ -7,11 +7,11 @@ import AppCard from '../components/AppCard.astro';
 // unlocks just that tool's Bundle-gated feature(s), not the full suite.
 // taskctl/timectl/diaryctl have nothing gated, so no standalone product.
 const standaloneCheckout = {
-  mailctl: 'https://buy.polar.sh/polar_cl_KJNOVnZ9fOiAAAWEkH8VvLH6YCOFPtgV9mNgb2j8MLQ',
-  calctl: 'https://buy.polar.sh/polar_cl_FVeOLZeCaEh8wYJiRL6xifwn3VDvkt4KGjipA3u479F',
-  budgetctl: 'https://buy.polar.sh/polar_cl_ARkg3wm2qsOAiv9PpGlw8cDBO00krDbAlm8QL2wg0gK',
-  notectl: 'https://buy.polar.sh/polar_cl_zmJEidXQGVmxB7wgQeVZ8oMTtFA6Myc6utnz22NVmtR',
-  habctl: 'https://buy.polar.sh/polar_cl_YoWfKB9lqFAPQRNTN6cYCSIMlAY83L5jXlXuY0CRxoS',
+  mailctl: { url: 'https://buy.polar.sh/polar_cl_KJNOVnZ9fOiAAAWEkH8VvLH6YCOFPtgV9mNgb2j8MLQ', label: 'AI features', label_de: 'KI-Features' },
+  calctl: { url: 'https://buy.polar.sh/polar_cl_FVeOLZeCaEh8wYJiRL6xifwn3VDvkt4KGjipA3u479F', label: 'AI features', label_de: 'KI-Features' },
+  budgetctl: { url: 'https://buy.polar.sh/polar_cl_ARkg3wm2qsOAiv9PpGlw8cDBO00krDbAlm8QL2wg0gK', label: 'AI features', label_de: 'KI-Features' },
+  notectl: { url: 'https://buy.polar.sh/polar_cl_zmJEidXQGVmxB7wgQeVZ8oMTtFA6Myc6utnz22NVmtR', label: '2nd vault', label_de: '2. Vault' },
+  habctl: { url: 'https://buy.polar.sh/polar_cl_YoWfKB9lqFAPQRNTN6cYCSIMlAY83L5jXlXuY0CRxoS', label: 'AI features', label_de: 'KI-Features' },
 };
 
 const apps = [
@@ -640,8 +640,8 @@ const faqLd = {
                 <span class="lang-en">Direct download ↗</span><span class="lang-de">Direkter Download ↗</span>
               </a>
               {standaloneCheckout[app.name] && (
-                <a href={standaloneCheckout[app.name]} target="_blank" rel="noopener" style="display: block; margin-top: 0.5rem; color: #00d97e; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; text-decoration: none;">
-                  <span class="lang-en">Unlock AI features — $9 ↗</span><span class="lang-de">KI-Features freischalten — $9 ↗</span>
+                <a href={standaloneCheckout[app.name].url} target="_blank" rel="noopener" style="display: block; margin-top: 0.5rem; color: #00d97e; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; text-decoration: none;">
+                  <span class="lang-en">Unlock {standaloneCheckout[app.name].label} — $9 (-30% w/ L4uNch26) ↗</span><span class="lang-de">{standaloneCheckout[app.name].label_de} freischalten — $9 (-30% mit L4uNch26) ↗</span>
                 </a>
               )}
             </div>
