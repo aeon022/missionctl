@@ -19,8 +19,8 @@ const isAppPage = apps.some(a => a.href === currentPath);
   <nav style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; display: flex; align-items: center; justify-content: space-between; height: 56px;">
 
     <!-- Logo -->
-    <a href="/" style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: #00d97e; text-decoration: none; letter-spacing: -0.02em; flex-shrink: 0;">
-      <span style="color: #e2e8f0;">mission</span>ctl
+    <a href="/" style="font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--color-terminal-green); text-decoration: none; letter-spacing: -0.02em; flex-shrink: 0;">
+      <span style="color: var(--color-terminal-text);">mission</span>ctl
     </a>
 
     <!-- Center: Home + Apps dropdown + Docs (desktop) -->
@@ -99,6 +99,17 @@ const isAppPage = apps.some(a => a.href === currentPath);
         <span class="lang-en">DE</span><span class="lang-de">EN</span>
       </button>
 
+      <!-- Theme toggle -->
+      <button id="theme-toggle" class="nav-theme-toggle" aria-label="Toggle light/dark theme" type="button">
+        <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <circle cx="8" cy="8" r="3.4" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.7 3.3l-1.1 1.1M4.4 11.6l-1.1 1.1M12.7 12.7l-1.1-1.1M4.4 4.4L3.3 3.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
       <!-- Buy button -->
       <a
         href="/#pricing"
@@ -115,6 +126,10 @@ const isAppPage = apps.some(a => a.href === currentPath);
     <a href="/docs" class={`mobile-menu-link${currentPath.startsWith('/docs') ? ' mobile-menu-link--active' : ''}`} role="menuitem"><span class="lang-en">docs</span><span class="lang-de">doku</span></a>
     <button id="lang-toggle-mobile" class="mobile-menu-link" role="menuitem" type="button" style="background:none;border:none;text-align:left;cursor:pointer;width:100%;">
       <span class="lang-en">Deutsch</span><span class="lang-de">English</span>
+    </button>
+    <button id="theme-toggle-mobile" class="mobile-menu-link" role="menuitem" type="button" style="background:none;border:none;text-align:left;cursor:pointer;width:100%;">
+      <span class="lang-en theme-label-to-light">Light mode</span><span class="lang-de theme-label-to-light">Heller Modus</span>
+      <span class="lang-en theme-label-to-dark">Dark mode</span><span class="lang-de theme-label-to-dark">Dunkler Modus</span>
     </button>
     <p class="mobile-menu-label">apps</p>
     <div class="mobile-apps-grid">
@@ -142,17 +157,17 @@ const isAppPage = apps.some(a => a.href === currentPath);
     max-width: 1100px;
     margin: 0.75rem auto 0;
     border-radius: 10px;
-    background: rgba(10,10,15,0.78);
-    border: 1px solid rgba(30,30,46,0.85);
-    box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.02);
+    background: rgba(var(--color-terminal-bg-rgb), 0.78);
+    border: 1px solid rgba(var(--color-terminal-border-rgb), 0.85);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(var(--color-hover-tint), 0.02);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .main-nav.scrolled {
-    background: rgba(10,10,15,0.92);
-    border-color: rgba(30,30,46,0.95);
-    box-shadow: 0 16px 44px rgba(0,0,0,0.45), 0 0 0 1px rgba(0,217,126,0.06);
+    background: rgba(var(--color-terminal-bg-rgb), 0.92);
+    border-color: rgba(var(--color-terminal-border-rgb), 0.95);
+    box-shadow: 0 16px 44px rgba(0,0,0,0.45), 0 0 0 1px rgba(var(--color-terminal-green-rgb), 0.06);
   }
   /* ── Shared link style ──────────────────────────────────── */
   .nav-link {
@@ -161,13 +176,13 @@ const isAppPage = apps.some(a => a.href === currentPath);
     padding: 0.35rem 0.75rem;
     border-radius: 4px;
     text-decoration: none;
-    color: #718096;
+    color: var(--color-terminal-dim);
     transition: color 0.15s ease, background 0.15s ease;
   }
   .nav-link:hover,
   .nav-link--active {
-    color: #00d97e;
-    background: rgba(0,217,126,0.07);
+    color: var(--color-terminal-green);
+    background: rgba(var(--color-terminal-green-rgb), 0.07);
   }
 
   /* ── Language toggle ────────────────────────────────────── */
@@ -179,13 +194,40 @@ const isAppPage = apps.some(a => a.href === currentPath);
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #718096;
+    color: var(--color-terminal-dim);
     transition: color 0.15s ease, background 0.15s ease;
   }
   .nav-lang-toggle:hover {
-    color: #00d97e;
-    background: rgba(0,217,126,0.07);
+    color: var(--color-terminal-green);
+    background: rgba(var(--color-terminal-green-rgb), 0.07);
   }
+
+  /* ── Theme toggle ───────────────────────────────────────── */
+  .nav-theme-toggle {
+    font-family: 'JetBrains Mono', monospace;
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--color-terminal-dim);
+    display: flex;
+    align-items: center;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  .nav-theme-toggle:hover {
+    color: var(--color-terminal-green);
+    background: rgba(var(--color-terminal-green-rgb), 0.07);
+  }
+  /* Icon shows the theme you'll SWITCH TO: sun visible while dark (click to
+     go light), moon visible while light (click to go dark). */
+  .theme-icon-moon { display: none; }
+  :global([data-theme="light"]) .theme-icon-sun { display: none; }
+  :global([data-theme="light"]) .theme-icon-moon { display: block; }
+  /* Mobile menu's text-label equivalent, same show/hide logic. */
+  .theme-label-to-dark { display: none; }
+  :global([data-theme="light"]) .theme-label-to-light { display: none; }
+  :global([data-theme="light"]) .theme-label-to-dark { display: inline; }
 
   /* ── Apps trigger button ────────────────────────────────── */
   .apps-trigger {
@@ -196,7 +238,7 @@ const isAppPage = apps.some(a => a.href === currentPath);
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #718096;
+    color: var(--color-terminal-dim);
     display: flex;
     align-items: center;
     gap: 0.35rem;
@@ -205,8 +247,8 @@ const isAppPage = apps.some(a => a.href === currentPath);
   .apps-trigger:hover,
   .apps-trigger.is-active,
   .apps-trigger[aria-expanded="true"] {
-    color: #00d97e;
-    background: rgba(0,217,126,0.07);
+    color: var(--color-terminal-green);
+    background: rgba(var(--color-terminal-green-rgb), 0.07);
   }
   .apps-chevron {
     transition: transform 0.2s ease;
@@ -228,11 +270,11 @@ const isAppPage = apps.some(a => a.href === currentPath);
     left: 50%;
     transform: translateX(-50%);
     width: 340px;
-    background: rgba(10,10,15,0.97);
-    border: 1px solid rgba(30,30,46,0.9);
+    background: rgba(var(--color-terminal-bg-rgb),0.97);
+    border: 1px solid rgba(var(--color-terminal-border-rgb),0.9);
     border-radius: 10px;
     padding: 0.75rem;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(var(--color-hover-tint),0.03);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
 
@@ -259,9 +301,9 @@ const isAppPage = apps.some(a => a.href === currentPath);
     transform: translateX(-50%) rotate(45deg);
     width: 10px;
     height: 10px;
-    background: rgba(10,10,15,0.97);
-    border-left: 1px solid rgba(30,30,46,0.9);
-    border-top: 1px solid rgba(30,30,46,0.9);
+    background: rgba(var(--color-terminal-bg-rgb),0.97);
+    border-left: 1px solid rgba(var(--color-terminal-border-rgb),0.9);
+    border-top: 1px solid rgba(var(--color-terminal-border-rgb),0.9);
   }
 
   /* ── App grid ───────────────────────────────────────────── */
@@ -282,7 +324,7 @@ const isAppPage = apps.some(a => a.href === currentPath);
     font-size: 0.75rem;
     font-weight: 500;
     text-decoration: none;
-    color: #a0aec0;
+    color: var(--color-terminal-code-text);
     border: 1px solid transparent;
     transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
   }
@@ -310,8 +352,8 @@ const isAppPage = apps.some(a => a.href === currentPath);
     font-size: 0.8rem;
     font-weight: 600;
     padding: 0.5rem 1rem;
-    background: #00d97e;
-    color: #0a0a0f;
+    background: var(--color-terminal-green);
+    color: var(--color-terminal-bg);
     border-radius: 4px;
     text-decoration: none;
     transition: background 0.15s ease, transform 0.15s ease;
@@ -319,7 +361,7 @@ const isAppPage = apps.some(a => a.href === currentPath);
     flex-shrink: 0;
   }
   .nav-buy:hover {
-    background: #00c070;
+    background: var(--color-terminal-green-hover);
     transform: translateY(-1px);
   }
 
@@ -331,18 +373,18 @@ const isAppPage = apps.some(a => a.href === currentPath);
     align-items: center;
     justify-content: center;
     background: transparent;
-    border: 1px solid rgba(30,30,46,0.9);
+    border: 1px solid rgba(var(--color-terminal-border-rgb),0.9);
     border-radius: 8px;
-    color: #a0aec0;
+    color: var(--color-terminal-code-text);
     cursor: pointer;
     flex-shrink: 0;
     transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
   }
   .mobile-menu-trigger:hover,
   .mobile-menu-trigger[aria-expanded="true"] {
-    color: #00d97e;
-    background: rgba(0,217,126,0.07);
-    border-color: rgba(0,217,126,0.25);
+    color: var(--color-terminal-green);
+    background: rgba(var(--color-terminal-green-rgb),0.07);
+    border-color: rgba(var(--color-terminal-green-rgb),0.25);
   }
   .burger-top, .burger-mid, .burger-bot {
     transition: transform 0.2s ease, opacity 0.2s ease;
@@ -358,11 +400,11 @@ const isAppPage = apps.some(a => a.href === currentPath);
     top: calc(100% + 0.5rem);
     left: 0;
     right: 0;
-    background: rgba(10,10,15,0.97);
-    border: 1px solid rgba(30,30,46,0.9);
+    background: rgba(var(--color-terminal-bg-rgb),0.97);
+    border: 1px solid rgba(var(--color-terminal-border-rgb),0.9);
     border-radius: 10px;
     padding: 0.75rem;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,255,255,0.03);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(var(--color-hover-tint),0.03);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     opacity: 0;
@@ -385,20 +427,20 @@ const isAppPage = apps.some(a => a.href === currentPath);
     padding: 0.7rem 0.6rem;
     border-radius: 6px;
     text-decoration: none;
-    color: #a0aec0;
+    color: var(--color-terminal-code-text);
     transition: color 0.15s ease, background 0.15s ease;
   }
   .mobile-menu-link:hover,
   .mobile-menu-link--active {
-    color: #00d97e;
-    background: rgba(0,217,126,0.07);
+    color: var(--color-terminal-green);
+    background: rgba(var(--color-terminal-green-rgb),0.07);
   }
   .mobile-menu-label {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.68rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: #4a5568;
+    color: var(--color-terminal-muted);
     margin: 0.75rem 0 0.5rem 0.6rem;
   }
   .mobile-apps-grid {

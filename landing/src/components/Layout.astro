@@ -121,6 +121,30 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
       });
     </script>
 
+    <!-- Light/dark theme toggle: dark is the site's native look, so an
+         unset preference stays dark (no auto-switch off prefers-color-scheme
+         — this is "add a light option", not "respect the OS by default").
+         Set before paint like the lang toggle above, to avoid a flash. -->
+    <script is:inline>
+      function missionctlApplyTheme() {
+        var saved = localStorage.getItem('missionctl_theme');
+        document.documentElement.setAttribute('data-theme', saved === 'light' ? 'light' : 'dark');
+      }
+      missionctlApplyTheme();
+      function missionctlToggleTheme() {
+        var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        localStorage.setItem('missionctl_theme', next);
+        document.documentElement.setAttribute('data-theme', next);
+      }
+      document.addEventListener('astro:page-load', function () {
+        missionctlApplyTheme();
+        var btn = document.getElementById('theme-toggle');
+        if (btn) btn.addEventListener('click', missionctlToggleTheme);
+        var btnMobile = document.getElementById('theme-toggle-mobile');
+        if (btnMobile) btnMobile.addEventListener('click', missionctlToggleTheme);
+      });
+    </script>
+
     <!-- Preconnect for Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
