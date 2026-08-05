@@ -25,6 +25,7 @@ const navSections = [
       { href: '#claude-config', label_en: 'Claude Desktop config', label_de: 'Claude-Desktop-Konfiguration' },
       { href: '#sync-across-devices', label_en: 'Sync across devices', label_de: 'Sync über mehrere Geräte' },
       { href: '#licensing', label_en: 'Licensing (Bundle features)', label_de: 'Lizenzierung (Bundle-Features)' },
+      { href: '#local-ai', label_en: 'Local AI with Ollama', label_de: 'Lokale KI mit Ollama' },
       { href: '#tutorial', label_en: 'Tutorial: first 10 minutes', label_de: 'Tutorial: die ersten 10 Minuten' },
     ],
   },
@@ -197,8 +198,8 @@ budgetctl license status           # ...and the same "status" subcommand for eac
 
       <h3><span class="lang-en">Choosing an AI provider</span><span class="lang-de">KI-Provider auswählen</span></h3>
       <p>
-        <span class="lang-en">Once a feature is unlocked, it still needs an LLM to actually call — and that doesn't have to mean a paid Anthropic key. mailctl, calctl, budgetctl, and habctl all auto-detect whichever of these is configured, in this order:</span>
-        <span class="lang-de">Sobald ein Feature freigeschaltet ist, braucht es trotzdem noch ein LLM, das den eigentlichen Aufruf macht — und das muss kein bezahlter Anthropic-Key sein. mailctl, calctl, budgetctl und habctl erkennen automatisch, was davon konfiguriert ist, in dieser Reihenfolge:</span>
+        <span class="lang-en">Once a feature is unlocked, it still needs an LLM to actually call — and that doesn't have to mean a paid Anthropic key. mailctl, calctl, budgetctl, habctl, and diaryctl (whose AI diary generation is free, not Bundle-gated) all auto-detect whichever of these is configured, in this order — full walkthrough with model recommendations in <a href="#local-ai" style="color:#00d97e;">Local AI with Ollama</a> below:</span>
+        <span class="lang-de">Sobald ein Feature freigeschaltet ist, braucht es trotzdem noch ein LLM, das den eigentlichen Aufruf macht — und das muss kein bezahlter Anthropic-Key sein. mailctl, calctl, budgetctl, habctl und diaryctl (dessen KI-Tagebuchgenerierung kostenlos ist, nicht Bundle-gated) erkennen automatisch, was davon konfiguriert ist, in dieser Reihenfolge — ausführliche Anleitung mit Modellempfehlungen weiter unten unter <a href="#local-ai" style="color:#00d97e;">Lokale KI mit Ollama</a>:</span>
       </p>
       <ul>
         <li><span class="lang-en"><code>ANTHROPIC_API_KEY</code> — Claude, paid.</span><span class="lang-de"><code>ANTHROPIC_API_KEY</code> — Claude, kostenpflichtig.</span></li>
@@ -210,6 +211,179 @@ budgetctl license status           # ...and the same "status" subcommand for eac
         <span class="lang-en">Override auto-detection with <code>&lt;TOOL&gt;_PROVIDER=anthropic|openai|gemini|ollama</code> (e.g. <code>MAILCTL_PROVIDER=ollama</code>). What's deliberately not supported: reusing a claude.ai or chatgpt.com browser session in place of an API key — both providers' terms of service prohibit programmatic reuse of a consumer web session, and it risks flagging your own account. Free-tier Gemini or local Ollama cover the "I don't want to pay or sign up for an API key" case without that risk.</span>
         <span class="lang-de">Automatische Erkennung überschreiben mit <code>&lt;TOOL&gt;_PROVIDER=anthropic|openai|gemini|ollama</code> (z. B. <code>MAILCTL_PROVIDER=ollama</code>). Bewusst nicht unterstützt: eine claude.ai- oder chatgpt.com-Browser-Session anstelle eines API-Keys wiederzuverwenden — die Nutzungsbedingungen beider Anbieter verbieten die programmatische Wiederverwendung einer Konsumenten-Web-Session, und es riskiert eine Sperre des eigenen Accounts. Kostenloses Gemini oder lokales Ollama decken den Fall "ich will nicht bezahlen oder mich für einen API-Key anmelden" ab, ohne dieses Risiko.</span>
       </p>
+
+      <!-- ── LOCAL AI ───────────────────────── -->
+      <h2 id="local-ai"><span class="lang-en">Local AI with Ollama</span><span class="lang-de">Lokale KI mit Ollama</span></h2>
+      <p>
+        <span class="lang-en">Every AI-gated feature in the suite (plus diaryctl's free AI diary generation) already falls back to a local <a href="https://ollama.com" target="_blank" rel="noopener" style="color:#00d97e;">Ollama</a> model automatically — no API key, no signup, no per-request cost, nothing leaves your machine. This is a full walkthrough: installing Ollama, picking the right model per tool, and the environment variables that control it.</span>
+        <span class="lang-de">Jedes KI-Feature im Bundle (plus diaryctls kostenlose KI-Tagebuchgenerierung) fällt bereits automatisch auf ein lokales <a href="https://ollama.com" target="_blank" rel="noopener" style="color:#00d97e;">Ollama</a>-Modell zurück — kein API-Key, keine Anmeldung, keine Kosten pro Anfrage, nichts verlässt deinen Rechner. Hier die vollständige Anleitung: Ollama installieren, das passende Modell pro Tool wählen, und die Umgebungsvariablen, die das steuern.</span>
+      </p>
+
+      <h3><span class="lang-en">1. Install Ollama</span><span class="lang-de">1. Ollama installieren</span></h3>
+      <pre><code>{`# macOS
+brew install ollama
+ollama serve                    # or just launch the Ollama.app — runs a background server on :11434
+
+# Linux
+curl -fsSL https://ollama.com/install.sh | sh`}</code></pre>
+
+      <h3><span class="lang-en">2. Pull a model and test it</span><span class="lang-de">2. Ein Modell laden und testen</span></h3>
+      <pre><code>{`ollama pull llama3.2
+ollama run llama3.2 "Say hi in five words"`}</code></pre>
+
+      <h3><span class="lang-en">3. That's it — try a gated feature</span><span class="lang-de">3. Das war's — ein Bundle-Feature ausprobieren</span></h3>
+      <p>
+        <span class="lang-en">Nothing else to configure. Provider auto-detection already tries Ollama last, with zero setup, once you've licensed the feature:</span>
+        <span class="lang-de">Nichts weiter zu konfigurieren. Die automatische Provider-Erkennung probiert Ollama bereits als Letztes, ganz ohne Einrichtung, sobald das Feature lizenziert ist:</span>
+      </p>
+      <pre><code>{`calctl summarize --event-title "Standup"`}</code></pre>
+
+      <h3><span class="lang-en">Choosing a model</span><span class="lang-de">Das richtige Modell wählen</span></h3>
+      <p>
+        <span class="lang-en">Bigger isn't always better — it's a size-vs-quality-vs-RAM tradeoff. Rough guide (all sizes are approximate 4-bit-quantized RAM, what Ollama pulls by default):</span>
+        <span class="lang-de">Größer ist nicht immer besser — es ist ein Kompromiss aus Größe, Qualität und RAM. Grobe Übersicht (alle Größenangaben sind ungefähr, 4-Bit-quantisiert, was Ollama standardmäßig lädt):</span>
+      </p>
+      <div style="overflow-x:auto; margin: 1rem 0 1.5rem;">
+      <table style="width:100%; border-collapse: collapse; font-size: 0.85rem;">
+        <thead>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Model</span><span class="lang-de">Modell</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Pull command</span><span class="lang-de">Pull-Befehl</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">~RAM</span><span class="lang-de">~RAM</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Best for</span><span class="lang-de">Am besten für</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">llama3.2 (3B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull llama3.2</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;">~2 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Default fallback. Fast, fine for short/low-stakes text — habit suggestions, quick summaries.</span><span class="lang-de">Standard-Fallback. Schnell, ausreichend für kurze, unkritische Texte — Habit-Vorschläge, kurze Zusammenfassungen.</span></td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">mistral (7B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull mistral</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;">~4–5 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Solid general-purpose writing — noticeably better tone than llama3.2 for email-style text.</span><span class="lang-de">Solide Allzweck-Textgenerierung — spürbar besserer Ton als llama3.2 für E-Mail-artige Texte.</span></td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">mistral-nemo (12B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull mistral-nemo</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;">~7–8 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Best quality-per-GB for longer synthesis — weekly reviews, meeting summaries, draft replies. 128k context.</span><span class="lang-de">Bestes Verhältnis Qualität/GB für längere Synthese — Wochen-Reviews, Meeting-Zusammenfassungen, Antwortentwürfe. 128k Kontext.</span></td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">qwen2.5 (14B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull qwen2.5:14b</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;">~9 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Very reliable structured/JSON output — the safest pick for budgetctl's transaction categorization.</span><span class="lang-de">Sehr zuverlässige strukturierte/JSON-Ausgabe — die sicherste Wahl für budgetctls Transaktionskategorisierung.</span></td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">qwen2.5-coder (14B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull qwen2.5-coder</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;">~9 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Reads code/diffs accurately while still writing reasonable prose — good middle ground for diaryctl.</span><span class="lang-de">Liest Code/Diffs präzise und schreibt trotzdem brauchbare Prosa — guter Mittelweg für diaryctl.</span></td>
+          </tr>
+          <tr>
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">codestral (22B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull codestral</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;">~13 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Purpose-built for code generation, not narrative prose — most technically literal read of a git diff, least "personal" voice. See the diaryctl note below.</span><span class="lang-de">Für Codegenerierung gebaut, nicht für erzählende Prosa — liest einen Git-Diff am technisch genauesten, klingt am wenigsten "persönlich". Siehe Hinweis zu diaryctl unten.</span></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+
+      <h3><span class="lang-en">Which model for which tool</span><span class="lang-de">Welches Modell für welches Tool</span></h3>
+      <div style="overflow-x:auto; margin: 1rem 0 1.5rem;">
+      <table style="width:100%; border-collapse: collapse; font-size: 0.85rem;">
+        <thead>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Tool / feature</span><span class="lang-de">Tool / Feature</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Task type</span><span class="lang-de">Aufgabentyp</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Recommended</span><span class="lang-de">Empfehlung</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Set with</span><span class="lang-de">Setzen mit</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">calctl summarize</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Structured meeting summary</span><span class="lang-de">Strukturierte Meeting-Zusammenfassung</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">mistral-nemo</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace; white-space:nowrap;">CALCTL_OLLAMA_MODEL</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">mailctl draft reply (a)</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Tone-sensitive writing</span><span class="lang-de">Tonsensibles Schreiben</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">mistral-nemo</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace; white-space:nowrap;">MAILCTL_OLLAMA_MODEL</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">budgetctl --ai import</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Classification, strict JSON</span><span class="lang-de">Klassifizierung, striktes JSON</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">qwen2.5:14b</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace; white-space:nowrap;">BUDGETCTL_OLLAMA_MODEL</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">habctl suggest (s)</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Short, low-stakes suggestions</span><span class="lang-de">Kurze, unkritische Vorschläge</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">llama3.2 <span class="lang-en">(default is fine)</span><span class="lang-de">(Standard reicht)</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;">—</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #1e1e2e;">
+            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">habctl review / goal (r / g)</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Longer synthesis, structured reasoning</span><span class="lang-de">Längere Synthese, strukturiertes Reasoning</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">mistral-nemo <span class="lang-en">or</span><span class="lang-de">oder</span> qwen2.5:14b</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace; white-space:nowrap;">HABCTL_OLLAMA_MODEL</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">diaryctl narrative</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Reads git diffs, writes personal prose</span><span class="lang-de">Liest Git-Diffs, schreibt persönliche Prosa</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">qwen2.5-coder <span class="lang-en">or</span><span class="lang-de">oder</span> mistral-nemo</td>
+            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace; white-space:nowrap;">DIARYCTL_OLLAMA_MODEL</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+      <p>
+        <span class="lang-en"><strong>habctl's one caveat:</strong> the override applies per <em>tool</em>, not per feature — <code>HABCTL_OLLAMA_MODEL</code> affects <code>suggest</code>, <code>review</code>, and <code>goal</code> alike. If you want <code>suggest</code> on the fast default while <code>review</code> uses a bigger model, override it inline for just that one call instead of exporting it permanently: <code>HABCTL_OLLAMA_MODEL=mistral-nemo habctl review</code>.</span>
+        <span class="lang-de"><strong>Ein Vorbehalt bei habctl:</strong> der Override gilt pro <em>Tool</em>, nicht pro Feature — <code>HABCTL_OLLAMA_MODEL</code> wirkt auf <code>suggest</code>, <code>review</code> und <code>goal</code> gleichermaßen. Willst du <code>suggest</code> beim schnellen Standard belassen, aber für <code>review</code> ein größeres Modell nutzen, setz es nur für diesen einen Aufruf statt dauerhaft zu exportieren: <code>HABCTL_OLLAMA_MODEL=mistral-nemo habctl review</code>.</span>
+      </p>
+      <p>
+        <span class="lang-en"><strong>mistral vs. codestral for diaryctl, specifically:</strong> Codestral is trained to <em>generate</em> code, not write prose <em>about</em> code — expect a technically accurate but fairly dry read of what a diff actually did, with less of a "personal reflection" voice. General models (mistral-nemo, qwen2.5) write noticeably warmer, more narrative diary entries but occasionally miss a subtlety in what the code changed. If your diary should read like something you'd actually want to re-read in a year, start with <strong>mistral-nemo</strong>; switch to <strong>qwen2.5-coder</strong> (a middle ground — code-aware but still writes reasonable prose) only if entries keep missing what your commits actually did. Pure <strong>codestral</strong> is worth trying if you mainly want an accurate technical changelog rather than a diary in the literary sense.</span>
+        <span class="lang-de"><strong>Mistral vs. Codestral konkret für diaryctl:</strong> Codestral ist darauf trainiert, Code zu <em>generieren</em>, nicht Prosa <em>über</em> Code zu schreiben — erwarte eine technisch akkurate, aber eher trockene Beschreibung dessen, was ein Diff getan hat, mit weniger "persönlicher Reflexion". Allgemeine Modelle (mistral-nemo, qwen2.5) schreiben spürbar wärmere, erzählerischere Tagebucheinträge, übersehen aber gelegentlich eine Feinheit im Code. Soll dein Tagebuch sich wie etwas lesen, das du in einem Jahr gerne nochmal liest, starte mit <strong>mistral-nemo</strong>; wechsle zu <strong>qwen2.5-coder</strong> (Mittelweg — codebewusst, schreibt aber noch brauchbare Prosa), falls Einträge wiederholt nicht treffen, was deine Commits tatsächlich gemacht haben. Reines <strong>Codestral</strong> lohnt sich, wenn du eher ein akkurates technisches Changelog willst als ein Tagebuch im literarischen Sinn.</span>
+      </p>
+
+      <h3><span class="lang-en">Configuration reference</span><span class="lang-de">Konfigurationsreferenz</span></h3>
+      <ul>
+        <li><span class="lang-en"><code>OLLAMA_HOST</code> — default <code>http://localhost:11434</code>. Override if Ollama runs elsewhere (another machine on your LAN, a custom port).</span><span class="lang-de"><code>OLLAMA_HOST</code> — Standard <code>http://localhost:11434</code>. Überschreiben, falls Ollama woanders läuft (anderer Rechner im LAN, eigener Port).</span></li>
+        <li><span class="lang-en"><code>OLLAMA_MODEL</code> — shared default model across every tool, if no per-tool override is set. Falls back to <code>llama3.2</code> if unset.</span><span class="lang-de"><code>OLLAMA_MODEL</code> — gemeinsames Standardmodell für alle Tools, falls kein Tool-spezifischer Override gesetzt ist. Fällt auf <code>llama3.2</code> zurück, falls nicht gesetzt.</span></li>
+        <li><span class="lang-en"><code>&lt;TOOL&gt;_OLLAMA_MODEL</code> — per-tool override, wins over the shared <code>OLLAMA_MODEL</code> (e.g. <code>DIARYCTL_OLLAMA_MODEL=qwen2.5-coder</code>, <code>MAILCTL_OLLAMA_MODEL=mistral-nemo</code>).</span><span class="lang-de"><code>&lt;TOOL&gt;_OLLAMA_MODEL</code> — Tool-spezifischer Override, gewinnt gegen das gemeinsame <code>OLLAMA_MODEL</code> (z. B. <code>DIARYCTL_OLLAMA_MODEL=qwen2.5-coder</code>, <code>MAILCTL_OLLAMA_MODEL=mistral-nemo</code>).</span></li>
+        <li><span class="lang-en"><code>&lt;TOOL&gt;_PROVIDER=ollama</code> — forces that one tool onto Ollama even if an API key is also set (e.g. keep paying for Claude in mailctl but stay free in budgetctl).</span><span class="lang-de"><code>&lt;TOOL&gt;_PROVIDER=ollama</code> — erzwingt für genau dieses Tool Ollama, selbst wenn auch ein API-Key gesetzt ist (z. B. in mailctl weiter Claude bezahlen, in budgetctl kostenlos bleiben).</span></li>
+      </ul>
+      <p><span class="lang-en">Full precedence: <code>&lt;TOOL&gt;_PROVIDER</code> (if set) picks the provider outright. Otherwise auto-detect checks, in order: <code>ANTHROPIC_API_KEY</code> → <code>OPENAI_API_KEY</code> → <code>GEMINI_API_KEY</code> → Ollama (always available, no key needed — the guaranteed fallback). Once on Ollama, the model is <code>&lt;TOOL&gt;_OLLAMA_MODEL</code> → <code>OLLAMA_MODEL</code> → <code>llama3.2</code>.</span><span class="lang-de">Vollständige Priorität: <code>&lt;TOOL&gt;_PROVIDER</code> (falls gesetzt) legt den Provider direkt fest. Sonst prüft die automatische Erkennung der Reihe nach: <code>ANTHROPIC_API_KEY</code> → <code>OPENAI_API_KEY</code> → <code>GEMINI_API_KEY</code> → Ollama (immer verfügbar, kein Key nötig — der garantierte Fallback). Bei Ollama gilt für das Modell: <code>&lt;TOOL&gt;_OLLAMA_MODEL</code> → <code>OLLAMA_MODEL</code> → <code>llama3.2</code>.</span></p>
+
+      <p><span class="lang-en">Example <code>~/.zshrc</code> to pin different models per tool permanently:</span><span class="lang-de">Beispiel <code>~/.zshrc</code>, um pro Tool dauerhaft unterschiedliche Modelle festzulegen:</span></p>
+      <pre><code>{`export MAILCTL_OLLAMA_MODEL=mistral-nemo
+export DIARYCTL_OLLAMA_MODEL=qwen2.5-coder
+export BUDGETCTL_OLLAMA_MODEL=qwen2.5:14b
+export CALCTL_OLLAMA_MODEL=mistral-nemo
+# habctl and everything else not listed here stays on the OLLAMA_MODEL default / llama3.2`}</code></pre>
+
+      <h3><span class="lang-en">Performance notes</span><span class="lang-de">Hinweise zur Performance</span></h3>
+      <ul>
+        <li><span class="lang-en"><strong>Apple Silicon:</strong> unified memory means a model's RAM footprint competes directly with everything else running. A 16 GB Mac comfortably handles up to ~9–10 GB models (mistral-nemo, qwen2.5:14b); on 8 GB, stick to llama3.2 or plain mistral (7B).</span><span class="lang-de"><strong>Apple Silicon:</strong> Unified Memory heißt, der RAM-Bedarf eines Modells konkurriert direkt mit allem anderen, was läuft. Ein 16-GB-Mac verkraftet gut bis ~9–10-GB-Modelle (mistral-nemo, qwen2.5:14b); bei 8 GB lieber bei llama3.2 oder einfachem mistral (7B) bleiben.</span></li>
+        <li><span class="lang-en">The <strong>first call</strong> after <code>ollama serve</code> starts (or after switching to a different model) is slow — Ollama has to load the model into memory. Subsequent calls are fast as long as the model stays warm (Ollama keeps recently-used models loaded for a few minutes by default).</span><span class="lang-de">Der <strong>erste Aufruf</strong> nach dem Start von <code>ollama serve</code> (oder nach einem Modellwechsel) ist langsam — Ollama muss das Modell erst in den Speicher laden. Folgeaufrufe sind schnell, solange das Modell warm bleibt (Ollama hält zuletzt genutzte Modelle standardmäßig einige Minuten geladen).</span></li>
+        <li><span class="lang-en">Every AI call in the suite streams token-by-token, so even a slower model shows visible progress instead of a long silent wait — see the live word-count in mailctl's compose view or diaryctl's editor.</span><span class="lang-de">Jeder KI-Aufruf in der Suite streamt Token für Token, sodass auch ein langsameres Modell sichtbaren Fortschritt zeigt statt eines langen stillen Wartens — sichtbar an der Live-Wortzahl in mailctls Verfassen-Ansicht oder diaryctls Editor.</span></li>
+      </ul>
+
+      <h3><span class="lang-en">Troubleshooting</span><span class="lang-de">Fehlerbehebung</span></h3>
+      <ul>
+        <li><span class="lang-en"><strong>"connection refused — is Ollama running?"</strong> — <code>ollama serve</code> isn't running. Launch the Ollama.app, or run <code>ollama serve</code> in a terminal.</span><span class="lang-de"><strong>"connection refused — is Ollama running?"</strong> — <code>ollama serve</code> läuft nicht. Ollama.app starten, oder <code>ollama serve</code> im Terminal ausführen.</span></li>
+        <li><span class="lang-en"><strong>"404 — model not found"</strong> — the model named in <code>OLLAMA_MODEL</code>/<code>&lt;TOOL&gt;_OLLAMA_MODEL</code> hasn't been pulled yet: <code>ollama pull &lt;name&gt;</code>.</span><span class="lang-de"><strong>"404 — model not found"</strong> — das in <code>OLLAMA_MODEL</code>/<code>&lt;TOOL&gt;_OLLAMA_MODEL</code> genannte Modell wurde noch nicht geladen: <code>ollama pull &lt;name&gt;</code>.</span></li>
+        <li><span class="lang-en">Slow or low-quality output — try a larger model if your RAM allows, or confirm what's actually loaded with <code>ollama ps</code>.</span><span class="lang-de">Langsame oder schwache Ausgabe — bei genug RAM ein größeres Modell probieren, oder mit <code>ollama ps</code> prüfen, was wirklich geladen ist.</span></li>
+        <li><span class="lang-en">Not sure which provider a tool picked? Gated commands print it in their output, and habctl's Settings screen (<code>S</code> key) shows the active provider directly.</span><span class="lang-de">Unsicher, welchen Provider ein Tool gewählt hat? Gesperrte Befehle geben das in ihrer Ausgabe aus, und habctls Settings-Ansicht (<code>S</code>-Taste) zeigt den aktiven Provider direkt an.</span></li>
+      </ul>
 
       <!-- ── TUTORIAL ───────────────────────── -->
       <h2 id="tutorial"><span class="lang-en">Tutorial: First 10 Minutes</span><span class="lang-de">Tutorial: Die ersten 10 Minuten</span></h2>
