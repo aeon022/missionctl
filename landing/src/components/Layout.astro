@@ -30,13 +30,22 @@ const {
 const siteUrl = 'https://missionctl.sh';
 const canonicalURL = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
 
+// SoftwareApplication JSON-LD used to hardcode operatingSystem: 'macOS' for
+// every app — wrong for the 5 apps that also run on Linux (they only bridge
+// Apple frameworks where an app genuinely needs to, e.g. mailctl→Apple Mail).
+// A search/AI engine reading the structured data would report the wrong OS
+// support for those 5. See each app's own hero copy ("macOS + Linux") for
+// the source of truth this table mirrors.
+const macOnlyApps = new Set(['mailctl', 'calctl', 'taskctl']);
+const operatingSystem = appName && !macOnlyApps.has(appName) ? 'macOS, Linux' : 'macOS';
+
 const organizationLd = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'missionctl',
   url: siteUrl,
   logo: new URL('/android-chrome-512x512.png', siteUrl).href,
-  sameAs: ['https://postctl.sh'],
+  sameAs: ['https://postctl.sh', 'https://github.com/aeon022'],
 };
 
 const primaryLd = type === 'software' && appName ? {
@@ -44,7 +53,7 @@ const primaryLd = type === 'software' && appName ? {
   '@type': 'SoftwareApplication',
   name: appName,
   applicationCategory: 'DeveloperApplication',
-  operatingSystem: 'macOS',
+  operatingSystem: operatingSystem,
   offers: {
     '@type': 'Offer',
     price: appPrice ?? '0',

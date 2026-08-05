@@ -260,10 +260,28 @@ const toolGroups = [
 
 const faqs = [
   {
-    q_en: 'Do I need a Claude subscription?',
-    q_de: 'Brauche ich ein Claude-Abo?',
-    a_en: 'Yes, Claude Pro or Team. missionctl connects to Claude Desktop via MCP — no extra subscription needed beyond that.',
-    a_de: 'Ja, Claude Pro oder Team. missionctl verbindet sich per MCP mit Claude Desktop — darüber hinaus ist kein zusätzliches Abo nötig.',
+    q_en: 'What is missionctl?',
+    q_de: 'Was ist missionctl?',
+    a_en: 'missionctl is a suite of 9 local-first terminal apps — mail, calendar, tasks, notes, budget, diary, time tracking, habits, and social posting — that expose 66 MCP tools so an AI assistant can act on your behalf directly from your own machine. All data stays local; there is no missionctl cloud service, and every app is free to download and use.',
+    a_de: 'missionctl ist eine Suite aus 9 local-first Terminal-Apps — Mail, Kalender, Aufgaben, Notizen, Budget, Tagebuch, Zeiterfassung, Habits und Social-Posting — die 66 MCP-Tools bereitstellen, damit ein KI-Assistent direkt von deinem eigenen Rechner aus in deinem Namen handeln kann. Alle Daten bleiben lokal, es gibt keinen missionctl-Cloud-Dienst, und jede App ist kostenlos herunterladbar und nutzbar.',
+  },
+  {
+    q_en: 'What is MCP (Model Context Protocol)?',
+    q_de: 'Was ist MCP (Model Context Protocol)?',
+    a_en: 'MCP is an open protocol, created by Anthropic, that lets AI assistants call external tools — like reading your calendar or sending an email — through a standard interface. Every missionctl app ships its own local MCP server (<app> mcp) so an MCP-capable client such as Claude Desktop can use it directly.',
+    a_de: 'MCP ist ein offenes, von Anthropic entwickeltes Protokoll, mit dem KI-Assistenten über eine standardisierte Schnittstelle externe Tools aufrufen können — etwa den Kalender lesen oder eine E-Mail senden. Jede missionctl-App bringt ihren eigenen lokalen MCP-Server mit (<app> mcp), sodass ein MCP-fähiger Client wie Claude Desktop sie direkt nutzen kann.',
+  },
+  {
+    q_en: 'How can missionctl make me more productive?',
+    q_de: 'Wie macht mich missionctl produktiver?',
+    a_en: 'It lets your AI assistant actually do the busywork instead of just discussing it — draft and send email replies, triage your calendar and find free slots, keep your task list current, log time and generate invoices, write a developer diary from your git history — through natural conversation instead of switching between apps.',
+    a_de: 'Deine KI kann die Kleinarbeit tatsächlich erledigen, statt nur darüber zu reden — E-Mail-Antworten entwerfen und senden, den Kalender sortieren und freie Slots finden, die Aufgabenliste aktuell halten, Zeit erfassen und Rechnungen erstellen, ein Entwickler-Tagebuch aus der Git-Historie schreiben — per natürlicher Konversation statt App-Hopping.',
+  },
+  {
+    q_en: 'Is missionctl free? Do I need a Claude subscription?',
+    q_de: 'Ist missionctl kostenlos? Brauche ich ein Claude-Abo?',
+    a_en: "All 9 apps are free to download and use (MIT licensed). A one-time $39 Bundle (or $9 per feature individually) unlocks optional AI features in 5 of the apps — no subscription either way. For the AI client side: Claude Desktop's free plan already supports local MCP servers, so no paid Claude plan is required. missionctl's own AI features also work with a free-tier Gemini key or a fully local Ollama model at no cost at all.",
+    a_de: 'Alle 9 Apps sind kostenlos herunterladbar und nutzbar (MIT-lizenziert). Ein einmaliger Kauf des $39-Bundles (oder $9 pro Feature einzeln) schaltet optionale KI-Features in 5 der Apps frei — kein Abo in beiden Fällen. Auf der KI-Client-Seite: Claude Desktops kostenloser Plan unterstützt bereits lokale MCP-Server, ein bezahlter Claude-Plan ist also nicht nötig. missionctls eigene KI-Features funktionieren zudem mit einem kostenlosen Gemini-Key oder einem komplett lokalen Ollama-Modell, völlig kostenlos.',
   },
   {
     q_en: 'Does it work on Linux?',
@@ -274,8 +292,8 @@ const faqs = [
   {
     q_en: 'Is my data safe?',
     q_de: 'Sind meine Daten sicher?',
-    a_en: 'All data stays on your machine. missionctl never calls any external server. The only network calls are what you explicitly trigger (sending an email, publishing a post).',
-    a_de: 'Alle Daten bleiben auf deinem Rechner. missionctl ruft niemals einen externen Server auf. Die einzigen Netzwerkaufrufe sind die, die du explizit auslöst (eine E-Mail senden, einen Post veröffentlichen).',
+    a_en: 'All data stays on your machine. missionctl never calls any external server. The only network calls are what you explicitly trigger (sending an email, publishing a post, or an optional AI call).',
+    a_de: 'Alle Daten bleiben auf deinem Rechner. missionctl ruft niemals einen externen Server auf. Die einzigen Netzwerkaufrufe sind die, die du explizit auslöst (eine E-Mail senden, einen Post veröffentlichen, oder ein optionaler KI-Aufruf).',
   },
   {
     q_en: "What if Apple Mail/Calendar isn't running?",
@@ -558,7 +576,7 @@ const faqLd = {
   </section>
 
   <!-- ======= FAQ ======= -->
-  <section style="padding: 5rem 1.5rem; background: var(--color-terminal-surface); border-top: 1px solid var(--color-terminal-border); border-bottom: 1px solid var(--color-terminal-border);">
+  <section id="faq" style="padding: 5rem 1.5rem; background: var(--color-terminal-surface); border-top: 1px solid var(--color-terminal-border); border-bottom: 1px solid var(--color-terminal-border);">
     <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
     <div style="max-width: 720px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
@@ -654,6 +672,7 @@ const faqLd = {
       </p>
     </div>
   </section>
+
 </Layout>
 
 <style>
