@@ -37,12 +37,12 @@
     position: relative;
     background: linear-gradient(90deg,
       transparent 0%,
-      rgba(0,217,126,0.05) 20%,
-      rgba(0,217,126,0.08) 50%,
-      rgba(0,217,126,0.05) 80%,
+      rgba(var(--color-terminal-green-rgb),0.05) 20%,
+      rgba(var(--color-terminal-green-rgb),0.08) 50%,
+      rgba(var(--color-terminal-green-rgb),0.05) 80%,
       transparent 100%
     );
-    border-bottom: 1px solid rgba(0,217,126,0.1);
+    border-bottom: 1px solid rgba(var(--color-terminal-green-rgb),0.1);
     overflow: hidden;
   }
 
@@ -53,7 +53,7 @@
     inset: 0;
     background: linear-gradient(90deg,
       transparent 0%,
-      rgba(255,255,255,0.03) 50%,
+      rgba(var(--color-hover-tint),0.03) 50%,
       transparent 100%
     );
     background-size: 200% 100%;
@@ -78,15 +78,15 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #00d97e;
-    box-shadow: 0 0 6px rgba(0,217,126,0.6);
+    background: var(--color-terminal-green);
+    box-shadow: 0 0 6px rgba(var(--color-terminal-green-rgb),0.6);
     animation: ann-pulse 2.5s ease infinite;
     flex-shrink: 0;
   }
 
   @keyframes ann-pulse {
-    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(0,217,126,0.6); }
-    50%       { opacity: 0.7; box-shadow: 0 0 10px rgba(0,217,126,0.9); }
+    0%, 100% { opacity: 1; box-shadow: 0 0 6px rgba(var(--color-terminal-green-rgb),0.6); }
+    50%       { opacity: 0.7; box-shadow: 0 0 10px rgba(var(--color-terminal-green-rgb),0.9); }
   }
 
   .ann-text {
@@ -95,23 +95,23 @@
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    color: #718096;
+    color: var(--color-terminal-dim);
     transition: color 0.15s;
   }
-  .ann-inner:hover .ann-text { color: #a0aec0; }
+  .ann-inner:hover .ann-text { color: var(--color-terminal-code-text); }
 
-  .ann-text strong { color: #e2e8f0; font-weight: 600; }
-  .ann-sep { color: #2d2d44; }
+  .ann-text strong { color: var(--color-terminal-text); font-weight: 600; }
+  .ann-sep { color: var(--color-terminal-border); }
   .ann-price {
-    color: #00d97e;
+    color: var(--color-terminal-green);
     font-weight: 700;
-    background: rgba(0,217,126,0.08);
+    background: rgba(var(--color-terminal-green-rgb),0.08);
     padding: 0.05rem 0.35rem;
     border-radius: 3px;
-    border: 1px solid rgba(0,217,126,0.15);
+    border: 1px solid rgba(var(--color-terminal-green-rgb),0.15);
   }
   .ann-cta {
-    color: #00d97e;
+    color: var(--color-terminal-green);
     transition: gap 0.15s;
     letter-spacing: 0.01em;
   }
@@ -125,7 +125,7 @@
     z-index: 2;
     background: none;
     border: none;
-    color: #2d2d44;
+    color: var(--color-terminal-border);
     cursor: pointer;
     padding: 0.3rem;
     display: flex;
@@ -134,7 +134,7 @@
     border-radius: 3px;
     transition: color 0.15s, background 0.15s;
   }
-  .ann-close:hover { color: #718096; background: rgba(255,255,255,0.04); }
+  .ann-close:hover { color: var(--color-terminal-dim); background: rgba(var(--color-hover-tint),0.04); }
 
   /* Hidden via html.bar-closed */
   :global(.bar-closed) #announcement-bar {

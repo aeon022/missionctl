@@ -18,15 +18,15 @@ const { title, price, features, features_de, ctaText, ctaText_de, ctaHref, highl
 ---
 
 <div style={`
-  background: ${highlighted ? 'rgba(0,217,126,0.04)' : '#111118'};
-  border: ${highlighted ? '2px solid rgba(0,217,126,0.4)' : '1px solid #1e1e2e'};
+  background: ${highlighted ? 'rgba(var(--color-terminal-green-rgb),0.04)' : 'var(--color-terminal-surface)'};
+  border: ${highlighted ? '2px solid rgba(var(--color-terminal-green-rgb),0.4)' : '1px solid var(--color-terminal-border)'};
   border-radius: 8px;
   padding: 1.75rem;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
   position: relative;
-  ${highlighted ? 'box-shadow: 0 0 40px rgba(0,217,126,0.08);' : ''}
+  ${highlighted ? 'box-shadow: 0 0 40px rgba(var(--color-terminal-green-rgb),0.08);' : ''}
   transition: border-color 0.2s, box-shadow 0.2s;
 `} class="pricing-card">
 
@@ -34,8 +34,8 @@ const { title, price, features, features_de, ctaText, ctaText_de, ctaHref, highl
   {badge && (
     <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%);">
       <span style="
-        background: #00d97e;
-        color: #0a0a0f;
+        background: var(--color-terminal-green);
+        color: var(--color-terminal-bg);
         font-family: 'JetBrains Mono', monospace;
         font-size: 0.7rem;
         font-weight: 700;
@@ -54,33 +54,33 @@ const { title, price, features, features_de, ctaText, ctaText_de, ctaHref, highl
       font-family: 'JetBrains Mono', monospace;
       font-size: 1rem;
       font-weight: 700;
-      color: ${highlighted ? '#00d97e' : '#e2e8f0'};
+      color: ${highlighted ? 'var(--color-terminal-green)' : 'var(--color-terminal-text)'};
       margin: 0 0 0.5rem;
     `}>{title}</h3>
     <div style="display: flex; align-items: baseline; gap: 0.25rem;">
       <span style={`
         font-size: 2rem;
         font-weight: 800;
-        color: ${highlighted ? '#00d97e' : '#e2e8f0'};
+        color: ${highlighted ? 'var(--color-terminal-green)' : 'var(--color-terminal-text)'};
         line-height: 1;
       `}>{price}</span>
-      <span style="color: #4a5568; font-size: 0.85rem;">USD</span>
+      <span style="color: var(--color-terminal-muted); font-size: 0.85rem;">USD</span>
     </div>
-    <p style="color: #4a5568; font-size: 0.75rem; margin: 0.35rem 0 0; font-family: 'JetBrains Mono', monospace;"><span class="lang-en">one-time purchase</span><span class="lang-de">Einmalkauf</span></p>
+    <p style="color: var(--color-terminal-muted); font-size: 0.75rem; margin: 0.35rem 0 0; font-family: 'JetBrains Mono', monospace;"><span class="lang-en">one-time purchase</span><span class="lang-de">Einmalkauf</span></p>
   </div>
 
   <!-- Features -->
   <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.5rem; flex: 1;">
     {features.map((f, i) => (
-      <li style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; color: #a0aec0;">
-        <span style={`color: ${highlighted ? '#00d97e' : '#4a5568'}; font-family: monospace; flex-shrink: 0; margin-top: 1px;`}>&#x2713;</span>
+      <li style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.85rem; color: var(--color-terminal-code-text);">
+        <span style={`color: ${highlighted ? 'var(--color-terminal-green)' : 'var(--color-terminal-muted)'}; font-family: monospace; flex-shrink: 0; margin-top: 1px;`}>&#x2713;</span>
         <span class="lang-en">{f}</span><span class="lang-de">{features_de?.[i] ?? f}</span>
       </li>
     ))}
   </ul>
 
   <!-- Note -->
-  {note && <p style="color: #4a5568; font-size: 0.75rem; margin: 0; font-style: italic;"><span class="lang-en">{note}</span><span class="lang-de">{note_de ?? note}</span></p>}
+  {note && <p style="color: var(--color-terminal-muted); font-size: 0.75rem; margin: 0; font-style: italic;"><span class="lang-en">{note}</span><span class="lang-de">{note_de ?? note}</span></p>}
 
   <!-- CTA -->
   <a
@@ -98,8 +98,8 @@ const { title, price, features, features_de, ctaText, ctaText_de, ctaHref, highl
       text-decoration: none;
       transition: all 0.15s ease;
       ${highlighted
-        ? 'background: #00d97e; color: #0a0a0f;'
-        : 'background: transparent; color: #e2e8f0; border: 1px solid #1e1e2e;'
+        ? 'background: var(--color-terminal-green); color: var(--color-terminal-bg);'
+        : 'background: transparent; color: var(--color-terminal-text); border: 1px solid var(--color-terminal-border);'
       }
     `}
     class={highlighted ? 'pricing-cta-primary' : 'pricing-cta-secondary'}
@@ -110,15 +110,15 @@ const { title, price, features, features_de, ctaText, ctaText_de, ctaHref, highl
 
 <style>
   .pricing-cta-primary:hover {
-    background: #00c070 !important;
+    background: var(--color-terminal-green-hover) !important;
     transform: translateY(-1px);
   }
   .pricing-cta-secondary:hover {
-    border-color: rgba(0,217,126,0.4) !important;
-    color: #00d97e !important;
+    border-color: rgba(var(--color-terminal-green-rgb),0.4) !important;
+    color: var(--color-terminal-green) !important;
   }
   .pricing-card:not([style*="border: 2px"]):hover {
-    border-color: rgba(255,255,255,0.1) !important;
+    border-color: rgba(var(--color-hover-tint),0.1) !important;
     transform: translateY(-3px);
   }
   .pricing-card {
@@ -128,8 +128,8 @@ const { title, price, features, features_de, ctaText, ctaText_de, ctaHref, highl
     animation: pricing-glow-pulse 3.2s ease-in-out infinite;
   }
   @keyframes pricing-glow-pulse {
-    0%, 100% { box-shadow: 0 0 40px rgba(0,217,126,0.08); }
-    50%      { box-shadow: 0 0 56px rgba(0,217,126,0.16); }
+    0%, 100% { box-shadow: 0 0 40px rgba(var(--color-terminal-green-rgb),0.08); }
+    50%      { box-shadow: 0 0 56px rgba(var(--color-terminal-green-rgb),0.16); }
   }
   @media (prefers-reduced-motion: reduce) {
     .pricing-card[style*="border: 2px"] { animation: none; }

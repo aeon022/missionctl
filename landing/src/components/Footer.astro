@@ -11,34 +11,34 @@ const apps = [
 ];
 ---
 
-<footer style="background: #111118; border-top: 1px solid #1e1e2e; padding: 3rem 1.5rem 2rem; position: relative; z-index: 1;">
+<footer style="background: var(--color-terminal-surface); border-top: 1px solid var(--color-terminal-border); padding: 3rem 1.5rem 2rem; position: relative; z-index: 1;">
   <div style="max-width: 1200px; margin: 0 auto;">
     <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem; margin-bottom: 2.5rem;" class="footer-grid">
 
       <!-- Brand -->
       <div>
-        <a href="/" style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: #00d97e; text-decoration: none; display: block; margin-bottom: 0.75rem;">
-          <span style="color: #e2e8f0;">mission</span>ctl
+        <a href="/" style="font-family: 'JetBrains Mono', monospace; font-size: 1.25rem; font-weight: 700; color: var(--color-terminal-green); text-decoration: none; display: block; margin-bottom: 0.75rem;">
+          <span style="color: var(--color-terminal-text);">mission</span>ctl
         </a>
-        <p style="color: #718096; font-size: 0.85rem; line-height: 1.6; margin: 0 0 1rem;">
+        <p style="color: var(--color-terminal-dim); font-size: 0.85rem; line-height: 1.6; margin: 0 0 1rem;">
           <span class="lang-en">66 MCP tools across 9 terminal apps.<br>Local-first. No subscriptions.</span>
           <span class="lang-de">66 MCP-Tools über 9 Terminal-Apps.<br>Local-first. Keine Abos.</span>
         </p>
-        <p style="color: #4a5568; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;">
+        <p style="color: var(--color-terminal-muted); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace;">
           <span class="lang-en">Built with Go, Bubbletea, and Claude.</span><span class="lang-de">Gebaut mit Go, Bubbletea und Claude.</span>
         </p>
       </div>
 
       <!-- Apps -->
       <div>
-        <h3 style="color: #e2e8f0; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 1rem;">Apps</h3>
+        <h3 style="color: var(--color-terminal-text); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 1rem;">Apps</h3>
         <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
           {apps.map(app => (
-            <a href={app.href} style="color: #718096; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; transition: color 0.15s;" class="footer-link">
+            <a href={app.href} style="color: var(--color-terminal-dim); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; transition: color 0.15s;" class="footer-link">
               {app.name}
             </a>
           ))}
-          <a href="https://postctl.sh" target="_blank" rel="noopener" style="color: #718096; text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; transition: color 0.15s;" class="footer-link">
+          <a href="https://postctl.sh" target="_blank" rel="noopener" style="color: var(--color-terminal-dim); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; transition: color 0.15s;" class="footer-link">
             postctl ↗
           </a>
         </nav>
@@ -46,23 +46,23 @@ const apps = [
 
       <!-- Legal -->
       <div>
-        <h3 style="color: #e2e8f0; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 1rem;"><span class="lang-en">Legal</span><span class="lang-de">Rechtliches</span></h3>
+        <h3 style="color: var(--color-terminal-text); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 1rem;"><span class="lang-en">Legal</span><span class="lang-de">Rechtliches</span></h3>
         <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
-          <a href="/privacy" style="color: #718096; text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link"><span class="lang-en">Privacy Policy</span><span class="lang-de">Datenschutz</span></a>
-          <a href="/cookies" style="color: #718096; text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link"><span class="lang-en">Cookie Policy</span><span class="lang-de">Cookie-Richtlinie</span></a>
-          <a href="https://github.com/aeon022/homebrew-tap" target="_blank" rel="noopener" style="color: #718096; text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link"><span class="lang-en">Download ↗</span><span class="lang-de">Herunterladen ↗</span></a>
-          <a href="https://buy.polar.sh/polar_cl_kf5owZpIIKKtLjfO6wU3ofmYHecAixqxVZrmr1GMGOd" target="_blank" rel="noopener" style="color: #718096; text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link"><span class="lang-en">Get the Bundle ↗</span><span class="lang-de">Bundle holen ↗</span></a>
+          <a href="/privacy" style="color: var(--color-terminal-dim); text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link"><span class="lang-en">Privacy Policy</span><span class="lang-de">Datenschutz</span></a>
+          <a href="/cookies" style="color: var(--color-terminal-dim); text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link"><span class="lang-en">Cookie Policy</span><span class="lang-de">Cookie-Richtlinie</span></a>
+          <a href="https://github.com/aeon022/homebrew-tap" target="_blank" rel="noopener" style="color: var(--color-terminal-dim); text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link"><span class="lang-en">Download ↗</span><span class="lang-de">Herunterladen ↗</span></a>
+          <a href="https://buy.polar.sh/polar_cl_kf5owZpIIKKtLjfO6wU3ofmYHecAixqxVZrmr1GMGOd" target="_blank" rel="noopener" style="color: var(--color-terminal-dim); text-decoration: none; font-size: 0.85rem; transition: color 0.15s;" class="footer-link"><span class="lang-en">Get the Bundle ↗</span><span class="lang-de">Bundle holen ↗</span></a>
         </nav>
       </div>
 
     </div>
 
     <!-- Bottom bar -->
-    <div style="border-top: 1px solid #1e1e2e; padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
-      <p style="color: #4a5568; font-size: 0.75rem; margin: 0;">
+    <div style="border-top: 1px solid var(--color-terminal-border); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+      <p style="color: var(--color-terminal-muted); font-size: 0.75rem; margin: 0;">
         <span class="lang-en">&copy; 2026 missionctl. All rights reserved.</span><span class="lang-de">&copy; 2026 missionctl. Alle Rechte vorbehalten.</span>
       </p>
-      <p style="color: #4a5568; font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; margin: 0;">
+      <p style="color: var(--color-terminal-muted); font-size: 0.75rem; font-family: 'JetBrains Mono', monospace; margin: 0;">
         <span class="lang-en">One-time purchase &middot; No subscriptions &middot; Your data stays local</span><span class="lang-de">Einmalkauf &middot; Keine Abos &middot; Deine Daten bleiben lokal</span>
       </p>
     </div>
@@ -71,7 +71,7 @@ const apps = [
 
 <style>
   .footer-link:hover {
-    color: #00d97e !important;
+    color: var(--color-terminal-green) !important;
   }
 
   @media (max-width: 640px) {

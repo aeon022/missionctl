@@ -11,31 +11,31 @@ const { title, content, id } = Astro.props;
 <div
   id={id}
   style="
-    background: #0d0d14;
-    border: 1px solid #1e1e2e;
+    background: var(--color-terminal-code-bg);
+    border: 1px solid var(--color-terminal-border);
     border-radius: 8px;
     overflow: hidden;
     font-family: 'JetBrains Mono', monospace;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(0,217,126,0.05);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(var(--color-terminal-green-rgb),0.05);
   "
 >
   <!-- Title bar -->
   <div style="
-    background: #111118;
-    border-bottom: 1px solid #1e1e2e;
+    background: var(--color-terminal-surface);
+    border-bottom: 1px solid var(--color-terminal-border);
     padding: 0.625rem 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
   ">
     <!-- Traffic lights -->
-    <span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444; display: inline-block; opacity: 0.8;"></span>
-    <span style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; display: inline-block; opacity: 0.8;"></span>
-    <span style="width: 10px; height: 10px; border-radius: 50%; background: #00d97e; display: inline-block; opacity: 0.8;"></span>
+    <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-terminal-red); display: inline-block; opacity: 0.8;"></span>
+    <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-terminal-amber); display: inline-block; opacity: 0.8;"></span>
+    <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-terminal-green); display: inline-block; opacity: 0.8;"></span>
     <span style="
       margin-left: 0.5rem;
       font-size: 0.7rem;
-      color: #4a5568;
+      color: var(--color-terminal-muted);
       letter-spacing: 0.02em;
     ">{title}</span>
   </div>
@@ -46,7 +46,7 @@ const { title, content, id } = Astro.props;
       margin: 0;
       font-size: 0.82rem;
       line-height: 1.7;
-      color: #00d97e;
+      color: var(--color-terminal-green);
       white-space: pre;
       tab-size: 2;
     "><Fragment set:html={content} /></pre>

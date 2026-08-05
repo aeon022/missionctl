@@ -13,8 +13,8 @@ const { name, description, description_de, href, mcpCount, features, features_de
 ---
 
 <article style="
-  background: #111118;
-  border: 1px solid #1e1e2e;
+  background: var(--color-terminal-surface);
+  border: 1px solid var(--color-terminal-border);
   border-radius: 8px;
   padding: 1.5rem;
   position: relative;
@@ -25,10 +25,10 @@ const { name, description, description_de, href, mcpCount, features, features_de
 " class="app-card">
 
   <!-- Corner decorations -->
-  <span style="position: absolute; top: -1px; left: -1px; font-family: monospace; font-size: 11px; color: #00d97e40; line-height: 1;">+</span>
-  <span style="position: absolute; top: -1px; right: -1px; font-family: monospace; font-size: 11px; color: #00d97e40; line-height: 1;">+</span>
-  <span style="position: absolute; bottom: -1px; left: -1px; font-family: monospace; font-size: 11px; color: #00d97e40; line-height: 1;">+</span>
-  <span style="position: absolute; bottom: -1px; right: -1px; font-family: monospace; font-size: 11px; color: #00d97e40; line-height: 1;">+</span>
+  <span style="position: absolute; top: -1px; left: -1px; font-family: monospace; font-size: 11px; color: rgba(var(--color-terminal-green-rgb), 0.25); line-height: 1;">+</span>
+  <span style="position: absolute; top: -1px; right: -1px; font-family: monospace; font-size: 11px; color: rgba(var(--color-terminal-green-rgb), 0.25); line-height: 1;">+</span>
+  <span style="position: absolute; bottom: -1px; left: -1px; font-family: monospace; font-size: 11px; color: rgba(var(--color-terminal-green-rgb), 0.25); line-height: 1;">+</span>
+  <span style="position: absolute; bottom: -1px; right: -1px; font-family: monospace; font-size: 11px; color: rgba(var(--color-terminal-green-rgb), 0.25); line-height: 1;">+</span>
 
   <!-- Header -->
   <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem;">
@@ -36,30 +36,30 @@ const { name, description, description_de, href, mcpCount, features, features_de
       font-family: 'JetBrains Mono', monospace;
       font-size: 1rem;
       font-weight: 700;
-      color: #00d97e;
+      color: var(--color-terminal-green);
       margin: 0;
     ">{name}</h3>
     <span style="
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
       padding: 0.2rem 0.5rem;
-      background: rgba(0,217,126,0.08);
-      border: 1px solid rgba(0,217,126,0.2);
+      background: rgba(var(--color-terminal-green-rgb),0.08);
+      border: 1px solid rgba(var(--color-terminal-green-rgb),0.2);
       border-radius: 20px;
-      color: #00d97e;
+      color: var(--color-terminal-green);
       white-space: nowrap;
     "><span class="lang-en">{mcpCount} MCP tools</span><span class="lang-de">{mcpCount} MCP-Tools</span></span>
   </div>
 
   <!-- Description -->
-  <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{description}</span><span class="lang-de">{description_de ?? description}</span></p>
+  <p style="color: var(--color-terminal-dim); font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{description}</span><span class="lang-de">{description_de ?? description}</span></p>
 
   <!-- Features -->
   <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 0.4rem; flex: 1;">
     {features.map((f, i) => (
-      <li style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.8rem; color: #4a5568;">
-        <span style="color: #00d97e; font-family: monospace; flex-shrink: 0; margin-top: 1px;">&#x2713;</span>
-        <span style="color: #a0aec0;"><span class="lang-en">{f}</span><span class="lang-de">{features_de?.[i] ?? f}</span></span>
+      <li style="display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.8rem; color: var(--color-terminal-muted);">
+        <span style="color: var(--color-terminal-green); font-family: monospace; flex-shrink: 0; margin-top: 1px;">&#x2713;</span>
+        <span style="color: var(--color-terminal-code-text);"><span class="lang-en">{f}</span><span class="lang-de">{features_de?.[i] ?? f}</span></span>
       </li>
     ))}
   </ul>
@@ -68,7 +68,7 @@ const { name, description, description_de, href, mcpCount, features, features_de
   <a href={href} style="
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.8rem;
-    color: #00d97e;
+    color: var(--color-terminal-green);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -85,8 +85,8 @@ const { name, description, description_de, href, mcpCount, features, features_de
     transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s cubic-bezier(0.4,0,0.2,1) !important;
   }
   .app-card:hover {
-    border-color: rgba(0, 217, 126, 0.35) !important;
-    box-shadow: 0 12px 32px rgba(0, 217, 126, 0.08), 0 0 0 1px rgba(0,217,126,0.1) !important;
+    border-color: rgba(var(--color-terminal-green-rgb), 0.35) !important;
+    box-shadow: 0 12px 32px rgba(var(--color-terminal-green-rgb), 0.08), 0 0 0 1px rgba(var(--color-terminal-green-rgb),0.1) !important;
     transform: translateY(-4px);
   }
 

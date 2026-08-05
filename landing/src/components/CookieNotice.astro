@@ -8,8 +8,8 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 100;
-  background: #111118;
-  border: 1px solid #1e1e2e;
+  background: var(--color-terminal-surface);
+  border: 1px solid var(--color-terminal-border);
   border-radius: 8px;
   padding: 0.75rem 1.25rem;
   align-items: center;
@@ -18,16 +18,16 @@
   width: calc(100% - 2rem);
   box-shadow: 0 4px 24px rgba(0,0,0,0.5);
 ">
-  <p style="color: #718096; font-size: 0.8rem; margin: 0; flex: 1; line-height: 1.5;">
+  <p style="color: var(--color-terminal-dim); font-size: 0.8rem; margin: 0; flex: 1; line-height: 1.5;">
     <span class="lang-en">We use essential cookies only. No tracking or analytics.</span>
     <span class="lang-de">Wir verwenden nur essenzielle Cookies. Kein Tracking, keine Analyse.</span>
-    <a href="/cookies" style="color: #00d97e; text-decoration: none;"><span class="lang-en">Learn more</span><span class="lang-de">Mehr erfahren</span></a>
+    <a href="/cookies" style="color: var(--color-terminal-green); text-decoration: none;"><span class="lang-en">Learn more</span><span class="lang-de">Mehr erfahren</span></a>
   </p>
   <button
     id="cookie-accept"
     style="
-      background: #00d97e;
-      color: #0a0a0f;
+      background: var(--color-terminal-green);
+      color: var(--color-terminal-bg);
       border: none;
       border-radius: 4px;
       padding: 0.4rem 0.875rem;
