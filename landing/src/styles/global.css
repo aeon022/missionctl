@@ -22,7 +22,10 @@
 
 html {
   scroll-behavior: auto; /* custom easing used for back-to-top and anchor links */
-  overflow-x: hidden; /* safety net: no single overflowing child should cause page-wide horizontal scroll */
+  overflow-x: clip; /* safety net: no single overflowing child should cause page-wide horizontal scroll.
+    NOT overflow-x:hidden — per spec, hidden forces the other axis to compute to auto, turning html/body
+    into their own scroll container and breaking position:sticky on descendants (the docs sidebar nav).
+    clip is grouped with visible for this rule, so it doesn't have that side effect. */
 }
 
 /* EN/DE language toggle. Pair markup like:
@@ -46,7 +49,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  overflow-x: hidden;
+  overflow-x: clip; /* see html{} above — hidden would break position:sticky on the docs sidebar */
 }
 
 /* Ambient monitor glow — soft green light bleeding from top */
