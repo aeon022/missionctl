@@ -9,44 +9,44 @@ import Layout from '../components/Layout.astro';
   <section style="min-height: calc(100vh - 56px); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem 1.5rem; text-align: center;">
     <div style="max-width: 600px;">
       <!-- Terminal window -->
-      <div style="background: #0d0d14; border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden; margin-bottom: 2.5rem; text-align: left; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
-        <div style="background: #111118; border-bottom: 1px solid #1e1e2e; padding: 0.625rem 1rem; display: flex; align-items: center; gap: 0.5rem;">
+      <div style="background: var(--color-terminal-code-bg); border: 1px solid var(--color-terminal-border); border-radius: 8px; overflow: hidden; margin-bottom: 2.5rem; text-align: left; box-shadow: 0 8px 32px rgba(0,0,0,0.4);">
+        <div style="background: var(--color-terminal-surface); border-bottom: 1px solid var(--color-terminal-border); padding: 0.625rem 1rem; display: flex; align-items: center; gap: 0.5rem;">
           <span style="width: 10px; height: 10px; border-radius: 50%; background: #ef4444; display: inline-block;"></span>
           <span style="width: 10px; height: 10px; border-radius: 50%; background: #f59e0b; display: inline-block;"></span>
-          <span style="width: 10px; height: 10px; border-radius: 50%; background: #00d97e; display: inline-block;"></span>
-          <span style="margin-left: 0.5rem; font-size: 0.7rem; color: #4a5568; font-family: 'JetBrains Mono', monospace;">bash</span>
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: var(--color-terminal-green); display: inline-block;"></span>
+          <span style="margin-left: 0.5rem; font-size: 0.7rem; color: var(--color-terminal-muted); font-family: 'JetBrains Mono', monospace;">bash</span>
         </div>
         <div style="padding: 1.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; line-height: 1.8;">
-          <p style="margin: 0; color: #e2e8f0;">
-            <span style="color: #4a5568">$ </span>cd /this-page
+          <p style="margin: 0; color: var(--color-terminal-text);">
+            <span style="color: var(--color-terminal-muted)">$ </span>cd /this-page
           </p>
           <p style="margin: 0; color: #ef4444;">
             bash: cd: /this-page: No such file or directory
           </p>
-          <p style="margin: 0.5rem 0 0; color: #e2e8f0;">
-            <span style="color: #4a5568">$ </span>echo $?
+          <p style="margin: 0.5rem 0 0; color: var(--color-terminal-text);">
+            <span style="color: var(--color-terminal-muted)">$ </span>echo $?
           </p>
-          <p style="margin: 0; color: #e2e8f0;">1</p>
-          <p style="margin: 0.5rem 0 0; color: #e2e8f0;">
-            <span style="color: #4a5568">$ </span><span class="cursor-blink" style="color: #00d97e;">&#x2588;</span>
+          <p style="margin: 0; color: var(--color-terminal-text);">1</p>
+          <p style="margin: 0.5rem 0 0; color: var(--color-terminal-text);">
+            <span style="color: var(--color-terminal-muted)">$ </span><span class="cursor-blink" style="color: var(--color-terminal-green);">&#x2588;</span>
           </p>
         </div>
       </div>
 
-      <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 4rem; font-weight: 900; color: #00d97e; margin: 0 0 0.5rem; line-height: 1;">404</h1>
-      <p style="color: #718096; font-size: 1rem; margin: 0 0 2rem; line-height: 1.6;">
+      <h1 style="font-family: 'JetBrains Mono', monospace; font-size: 4rem; font-weight: 900; color: var(--color-terminal-green); margin: 0 0 0.5rem; line-height: 1;">404</h1>
+      <p style="color: var(--color-terminal-dim); font-size: 1rem; margin: 0 0 2rem; line-height: 1.6;">
         <span class="lang-en">This page doesn't exist. It may have moved, or you may have followed a broken link.</span>
         <span class="lang-de">Diese Seite existiert nicht. Sie wurde vielleicht verschoben, oder du bist einem defekten Link gefolgt.</span>
       </p>
 
       <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
         <a href="/"
-          style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+          style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: var(--color-terminal-green); color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
           class="home-link">
           <span class="lang-en">&larr; Go home</span><span class="lang-de">&larr; Zur Startseite</span>
         </a>
         <a href="/#apps"
-          style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+          style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: var(--color-terminal-text); border-radius: 6px; border: 1px solid var(--color-terminal-border); font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
           class="apps-link">
           <span class="lang-en">Browse apps</span><span class="lang-de">Apps ansehen</span>
         </a>
@@ -56,6 +56,6 @@ import Layout from '../components/Layout.astro';
 </Layout>
 
 <style>
-  .home-link:hover { background: #00c070 !important; transform: translateY(-2px); }
-  .apps-link:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
+  .home-link:hover { background: var(--color-terminal-green-hover) !important; transform: translateY(-2px); }
+  .apps-link:hover { border-color: rgba(var(--color-terminal-green-rgb),0.3) !important; color: var(--color-terminal-green) !important; }
 </style>

@@ -37,50 +37,50 @@ const features = [
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #84cc16; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
           missionctl suite &middot; macOS + Linux
         </div>
-        <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1rem;">
+        <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: var(--color-terminal-text); margin: 0 0 1rem;">
           <span style="font-family: 'JetBrains Mono', monospace; color: #84cc16;">habctl</span>
         </h1>
-        <p style="font-size: 1.25rem; font-weight: 600; color: #e2e8f0; margin: 0 0 0.75rem;"><span class="lang-en">Daily habit tracking for terminal people</span><span class="lang-de">Tägliches Habit-Tracking für Terminal-Menschen</span></p>
-        <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Track daily habits with streaks, heatmaps, and AI weekly coaching reviews — all from your terminal. Claude can check in habits, flag at-risk streaks, and write a coaching briefing via 12 MCP tools.</span><span class="lang-de">Verfolge tägliche Gewohnheiten mit Streaks, Heatmaps und KI-Wochen-Coaching-Reviews — alles aus deinem Terminal. Claude kann Gewohnheiten abhaken, gefährdete Streaks markieren und über 12 MCP-Tools ein Coaching-Briefing schreiben.</span></p>
+        <p style="font-size: 1.25rem; font-weight: 600; color: var(--color-terminal-text); margin: 0 0 0.75rem;"><span class="lang-en">Daily habit tracking for terminal people</span><span class="lang-de">Tägliches Habit-Tracking für Terminal-Menschen</span></p>
+        <p style="color: var(--color-terminal-dim); font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Track daily habits with streaks, heatmaps, and AI weekly coaching reviews — all from your terminal. Claude can check in habits, flag at-risk streaks, and write a coaching briefing via 12 MCP tools.</span><span class="lang-de">Verfolge tägliche Gewohnheiten mit Streaks, Heatmaps und KI-Wochen-Coaching-Reviews — alles aus deinem Terminal. Claude kann Gewohnheiten abhaken, gefährdete Streaks markieren und über 12 MCP-Tools ein Coaching-Briefing schreiben.</span></p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://github.com/aeon022/habctl/releases/latest" target="_blank" rel="noopener"
-            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #84cc16; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #84cc16; color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
             class="cta-primary">
             <span class="lang-en">Download &mdash; Free</span><span class="lang-de">Herunterladen &mdash; Kostenlos</span>
           </a>
           <a href="https://buy.polar.sh/polar_cl_kf5owZpIIKKtLjfO6wU3ofmYHecAixqxVZrmr1GMGOd" target="_blank" rel="noopener"
-            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: transparent; color: var(--color-terminal-text); border-radius: 6px; border: 1px solid var(--color-terminal-border); font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
             class="cta-secondary">
             <span class="lang-en">Get the Bundle &mdash; $39</span><span class="lang-de">Bundle holen &mdash; $39</span>
           </a>
           <a href="https://buy.polar.sh/polar_cl_YoWfKB9lqFAPQRNTN6cYCSIMlAY83L5jXlXuY0CRxoS" target="_blank" rel="noopener"
-            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; color: #718096; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none;">
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; color: var(--color-terminal-dim); font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none;">
             <span class="lang-en">Unlock AI features &mdash; $9 (-30% w/ L4uNch26)</span><span class="lang-de">KI-Features freischalten &mdash; $9 (-30% mit L4uNch26)</span>
           </a>
         </div>
       </div>
       <div>
-        <TerminalWindow title="habctl — list" content={`<span style="color:#4a5568">$ </span>habctl list
-<span style="color:#84cc16">Habits</span>                          <span style="color:#4a5568">streak  today  30d</span>
-<span style="color:#e2e8f0">Sport                           </span><span style="color:#00d97e">12 days</span>  <span style="color:#00d97e">✓</span>     <span style="color:#00d97e">███████████████░░░░░</span> 77%
-<span style="color:#e2e8f0">Read 30 min                     </span><span style="color:#00d97e"> 5 days</span>  <span style="color:#00d97e">✓</span>     <span style="color:#00d97e">█████████████░░░░░░░</span> 67%
-<span style="color:#e2e8f0">No sugar                        </span><span style="color:#84cc16"> 2 days</span>  <span style="color:#718096">–</span>     <span style="color:#84cc16">████████░░░░░░░░░░░░</span> 43%
+        <TerminalWindow title="habctl — list" content={`<span style="color:var(--color-terminal-muted)">$ </span>habctl list
+<span style="color:#84cc16">Habits</span>                          <span style="color:var(--color-terminal-muted)">streak  today  30d</span>
+<span style="color:var(--color-terminal-text)">Sport                           </span><span style="color:var(--color-terminal-green)">12 days</span>  <span style="color:var(--color-terminal-green)">✓</span>     <span style="color:var(--color-terminal-green)">███████████████░░░░░</span> 77%
+<span style="color:var(--color-terminal-text)">Read 30 min                     </span><span style="color:var(--color-terminal-green)"> 5 days</span>  <span style="color:var(--color-terminal-green)">✓</span>     <span style="color:var(--color-terminal-green)">█████████████░░░░░░░</span> 67%
+<span style="color:var(--color-terminal-text)">No sugar                        </span><span style="color:#84cc16"> 2 days</span>  <span style="color:var(--color-terminal-dim)">–</span>     <span style="color:#84cc16">████████░░░░░░░░░░░░</span> 43%
 
-<span style="color:#4a5568">$ </span>habctl check <span style="color:#a0aec0">"No sugar"</span>
-<span style="color:#00d97e">✓</span> <span style="color:#a0aec0">Checked in: No sugar  (streak: 3 days)</span><span class="cursor-blink" style="color:#84cc16">█</span>`} />
+<span style="color:var(--color-terminal-muted)">$ </span>habctl check <span style="color:var(--color-terminal-code-text)">"No sugar"</span>
+<span style="color:var(--color-terminal-green)">✓</span> <span style="color:var(--color-terminal-code-text)">Checked in: No sugar  (streak: 3 days)</span><span class="cursor-blink" style="color:#84cc16">█</span>`} />
       </div>
     </div>
   </section>
 
   <!-- FEATURES -->
-  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+  <section style="padding: 4rem 1.5rem; background: var(--color-terminal-surface); border-top: 1px solid var(--color-terminal-border); border-bottom: 1px solid var(--color-terminal-border);">
     <div style="max-width: 1100px; margin: 0 auto;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2.5rem; letter-spacing: -0.02em;"><span class="lang-en">Features</span><span class="lang-de">Funktionen</span></h2>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-terminal-text); margin: 0 0 2.5rem; letter-spacing: -0.02em;"><span class="lang-en">Features</span><span class="lang-de">Funktionen</span></h2>
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
         {features.map((feat: {title: string; title_de: string; desc: string; desc_de: string}) => (
-          <div style="background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
+          <div style="background: var(--color-terminal-bg); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
             <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #84cc16; margin: 0 0 0.5rem;"><span class="lang-en">{feat.title}</span><span class="lang-de">{feat.title_de}</span></h3>
-            <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{feat.desc}</span><span class="lang-de">{feat.desc_de}</span></p>
+            <p style="color: var(--color-terminal-dim); font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{feat.desc}</span><span class="lang-de">{feat.desc_de}</span></p>
           </div>
         ))}
       </div>
@@ -89,50 +89,50 @@ const features = [
 
   <!-- CHEATSHEET -->
   <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
-    <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 2rem; letter-spacing: -0.02em;"><span class="lang-en">Command Reference</span><span class="lang-de">Befehlsreferenz</span></h2>
-    <TerminalWindow title="habctl — cheatsheet" content={`<span style="color:#4a5568"># Add a new habit</span>
-<span style="color:#4a5568">$ </span>habctl add <span style="color:#a0aec0">"Sport"</span>
-<span style="color:#4a5568">$ </span>habctl add <span style="color:#a0aec0">"Read 30 min"</span>
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-terminal-text); margin: 0 0 2rem; letter-spacing: -0.02em;"><span class="lang-en">Command Reference</span><span class="lang-de">Befehlsreferenz</span></h2>
+    <TerminalWindow title="habctl — cheatsheet" content={`<span style="color:var(--color-terminal-muted)"># Add a new habit</span>
+<span style="color:var(--color-terminal-muted)">$ </span>habctl add <span style="color:var(--color-terminal-code-text)">"Sport"</span>
+<span style="color:var(--color-terminal-muted)">$ </span>habctl add <span style="color:var(--color-terminal-code-text)">"Read 30 min"</span>
 
-<span style="color:#4a5568"># Check in for today</span>
-<span style="color:#4a5568">$ </span>habctl check <span style="color:#a0aec0">"Sport"</span>
-<span style="color:#4a5568">$ </span>habctl check <span style="color:#a0aec0">"Sport"</span> <span style="color:#6366f1">--date</span> 2026-07-10   <span style="color:#4a5568"># backfill a date</span>
+<span style="color:var(--color-terminal-muted)"># Check in for today</span>
+<span style="color:var(--color-terminal-muted)">$ </span>habctl check <span style="color:var(--color-terminal-code-text)">"Sport"</span>
+<span style="color:var(--color-terminal-muted)">$ </span>habctl check <span style="color:var(--color-terminal-code-text)">"Sport"</span> <span style="color:#6366f1">--date</span> 2026-07-10   <span style="color:var(--color-terminal-muted)"># backfill a date</span>
 
-<span style="color:#4a5568"># List all habits with streaks and 30-day bars</span>
-<span style="color:#4a5568">$ </span>habctl list
-<span style="color:#4a5568">$ </span>habctl list <span style="color:#6366f1">--format</span> diary                <span style="color:#4a5568"># diaryctl integration</span>
+<span style="color:var(--color-terminal-muted)"># List all habits with streaks and 30-day bars</span>
+<span style="color:var(--color-terminal-muted)">$ </span>habctl list
+<span style="color:var(--color-terminal-muted)">$ </span>habctl list <span style="color:#6366f1">--format</span> diary                <span style="color:var(--color-terminal-muted)"># diaryctl integration</span>
 
-<span style="color:#4a5568"># Detailed stats for a habit</span>
-<span style="color:#4a5568">$ </span>habctl stats <span style="color:#a0aec0">"Sport"</span>
+<span style="color:var(--color-terminal-muted)"># Detailed stats for a habit</span>
+<span style="color:var(--color-terminal-muted)">$ </span>habctl stats <span style="color:var(--color-terminal-code-text)">"Sport"</span>
 
-<span style="color:#4a5568"># AI weekly coaching review</span>
-<span style="color:#4a5568">$ </span>habctl review
+<span style="color:var(--color-terminal-muted)"># AI weekly coaching review</span>
+<span style="color:var(--color-terminal-muted)">$ </span>habctl review
 
-<span style="color:#4a5568"># AI habit suggestions</span>
-<span style="color:#4a5568">$ </span>habctl suggest <span style="color:#6366f1">--goal</span> <span style="color:#a0aec0">"more focus, less screen time"</span>
+<span style="color:var(--color-terminal-muted)"># AI habit suggestions</span>
+<span style="color:var(--color-terminal-muted)">$ </span>habctl suggest <span style="color:#6366f1">--goal</span> <span style="color:var(--color-terminal-code-text)">"more focus, less screen time"</span>
 
-<span style="color:#4a5568"># Start MCP server</span>
-<span style="color:#4a5568">$ </span>habctl mcp`} />
+<span style="color:var(--color-terminal-muted)"># Start MCP server</span>
+<span style="color:var(--color-terminal-muted)">$ </span>habctl mcp`} />
   </section>
 
   <!-- MCP TOOLS -->
-  <section style="padding: 4rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+  <section style="padding: 4rem 1.5rem; background: var(--color-terminal-surface); border-top: 1px solid var(--color-terminal-border); border-bottom: 1px solid var(--color-terminal-border);">
     <div style="max-width: 1100px; margin: 0 auto;">
-      <h2 style="font-size: 1.5rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.5rem; letter-spacing: -0.02em;"><span class="lang-en">MCP Tools</span><span class="lang-de">MCP-Tools</span></h2>
-      <p style="color: #718096; font-size: 0.875rem; margin: 0 0 2rem;"><span class="lang-en">Available via</span><span class="lang-de">Verfügbar über</span> <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; color: #84cc16;">habctl mcp</code></p>
-      <div style="border: 1px solid #1e1e2e; border-radius: 8px; overflow: hidden;">
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.5rem; letter-spacing: -0.02em;"><span class="lang-en">MCP Tools</span><span class="lang-de">MCP-Tools</span></h2>
+      <p style="color: var(--color-terminal-dim); font-size: 0.875rem; margin: 0 0 2rem;"><span class="lang-en">Available via</span><span class="lang-de">Verfügbar über</span> <code style="font-family: 'JetBrains Mono', monospace; background: var(--color-terminal-bg); padding: 0.1em 0.4em; border-radius: 3px; color: #84cc16;">habctl mcp</code></p>
+      <div style="border: 1px solid var(--color-terminal-border); border-radius: 8px; overflow: hidden;">
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
-            <tr style="background: #0a0a0f; border-bottom: 1px solid #1e1e2e;">
-              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;"><span class="lang-en">Tool</span><span class="lang-de">Tool</span></th>
-              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #4a5568; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;"><span class="lang-en">Description</span><span class="lang-de">Beschreibung</span></th>
+            <tr style="background: var(--color-terminal-bg); border-bottom: 1px solid var(--color-terminal-border);">
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--color-terminal-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600; width: 35%;"><span class="lang-en">Tool</span><span class="lang-de">Tool</span></th>
+              <th style="text-align: left; padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--color-terminal-muted); text-transform: uppercase; letter-spacing: 0.08em; font-weight: 600;"><span class="lang-en">Description</span><span class="lang-de">Beschreibung</span></th>
             </tr>
           </thead>
           <tbody>
             {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
-              <tr style={`background: ${i % 2 === 0 ? '#111118' : '#0d0d14'}; border-bottom: 1px solid #1e1e2e;`}>
+              <tr style={`background: ${i % 2 === 0 ? 'var(--color-terminal-surface)' : 'var(--color-terminal-code-bg)'}; border-bottom: 1px solid var(--color-terminal-border);`}>
                 <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-word; color: #84cc16;">{tool.name}</td>
-                <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: #718096;">{tool.desc}</td>
+                <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: var(--color-terminal-dim);">{tool.desc}</td>
               </tr>
             ))}
           </tbody>
@@ -143,26 +143,26 @@ const features = [
 
   <!-- PRICING CTA -->
   <section style="padding: 5rem 1.5rem; text-align: center; max-width: 600px; margin: 0 auto;">
-    <h2 style="font-size: 1.75rem; font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
+    <h2 style="font-size: 1.75rem; font-weight: 800; color: var(--color-terminal-text); margin: 0 0 1rem; letter-spacing: -0.02em;">
       <span class="lang-en">Build habits that stick.</span><span class="lang-de">Baue Gewohnheiten, die bleiben.</span>
     </h2>
-    <p style="color: #718096; font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
+    <p style="color: var(--color-terminal-dim); font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;">
       <span class="lang-en">Free and open source. Or get the lifetime Bundle for all 9 tools &mdash; launch special: -30% with code L4uNch26.</span>
       <span class="lang-de">Kostenlos und Open Source. Oder hol dir das Lifetime-Bundle für alle 9 Tools &mdash; Launch-Special: -30% mit Code L4uNch26.</span>
     </p>
     <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
       <a href="https://github.com/aeon022/habctl/releases/latest" target="_blank" rel="noopener"
-        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #84cc16; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(132,204,22,0.2);"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #84cc16; color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(132,204,22,0.2);"
             class="cta-primary">
             <span class="lang-en">Download &mdash; Free</span><span class="lang-de">Herunterladen &mdash; Kostenlos</span>
           </a>
       <a href="https://buy.polar.sh/polar_cl_kf5owZpIIKKtLjfO6wU3ofmYHecAixqxVZrmr1GMGOd" target="_blank" rel="noopener"
-        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: transparent; color: var(--color-terminal-text); border-radius: 6px; border: 1px solid var(--color-terminal-border); font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s;"
             class="cta-secondary">
             <span class="lang-en">Get the Bundle &mdash; $39</span><span class="lang-de">Bundle holen &mdash; $39</span>
           </a>
       <a href="https://buy.polar.sh/polar_cl_YoWfKB9lqFAPQRNTN6cYCSIMlAY83L5jXlXuY0CRxoS" target="_blank" rel="noopener"
-        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; color: #718096; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none;">
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; color: var(--color-terminal-dim); font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none;">
             <span class="lang-en">Unlock AI features &mdash; $9 (-30% w/ L4uNch26)</span><span class="lang-de">KI-Features freischalten &mdash; $9 (-30% mit L4uNch26)</span>
           </a>
     </div>

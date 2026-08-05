@@ -146,7 +146,7 @@ const workflows = [
 // Tool grid data
 const toolGroups = [
   {
-    app: 'mailctl', count: 6, color: '#00d97e',
+    app: 'mailctl', count: 6, color: 'var(--color-terminal-green)',
     tools: [
       { name: 'inbox',      desc: 'List recent inbox messages with sender, subject, preview' },
       { name: 'search_email', desc: 'Search by keyword across subject, sender, body' },
@@ -323,14 +323,14 @@ const faqLd = {
 
       <!-- Left: Text -->
       <div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #00d97e; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--color-terminal-green); margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
           <span class="lang-en">66 MCP tools &middot; 9 terminal apps &middot; macOS + Linux</span><span class="lang-de">66 MCP-Tools &middot; 9 Terminal-Apps &middot; macOS + Linux</span>
         </div>
-        <h1 style="font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.03em; color: #e2e8f0; margin: 0 0 1.25rem;">
-          <span class="lang-en">Give your AI<br><span style="color: #00d97e; text-shadow: 0 0 40px rgba(0,217,126,0.3);">hands.</span></span>
-          <span class="lang-de">Gib deiner KI<br><span style="color: #00d97e; text-shadow: 0 0 40px rgba(0,217,126,0.3);">Hände.</span></span>
+        <h1 style="font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.03em; color: var(--color-terminal-text); margin: 0 0 1.25rem;">
+          <span class="lang-en">Give your AI<br><span style="color: var(--color-terminal-green); text-shadow: 0 0 40px rgba(var(--color-terminal-green-rgb),0.3);">hands.</span></span>
+          <span class="lang-de">Gib deiner KI<br><span style="color: var(--color-terminal-green); text-shadow: 0 0 40px rgba(var(--color-terminal-green-rgb),0.3);">Hände.</span></span>
         </h1>
-        <p style="font-size: 1.125rem; color: #718096; line-height: 1.65; margin: 0 0 2rem; max-width: 480px;">
+        <p style="font-size: 1.125rem; color: var(--color-terminal-dim); line-height: 1.65; margin: 0 0 2rem; max-width: 480px;">
           <span class="lang-en">66 MCP tools across 9 terminal apps. Local-first. No subscriptions.
           Your AI can now read email, manage your calendar, handle tasks, write notes, track spending, log time, track habits, keep a diary, and schedule posts.</span>
           <span class="lang-de">66 MCP-Tools über 9 Terminal-Apps. Local-first. Keine Abos.
@@ -339,40 +339,40 @@ const faqLd = {
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a
             href="#pricing"
-            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s ease; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
+            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: var(--color-terminal-green); color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s ease; box-shadow: 0 4px 20px rgba(var(--color-terminal-green-rgb),0.2);"
             class="hero-cta-primary"
           >
             <span class="lang-en">Download &mdash; Free</span><span class="lang-de">Herunterladen &mdash; Kostenlos</span>
           </a>
           <a
             href="#apps"
-            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: transparent; color: #e2e8f0; border-radius: 6px; border: 1px solid #1e1e2e; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s ease;"
+            style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.875rem 1.5rem; background: transparent; color: var(--color-terminal-text); border-radius: 6px; border: 1px solid var(--color-terminal-border); font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 600; text-decoration: none; transition: all 0.15s ease;"
             class="hero-cta-secondary"
           >
             <span class="lang-en">Browse Apps &darr;</span><span class="lang-de">Apps ansehen &darr;</span>
           </a>
         </div>
-        <p style="color: #4a5568; font-size: 0.75rem; margin: 1.25rem 0 0; font-family: 'JetBrains Mono', monospace;">
+        <p style="color: var(--color-terminal-muted); font-size: 0.75rem; margin: 1.25rem 0 0; font-family: 'JetBrains Mono', monospace;">
           <span class="lang-en">MIT licensed &middot; Free core, Bundle unlocks more &middot; Your data stays on your machine</span><span class="lang-de">MIT-lizenziert &middot; Kostenloser Kern, Bundle schaltet mehr frei &middot; Deine Daten bleiben auf deinem Rechner</span>
         </p>
       </div>
 
       <!-- Right: Terminal (typewriter) -->
       <div>
-        <TerminalWindow id="hero-terminal" title="~ missionctl" content={`<span class="cursor-blink" style="color:#00d97e">&#x2588;</span>`} />
+        <TerminalWindow id="hero-terminal" title="~ missionctl" content={`<span class="cursor-blink" style="color:var(--color-terminal-green)">&#x2588;</span>`} />
       </div>
 
     </div>
   </section>
 
   <!-- ======= THE IDEA ======= -->
-  <section style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+  <section style="padding: 5rem 1.5rem; background: var(--color-terminal-surface); border-top: 1px solid var(--color-terminal-border); border-bottom: 1px solid var(--color-terminal-border);">
     <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-      <h2 style="font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 800; color: #e2e8f0; margin: 0 0 1rem; letter-spacing: -0.02em;">
-        <span class="lang-en">AI is great at planning.<br><span style="color: #718096;">It's bad at doing — because it has no hands.</span></span>
-        <span class="lang-de">KI ist großartig im Planen.<br><span style="color: #718096;">Schlecht im Tun — weil sie keine Hände hat.</span></span>
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 800; color: var(--color-terminal-text); margin: 0 0 1rem; letter-spacing: -0.02em;">
+        <span class="lang-en">AI is great at planning.<br><span style="color: var(--color-terminal-dim);">It's bad at doing — because it has no hands.</span></span>
+        <span class="lang-de">KI ist großartig im Planen.<br><span style="color: var(--color-terminal-dim);">Schlecht im Tun — weil sie keine Hände hat.</span></span>
       </h2>
-      <p style="color: #718096; font-size: 1rem; line-height: 1.7; max-width: 600px; margin: 0 auto;">
+      <p style="color: var(--color-terminal-dim); font-size: 1rem; line-height: 1.7; max-width: 600px; margin: 0 auto;">
         <span class="lang-en">missionctl gives your AI hands. Each app runs locally on your machine and exposes MCP tools that Claude (or any MCP client) can call directly — no cloud, no subscriptions, no data leaving your computer.</span>
         <span class="lang-de">missionctl gibt deiner KI Hände. Jede App läuft lokal auf deinem Rechner und stellt MCP-Tools bereit, die Claude (oder jeder andere MCP-Client) direkt aufrufen kann — keine Cloud, keine Abos, keine Daten verlassen deinen Rechner.</span>
       </p>
@@ -382,10 +382,10 @@ const faqLd = {
   <!-- ======= HOW IT WORKS ======= -->
   <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 3rem;">
-      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.75rem; letter-spacing: -0.02em;">
         <span class="lang-en">How it works</span><span class="lang-de">So funktioniert's</span>
       </h2>
-      <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
+      <p style="color: var(--color-terminal-dim); font-size: 1rem; max-width: 500px; margin: 0 auto;">
         <span class="lang-en">AI plans. missionctl executes. Your data stays local.</span><span class="lang-de">KI plant. missionctl führt aus. Deine Daten bleiben lokal.</span>
       </p>
     </div>
@@ -408,7 +408,7 @@ const faqLd = {
       <!-- Step 2 -->
       <div class="how-card how-card--accent">
         <div class="how-step-num">02</div>
-        <h3 class="how-title" style="color:#00d97e;"><span class="lang-en">Claude calls MCP tools</span><span class="lang-de">Claude ruft MCP-Tools auf</span></h3>
+        <h3 class="how-title" style="color:var(--color-terminal-green);"><span class="lang-en">Claude calls MCP tools</span><span class="lang-de">Claude ruft MCP-Tools auf</span></h3>
         <p class="how-desc">
           <span class="lang-en">66 tools across 9 apps,<br>running locally on your machine</span>
           <span class="lang-de">66 Tools über 9 Apps,<br>laufen lokal auf deinem Rechner</span>
@@ -443,13 +443,13 @@ const faqLd = {
   </section>
 
   <!-- ======= APPS GRID ======= -->
-  <section id="apps" style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+  <section id="apps" style="padding: 5rem 1.5rem; background: var(--color-terminal-surface); border-top: 1px solid var(--color-terminal-border); border-bottom: 1px solid var(--color-terminal-border);">
     <div style="max-width: 1200px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.75rem; letter-spacing: -0.02em;">
           <span class="lang-en">Nine apps. One config block.</span><span class="lang-de">Neun Apps. Ein Config-Block.</span>
         </h2>
-        <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
+        <p style="color: var(--color-terminal-dim); font-size: 1rem; max-width: 500px; margin: 0 auto;">
           <span class="lang-en">Each tool stands alone or works together as part of the missionctl suite.</span><span class="lang-de">Jedes Tool funktioniert für sich allein oder im Zusammenspiel als Teil der missionctl-Suite.</span>
         </p>
       </div>
@@ -473,10 +473,10 @@ const faqLd = {
   <!-- ======= 43-TOOL GRID ======= -->
   <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 3rem;">
-      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.75rem; letter-spacing: -0.02em;">
         <span class="lang-en">66 tools. One config.</span><span class="lang-de">66 Tools. Eine Config.</span>
       </h2>
-      <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
+      <p style="color: var(--color-terminal-dim); font-size: 1rem; max-width: 500px; margin: 0 auto;">
         <span class="lang-en">Hover any chip to see what it does. Every tool is callable from Claude Desktop.</span><span class="lang-de">Fahre über einen Chip, um zu sehen, was er tut. Jedes Tool ist aus Claude Desktop aufrufbar.</span>
       </p>
     </div>
@@ -487,7 +487,7 @@ const faqLd = {
           <span style={`font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: ${group.color};`}>
             {group.app}
           </span>
-          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #4a5568; background: #111118; border: 1px solid #1e1e2e; padding: 0.15rem 0.5rem; border-radius: 20px;">
+          <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--color-terminal-muted); background: var(--color-terminal-surface); border: 1px solid var(--color-terminal-border); padding: 0.15rem 0.5rem; border-radius: 20px;">
             {group.count} tools
           </span>
         </div>
@@ -504,19 +504,19 @@ const faqLd = {
   </section>
 
   <!-- ======= MCP SECTION ======= -->
-  <section style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+  <section style="padding: 5rem 1.5rem; background: var(--color-terminal-surface); border-top: 1px solid var(--color-terminal-border); border-bottom: 1px solid var(--color-terminal-border);">
     <div style="max-width: 900px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.75rem; letter-spacing: -0.02em;">
           <span class="lang-en">Plug in in 2 minutes</span><span class="lang-de">In 2 Minuten einbinden</span>
         </h2>
-        <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
-          <span class="lang-en">Add this to your <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; color: #00d97e;">claude_desktop_config.json</code> and restart Claude Desktop.</span>
-          <span class="lang-de">Füge dies zu deiner <code style="font-family: 'JetBrains Mono', monospace; background: #0a0a0f; padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; color: #00d97e;">claude_desktop_config.json</code> hinzu und starte Claude Desktop neu.</span>
+        <p style="color: var(--color-terminal-dim); font-size: 1rem; max-width: 500px; margin: 0 auto;">
+          <span class="lang-en">Add this to your <code style="font-family: 'JetBrains Mono', monospace; background: var(--color-terminal-bg); padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; color: var(--color-terminal-green);">claude_desktop_config.json</code> and restart Claude Desktop.</span>
+          <span class="lang-de">Füge dies zu deiner <code style="font-family: 'JetBrains Mono', monospace; background: var(--color-terminal-bg); padding: 0.1em 0.4em; border-radius: 3px; font-size: 0.9em; color: var(--color-terminal-green);">claude_desktop_config.json</code> hinzu und starte Claude Desktop neu.</span>
         </p>
       </div>
 
-      <TerminalWindow title="claude_desktop_config.json" content={`<span style="color:#a0aec0">${mcpConfig.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>`} />
+      <TerminalWindow title="claude_desktop_config.json" content={`<span style="color:var(--color-terminal-code-text)">${mcpConfig.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}</span>`} />
 
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;" class="mcp-stats-grid">
         {[
@@ -524,9 +524,9 @@ const faqLd = {
           { n: '9', label_en: 'local-first apps', label_de: 'local-first Apps' },
           { n: '0', label_en: 'cloud dependencies', label_de: 'Cloud-Abhängigkeiten' },
         ].map(stat => (
-          <div style="text-align: center; padding: 1.25rem; background: #0a0a0f; border: 1px solid #1e1e2e; border-radius: 8px; transition: border-color 0.2s, transform 0.2s;" class="stat-tile">
-            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 800; color: #00d97e;" class="stat-num" data-count={stat.n}>{stat.n}</div>
-            <div style="color: #718096; font-size: 0.8rem; margin-top: 0.25rem;"><span class="lang-en">{stat.label_en}</span><span class="lang-de">{stat.label_de}</span></div>
+          <div style="text-align: center; padding: 1.25rem; background: var(--color-terminal-bg); border: 1px solid var(--color-terminal-border); border-radius: 8px; transition: border-color 0.2s, transform 0.2s;" class="stat-tile">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 800; color: var(--color-terminal-green);" class="stat-num" data-count={stat.n}>{stat.n}</div>
+            <div style="color: var(--color-terminal-dim); font-size: 0.8rem; margin-top: 0.25rem;"><span class="lang-en">{stat.label_en}</span><span class="lang-de">{stat.label_de}</span></div>
           </div>
         ))}
       </div>
@@ -536,33 +536,33 @@ const faqLd = {
   <!-- ======= AI WORKFLOWS ======= -->
   <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 3rem;">
-      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+      <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.75rem; letter-spacing: -0.02em;">
         <span class="lang-en">Real AI workflows</span><span class="lang-de">Echte KI-Workflows</span>
       </h2>
-      <p style="color: #718096; font-size: 1rem; max-width: 500px; margin: 0 auto;">
+      <p style="color: var(--color-terminal-dim); font-size: 1rem; max-width: 500px; margin: 0 auto;">
         <span class="lang-en">Cross-app workflows that actually work — because the tools are already connected.</span><span class="lang-de">App-übergreifende Workflows, die wirklich funktionieren — weil die Tools bereits verbunden sind.</span>
       </p>
     </div>
 
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;" class="workflows-grid">
       {workflows.map(w => (
-        <article style="background: #111118; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="workflow-card">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #00d97e; margin-bottom: 0.75rem; letter-spacing: 0.05em;">
+        <article style="background: var(--color-terminal-surface); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="workflow-card">
+          <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--color-terminal-green); margin-bottom: 0.75rem; letter-spacing: 0.05em;">
             {w.cmd}
           </div>
-          <h3 style="font-size: 1rem; font-weight: 700; color: #e2e8f0; margin: 0 0 0.75rem;"><span class="lang-en">{w.title_en}</span><span class="lang-de">{w.title_de}</span></h3>
-          <p style="color: #718096; font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{w.description_en}</span><span class="lang-de">{w.description_de}</span></p>
+          <h3 style="font-size: 1rem; font-weight: 700; color: var(--color-terminal-text); margin: 0 0 0.75rem;"><span class="lang-en">{w.title_en}</span><span class="lang-de">{w.title_de}</span></h3>
+          <p style="color: var(--color-terminal-dim); font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{w.description_en}</span><span class="lang-de">{w.description_de}</span></p>
         </article>
       ))}
     </div>
   </section>
 
   <!-- ======= FAQ ======= -->
-  <section style="padding: 5rem 1.5rem; background: #111118; border-top: 1px solid #1e1e2e; border-bottom: 1px solid #1e1e2e;">
+  <section style="padding: 5rem 1.5rem; background: var(--color-terminal-surface); border-top: 1px solid var(--color-terminal-border); border-bottom: 1px solid var(--color-terminal-border);">
     <script type="application/ld+json" set:html={JSON.stringify(faqLd)} />
     <div style="max-width: 720px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.75rem; letter-spacing: -0.02em;">
           <span class="lang-en">Frequently asked</span><span class="lang-de">Häufige Fragen</span>
         </h2>
       </div>
@@ -584,63 +584,63 @@ const faqLd = {
   </section>
 
   <!-- ======= DOWNLOAD ======= -->
-  <section id="pricing" style="padding: 5rem 1.5rem; background: #0a0a0f; border-top: 1px solid #1e1e2e;">
+  <section id="pricing" style="padding: 5rem 1.5rem; background: var(--color-terminal-bg); border-top: 1px solid var(--color-terminal-border);">
     <div style="max-width: 1100px; margin: 0 auto;">
       <div style="text-align: center; margin-bottom: 3rem;">
-        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: #e2e8f0; margin: 0 0 0.75rem; letter-spacing: -0.02em;">
+        <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.75rem; letter-spacing: -0.02em;">
           <span class="lang-en">Simple pricing</span><span class="lang-de">Einfache Preise</span>
         </h2>
-        <p style="color: #718096; font-size: 1rem; max-width: 560px; margin: 0 auto;">
+        <p style="color: var(--color-terminal-dim); font-size: 1rem; max-width: 560px; margin: 0 auto;">
           <span class="lang-en">All 9 tools are free to download individually. Or get the lifetime Bundle — one-time payment, all future updates included.</span><span class="lang-de">Alle 9 Tools sind einzeln kostenlos herunterladbar. Oder hol dir das Lifetime-Bundle — Einmalzahlung, alle zukünftigen Updates inklusive.</span>
         </p>
       </div>
 
       <!-- Bundle callout -->
-      <div style="background: linear-gradient(135deg, rgba(0,217,126,0.08), rgba(0,217,126,0.02)); border: 1px solid rgba(0,217,126,0.25); border-radius: 10px; padding: 2rem; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;" class="bundle-callout">
+      <div style="background: linear-gradient(135deg, rgba(var(--color-terminal-green-rgb),0.08), rgba(var(--color-terminal-green-rgb),0.02)); border: 1px solid rgba(var(--color-terminal-green-rgb),0.25); border-radius: 10px; padding: 2rem; margin-bottom: 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;" class="bundle-callout">
         <div>
-          <div style="display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; color: #00d97e; background: rgba(0,217,126,0.1); border: 1px solid rgba(0,217,126,0.2); padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;">
+          <div style="display: inline-flex; align-items: center; gap: 0.5rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; color: var(--color-terminal-green); background: rgba(var(--color-terminal-green-rgb),0.1); border: 1px solid rgba(var(--color-terminal-green-rgb),0.2); padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em;">
             <span class="lang-en">Launch special &middot; -30% with code L4uNch26</span><span class="lang-de">Launch-Special &middot; -30% mit Code L4uNch26</span>
           </div>
-          <h3 style="font-size: 1.25rem; font-weight: 800; color: #e2e8f0; margin: 0 0 0.4rem;">missionctl Bundle</h3>
-          <p style="color: #718096; font-size: 0.9rem; margin: 0; line-height: 1.6;">
+          <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.4rem;">missionctl Bundle</h3>
+          <p style="color: var(--color-terminal-dim); font-size: 0.9rem; margin: 0; line-height: 1.6;">
             <span class="lang-en">All 9 tools, lifetime license, one-time payment. Future updates included.</span>
             <span class="lang-de">Alle 9 Tools, lebenslange Lizenz, Einmalzahlung. Zukünftige Updates inklusive.</span>
           </p>
         </div>
         <a href="https://buy.polar.sh/polar_cl_kf5owZpIIKKtLjfO6wU3ofmYHecAixqxVZrmr1GMGOd" target="_blank" rel="noopener"
-          style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #00d97e; color: #0a0a0f; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 20px rgba(0,217,126,0.2);"
+          style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: var(--color-terminal-green); color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 20px rgba(var(--color-terminal-green-rgb),0.2);"
           class="cta-primary">
           <span class="lang-en">Get the Bundle &mdash; $39</span><span class="lang-de">Bundle holen &mdash; $39</span>
         </a>
       </div>
 
-      <p style="text-align: center; color: #4a5568; font-size: 0.8rem; margin: 0 0 1.5rem; font-family: 'JetBrains Mono', monospace;">
+      <p style="text-align: center; color: var(--color-terminal-muted); font-size: 0.8rem; margin: 0 0 1.5rem; font-family: 'JetBrains Mono', monospace;">
         <span class="lang-en">Or grab any tool individually for free:</span><span class="lang-de">Oder hol dir jedes Tool einzeln kostenlos:</span>
       </p>
 
       <div style="margin-bottom: 2.5rem;">
-        <TerminalWindow title="~ install" content={`<span style="color:#4a5568"># tap once, then install any of the 8 dev tools</span>
-<span style="color:#4a5568">$ </span>brew tap aeon022/tap https://github.com/aeon022/homebrew-tap
-<span style="color:#4a5568">$ </span>brew install aeon022/tap/calctl`} />
+        <TerminalWindow title="~ install" content={`<span style="color:var(--color-terminal-muted)"># tap once, then install any of the 8 dev tools</span>
+<span style="color:var(--color-terminal-muted)">$ </span>brew tap aeon022/tap https://github.com/aeon022/homebrew-tap
+<span style="color:var(--color-terminal-muted)">$ </span>brew install aeon022/tap/calctl`} />
       </div>
 
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;" class="pricing-grid">
         {apps.map((app) => (
           app.name === 'postctl' ? (
-            <div style="background: #111118; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.25rem;">
-              <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #e2e8f0; margin: 0 0 0.5rem;">postctl</h3>
-              <p style="color: #718096; font-size: 0.8rem; margin: 0 0 0.75rem; line-height: 1.5;"><span class="lang-en">Own site &middot; free core, optional Pro license</span><span class="lang-de">Eigene Seite &middot; kostenloser Kern, optionale Pro-Lizenz</span></p>
-              <a href="https://postctl.sh" target="_blank" rel="noopener" style="color: #00d97e; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; text-decoration: none;">postctl.sh &rarr;</a>
+            <div style="background: var(--color-terminal-surface); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.25rem;">
+              <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: var(--color-terminal-text); margin: 0 0 0.5rem;">postctl</h3>
+              <p style="color: var(--color-terminal-dim); font-size: 0.8rem; margin: 0 0 0.75rem; line-height: 1.5;"><span class="lang-en">Own site &middot; free core, optional Pro license</span><span class="lang-de">Eigene Seite &middot; kostenloser Kern, optionale Pro-Lizenz</span></p>
+              <a href="https://postctl.sh" target="_blank" rel="noopener" style="color: var(--color-terminal-green); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; text-decoration: none;">postctl.sh &rarr;</a>
             </div>
           ) : (
-            <div style="background: #111118; border: 1px solid #1e1e2e; border-radius: 8px; padding: 1.25rem;">
-              <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #e2e8f0; margin: 0 0 0.5rem;">{app.name}</h3>
-              <code style="display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: #00d97e; background: #0a0a0f; padding: 0.4rem 0.6rem; border-radius: 4px; margin: 0 0 0.6rem; overflow-x: auto; white-space: nowrap;">brew install aeon022/tap/{app.name}</code>
-              <a href={`https://github.com/aeon022/${app.name}/releases/latest`} target="_blank" rel="noopener" style="color: #718096; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; text-decoration: none;">
+            <div style="background: var(--color-terminal-surface); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.25rem;">
+              <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: var(--color-terminal-text); margin: 0 0 0.5rem;">{app.name}</h3>
+              <code style="display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--color-terminal-green); background: var(--color-terminal-bg); padding: 0.4rem 0.6rem; border-radius: 4px; margin: 0 0 0.6rem; overflow-x: auto; white-space: nowrap;">brew install aeon022/tap/{app.name}</code>
+              <a href={`https://github.com/aeon022/${app.name}/releases/latest`} target="_blank" rel="noopener" style="color: var(--color-terminal-dim); font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; text-decoration: none;">
                 <span class="lang-en">Direct download ↗</span><span class="lang-de">Direkter Download ↗</span>
               </a>
               {standaloneCheckout[app.name] && (
-                <a href={standaloneCheckout[app.name].url} target="_blank" rel="noopener" style="display: block; margin-top: 0.5rem; color: #00d97e; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; text-decoration: none;">
+                <a href={standaloneCheckout[app.name].url} target="_blank" rel="noopener" style="display: block; margin-top: 0.5rem; color: var(--color-terminal-green); font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; text-decoration: none;">
                   <span class="lang-en">Unlock {standaloneCheckout[app.name].label} — $9 (-30% w/ L4uNch26) ↗</span><span class="lang-de">{standaloneCheckout[app.name].label_de} freischalten — $9 (-30% mit L4uNch26) ↗</span>
                 </a>
               )}
@@ -649,7 +649,7 @@ const faqLd = {
         ))}
       </div>
 
-      <p style="text-align: center; color: #4a5568; font-size: 0.8rem; margin-top: 2rem; font-family: 'JetBrains Mono', monospace;">
+      <p style="text-align: center; color: var(--color-terminal-muted); font-size: 0.8rem; margin-top: 2rem; font-family: 'JetBrains Mono', monospace;">
         <span class="lang-en">MIT licensed &middot; Source on GitHub &middot; Build from source if you'd rather not use Homebrew</span><span class="lang-de">MIT-lizenziert &middot; Quellcode auf GitHub &middot; Baue aus dem Quellcode, falls du kein Homebrew nutzen willst</span>
       </p>
     </div>
@@ -697,7 +697,7 @@ const faqLd = {
     left: 1%;
     width: min(20vw, 260px);
     height: min(20vw, 260px);
-    background: radial-gradient(circle, rgba(0,217,126,0.30), rgba(0,217,126,0) 72%);
+    background: radial-gradient(circle, rgba(var(--color-terminal-green-rgb),0.30), rgba(var(--color-terminal-green-rgb),0) 72%);
     animation: blob-morph-a 16s ease-in-out infinite alternate, blob-color-a 24s ease-in-out infinite;
   }
   .hero-blob-b {
@@ -717,12 +717,12 @@ const faqLd = {
     100% { border-radius: 42% 58% 56% 44% / 56% 44% 56% 44%; }
   }
   @keyframes blob-color-a {
-    0%, 100% { background: radial-gradient(circle, rgba(0,217,126,0.30), rgba(0,217,126,0) 72%); }
+    0%, 100% { background: radial-gradient(circle, rgba(var(--color-terminal-green-rgb),0.30), rgba(var(--color-terminal-green-rgb),0) 72%); }
     50%      { background: radial-gradient(circle, rgba(245,158,11,0.24), rgba(245,158,11,0) 72%); }
   }
   @keyframes blob-color-b {
     0%, 100% { background: radial-gradient(circle, rgba(99,102,241,0.26), rgba(99,102,241,0) 72%); }
-    50%      { background: radial-gradient(circle, rgba(0,217,126,0.24), rgba(0,217,126,0) 72%); }
+    50%      { background: radial-gradient(circle, rgba(var(--color-terminal-green-rgb),0.24), rgba(var(--color-terminal-green-rgb),0) 72%); }
   }
   @media (max-width: 640px) {
     .hero-blob-b { display: none; }
@@ -732,27 +732,27 @@ const faqLd = {
   }
 
   /* ── Hero CTAs ── */
-  .hero-cta-primary:hover  { background: #00c070 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,217,126,0.3) !important; }
-  .hero-cta-secondary:hover { border-color: rgba(0,217,126,0.3) !important; color: #00d97e !important; }
+  .hero-cta-primary:hover  { background: var(--color-terminal-green-hover) !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(var(--color-terminal-green-rgb),0.3) !important; }
+  .hero-cta-secondary:hover { border-color: rgba(var(--color-terminal-green-rgb),0.3) !important; color: var(--color-terminal-green) !important; }
 
   /* ── Workflow cards ── */
   .workflow-card { transition: border-color 0.2s, transform 0.2s cubic-bezier(0.4,0,0.2,1), box-shadow 0.2s; }
   .workflow-card:hover {
-    border-color: rgba(0,217,126,0.25) !important;
+    border-color: rgba(var(--color-terminal-green-rgb),0.25) !important;
     transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(0,217,126,0.06);
+    box-shadow: 0 10px 28px rgba(var(--color-terminal-green-rgb),0.06);
   }
 
   /* ── Stat counters ── */
   .stat-num { transition: text-shadow 0.3s; }
-  .stat-tile:hover { border-color: rgba(0,217,126,0.3) !important; transform: translateY(-2px); }
-  .stat-tile:hover .stat-num { text-shadow: 0 0 24px rgba(0,217,126,0.5); }
+  .stat-tile:hover { border-color: rgba(var(--color-terminal-green-rgb),0.3) !important; transform: translateY(-2px); }
+  .stat-tile:hover .stat-num { text-shadow: 0 0 24px rgba(var(--color-terminal-green-rgb),0.5); }
 
   /* ── How it works ── */
   .how-steps { align-items: center; }
   .how-card {
-    background: #111118;
-    border: 1px solid #1e1e2e;
+    background: var(--color-terminal-surface);
+    border: 1px solid var(--color-terminal-border);
     border-radius: 8px;
     padding: 1.5rem;
     flex: 1;
@@ -761,15 +761,15 @@ const faqLd = {
     transition: border-color 0.2s;
   }
   .how-card--accent {
-    background: rgba(0,217,126,0.04);
-    border-color: rgba(0,217,126,0.2);
+    background: rgba(var(--color-terminal-green-rgb),0.04);
+    border-color: rgba(var(--color-terminal-green-rgb),0.2);
   }
   .how-card { transition: border-color 0.2s, transform 0.2s cubic-bezier(0.4,0,0.2,1); }
-  .how-card:hover { border-color: rgba(0,217,126,0.3) !important; transform: translateY(-3px); }
+  .how-card:hover { border-color: rgba(var(--color-terminal-green-rgb),0.3) !important; transform: translateY(-3px); }
   .how-step-num {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.65rem;
-    color: rgba(0,217,126,0.5);
+    color: rgba(var(--color-terminal-green-rgb),0.5);
     font-weight: 700;
     margin-bottom: 0.5rem;
     letter-spacing: 0.1em;
@@ -778,18 +778,18 @@ const faqLd = {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.85rem;
     font-weight: 700;
-    color: #e2e8f0;
+    color: var(--color-terminal-text);
     margin: 0 0 0.5rem;
   }
   .how-desc {
     font-size: 0.78rem;
-    color: #718096;
+    color: var(--color-terminal-dim);
     line-height: 1.55;
     margin: 0;
   }
   .how-arrow {
     font-family: 'JetBrains Mono', monospace;
-    color: #00d97e;
+    color: var(--color-terminal-green);
     font-size: 0.9rem;
     flex-shrink: 0;
     padding: 0 0.25rem;
@@ -799,14 +799,14 @@ const faqLd = {
   /* ── FAQ ── */
   .faq-list { display: flex; flex-direction: column; gap: 0; }
   .faq-item {
-    border: 1px solid #1e1e2e;
+    border: 1px solid var(--color-terminal-border);
     border-radius: 6px;
     margin-bottom: 0.5rem;
-    background: #0a0a0f;
+    background: var(--color-terminal-bg);
     overflow: hidden;
     transition: border-color 0.2s;
   }
-  .faq-item.open { border-color: rgba(0,217,126,0.2); }
+  .faq-item.open { border-color: rgba(var(--color-terminal-green-rgb),0.2); }
   .faq-question {
     width: 100%;
     background: none;
@@ -821,13 +821,13 @@ const faqLd = {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.85rem;
     font-weight: 600;
-    color: #e2e8f0;
+    color: var(--color-terminal-text);
     transition: color 0.15s;
   }
-  .faq-question:hover { color: #00d97e; }
+  .faq-question:hover { color: var(--color-terminal-green); }
   .faq-icon {
     font-size: 1.1rem;
-    color: rgba(0,217,126,0.6);
+    color: rgba(var(--color-terminal-green-rgb),0.6);
     flex-shrink: 0;
     font-family: 'JetBrains Mono', monospace;
     transition: transform 0.25s;
@@ -836,7 +836,7 @@ const faqLd = {
   .faq-item.open .faq-icon { transform: rotate(45deg); }
   .faq-answer-text {
     padding: 0 1.25rem 1.1rem;
-    color: #718096;
+    color: var(--color-terminal-dim);
     font-size: 0.875rem;
     line-height: 1.65;
     margin: 0;
@@ -890,19 +890,19 @@ const faqLd = {
   interface Segment { text: string; color?: string; blink?: boolean; }
 
   const lines: Segment[][] = [
-    [{ text: '$ ', color: '#4a5568' }, { text: 'mailctl sync && taskctl today', color: '#e2e8f0' }],
-    [{ text: '✓', color: '#00d97e' }, { text: ' Synced 12 messages', color: '#a0aec0' }],
-    [{ text: '✓', color: '#00d97e' }, { text: ' 3 tasks due today', color: '#a0aec0' }],
+    [{ text: '$ ', color: 'var(--color-terminal-muted)' }, { text: 'mailctl sync && taskctl today', color: 'var(--color-terminal-text)' }],
+    [{ text: '✓', color: 'var(--color-terminal-green)' }, { text: ' Synced 12 messages', color: 'var(--color-terminal-code-text)' }],
+    [{ text: '✓', color: 'var(--color-terminal-green)' }, { text: ' 3 tasks due today', color: 'var(--color-terminal-code-text)' }],
     [],
-    [{ text: '$ ', color: '#4a5568' }, { text: 'calctl free ', color: '#e2e8f0' }, { text: '--from', color: '#6366f1' }, { text: ' today ', color: '#e2e8f0' }, { text: '--to', color: '#6366f1' }, { text: ' +7d', color: '#e2e8f0' }],
-    [{ text: 'Free slots:', color: '#a0aec0' }],
-    [{ text: '  Mon', color: '#f59e0b' }, { text: ' 09:00–11:00', color: '#e2e8f0' }],
-    [{ text: '  Wed', color: '#f59e0b' }, { text: ' 14:00–16:00', color: '#e2e8f0' }],
+    [{ text: '$ ', color: 'var(--color-terminal-muted)' }, { text: 'calctl free ', color: 'var(--color-terminal-text)' }, { text: '--from', color: '#6366f1' }, { text: ' today ', color: 'var(--color-terminal-text)' }, { text: '--to', color: '#6366f1' }, { text: ' +7d', color: 'var(--color-terminal-text)' }],
+    [{ text: 'Free slots:', color: 'var(--color-terminal-code-text)' }],
+    [{ text: '  Mon', color: '#f59e0b' }, { text: ' 09:00–11:00', color: 'var(--color-terminal-text)' }],
+    [{ text: '  Wed', color: '#f59e0b' }, { text: ' 14:00–16:00', color: 'var(--color-terminal-text)' }],
     [],
-    [{ text: '$ ', color: '#4a5568' }, { text: 'budgetctl summary ', color: '#e2e8f0' }, { text: '--month', color: '#6366f1' }, { text: ' 2026-07', color: '#e2e8f0' }],
-    [{ text: 'Income:   ', color: '#a0aec0' }, { text: '€4,200.00', color: '#00d97e' }],
-    [{ text: 'Expenses: ', color: '#a0aec0' }, { text: '€2,847.35', color: '#ef4444' }],
-    [{ text: 'Saved:    ', color: '#a0aec0' }, { text: '€1,352.65 (32.2%)', color: '#00d97e' }, { text: '█', color: '#00d97e', blink: true }],
+    [{ text: '$ ', color: 'var(--color-terminal-muted)' }, { text: 'budgetctl summary ', color: 'var(--color-terminal-text)' }, { text: '--month', color: '#6366f1' }, { text: ' 2026-07', color: 'var(--color-terminal-text)' }],
+    [{ text: 'Income:   ', color: 'var(--color-terminal-code-text)' }, { text: '€4,200.00', color: 'var(--color-terminal-green)' }],
+    [{ text: 'Expenses: ', color: 'var(--color-terminal-code-text)' }, { text: '€2,847.35', color: '#ef4444' }],
+    [{ text: 'Saved:    ', color: 'var(--color-terminal-code-text)' }, { text: '€1,352.65 (32.2%)', color: 'var(--color-terminal-green)' }, { text: '█', color: 'var(--color-terminal-green)', blink: true }],
   ];
 
   function runTypewriter(pre: HTMLElement) {

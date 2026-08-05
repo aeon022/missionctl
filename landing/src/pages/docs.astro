@@ -61,7 +61,7 @@ const navSections = [
 >
   <!-- Mobile sidebar nav -->
   <details class="docs-mobile-nav">
-    <summary><span class="lang-en">Documentation</span><span class="lang-de">Dokumentation</span> <span style="color:#4a5568; font-size:0.7rem;">&#9660;</span></summary>
+    <summary><span class="lang-en">Documentation</span><span class="lang-de">Dokumentation</span> <span style="color:var(--color-terminal-muted); font-size:0.7rem;">&#9660;</span></summary>
     <nav>
       {navSections.map(s => s.links.map(l => (
         <a href={l.href}><span class="lang-en">{l.label_en}</span><span class="lang-de">{l.label_de}</span></a>
@@ -91,7 +91,7 @@ const navSections = [
     <!-- Main content -->
     <div class="docs-main">
       <h1><span class="lang-en">missionctl Documentation</span><span class="lang-de">missionctl-Dokumentation</span></h1>
-      <p style="color:#718096; margin-bottom:2rem;">
+      <p style="color:var(--color-terminal-dim); margin-bottom:2rem;">
         <span class="lang-en">66 MCP tools across 9 terminal apps. Local-first, no cloud, no subscriptions.</span>
         <span class="lang-de">66 MCP-Tools über 9 Terminal-Apps. Local-first, keine Cloud, keine Abos.</span>
       </p>
@@ -170,8 +170,8 @@ export NOTECTL_DATA_DIR="$HOME/Dropbox/missionctl/notectl"`}</code></pre>
       <!-- ── LICENSING ──────────────────────── -->
       <h2 id="licensing"><span class="lang-en">Licensing (Bundle features)</span><span class="lang-de">Lizenzierung (Bundle-Features)</span></h2>
       <p>
-        <span class="lang-en">All 9 tools are free and MIT licensed. A small number of features that cost real compute (AI calls) or add real complexity are part of the <a href="/#pricing" style="color:#00d97e;">missionctl Bundle</a> instead of the free core — everything else stays free forever:</span>
-        <span class="lang-de">Alle 9 Tools sind kostenlos und MIT-lizenziert. Eine kleine Zahl an Features, die echte Rechenkosten (KI-Aufrufe) verursachen oder echte Komplexität hinzufügen, gehören zum <a href="/#pricing" style="color:#00d97e;">missionctl Bundle</a> statt zum kostenlosen Kern — alles andere bleibt für immer kostenlos:</span>
+        <span class="lang-en">All 9 tools are free and MIT licensed. A small number of features that cost real compute (AI calls) or add real complexity are part of the <a href="/#pricing" style="color:var(--color-terminal-green);">missionctl Bundle</a> instead of the free core — everything else stays free forever:</span>
+        <span class="lang-de">Alle 9 Tools sind kostenlos und MIT-lizenziert. Eine kleine Zahl an Features, die echte Rechenkosten (KI-Aufrufe) verursachen oder echte Komplexität hinzufügen, gehören zum <a href="/#pricing" style="color:var(--color-terminal-green);">missionctl Bundle</a> statt zum kostenlosen Kern — alles andere bleibt für immer kostenlos:</span>
       </p>
       <ul>
         <li><span class="lang-en"><strong>budgetctl:</strong> AI transaction categorization (<code>--ai</code>) and recurring-payment detection (<code>budgetctl recurring</code>).</span><span class="lang-de"><strong>budgetctl:</strong> KI-Transaktionskategorisierung (<code>--ai</code>) und Erkennung wiederkehrender Zahlungen (<code>budgetctl recurring</code>).</span></li>
@@ -198,14 +198,14 @@ budgetctl license status           # ...and the same "status" subcommand for eac
 
       <h3><span class="lang-en">Choosing an AI provider</span><span class="lang-de">KI-Provider auswählen</span></h3>
       <p>
-        <span class="lang-en">Once a feature is unlocked, it still needs an LLM to actually call — and that doesn't have to mean a paid Anthropic key. mailctl, calctl, budgetctl, habctl, and diaryctl (whose AI diary generation is free, not Bundle-gated) all auto-detect whichever of these is configured, in this order — full walkthrough with model recommendations in <a href="#local-ai" style="color:#00d97e;">Local AI with Ollama</a> below:</span>
-        <span class="lang-de">Sobald ein Feature freigeschaltet ist, braucht es trotzdem noch ein LLM, das den eigentlichen Aufruf macht — und das muss kein bezahlter Anthropic-Key sein. mailctl, calctl, budgetctl, habctl und diaryctl (dessen KI-Tagebuchgenerierung kostenlos ist, nicht Bundle-gated) erkennen automatisch, was davon konfiguriert ist, in dieser Reihenfolge — ausführliche Anleitung mit Modellempfehlungen weiter unten unter <a href="#local-ai" style="color:#00d97e;">Lokale KI mit Ollama</a>:</span>
+        <span class="lang-en">Once a feature is unlocked, it still needs an LLM to actually call — and that doesn't have to mean a paid Anthropic key. mailctl, calctl, budgetctl, habctl, and diaryctl (whose AI diary generation is free, not Bundle-gated) all auto-detect whichever of these is configured, in this order — full walkthrough with model recommendations in <a href="#local-ai" style="color:var(--color-terminal-green);">Local AI with Ollama</a> below:</span>
+        <span class="lang-de">Sobald ein Feature freigeschaltet ist, braucht es trotzdem noch ein LLM, das den eigentlichen Aufruf macht — und das muss kein bezahlter Anthropic-Key sein. mailctl, calctl, budgetctl, habctl und diaryctl (dessen KI-Tagebuchgenerierung kostenlos ist, nicht Bundle-gated) erkennen automatisch, was davon konfiguriert ist, in dieser Reihenfolge — ausführliche Anleitung mit Modellempfehlungen weiter unten unter <a href="#local-ai" style="color:var(--color-terminal-green);">Lokale KI mit Ollama</a>:</span>
       </p>
       <ul>
         <li><span class="lang-en"><code>ANTHROPIC_API_KEY</code> — Claude, paid.</span><span class="lang-de"><code>ANTHROPIC_API_KEY</code> — Claude, kostenpflichtig.</span></li>
         <li><span class="lang-en"><code>OPENAI_API_KEY</code> — GPT-4o mini, paid.</span><span class="lang-de"><code>OPENAI_API_KEY</code> — GPT-4o mini, kostenpflichtig.</span></li>
-        <li><span class="lang-en"><code>GEMINI_API_KEY</code> — free tier, no card required. Get one at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:#00d97e;">aistudio.google.com/apikey</a> in about 30 seconds.</span><span class="lang-de"><code>GEMINI_API_KEY</code> — kostenlose Stufe, keine Kreditkarte nötig. In etwa 30 Sekunden unter <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:#00d97e;">aistudio.google.com/apikey</a> erstellt.</span></li>
-        <li><span class="lang-en">A local <a href="https://ollama.com" target="_blank" rel="noopener" style="color:#00d97e;">Ollama</a> model — no key, no signup, nothing leaves your machine. The always-available fallback if nothing else is set.</span><span class="lang-de">Ein lokales <a href="https://ollama.com" target="_blank" rel="noopener" style="color:#00d97e;">Ollama</a>-Modell — kein Key, keine Anmeldung, nichts verlässt deinen Rechner. Der immer verfügbare Fallback, falls nichts anderes gesetzt ist.</span></li>
+        <li><span class="lang-en"><code>GEMINI_API_KEY</code> — free tier, no card required. Get one at <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:var(--color-terminal-green);">aistudio.google.com/apikey</a> in about 30 seconds.</span><span class="lang-de"><code>GEMINI_API_KEY</code> — kostenlose Stufe, keine Kreditkarte nötig. In etwa 30 Sekunden unter <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" style="color:var(--color-terminal-green);">aistudio.google.com/apikey</a> erstellt.</span></li>
+        <li><span class="lang-en">A local <a href="https://ollama.com" target="_blank" rel="noopener" style="color:var(--color-terminal-green);">Ollama</a> model — no key, no signup, nothing leaves your machine. The always-available fallback if nothing else is set.</span><span class="lang-de">Ein lokales <a href="https://ollama.com" target="_blank" rel="noopener" style="color:var(--color-terminal-green);">Ollama</a>-Modell — kein Key, keine Anmeldung, nichts verlässt deinen Rechner. Der immer verfügbare Fallback, falls nichts anderes gesetzt ist.</span></li>
       </ul>
       <p>
         <span class="lang-en">Override auto-detection with <code>&lt;TOOL&gt;_PROVIDER=anthropic|openai|gemini|ollama</code> (e.g. <code>MAILCTL_PROVIDER=ollama</code>). What's deliberately not supported: reusing a claude.ai or chatgpt.com browser session in place of an API key — both providers' terms of service prohibit programmatic reuse of a consumer web session, and it risks flagging your own account. Free-tier Gemini or local Ollama cover the "I don't want to pay or sign up for an API key" case without that risk.</span>
@@ -215,8 +215,8 @@ budgetctl license status           # ...and the same "status" subcommand for eac
       <!-- ── LOCAL AI ───────────────────────── -->
       <h2 id="local-ai"><span class="lang-en">Local AI with Ollama</span><span class="lang-de">Lokale KI mit Ollama</span></h2>
       <p>
-        <span class="lang-en">Every AI-gated feature in the suite (plus diaryctl's free AI diary generation) already falls back to a local <a href="https://ollama.com" target="_blank" rel="noopener" style="color:#00d97e;">Ollama</a> model automatically — no API key, no signup, no per-request cost, nothing leaves your machine. This is a full walkthrough: installing Ollama, picking the right model per tool, and the environment variables that control it.</span>
-        <span class="lang-de">Jedes KI-Feature im Bundle (plus diaryctls kostenlose KI-Tagebuchgenerierung) fällt bereits automatisch auf ein lokales <a href="https://ollama.com" target="_blank" rel="noopener" style="color:#00d97e;">Ollama</a>-Modell zurück — kein API-Key, keine Anmeldung, keine Kosten pro Anfrage, nichts verlässt deinen Rechner. Hier die vollständige Anleitung: Ollama installieren, das passende Modell pro Tool wählen, und die Umgebungsvariablen, die das steuern.</span>
+        <span class="lang-en">Every AI-gated feature in the suite (plus diaryctl's free AI diary generation) already falls back to a local <a href="https://ollama.com" target="_blank" rel="noopener" style="color:var(--color-terminal-green);">Ollama</a> model automatically — no API key, no signup, no per-request cost, nothing leaves your machine. This is a full walkthrough: installing Ollama, picking the right model per tool, and the environment variables that control it.</span>
+        <span class="lang-de">Jedes KI-Feature im Bundle (plus diaryctls kostenlose KI-Tagebuchgenerierung) fällt bereits automatisch auf ein lokales <a href="https://ollama.com" target="_blank" rel="noopener" style="color:var(--color-terminal-green);">Ollama</a>-Modell zurück — kein API-Key, keine Anmeldung, keine Kosten pro Anfrage, nichts verlässt deinen Rechner. Hier die vollständige Anleitung: Ollama installieren, das passende Modell pro Tool wählen, und die Umgebungsvariablen, die das steuern.</span>
       </p>
 
       <h3><span class="lang-en">1. Install Ollama</span><span class="lang-de">1. Ollama installieren</span></h3>
@@ -246,49 +246,49 @@ ollama run llama3.2 "Say hi in five words"`}</code></pre>
       <div style="overflow-x:auto; margin: 1rem 0 1.5rem;">
       <table style="width:100%; border-collapse: collapse; font-size: 0.85rem;">
         <thead>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Model</span><span class="lang-de">Modell</span></th>
-            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Pull command</span><span class="lang-de">Pull-Befehl</span></th>
-            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">~RAM</span><span class="lang-de">~RAM</span></th>
-            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Best for</span><span class="lang-de">Am besten für</span></th>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:var(--color-terminal-text); font-family:'JetBrains Mono',monospace;"><span class="lang-en">Model</span><span class="lang-de">Modell</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:var(--color-terminal-text); font-family:'JetBrains Mono',monospace;"><span class="lang-en">Pull command</span><span class="lang-de">Pull-Befehl</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:var(--color-terminal-text); font-family:'JetBrains Mono',monospace;"><span class="lang-en">~RAM</span><span class="lang-de">~RAM</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:var(--color-terminal-text); font-family:'JetBrains Mono',monospace;"><span class="lang-en">Best for</span><span class="lang-de">Am besten für</span></th>
           </tr>
         </thead>
         <tbody>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">llama3.2 (3B)</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull llama3.2</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;">~2 GB</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Default fallback. Fast, fine for short/low-stakes text — habit suggestions, quick summaries.</span><span class="lang-de">Standard-Fallback. Schnell, ausreichend für kurze, unkritische Texte — Habit-Vorschläge, kurze Zusammenfassungen.</span></td>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green); font-family:'JetBrains Mono',monospace; white-space:nowrap;">llama3.2 (3B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace;">ollama pull llama3.2</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);">~2 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Default fallback. Fast, fine for short/low-stakes text — habit suggestions, quick summaries.</span><span class="lang-de">Standard-Fallback. Schnell, ausreichend für kurze, unkritische Texte — Habit-Vorschläge, kurze Zusammenfassungen.</span></td>
           </tr>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">mistral (7B)</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull mistral</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;">~4–5 GB</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Solid general-purpose writing — noticeably better tone than llama3.2 for email-style text.</span><span class="lang-de">Solide Allzweck-Textgenerierung — spürbar besserer Ton als llama3.2 für E-Mail-artige Texte.</span></td>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green); font-family:'JetBrains Mono',monospace; white-space:nowrap;">mistral (7B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace;">ollama pull mistral</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);">~4–5 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Solid general-purpose writing — noticeably better tone than llama3.2 for email-style text.</span><span class="lang-de">Solide Allzweck-Textgenerierung — spürbar besserer Ton als llama3.2 für E-Mail-artige Texte.</span></td>
           </tr>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">mistral-nemo (12B)</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull mistral-nemo</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;">~7–8 GB</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Best quality-per-GB for longer synthesis — weekly reviews, meeting summaries, draft replies. 128k context.</span><span class="lang-de">Bestes Verhältnis Qualität/GB für längere Synthese — Wochen-Reviews, Meeting-Zusammenfassungen, Antwortentwürfe. 128k Kontext.</span></td>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green); font-family:'JetBrains Mono',monospace; white-space:nowrap;">mistral-nemo (12B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace;">ollama pull mistral-nemo</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);">~7–8 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Best quality-per-GB for longer synthesis — weekly reviews, meeting summaries, draft replies. 128k context.</span><span class="lang-de">Bestes Verhältnis Qualität/GB für längere Synthese — Wochen-Reviews, Meeting-Zusammenfassungen, Antwortentwürfe. 128k Kontext.</span></td>
           </tr>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">qwen2.5 (14B)</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull qwen2.5:14b</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;">~9 GB</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Very reliable structured/JSON output — the safest pick for budgetctl's transaction categorization.</span><span class="lang-de">Sehr zuverlässige strukturierte/JSON-Ausgabe — die sicherste Wahl für budgetctls Transaktionskategorisierung.</span></td>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green); font-family:'JetBrains Mono',monospace; white-space:nowrap;">qwen2.5 (14B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace;">ollama pull qwen2.5:14b</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);">~9 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Very reliable structured/JSON output — the safest pick for budgetctl's transaction categorization.</span><span class="lang-de">Sehr zuverlässige strukturierte/JSON-Ausgabe — die sicherste Wahl für budgetctls Transaktionskategorisierung.</span></td>
           </tr>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">qwen2.5-coder (14B)</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull qwen2.5-coder</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;">~9 GB</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Reads code/diffs accurately while still writing reasonable prose — good middle ground for diaryctl.</span><span class="lang-de">Liest Code/Diffs präzise und schreibt trotzdem brauchbare Prosa — guter Mittelweg für diaryctl.</span></td>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green); font-family:'JetBrains Mono',monospace; white-space:nowrap;">qwen2.5-coder (14B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace;">ollama pull qwen2.5-coder</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);">~9 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Reads code/diffs accurately while still writing reasonable prose — good middle ground for diaryctl.</span><span class="lang-de">Liest Code/Diffs präzise und schreibt trotzdem brauchbare Prosa — guter Mittelweg für diaryctl.</span></td>
           </tr>
           <tr>
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e; font-family:'JetBrains Mono',monospace; white-space:nowrap;">codestral (22B)</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace;">ollama pull codestral</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;">~13 GB</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Purpose-built for code generation, not narrative prose — most technically literal read of a git diff, least "personal" voice. See the diaryctl note below.</span><span class="lang-de">Für Codegenerierung gebaut, nicht für erzählende Prosa — liest einen Git-Diff am technisch genauesten, klingt am wenigsten "persönlich". Siehe Hinweis zu diaryctl unten.</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green); font-family:'JetBrains Mono',monospace; white-space:nowrap;">codestral (22B)</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace;">ollama pull codestral</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);">~13 GB</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Purpose-built for code generation, not narrative prose — most technically literal read of a git diff, least "personal" voice. See the diaryctl note below.</span><span class="lang-de">Für Codegenerierung gebaut, nicht für erzählende Prosa — liest einen Git-Diff am technisch genauesten, klingt am wenigsten "persönlich". Siehe Hinweis zu diaryctl unten.</span></td>
           </tr>
         </tbody>
       </table>
@@ -298,49 +298,49 @@ ollama run llama3.2 "Say hi in five words"`}</code></pre>
       <div style="overflow-x:auto; margin: 1rem 0 1.5rem;">
       <table style="width:100%; border-collapse: collapse; font-size: 0.85rem;">
         <thead>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Tool / feature</span><span class="lang-de">Tool / Feature</span></th>
-            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Task type</span><span class="lang-de">Aufgabentyp</span></th>
-            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Recommended</span><span class="lang-de">Empfehlung</span></th>
-            <th style="text-align:left; padding: 0.5rem 0.75rem; color:#e2e8f0; font-family:'JetBrains Mono',monospace;"><span class="lang-en">Set with</span><span class="lang-de">Setzen mit</span></th>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:var(--color-terminal-text); font-family:'JetBrains Mono',monospace;"><span class="lang-en">Tool / feature</span><span class="lang-de">Tool / Feature</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:var(--color-terminal-text); font-family:'JetBrains Mono',monospace;"><span class="lang-en">Task type</span><span class="lang-de">Aufgabentyp</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:var(--color-terminal-text); font-family:'JetBrains Mono',monospace;"><span class="lang-en">Recommended</span><span class="lang-de">Empfehlung</span></th>
+            <th style="text-align:left; padding: 0.5rem 0.75rem; color:var(--color-terminal-text); font-family:'JetBrains Mono',monospace;"><span class="lang-en">Set with</span><span class="lang-de">Setzen mit</span></th>
           </tr>
         </thead>
         <tbody>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">calctl summarize</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Structured meeting summary</span><span class="lang-de">Strukturierte Meeting-Zusammenfassung</span></td>
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">mistral-nemo</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace; white-space:nowrap;">CALCTL_OLLAMA_MODEL</td>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-text);">calctl summarize</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Structured meeting summary</span><span class="lang-de">Strukturierte Meeting-Zusammenfassung</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green);">mistral-nemo</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace; white-space:nowrap;">CALCTL_OLLAMA_MODEL</td>
           </tr>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">mailctl draft reply (a)</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Tone-sensitive writing</span><span class="lang-de">Tonsensibles Schreiben</span></td>
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">mistral-nemo</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace; white-space:nowrap;">MAILCTL_OLLAMA_MODEL</td>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-text);">mailctl draft reply (a)</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Tone-sensitive writing</span><span class="lang-de">Tonsensibles Schreiben</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green);">mistral-nemo</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace; white-space:nowrap;">MAILCTL_OLLAMA_MODEL</td>
           </tr>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">budgetctl --ai import</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Classification, strict JSON</span><span class="lang-de">Klassifizierung, striktes JSON</span></td>
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">qwen2.5:14b</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace; white-space:nowrap;">BUDGETCTL_OLLAMA_MODEL</td>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-text);">budgetctl --ai import</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Classification, strict JSON</span><span class="lang-de">Klassifizierung, striktes JSON</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green);">qwen2.5:14b</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace; white-space:nowrap;">BUDGETCTL_OLLAMA_MODEL</td>
           </tr>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">habctl suggest (s)</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Short, low-stakes suggestions</span><span class="lang-de">Kurze, unkritische Vorschläge</span></td>
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">llama3.2 <span class="lang-en">(default is fine)</span><span class="lang-de">(Standard reicht)</span></td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;">—</td>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-text);">habctl suggest (s)</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Short, low-stakes suggestions</span><span class="lang-de">Kurze, unkritische Vorschläge</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green);">llama3.2 <span class="lang-en">(default is fine)</span><span class="lang-de">(Standard reicht)</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);">—</td>
           </tr>
-          <tr style="border-bottom: 1px solid #1e1e2e;">
-            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">habctl review / goal (r / g)</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Longer synthesis, structured reasoning</span><span class="lang-de">Längere Synthese, strukturiertes Reasoning</span></td>
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">mistral-nemo <span class="lang-en">or</span><span class="lang-de">oder</span> qwen2.5:14b</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace; white-space:nowrap;">HABCTL_OLLAMA_MODEL</td>
+          <tr style="border-bottom: 1px solid var(--color-terminal-border);">
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-text);">habctl review / goal (r / g)</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Longer synthesis, structured reasoning</span><span class="lang-de">Längere Synthese, strukturiertes Reasoning</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green);">mistral-nemo <span class="lang-en">or</span><span class="lang-de">oder</span> qwen2.5:14b</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace; white-space:nowrap;">HABCTL_OLLAMA_MODEL</td>
           </tr>
           <tr>
-            <td style="padding: 0.5rem 0.75rem; color:#e2e8f0;">diaryctl narrative</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096;"><span class="lang-en">Reads git diffs, writes personal prose</span><span class="lang-de">Liest Git-Diffs, schreibt persönliche Prosa</span></td>
-            <td style="padding: 0.5rem 0.75rem; color:#00d97e;">qwen2.5-coder <span class="lang-en">or</span><span class="lang-de">oder</span> mistral-nemo</td>
-            <td style="padding: 0.5rem 0.75rem; color:#718096; font-family:'JetBrains Mono',monospace; white-space:nowrap;">DIARYCTL_OLLAMA_MODEL</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-text);">diaryctl narrative</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim);"><span class="lang-en">Reads git diffs, writes personal prose</span><span class="lang-de">Liest Git-Diffs, schreibt persönliche Prosa</span></td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-green);">qwen2.5-coder <span class="lang-en">or</span><span class="lang-de">oder</span> mistral-nemo</td>
+            <td style="padding: 0.5rem 0.75rem; color:var(--color-terminal-dim); font-family:'JetBrains Mono',monospace; white-space:nowrap;">DIARYCTL_OLLAMA_MODEL</td>
           </tr>
         </tbody>
       </table>
@@ -408,7 +408,7 @@ taskctl       # opens the task list`}</code></pre>
       <p><span class="lang-en">Press <code>:</code> in either one and type a few letters — the command palette live-filters every available action, so you don't need to memorize keybindings up front.</span><span class="lang-de">Drücke in beiden <code>:</code> und tippe ein paar Buchstaben — die Befehlspalette filtert live alle verfügbaren Aktionen, du musst dir also keine Tastenkürzel vorher merken.</span></p>
 
       <h3><span class="lang-en">4. Connect Claude Desktop</span><span class="lang-de">4. Claude Desktop verbinden</span></h3>
-      <p><span class="lang-en">Add both to <code>claude_desktop_config.json</code> (see <a href="#claude-config" style="color:#00d97e;">Claude Desktop config</a> above), then restart Claude Desktop.</span><span class="lang-de">Füge beide zu <code>claude_desktop_config.json</code> hinzu (siehe <a href="#claude-config" style="color:#00d97e;">Claude-Desktop-Konfiguration</a> oben), dann Claude Desktop neu starten.</span></p>
+      <p><span class="lang-en">Add both to <code>claude_desktop_config.json</code> (see <a href="#claude-config" style="color:var(--color-terminal-green);">Claude Desktop config</a> above), then restart Claude Desktop.</span><span class="lang-de">Füge beide zu <code>claude_desktop_config.json</code> hinzu (siehe <a href="#claude-config" style="color:var(--color-terminal-green);">Claude-Desktop-Konfiguration</a> oben), dann Claude Desktop neu starten.</span></p>
       <pre><code>{`{
   "mcpServers": {
     "calctl":  { "command": "calctl",  "args": ["mcp"] },
@@ -424,9 +424,9 @@ taskctl       # opens the task list`}</code></pre>
 
       <h3><span class="lang-en">6. Next steps</span><span class="lang-de">6. Nächste Schritte</span></h3>
       <ul>
-        <li><span class="lang-en">Install the rest of the suite the same way — see <a href="#installation" style="color:#00d97e;">Installation</a>.</span><span class="lang-de">Installiere den Rest der Suite genauso — siehe <a href="#installation" style="color:#00d97e;">Installation</a>.</span></li>
-        <li><span class="lang-en">Using more than one machine? Set up <a href="#sync-across-devices" style="color:#00d97e;">sync across devices</a>.</span><span class="lang-de">Nutzt du mehr als ein Gerät? Richte <a href="#sync-across-devices" style="color:#00d97e;">Sync über mehrere Geräte</a> ein.</span></li>
-        <li><span class="lang-en">Browse more multi-tool prompt ideas in <a href="#ai-workflows" style="color:#00d97e;">AI Workflows</a> below.</span><span class="lang-de">Weitere Multi-Tool-Prompt-Ideen findest du unten in <a href="#ai-workflows" style="color:#00d97e;">KI-Workflows</a>.</span></li>
+        <li><span class="lang-en">Install the rest of the suite the same way — see <a href="#installation" style="color:var(--color-terminal-green);">Installation</a>.</span><span class="lang-de">Installiere den Rest der Suite genauso — siehe <a href="#installation" style="color:var(--color-terminal-green);">Installation</a>.</span></li>
+        <li><span class="lang-en">Using more than one machine? Set up <a href="#sync-across-devices" style="color:var(--color-terminal-green);">sync across devices</a>.</span><span class="lang-de">Nutzt du mehr als ein Gerät? Richte <a href="#sync-across-devices" style="color:var(--color-terminal-green);">Sync über mehrere Geräte</a> ein.</span></li>
+        <li><span class="lang-en">Browse more multi-tool prompt ideas in <a href="#ai-workflows" style="color:var(--color-terminal-green);">AI Workflows</a> below.</span><span class="lang-de">Weitere Multi-Tool-Prompt-Ideen findest du unten in <a href="#ai-workflows" style="color:var(--color-terminal-green);">KI-Workflows</a>.</span></li>
       </ul>
 
       <!-- ── MAILCTL ───────────────────────── -->
@@ -457,7 +457,7 @@ mailctl accounts                 # list accounts
 mailctl license activate <key>   # activate missionctl Bundle
 mailctl license status           # check license status
 mailctl mcp                      # start MCP server`}</code></pre>
-      <p><span class="lang-en">AI draft reply (the <code>a</code> key below) requires the <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — everything else here is free.</span><span class="lang-de">Der KI-Antwortentwurf (die <code>a</code>-Taste unten) erfordert das <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — alles andere hier ist kostenlos.</span></p>
+      <p><span class="lang-en">AI draft reply (the <code>a</code> key below) requires the <a href="#licensing" style="color:var(--color-terminal-green);">missionctl Bundle</a> — everything else here is free.</span><span class="lang-de">Der KI-Antwortentwurf (die <code>a</code>-Taste unten) erfordert das <a href="#licensing" style="color:var(--color-terminal-green);">missionctl Bundle</a> — alles andere hier ist kostenlos.</span></p>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
@@ -519,7 +519,7 @@ calctl summarize --event-title "Standup"   # AI meeting summary — missionctl B
 calctl license activate <key>       # activate missionctl Bundle
 calctl license status               # check license status
 calctl mcp                          # start MCP server`}</code></pre>
-      <p><span class="lang-en">AI meeting summaries (<code>calctl summarize</code>) require the <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — everything else here is free.</span><span class="lang-de">KI-Meeting-Zusammenfassungen (<code>calctl summarize</code>) erfordern das <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — alles andere hier ist kostenlos.</span></p>
+      <p><span class="lang-en">AI meeting summaries (<code>calctl summarize</code>) require the <a href="#licensing" style="color:var(--color-terminal-green);">missionctl Bundle</a> — everything else here is free.</span><span class="lang-de">KI-Meeting-Zusammenfassungen (<code>calctl summarize</code>) erfordern das <a href="#licensing" style="color:var(--color-terminal-green);">missionctl Bundle</a> — alles andere hier ist kostenlos.</span></p>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
@@ -649,7 +649,7 @@ notectl license status          # check license status
 notectl mcp                     # start MCP server`}</code></pre>
 
       <h3><span class="lang-en">Multiple vaults</span><span class="lang-de">Mehrere Vaults</span></h3>
-      <p><span class="lang-en">The free tier includes one vault. Registering a second requires the <a href="/#pricing" style="color:#00d97e;">missionctl Bundle</a> — see <a href="#licensing" style="color:#00d97e;">Licensing</a>.</span><span class="lang-de">Die kostenlose Version umfasst einen Vault. Ein zweiter erfordert das <a href="/#pricing" style="color:#00d97e;">missionctl Bundle</a> — siehe <a href="#licensing" style="color:#00d97e;">Lizenzierung</a>.</span></p>
+      <p><span class="lang-en">The free tier includes one vault. Registering a second requires the <a href="/#pricing" style="color:var(--color-terminal-green);">missionctl Bundle</a> — see <a href="#licensing" style="color:var(--color-terminal-green);">Licensing</a>.</span><span class="lang-de">Die kostenlose Version umfasst einen Vault. Ein zweiter erfordert das <a href="/#pricing" style="color:var(--color-terminal-green);">missionctl Bundle</a> — siehe <a href="#licensing" style="color:var(--color-terminal-green);">Lizenzierung</a>.</span></p>
       <pre><code>{`notectl vault add work ~/Documents/Obsidian/Work
 notectl vault add personal ~/Documents/Obsidian/Personal  # missionctl Bundle
 notectl vault list                                        # * marks the active vault
@@ -726,7 +726,7 @@ budgetctl export --format csv       # export data
 budgetctl license activate <key>    # activate missionctl Bundle
 budgetctl license status            # check license status
 budgetctl mcp                       # start MCP server`}</code></pre>
-      <p><span class="lang-en">See <a href="#licensing" style="color:#00d97e;">Licensing</a> above — everything except <code>--ai</code> and <code>recurring</code> is free.</span><span class="lang-de">Siehe <a href="#licensing" style="color:#00d97e;">Lizenzierung</a> oben — alles außer <code>--ai</code> und <code>recurring</code> ist kostenlos.</span></p>
+      <p><span class="lang-en">See <a href="#licensing" style="color:var(--color-terminal-green);">Licensing</a> above — everything except <code>--ai</code> and <code>recurring</code> is free.</span><span class="lang-de">Siehe <a href="#licensing" style="color:var(--color-terminal-green);">Lizenzierung</a> oben — alles außer <code>--ai</code> und <code>recurring</code> ist kostenlos.</span></p>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
@@ -793,7 +793,7 @@ habctl remind                        # macOS notification for unchecked habits
 habctl license activate <key>        # activate missionctl Bundle
 habctl license status                # check license status
 habctl mcp                           # start MCP server`}</code></pre>
-      <p><span class="lang-en">AI suggestions and the AI weekly review require the <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — everything else here is free.</span><span class="lang-de">KI-Vorschläge und der KI-Wochen-Review erfordern das <a href="#licensing" style="color:#00d97e;">missionctl Bundle</a> — alles andere hier ist kostenlos.</span></p>
+      <p><span class="lang-en">AI suggestions and the AI weekly review require the <a href="#licensing" style="color:var(--color-terminal-green);">missionctl Bundle</a> — everything else here is free.</span><span class="lang-de">KI-Vorschläge und der KI-Wochen-Review erfordern das <a href="#licensing" style="color:var(--color-terminal-green);">missionctl Bundle</a> — alles andere hier ist kostenlos.</span></p>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
@@ -847,10 +847,10 @@ habctl mcp                           # start MCP server`}</code></pre>
       <p>
         <span class="lang-en">Social media scheduling for Threads, Bluesky, Mastodon, Twitter, LinkedIn, Telegram, and Discord. Manage posts,
         campaigns, and drafts from your terminal.
-        Available at <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:#00d97e;">postctl.sh</a>.</span>
+        Available at <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:var(--color-terminal-green);">postctl.sh</a>.</span>
         <span class="lang-de">Social-Media-Planung für Threads, Bluesky, Mastodon, Twitter, LinkedIn, Telegram und Discord. Verwalte Posts,
         Kampagnen und Entwürfe direkt aus dem Terminal.
-        Verfügbar unter <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:#00d97e;">postctl.sh</a>.</span>
+        Verfügbar unter <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:var(--color-terminal-green);">postctl.sh</a>.</span>
       </p>
 
       <h3><span class="lang-en">Install</span><span class="lang-de">Installation</span></h3>
@@ -1025,7 +1025,7 @@ q       quit`}</code></pre>
       <p><span class="lang-en">All 66 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</span><span class="lang-de">Alle 66 Tools nach App gruppiert. Jedes Tool ist aus Claude Desktop aufrufbar, sobald die Config eingerichtet ist.</span></p>
 
       {[
-        { app: 'mailctl', color: '#00d97e', tools: [
+        { app: 'mailctl', color: 'var(--color-terminal-green)', tools: [
           ['inbox', 'List recent inbox messages with sender, subject, preview'],
           ['search_email', 'Search by keyword across subject, sender, body'],
           ['email_thread', 'Get all messages in a thread matched by subject'],
@@ -1114,11 +1114,11 @@ q       quit`}</code></pre>
           <h3 style={`color: ${group.color};`}>{group.app}</h3>
           <table style="width:100%; border-collapse:collapse; font-size:0.83rem;">
             {group.tools.map(([name, desc]) => (
-              <tr style="border-bottom: 1px solid #1e1e2e;">
+              <tr style="border-bottom: 1px solid var(--color-terminal-border);">
                 <td style="padding: 0.5rem 0.75rem 0.5rem 0; white-space: nowrap;">
-                  <code style="font-family:'JetBrains Mono',monospace; font-size:0.8em; background:#111118; border:1px solid #1e1e2e; padding:0.1em 0.35em; border-radius:3px; color:#00d97e;">{name}</code>
+                  <code style="font-family:'JetBrains Mono',monospace; font-size:0.8em; background:var(--color-terminal-surface); border:1px solid var(--color-terminal-border); padding:0.1em 0.35em; border-radius:3px; color:var(--color-terminal-green);">{name}</code>
                 </td>
-                <td style="padding: 0.5rem 0; color: #718096; line-height: 1.5;">{desc}</td>
+                <td style="padding: 0.5rem 0; color: var(--color-terminal-dim); line-height: 1.5;">{desc}</td>
               </tr>
             ))}
           </table>
@@ -1180,11 +1180,11 @@ q       quit`}</code></pre>
         und erstellt Aufgaben in Apple Erinnerungen (<code>create_task</code>).</span>
       </p>
 
-      <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(0,217,126,0.04); border: 1px solid rgba(0,217,126,0.15); border-radius: 8px;">
-        <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: #a0aec0;">
-          <span style="color: #00d97e; font-weight: 600;"><span class="lang-en">Ready to start?</span><span class="lang-de">Bereit loszulegen?</span></span>
+      <div style="margin-top: 3rem; padding: 1.5rem; background: rgba(var(--color-terminal-green-rgb),0.04); border: 1px solid rgba(var(--color-terminal-green-rgb),0.15); border-radius: 8px;">
+        <p style="margin: 0; font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; color: var(--color-terminal-code-text);">
+          <span style="color: var(--color-terminal-green); font-weight: 600;"><span class="lang-en">Ready to start?</span><span class="lang-de">Bereit loszulegen?</span></span>
           &nbsp;&nbsp;
-          <a href="https://github.com/aeon022/homebrew-tap" target="_blank" rel="noopener" style="color: #00d97e; text-decoration: none;">
+          <a href="https://github.com/aeon022/homebrew-tap" target="_blank" rel="noopener" style="color: var(--color-terminal-green); text-decoration: none;">
             <span class="lang-en">brew install — Free</span><span class="lang-de">brew install — Kostenlos</span> &rarr;
           </a>
         </p>
