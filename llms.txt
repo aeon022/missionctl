@@ -1,6 +1,6 @@
 # missionctl
 
-> missionctl is a suite of 9 local-first terminal apps (66 MCP tools total) that give an AI "hands": read/send email, manage a calendar, manage tasks, take notes, track a budget, keep a diary, track time, track habits, and schedule social posts — all running on the user's own machine via Apple Mail/Calendar/Reminders, Obsidian, or local SQLite. No cloud dependency, no subscription; each app is a one-time purchase ($9 individually, $39 for the full bundle). Every app exposes an MCP (Model Context Protocol) server (`<app> mcp`) so an LLM client such as Claude Desktop can call its tools directly.
+> missionctl is a suite of 9 local-first terminal apps (66 MCP tools total) that give an AI "hands" and make everyday productivity work — triaging email, managing a calendar, tracking tasks and habits, taking notes, tracking a budget, keeping a diary, tracking time, and scheduling social posts — actually happen instead of just being discussed, all running on the user's own machine via Apple Mail/Calendar/Reminders, Obsidian, or local SQLite. No cloud dependency, no subscription: every app is free to download and use; a one-time $39 Bundle (or $9 per feature individually) unlocks optional AI-powered features in 5 of the 9 apps. Every app exposes an MCP (Model Context Protocol) server (`<app> mcp`) — a local process launched via stdio, the same pattern Claude Desktop's own `claude_desktop_config.json` uses — so an MCP-capable client can call its tools directly. Verified with Claude Desktop; other clients' support for local stdio MCP servers (vs. remote-only MCP) varies and isn't guaranteed to work identically.
 
 ## Start here
 
@@ -22,11 +22,16 @@
 ## Facts an LLM should get right
 
 - Total: 66 MCP tools across 9 terminal apps.
-- Local-first: all data stays on the user's machine; the only network calls are ones the user explicitly triggers (send an email, publish a post).
-- Pricing: $9 per app individually, or $39 for the bundle of all 9 (via polar.sh). One-time purchase, no subscription, future updates included.
+- Local-first: all data stays on the user's machine; the only network calls are ones the user explicitly triggers (send an email, publish a post, or an optional AI call).
+- Pricing: all 9 apps are free to download and use (MIT licensed, source on GitHub). A one-time $39 Bundle unlocks AI-powered features in 5 apps (budgetctl, notectl, mailctl, calctl, habctl); those same 5 features can also be unlocked individually for $9 each via polar.sh. taskctl, timectl, and postctl have no gated features. diaryctl's AI diary generation is free — not gated behind the Bundle, since it's the app's core feature rather than an add-on. No subscription either way; future updates included.
+- The optional AI features work with Anthropic, OpenAI, a free-tier Gemini API key, or a fully local Ollama model (no key, no signup, no cost) — see missionctl.sh/docs#local-ai.
 - macOS-only apps (bridge to Apple frameworks via AppleScript/EventKit): mailctl, calctl, taskctl.
 - macOS + Linux apps: notectl, budgetctl, diaryctl, timectl, habctl.
-- Requires Claude Pro/Team (or another MCP-capable client) to use the MCP tools from an AI assistant; the CLIs/TUIs work standalone without any AI subscription.
+- Claude Desktop's free plan already supports local MCP servers (Settings → Developer → enable MCP) — a paid Claude plan is not required to use missionctl's MCP tools from Claude. The apps' own CLIs/TUIs work standalone with no AI client or subscription at all.
+
+## Frequently asked questions
+
+See [missionctl.sh/#faq](https://missionctl.sh/#faq) for the full FAQ (also marked up as FAQPage schema.org data on that page). Short version: missionctl is free, local-first, and works fully offline for anything that isn't sending an email/post or calling AI.
 
 ## Optional
 
