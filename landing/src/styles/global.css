@@ -119,6 +119,28 @@ body::after {
   z-index: 0;
 }
 
+/* Light mode gets its own atmosphere instead of just fading the dark-mode
+   values toward invisible on white — a naive opacity carryover read as
+   "cheap"/flat in review. Richer, more saturated glow (white needs more
+   pigment than near-black to show a tint at all) plus a subtle dot-grid
+   for the "technical/graph-paper" texture, layered with a soft cool-toned
+   vignette instead of body::after's near-black one (which just looks like
+   dirty smudged edges on a light background). */
+:root[data-theme="light"] body::before {
+  background: radial-gradient(
+    ellipse at 50% 20%,
+    rgba(var(--color-terminal-green-rgb), 0.16) 0%,
+    rgba(99, 102, 241, 0.11) 32%,
+    rgba(245, 158, 11, 0.05) 55%,
+    transparent 75%
+  );
+}
+:root[data-theme="light"] body::after {
+  background:
+    radial-gradient(circle, rgba(26, 26, 40, 0.05) 1px, transparent 1px) 0 0 / 28px 28px,
+    radial-gradient(ellipse at center, transparent 40%, rgba(71, 85, 105, 0.07) 100%);
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
