@@ -3,6 +3,17 @@ import Layout from '../components/Layout.astro';
 import TerminalWindow from '../components/TerminalWindow.astro';
 import AppCard from '../components/AppCard.astro';
 
+// Standalone $9 checkout links for the 5 tools with AI-gated features —
+// unlocks just that tool's Bundle-gated feature(s), not the full suite.
+// taskctl/timectl/diaryctl have nothing gated, so no standalone product.
+const standaloneCheckout = {
+  mailctl: 'https://buy.polar.sh/polar_cl_KJNOVnZ9fOiAAAWEkH8VvLH6YCOFPtgV9mNgb2j8MLQ',
+  calctl: 'https://buy.polar.sh/polar_cl_FVeOLZeCaEh8wYJiRL6xifwn3VDvkt4KGjipA3u479F',
+  budgetctl: 'https://buy.polar.sh/polar_cl_ARkg3wm2qsOAiv9PpGlw8cDBO00krDbAlm8QL2wg0gK',
+  notectl: 'https://buy.polar.sh/polar_cl_zmJEidXQGVmxB7wgQeVZ8oMTtFA6Myc6utnz22NVmtR',
+  habctl: 'https://buy.polar.sh/polar_cl_YoWfKB9lqFAPQRNTN6cYCSIMlAY83L5jXlXuY0CRxoS',
+};
+
 const apps = [
   {
     name: 'mailctl',
@@ -628,6 +639,11 @@ const faqLd = {
               <a href={`https://github.com/aeon022/${app.name}/releases/latest`} target="_blank" rel="noopener" style="color: #718096; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; text-decoration: none;">
                 <span class="lang-en">Direct download ↗</span><span class="lang-de">Direkter Download ↗</span>
               </a>
+              {standaloneCheckout[app.name] && (
+                <a href={standaloneCheckout[app.name]} target="_blank" rel="noopener" style="display: block; margin-top: 0.5rem; color: #00d97e; font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; text-decoration: none;">
+                  <span class="lang-en">Unlock AI features — $9 ↗</span><span class="lang-de">KI-Features freischalten — $9 ↗</span>
+                </a>
+              )}
             </div>
           )
         ))}
