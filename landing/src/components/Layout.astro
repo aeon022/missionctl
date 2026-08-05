@@ -195,13 +195,13 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
       <AnnouncementBar />
       <Nav />
     </div>
-    <!-- Light-mode-only "living background" — CRT-ish scanlines + slowly
-         drifting code glyphs, layered behind the ambient glow in
-         global.css's body::before/::after. Real DOM elements (not more
-         pseudo-elements — body already uses ::before/::after) so each can
-         animate independently. Hidden entirely in dark mode via CSS. -->
-    <div class="crt-scanlines" aria-hidden="true"></div>
-    <div class="crt-codebits" aria-hidden="true"></div>
+    <!-- Light-mode-only "living background" — two extra soft color blobs
+         drifting independently, on top of the one already on body::before
+         (global.css), for a slow-moving "aurora" wash. Real DOM elements
+         (not more pseudo-elements — body already uses ::before/::after)
+         so each can animate on its own timing. Hidden in dark mode. -->
+    <div class="aurora-blob-a" aria-hidden="true"></div>
+    <div class="aurora-blob-b" aria-hidden="true"></div>
     <!-- Spacer OUTSIDE the fixed #site-header — a spacer nested inside a
          fixed-position ancestor contributes no height to document flow, so
          this must live here, not inside Nav.astro, or every page's content
