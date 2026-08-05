@@ -124,17 +124,42 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
     <!-- Light/dark theme toggle: dark is the site's native look, so an
          unset preference stays dark (no auto-switch off prefers-color-scheme
          — this is "add a light option", not "respect the OS by default").
-         Set before paint like the lang toggle above, to avoid a flash. -->
+         Set before paint like the lang toggle above, to avoid a flash.
+         Three-way cycle: dark → light → auto → dark. "auto" tracks
+         prefers-color-scheme live (see the matchMedia listener below), not
+         just once on load — data-theme is the RESOLVED light/dark value
+         everything CSS-side keys off; data-theme-pref is what the user
+         actually chose, which Nav.astro's icon show/hide logic needs to
+         distinguish "auto resolving to dark right now" from "dark chosen
+         directly" so the correct icon shows. -->
     <script is:inline>
+      function missionctlResolveTheme(pref) {
+        if (pref === 'auto') {
+          return (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        return pref === 'light' ? 'light' : 'dark';
+      }
       function missionctlApplyTheme() {
-        var saved = localStorage.getItem('missionctl_theme');
-        document.documentElement.setAttribute('data-theme', saved === 'light' ? 'light' : 'dark');
+        var saved = localStorage.getItem('missionctl_theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', missionctlResolveTheme(saved));
+        document.documentElement.setAttribute('data-theme-pref', saved);
       }
       missionctlApplyTheme();
       function missionctlToggleTheme() {
-        var next = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        var order = ['dark', 'light', 'auto'];
+        var current = localStorage.getItem('missionctl_theme') || 'dark';
+        var next = order[(order.indexOf(current) + 1) % order.length];
         localStorage.setItem('missionctl_theme', next);
-        document.documentElement.setAttribute('data-theme', next);
+        missionctlApplyTheme();
+      }
+      // Registered once, not inside astro:page-load — window.matchMedia is a
+      // persistent global, not a DOM node that gets replaced/GC'd on every
+      // SPA transition like the buttons below, so re-adding this listener
+      // there would silently stack duplicate handlers over time.
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function () {
+          if ((localStorage.getItem('missionctl_theme') || 'dark') === 'auto') missionctlApplyTheme();
+        });
       }
       document.addEventListener('astro:page-load', function () {
         missionctlApplyTheme();

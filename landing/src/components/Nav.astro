@@ -99,14 +99,18 @@ const isAppPage = apps.some(a => a.href === currentPath);
         <span class="lang-en">DE</span><span class="lang-de">EN</span>
       </button>
 
-      <!-- Theme toggle -->
-      <button id="theme-toggle" class="nav-theme-toggle" aria-label="Toggle light/dark theme" type="button">
+      <!-- Theme toggle: cycles dark → light → auto → dark -->
+      <button id="theme-toggle" class="nav-theme-toggle" aria-label="Cycle theme: dark, light, or auto (follows system)" type="button">
         <svg class="theme-icon-sun" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <circle cx="8" cy="8" r="3.4" stroke="currentColor" stroke-width="1.4"/>
           <path d="M8 1v1.6M8 13.4V15M15 8h-1.6M2.6 8H1M12.7 3.3l-1.1 1.1M4.4 11.6l-1.1 1.1M12.7 12.7l-1.1-1.1M4.4 4.4L3.3 3.3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
         </svg>
         <svg class="theme-icon-moon" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
           <path d="M13.5 9.5A6 6 0 0 1 6.5 2.5a6 6 0 1 0 7 7Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+        </svg>
+        <svg class="theme-icon-auto" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <rect x="1.5" y="2.5" width="13" height="8.5" rx="1.2" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M5.5 14h5M8 11v3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
         </svg>
       </button>
 
@@ -128,8 +132,9 @@ const isAppPage = apps.some(a => a.href === currentPath);
       <span class="lang-en">Deutsch</span><span class="lang-de">English</span>
     </button>
     <button id="theme-toggle-mobile" class="mobile-menu-link" role="menuitem" type="button" style="background:none;border:none;text-align:left;cursor:pointer;width:100%;">
-      <span class="lang-en theme-label-to-light">Light mode</span><span class="lang-de theme-label-to-light">Heller Modus</span>
-      <span class="lang-en theme-label-to-dark">Dark mode</span><span class="lang-de theme-label-to-dark">Dunkler Modus</span>
+      <span class="lang-en theme-label-to-light">Switch to light</span><span class="lang-de theme-label-to-light">Zu hell wechseln</span>
+      <span class="lang-en theme-label-to-auto">Switch to auto</span><span class="lang-de theme-label-to-auto">Zu automatisch wechseln</span>
+      <span class="lang-en theme-label-to-dark">Switch to dark</span><span class="lang-de theme-label-to-dark">Zu dunkel wechseln</span>
     </button>
     <p class="mobile-menu-label">apps</p>
     <div class="mobile-apps-grid">
@@ -219,15 +224,24 @@ const isAppPage = apps.some(a => a.href === currentPath);
     color: var(--color-terminal-green);
     background: rgba(var(--color-terminal-green-rgb), 0.07);
   }
-  /* Icon shows the theme you'll SWITCH TO: sun visible while dark (click to
-     go light), moon visible while light (click to go dark). */
-  .theme-icon-moon { display: none; }
-  :global([data-theme="light"]) .theme-icon-sun { display: none; }
-  :global([data-theme="light"]) .theme-icon-moon { display: block; }
-  /* Mobile menu's text-label equivalent, same show/hide logic. */
-  .theme-label-to-dark { display: none; }
-  :global([data-theme="light"]) .theme-label-to-light { display: none; }
-  :global([data-theme="light"]) .theme-label-to-dark { display: inline; }
+  /* Icon shows the CURRENTLY CHOSEN theme (data-theme-pref: dark/light/
+     auto — not data-theme, which is auto's resolved light-or-dark value).
+     Cycle order is dark → light → auto → dark, so moon is the default/base
+     state (covers both "unset" and "dark" explicitly). */
+  .theme-icon-sun, .theme-icon-auto { display: none; }
+  .theme-icon-moon { display: block; }
+  :global([data-theme-pref="light"]) .theme-icon-sun { display: block; }
+  :global([data-theme-pref="light"]) .theme-icon-moon { display: none; }
+  :global([data-theme-pref="auto"]) .theme-icon-auto { display: block; }
+  :global([data-theme-pref="auto"]) .theme-icon-moon { display: none; }
+  /* Mobile menu's text-label equivalent: shows the NEXT destination in the
+     cycle (dark→light, light→auto, auto→dark), since a menu item reads more
+     naturally as an action ("switch to X") than a current-state display. */
+  .theme-label-to-auto, .theme-label-to-dark { display: none; }
+  :global([data-theme-pref="light"]) .theme-label-to-light { display: none; }
+  :global([data-theme-pref="light"]) .theme-label-to-auto { display: inline; }
+  :global([data-theme-pref="auto"]) .theme-label-to-light { display: none; }
+  :global([data-theme-pref="auto"]) .theme-label-to-dark { display: inline; }
 
   /* ── Apps trigger button ────────────────────────────────── */
   .apps-trigger {
