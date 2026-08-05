@@ -288,15 +288,18 @@ mailctl mcp                      # start MCP server`}</code></pre>
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>     <span>Navigate up/down</span>
+        <kbd>g / G</kbd>     <span>Jump to top / bottom</span>
+        <kbd>1-9</kbd>       <span>Jump to nth visible email</span>
         <kbd>Enter</kbd>     <span>Open selected email</span>
         <kbd>Tab / Shift+Tab</kbd> <span>Switch account</span>
         <kbd>n</kbd>         <span>Compose new email</span>
         <kbd>r</kbd>         <span>Reply (opens compose with quoted text)</span>
         <kbd>a</kbd>         <span>AI draft reply (missionctl Bundle)</span>
+        <kbd>U</kbd>         <span>Open unsubscribe link (detail view)</span>
         <kbd>o</kbd>         <span>Open in Mail.app</span>
         <kbd>d</kbd>         <span>Delete (press again to confirm)</span>
         <kbd>y</kbd>         <span>Copy subject + sender</span>
-        <kbd>v</kbd>         <span>Select mode (batch actions)</span>
+        <kbd>v</kbd>         <span>Select mode — space toggles, A selects all, r marks read, d deletes selected</span>
         <kbd>u</kbd>         <span>Toggle unread-only filter</span>
         <kbd>s</kbd>         <span>Sync inbox</span>
         <kbd>/</kbd>         <span>Search</span>
@@ -349,10 +352,13 @@ calctl mcp                          # start MCP server`}</code></pre>
         <kbd>j / k</kbd>   <span>Navigate events</span>
         <kbd>h / l</kbd>   <span>Previous / next week</span>
         <kbd>+ / -</kbd>   <span>Show more / fewer days</span>
+        <kbd>1-9</kbd>     <span>Jump to nth visible event</span>
         <kbd>Enter</kbd>   <span>Open event detail</span>
         <kbd>n</kbd>       <span>Create new event</span>
         <kbd>e</kbd>       <span>Edit event</span>
-        <kbd>d</kbd>       <span>Delete event (asks to confirm)</span>
+        <kbd>d</kbd>       <span>Delete event (asks Y/N to confirm)</span>
+        <kbd>u</kbd>       <span>Undo last delete</span>
+        <kbd>y</kbd>       <span>Copy event title</span>
         <kbd>f</kbd>       <span>Free slots</span>
         <kbd>c</kbd>       <span>Set default calendar</span>
         <kbd>s</kbd>       <span>Sync calendar</span>
@@ -405,7 +411,7 @@ taskctl mcp                          # start MCP server`}</code></pre>
         <kbd>j / k</kbd>   <span>Navigate tasks</span>
         <kbd>1-9</kbd>     <span>Jump to nth visible task</span>
         <kbd>Space</kbd>   <span>Toggle task complete</span>
-        <kbd>Enter</kbd>   <span>Task details</span>
+        <kbd>Enter</kbd>   <span>Task details — a/space/x add, toggle, remove a subtask</span>
         <kbd>n</kbd>       <span>New task</span>
         <kbd>e</kbd>       <span>Edit task</span>
         <kbd>d</kbd>       <span>Delete task (asks to confirm)</span>
@@ -413,7 +419,7 @@ taskctl mcp                          # start MCP server`}</code></pre>
         <kbd>S</kbd>       <span>Postpone to tomorrow</span>
         <kbd>y</kbd>       <span>Copy title</span>
         <kbd>u</kbd>       <span>Undo last action</span>
-        <kbd>v</kbd>       <span>Select mode (batch actions)</span>
+        <kbd>v</kbd>       <span>Select mode — space toggles, A selects all, enter completes, d deletes selected</span>
         <kbd>p</kbd>       <span>Pomodoro timer</span>
         <kbd>t</kbd>       <span>Focus mode (today &amp; overdue)</span>
         <kbd>O</kbd>       <span>Filter: overdue only</span>
@@ -479,10 +485,13 @@ notectl vault use work                                     # switch active vault
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate notes</span>
         <kbd>g / G</kbd>   <span>Jump to top / bottom</span>
+        <kbd>1-9</kbd>     <span>Jump to nth visible note</span>
         <kbd>Enter</kbd>   <span>Open note</span>
+        <kbd>Space</kbd>   <span>Toggle checkbox on current line (detail view, writes back to Apple Notes)</span>
         <kbd>n</kbd>       <span>New note</span>
         <kbd>e</kbd>       <span>Edit note</span>
         <kbd>d</kbd>       <span>Delete note (asks to confirm)</span>
+        <kbd>u</kbd>       <span>Undo last delete</span>
         <kbd>o</kbd>       <span>Open in external app</span>
         <kbd>y</kbd>       <span>Copy title</span>
         <kbd>S</kbd>       <span>Toggle sort (date / title)</span>
@@ -492,6 +501,7 @@ notectl vault use work                                     # switch active vault
         <kbd>s</kbd>       <span>Sync vault</span>
         <kbd>/</kbd>       <span>Search</span>
         <kbd>Tab / Shift+Tab</kbd> <span>Browse folders</span>
+        <kbd>&lt; / &gt;</kbd> <span>Resize the two-pane split</span>
         <kbd>:</kbd>       <span>Command palette</span>
         <kbd>?</kbd>       <span>Help</span>
         <kbd>q</kbd>       <span>Quit</span>
@@ -547,6 +557,8 @@ budgetctl mcp                       # start MCP server`}</code></pre>
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>         <span>Navigate transactions</span>
+        <kbd>g / G</kbd>         <span>Jump to top / bottom</span>
+        <kbd>1-9</kbd>           <span>Jump to nth visible transaction</span>
         <kbd>Tab / Shift+Tab</kbd> <span>Next / previous month</span>
         <kbd>y / Y</kbd>         <span>Next / previous year</span>
         <kbd>[ / ]</kbd>         <span>Cycle accounts</span>
@@ -557,7 +569,7 @@ budgetctl mcp                       # start MCP server`}</code></pre>
         <kbd>d</kbd>             <span>Delete entry (asks to confirm)</span>
         <kbd>u</kbd>             <span>Undo last delete</span>
         <kbd>c</kbd>             <span>Set category</span>
-        <kbd>v</kbd>             <span>Select mode (batch categorize)</span>
+        <kbd>v</kbd>             <span>Select mode — space toggles, A selects all (batch categorize)</span>
         <kbd>f</kbd>             <span>Filter by category</span>
         <kbd>/</kbd>             <span>Search transactions</span>
         <kbd>s / S</kbd>         <span>Summary (categories, charts, goals)</span>
@@ -612,14 +624,31 @@ habctl mcp                           # start MCP server`}</code></pre>
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate habits</span>
+        <kbd>1-9</kbd>     <span>Jump to nth visible habit</span>
         <kbd>space</kbd>   <span>Check in / undo check-in</span>
         <kbd>n</kbd>       <span>New habit</span>
+        <kbd>p</kbd>       <span>Add habit from curated preset list</span>
         <kbd>e</kbd>       <span>Edit habit</span>
+        <kbd>E</kbd>       <span>Quick-edit habit description</span>
         <kbd>d</kbd>       <span>Delete habit</span>
+        <kbd>a</kbd>       <span>Archive habit (history preserved)</span>
+        <kbd>A</kbd>       <span>Browse archived habits (restore / delete)</span>
+        <kbd>V</kbd>       <span>Batch-select mode — space toggles, A selects all, enter archives</span>
+        <kbd>m</kbd>       <span>Move habit to a group</span>
+        <kbd>G</kbd>       <span>Manage groups</span>
+        <kbd>c</kbd>       <span>Manage habit chains</span>
+        <kbd>N</kbd>       <span>Add/edit note on today's check-in</span>
+        <kbd>y</kbd>       <span>Copy habit name</span>
         <kbd>s</kbd>       <span>AI suggestions (missionctl Bundle)</span>
         <kbd>r</kbd>       <span>AI weekly review (missionctl Bundle)</span>
-        <kbd>c</kbd>       <span>Manage habit chains</span>
+        <kbd>g</kbd>       <span>AI goal → decompose into linked habits (missionctl Bundle)</span>
         <kbd>t</kbd>       <span>Stats — heatmap &amp; completion</span>
+        <kbd>w</kbd>       <span>Toggle 7-day / 30-day window</span>
+        <kbd>v</kbd>       <span>Toggle compact / normal view</span>
+        <kbd>S</kbd>       <span>Settings — AI provider &amp; API keys</span>
+        <kbd>/</kbd>       <span>Filter habits</span>
+        <kbd>:</kbd>       <span>Command palette</span>
+        <kbd>?</kbd>       <span>Help</span>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
 
@@ -669,6 +698,8 @@ postctl mcp                          # start MCP server`}</code></pre>
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
         <kbd>j / k</kbd>   <span>Navigate posts/history</span>
+        <kbd>Tab / Shift+Tab</kbd> <span>Switch tab (Dashboard/Posts/Schedule/History/Analytics/Settings/Logs)</span>
+        <kbd>Enter</kbd>   <span>Open detail view / apply filter / activate settings row</span>
         <kbd>Space</kbd>   <span>Select / deselect post for bulk actions</span>
         <kbd>p</kbd>       <span>Publish selected post(s) immediately</span>
         <kbd>s</kbd>       <span>Schedule post to next queue slot</span>
@@ -676,8 +707,10 @@ postctl mcp                          # start MCP server`}</code></pre>
         <kbd>n</kbd>       <span>Create new post</span>
         <kbd>d</kbd>       <span>Delete post locally and remotely</span>
         <kbd>r</kbd>       <span>Repurpose post content via AI</span>
+        <kbd>i</kbd>       <span>Import posts</span>
         <kbd>f</kbd>       <span>Filter by campaign</span>
         <kbd>x</kbd>       <span>Export history</span>
+        <kbd>?</kbd>       <span>Toggle quick-help footer</span>
         <kbd>R / F1</kbd>  <span>Open README documentation</span>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
@@ -732,6 +765,7 @@ diaryctl mcp                 # start MCP server`}</code></pre>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <pre><code>{`j/k     navigate entries
+1-9     jump to nth visible entry
 enter   open entry
 n       generate today's entry
 e       edit entry
@@ -744,6 +778,12 @@ r       browse tracked git repos
 :       command palette
 ?       help
 q       quit`}</code></pre>
+      <p><span class="lang-en">While editing an entry:</span><span class="lang-de">Beim Bearbeiten eines Eintrags:</span></p>
+      <pre><code>{`a         stream an AI-generated continuation into the entry
+ctrl+s    save
+ctrl+f    toggle centered writing mode
+ctrl+v    enter vim-normal mode
+tab / [ / ]  jump to next / previous AI marker or "##" section`}</code></pre>
 
       <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
       <div>
@@ -784,6 +824,7 @@ s       stop running timer
 r       restart selected entry's task
 c       copy selected entry into new-task input
 j/k     navigate log
+1-9     jump to nth visible entry
 e       edit notes
 d       delete entry (asks to confirm)
 u       undo last delete
