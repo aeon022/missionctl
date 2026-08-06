@@ -15,7 +15,7 @@ No SaaS. No cloud. No subscriptions. Your data stays on your machine.
 | [mailctl](mailctl/) | Read inbox, compose and send email | 6 | Apple Mail (AppleScript) |
 | [calctl](calctl/) | Browse calendar, create events, find free slots | 7 | Apple Calendar (AppleScript) |
 | [taskctl](taskctl/) | Manage tasks, sync with Apple Reminders | 7 | Apple Reminders (EventKit) |
-| [notectl](notectl/) | Read and write Obsidian vault notes, daily notes | 7 | Obsidian vault (.md files) |
+| [notectl](notectl/) | Read and write notes, daily notes — Obsidian, Apple Notes, or Joplin | 7 | Obsidian vault, Apple Notes, or Joplin (local Data API) |
 | [budgetctl](budgetctl/) | Track income & expenses, import bank CSVs, goals, subscriptions | 11 | Manual entries + bank CSV |
 | [habctl](habctl/) | Track habits, streaks, AI coaching reviews | 12 | Local SQLite |
 | [timectl](timectl/) | Start/stop timers, weekly breakdown, invoice export | 4 | Local SQLite |
@@ -58,7 +58,7 @@ Pull your existing data into the local SQLite caches:
 mailctl sync        # inbox from Apple Mail
 calctl sync         # events from Apple Calendar
 taskctl sync        # tasks from Apple Reminders
-notectl sync        # index your Obsidian vault
+notectl sync        # index your configured source(s) — Obsidian, Apple Notes, and/or Joplin
 ```
 
 budgetctl needs no sync — add entries manually (`budgetctl add` or `n` in the TUI) or import a CSV export with `budgetctl import bank.csv`. postctl is self-contained.
@@ -115,7 +115,7 @@ taskctl daemon --install                      Install background sync daemon
 
 # Notes
 notectl                                       Open TUI
-notectl sync                                  Index Obsidian vault
+notectl sync                                  Index configured source(s) — Obsidian, Apple Notes, Joplin
 notectl daily [--open]                        Open/create today's note
 notectl write TITLE [--body TEXT] [-f FOLDER] Create or update a note
 notectl read  TITLE [--json]                  Read a note
@@ -217,9 +217,9 @@ missionctl doctor                             Check install, MCP registration, D
 |------|-------------|
 | `list_notes` | List notes from cache (filter: folder, source) |
 | `read_note` | Read full note content by title |
-| `write_note` | Create or update a note in the vault |
+| `write_note` | Create or update a note in the configured source (Obsidian, Apple Notes, or Joplin) |
 | `search_notes` | Keyword search across title and content |
-| `sync_notes` | Sync Obsidian vault into cache |
+| `sync_notes` | Sync the configured source(s) into cache — one or several at once, see `sync_sources` |
 | `get_daily_note` | Get today's daily note (creates from template if missing) |
 | `append_daily_note` | Append content under a named section |
 
@@ -386,7 +386,7 @@ Apple Mail / Calendar / Reminders
         │ AppleScript / EventKit
         ▼
    Local SQLite cache  ◄──── bank CSV (budgetctl)
-        │                    Obsidian vault (notectl)
+        │                    Obsidian vault / Apple Notes / Joplin (notectl)
    ┌────┴──────────┐         Markdown files (postctl)
    │               │
   TUI           MCP server (stdio)

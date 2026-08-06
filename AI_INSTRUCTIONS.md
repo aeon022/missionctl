@@ -19,7 +19,7 @@ Add all nine servers to `~/Library/Application Support/Claude/claude_desktop_con
     "mailctl":   { "command": "mailctl",   "args": ["mcp"], "description": "Read and send email via Apple Mail" },
     "calctl":    { "command": "calctl",    "args": ["mcp"], "description": "Read and write calendar events" },
     "taskctl":   { "command": "taskctl",   "args": ["mcp"], "description": "Manage tasks via Apple Reminders" },
-    "notectl":   { "command": "notectl",   "args": ["mcp"], "description": "Read and write Obsidian vault notes" },
+    "notectl":   { "command": "notectl",   "args": ["mcp"], "description": "Read and write notes — Obsidian, Apple Notes, or Joplin" },
     "budgetctl": { "command": "budgetctl", "args": ["mcp"], "description": "Read budget, transactions, goals" },
     "habctl":    { "command": "habctl",    "args": ["mcp"], "description": "Track habits and streaks" },
     "timectl":   { "command": "timectl",   "args": ["mcp"], "description": "Time tracking and invoicing" },
@@ -64,7 +64,7 @@ taskctl — Tasks (Apple Reminders)
   taskctl add "Title" [--due Y-M-D] [--list NAME] [--url URL]
   taskctl done "Title"                  → complete
 
-notectl — Notes (Obsidian vault)
+notectl — Notes (Obsidian vault, Apple Notes, or Joplin — see `source` in notectl.yaml)
   notectl search "query" --json         → search
   notectl read "Title" --json           → read one note
   notectl write "Title" --body "text" [-f folder] [-t tag1,tag2]
