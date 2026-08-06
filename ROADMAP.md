@@ -224,6 +224,12 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
 - [x] Robust error handling & retry logic — zentrales Retry-Middleware (`platforms.WithRetry`,
   exponential Backoff + Jitter, nur transiente Fehler: Netzwerk/429/5xx) für alle Publish-Pfade
   (CLI, MCP, TUI single/bulk)
+- [ ] Echtes `Delete()` für facebook, linkedin, devto, hashnode, medium, reddit — bislang
+  unimplementierte Stubs, die immer `nil` zurückgaben (löschten also nie wirklich etwas auf der
+  Plattform). Am 2026-08-06 gefunden und auf einen ehrlichen "not implemented"-Fehler umgestellt,
+  damit der lokale Post-Datensatz beim Löschen nicht mehr fälschlich mitgelöscht wird — die
+  eigentliche API-Implementierung für diese 6 Plattformen fehlt aber noch. Twitter/X, Bluesky,
+  Mastodon, Threads, Discord, Telegram haben Delete bereits vollständig implementiert.
 - [ ] Brew formula via tap — einziger Blocker für Distribution
 
 ### v1.1 — Campaigns (Q4 2026)
