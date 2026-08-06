@@ -5,9 +5,9 @@ import TerminalWindow from '../components/TerminalWindow.astro';
 const mcpTools = [
   { name: "list_notes", desc: "List notes from the local cache, sorted by most recently modified" },
   { name: "read_note", desc: "Read the full content of a note by title" },
-  { name: "write_note", desc: "Write or update a note in the Obsidian vault" },
+  { name: "write_note", desc: "Write or update a note in the configured source — Obsidian, Apple Notes, or Joplin" },
   { name: "search_notes", desc: "Search notes by keyword across title and content" },
-  { name: "sync_notes", desc: "Sync the Obsidian vault into the local cache" },
+  { name: "sync_notes", desc: "Sync the configured source(s) into the local cache — one or several at once" },
   { name: "get_daily_note", desc: "Get today's daily note, created from template if missing" },
   { name: "append_daily_note", desc: "Append content to today's daily note under a named section" },
 ];
@@ -17,6 +17,8 @@ const features = [
   { title: "Full-text Search", title_de: "Volltextsuche", desc: "Search across your entire vault instantly. Returns ranked results with context snippets.", desc_de: "Durchsuche deinen gesamten Vault sofort. Liefert bewertete Ergebnisse mit Kontext-Ausschnitten." },
   { title: "Tag-based Filtering", title_de: "Tag-basierte Filterung", desc: "Filter notes by Obsidian tags, links, or frontmatter fields. Great for project-scoped AI workflows.", desc_de: "Filtere Notizen nach Obsidian-Tags, Links oder Frontmatter-Feldern. Ideal für projektbezogene KI-Workflows." },
   { title: "Apple Notes Sync (macOS)", title_de: "Apple-Notizen-Sync (macOS)", desc: "Optional source backend alongside Obsidian/Joplin/Markdown. Reads and writes native Apple Notes over AppleScript — no export step.", desc_de: "Optionales Quell-Backend neben Obsidian/Joplin/Markdown. Liest und schreibt native Apple Notizen über AppleScript — kein Export-Schritt nötig." },
+  { title: "Joplin Support", title_de: "Joplin-Unterstützung", desc: "Reads and writes Joplin notes via its local Data API — including nested notebooks (Parent/Child paths), created automatically if they don't exist yet. Requires Joplin running with Web Clipper enabled.", desc_de: "Liest und schreibt Joplin-Notizen über dessen lokale Data-API — inklusive verschachtelter Notizbücher (Parent/Child-Pfade), die bei Bedarf automatisch angelegt werden. Erfordert laufendes Joplin mit aktiviertem Web-Clipper." },
+  { title: "Sync Multiple Sources at Once", title_de: "Mehrere Quellen gleichzeitig syncen", desc: "sync_sources combines Obsidian, Apple Notes, and Joplin into one browsable cache — e.g. Apple Notes + Joplin together. Writing a new note still targets exactly one source, chosen via `source`.", desc_de: "sync_sources kombiniert Obsidian, Apple Notizen und Joplin in einem durchsuchbaren Cache — z.B. Apple Notizen + Joplin gemeinsam. Neue Notizen landen weiterhin gezielt in genau einer Quelle, festgelegt über `source`." },
   { title: "Multiple Vaults (Bundle)", title_de: "Mehrere Vaults (Bundle)", desc: "notectl vault add/list/use manages several named vaults and switches between them. The free tier includes one; more unlocks with the missionctl Bundle.", desc_de: "notectl vault add/list/use verwaltet mehrere benannte Vaults und wechselt zwischen ihnen. Die kostenlose Version umfasst einen; weitere schalten mit dem missionctl-Bundle frei." },
   { title: "Real Checklist State (macOS)", title_de: "Echter Checklisten-Status (macOS)", desc: "Checked/unchecked status for Apple Notes checklists isn't exposed by AppleScript at all — notectl reads it straight from Notes' own local database, so ☑ and ☐ in the terminal always match what you see in the Notes app.", desc_de: "Der Ab-/Angehakt-Status von Apple-Notizen-Checklisten wird von AppleScript gar nicht bereitgestellt — notectl liest ihn direkt aus der lokalen Datenbank von Notizen, sodass ☑ und ☐ im Terminal immer exakt dem entsprechen, was in der Notizen-App zu sehen ist." },
   { title: "Command Palette", title_de: "Befehlspalette", desc: "Press \":\" and type an action by name — new note, sync, browse tags — instead of memorizing shortcuts. Live-filtered as you type.", desc_de: "Drücke \":\" und tippe eine Aktion nach Namen — neue Notiz, Sync, Tags durchsuchen — statt Shortcuts auswendig zu lernen. Filtert live beim Tippen." },
@@ -25,7 +27,7 @@ const features = [
 
 <Layout
   title="notectl — Notes from your Terminal"
-  description="notectl — Obsidian vault notes and daily notes from your terminal. 7 MCP tools for Claude Desktop. Works on macOS and Linux."
+  description="notectl — notes from your terminal via Obsidian, Apple Notes, or Joplin, daily notes included. 7 MCP tools for Claude Desktop. Works on macOS and Linux."
   type="software"
   appName="notectl"
 >
@@ -40,7 +42,7 @@ const features = [
           <span style="font-family: 'JetBrains Mono', monospace; color: #a78bfa;">notectl</span>
         </h1>
         <p style="font-size: 1.25rem; font-weight: 600; color: var(--color-terminal-text); margin: 0 0 0.75rem;"><span class="lang-en">Notes from your Terminal</span><span class="lang-de">Notizen aus deinem Terminal</span></p>
-        <p style="color: var(--color-terminal-dim); font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Obsidian vault notes and daily notes via MCP. Works on macOS and Linux. 7 MCP tools for AI-powered note-taking.</span><span class="lang-de">Obsidian-Vault-Notizen und Daily Notes über MCP. Läuft unter macOS und Linux. 7 MCP-Tools für KI-gestütztes Notieren.</span></p>
+        <p style="color: var(--color-terminal-dim); font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Notes and daily notes via MCP — Obsidian, Apple Notes, or Joplin, synced individually or together. Works on macOS and Linux. 7 MCP tools for AI-powered note-taking.</span><span class="lang-de">Notizen und Daily Notes über MCP — Obsidian, Apple Notizen oder Joplin, einzeln oder gemeinsam gesynct. Läuft unter macOS und Linux. 7 MCP-Tools für KI-gestütztes Notieren.</span></p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://github.com/aeon022/notectl/releases/latest" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #a78bfa; color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
