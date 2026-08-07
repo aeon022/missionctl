@@ -714,7 +714,8 @@ cd budgetctl && ./setup.sh`}</code></pre>
       <pre><code>{`budgetctl import bank.csv --account checking
 budgetctl import n26.csv --format n26
 budgetctl import bank.csv --ai       # AI categorization — missionctl Bundle
-# Supported: N26, ING, DKB, Generic CSV`}</code></pre>
+# Supported: N26, ING, DKB, Sparkasse/George, Austrian bank Umsatzliste, Generic CSV
+# File encoding is auto-detected (UTF-8, UTF-16 LE/BE, Windows-1252)`}</code></pre>
 
       <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`budgetctl list                      # list transactions
@@ -742,7 +743,12 @@ budgetctl mcp                       # start MCP server`}</code></pre>
 budgetctl profile use firma                    # everything (CLI, TUI, MCP) now scopes to firma
 budgetctl profile list                         # show all profiles, mark the active one
 budgetctl profile use default                  # back to the unscoped default database
+budgetctl profile set-data-dir firma DIR       # sync an already-created profile; "" moves it back to local
 budgetctl profile remove firma                 # forgets the profile — its database stays on disk`}</code></pre>
+      <p>
+        <span class="lang-en"><code>set-data-dir</code> refuses a folder already used by another profile or the unscoped default — profiles exist to keep data apart, so give each synced one its own folder.</span>
+        <span class="lang-de"><code>set-data-dir</code> verweigert einen Ordner, der schon von einem anderen Profil oder dem Default belegt ist — Profile sollen Daten trennen, also braucht jedes synchronisierte einen eigenen Ordner.</span>
+      </p>
       <p>
         <span class="lang-en">With no active profile, budgetctl behaves exactly as before. In the TUI, press <code>p</code> to switch, create, or remove profiles the same way.</span>
         <span class="lang-de">Ohne aktives Profil verhält sich budgetctl genau wie zuvor. Im TUI wechselst, erstellst oder entfernst du Profile ebenso mit <code>p</code>.</span>
