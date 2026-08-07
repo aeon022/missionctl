@@ -747,6 +747,12 @@ budgetctl profile remove firma                 # forgets the profile — its dat
         <span class="lang-en">With no active profile, budgetctl behaves exactly as before. In the TUI, press <code>p</code> to switch, create, or remove profiles the same way.</span>
         <span class="lang-de">Ohne aktives Profil verhält sich budgetctl genau wie zuvor. Im TUI wechselst, erstellst oder entfernst du Profile ebenso mit <code>p</code>.</span>
       </p>
+      <p>
+        <span class="lang-en">For a one-off command without switching your saved active profile, pass <code>--profile</code> (or <code>-p</code>) instead:</span>
+        <span class="lang-de">Für einen einzelnen Befehl, ohne dein gespeichertes aktives Profil zu wechseln, nutze stattdessen <code>--profile</code> (oder <code>-p</code>):</span>
+      </p>
+      <pre><code>{`budgetctl import statement.csv --profile firma --account checking
+budgetctl --profile firma summary`}</code></pre>
 
       <h3><span class="lang-en">TUI keybindings</span><span class="lang-de">TUI-Tastenkürzel</span></h3>
       <div class="docs-kbd-grid">
