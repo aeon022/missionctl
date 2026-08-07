@@ -20,6 +20,7 @@ const features = [
   { title: "Category Rules", title_de: "Kategorie-Regeln", desc: "Define regex-based categorization rules. Transactions are auto-categorized on import. Rules persist in SQLite.", desc_de: "Definiere Regex-basierte Kategorisierungsregeln. Transaktionen werden beim Import automatisch kategorisiert. Regeln bleiben dauerhaft in SQLite gespeichert." },
   { title: "AI Categorization (Bundle)", title_de: "KI-Kategorisierung (Bundle)", desc: "Import with --ai and your configured AI provider (Anthropic, OpenAI, Gemini, or local Ollama — no cost) categorizes uncategorized transactions for you. Unlocks with the missionctl Bundle.", desc_de: "Importiere mit --ai und dein konfigurierter KI-Anbieter (Anthropic, OpenAI, Gemini oder lokales Ollama — kostenlos) kategorisiert unkategorisierte Transaktionen für dich. Schaltet mit dem missionctl-Bundle frei." },
   { title: "Budget Goals", title_de: "Budgetziele", desc: "Set monthly spending limits per category. Visual progress bars show how you're tracking against each goal.", desc_de: "Setze monatliche Ausgabenlimits pro Kategorie. Visuelle Fortschrittsbalken zeigen, wie du im Vergleich zu jedem Ziel liegst." },
+  { title: "Profiles", title_de: "Profile", desc: "Keep contexts fully separate — a business account and your personal accounts each get their own database. Switch with budgetctl profile use or the TUI's p key.", desc_de: "Halte Kontexte vollständig getrennt — ein Geschäftskonto und deine privaten Konten bekommen jeweils eine eigene Datenbank. Wechsle mit budgetctl profile use oder der p-Taste im TUI." },
   { title: "Recurring Detection (Bundle)", title_de: "Erkennung wiederkehrender Zahlungen (Bundle)", desc: "Automatically detect recurring payments (subscriptions, rent, utilities) based on transaction patterns. Unlocks with the missionctl Bundle.", desc_de: "Erkennt automatisch wiederkehrende Zahlungen (Abos, Miete, Nebenkosten) anhand von Transaktionsmustern. Schaltet mit dem missionctl-Bundle frei." },
   { title: "Command Palette", title_de: "Befehlspalette", desc: "Press \":\" and type an action by name — new entry, import CSV, summary — instead of memorizing shortcuts. Live-filtered as you type.", desc_de: "Drücke \":\" und tippe eine Aktion nach Namen — neuer Eintrag, CSV-Import, Übersicht — statt Shortcuts auswendig zu lernen. Filtert live beim Tippen." },
 ];
@@ -117,6 +118,10 @@ const features = [
 
 <span style="color:var(--color-terminal-muted)"># Add a category rule</span>
 <span style="color:var(--color-terminal-muted)">$ </span>budgetctl rule add <span style="color:var(--color-terminal-code-text)">"Spotify"</span> entertainment
+
+<span style="color:var(--color-terminal-muted)"># Keep work & personal fully separate</span>
+<span style="color:var(--color-terminal-muted)">$ </span>budgetctl profile add firma
+<span style="color:var(--color-terminal-muted)">$ </span>budgetctl profile use firma
 
 <span style="color:var(--color-terminal-muted)"># Detect recurring payments</span>
 <span style="color:var(--color-terminal-muted)">$ </span>budgetctl recurring
