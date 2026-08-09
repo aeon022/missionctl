@@ -44,7 +44,12 @@ for submod in $(git config --file .gitmodules --get-regexp path | awk '{print $2
     continue
   fi
 
-  git -C "$submod" checkout origin/main --quiet
+  # checkout main (creating it tracking origin/main on a fresh --init) then
+  # fast-forward it — never `checkout origin/main` directly, which detaches
+  # HEAD. Safe because the `ahead` check above already proved HEAD has
+  # nothing origin/main lacks.
+  git -C "$submod" checkout main --quiet 2>/dev/null || git -C "$submod" checkout -B main --track origin/main --quiet
+  git -C "$submod" merge --ff-only origin/main --quiet
 
   if ! git diff --quiet -- "$submod"; then
     subject=$(git -C "$submod" log -1 --format=%s)
