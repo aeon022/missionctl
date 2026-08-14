@@ -181,7 +181,7 @@ const toolGroups = [
     ],
   },
   {
-    app: 'notectl', count: 7, color: '#a78bfa',
+    app: 'notectl', count: 8, color: '#a78bfa',
     tools: [
       { name: 'list_notes',      desc: 'List notes from cache (filter: folder, source)' },
       { name: 'read_note',       desc: 'Read full note content by title' },
@@ -190,6 +190,7 @@ const toolGroups = [
       { name: 'sync_notes',      desc: 'Sync Obsidian vault into cache' },
       { name: 'get_daily_note',  desc: "Get today's daily note (creates from template if missing)" },
       { name: 'append_daily_note', desc: 'Append content under a named section' },
+      { name: 'delete_note',     desc: 'Delete a note by title (folder disambiguates duplicates)' },
     ],
   },
   {
@@ -262,8 +263,8 @@ const faqs = [
   {
     q_en: 'What is missionctl?',
     q_de: 'Was ist missionctl?',
-    a_en: 'missionctl is a suite of 9 local-first terminal apps — mail, calendar, tasks, notes, budget, diary, time tracking, habits, and social posting — that expose 66 MCP tools so an AI assistant can act on your behalf directly from your own machine. All data stays local; there is no missionctl cloud service, and every app is free to download and use.',
-    a_de: 'missionctl ist eine Suite aus 9 local-first Terminal-Apps — Mail, Kalender, Aufgaben, Notizen, Budget, Tagebuch, Zeiterfassung, Habits und Social-Posting — die 66 MCP-Tools bereitstellen, damit ein KI-Assistent direkt von deinem eigenen Rechner aus in deinem Namen handeln kann. Alle Daten bleiben lokal, es gibt keinen missionctl-Cloud-Dienst, und jede App ist kostenlos herunterladbar und nutzbar.',
+    a_en: 'missionctl is a suite of 9 local-first terminal apps — mail, calendar, tasks, notes, budget, diary, time tracking, habits, and social posting — that expose 67 MCP tools so an AI assistant can act on your behalf directly from your own machine. All data stays local; there is no missionctl cloud service, and every app is free to download and use.',
+    a_de: 'missionctl ist eine Suite aus 9 local-first Terminal-Apps — Mail, Kalender, Aufgaben, Notizen, Budget, Tagebuch, Zeiterfassung, Habits und Social-Posting — die 67 MCP-Tools bereitstellen, damit ein KI-Assistent direkt von deinem eigenen Rechner aus in deinem Namen handeln kann. Alle Daten bleiben lokal, es gibt keinen missionctl-Cloud-Dienst, und jede App ist kostenlos herunterladbar und nutzbar.',
   },
   {
     q_en: 'What is MCP (Model Context Protocol)?',
@@ -328,7 +329,7 @@ const faqLd = {
 
 <Layout
   title="missionctl — Give your AI hands"
-  description="66 MCP tools, 9 local-first terminal apps. Email, calendar, tasks, notes, budget, habits, time, diary, and social posts. No subscriptions."
+  description="67 MCP tools, 9 local-first terminal apps. Email, calendar, tasks, notes, budget, habits, time, diary, and social posts. No subscriptions."
 >
   <!-- ======= HERO ======= -->
   <section style="position: relative; min-height: calc(100vh - 92px); display: flex; flex-direction: column; justify-content: center; padding: 10rem 1.5rem 6rem; max-width: 1200px; margin: 0 auto;" id="hero-section">
@@ -342,16 +343,16 @@ const faqLd = {
       <!-- Left: Text -->
       <div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--color-terminal-green); margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
-          <span class="lang-en">66 MCP tools &middot; 9 terminal apps &middot; macOS + Linux</span><span class="lang-de">66 MCP-Tools &middot; 9 Terminal-Apps &middot; macOS + Linux</span>
+          <span class="lang-en">67 MCP tools &middot; 9 terminal apps &middot; macOS + Linux</span><span class="lang-de">67 MCP-Tools &middot; 9 Terminal-Apps &middot; macOS + Linux</span>
         </div>
         <h1 style="font-size: clamp(2.5rem, 5vw, 3.75rem); font-weight: 900; line-height: 1.08; letter-spacing: -0.03em; color: var(--color-terminal-text); margin: 0 0 1.25rem;">
           <span class="lang-en">Give your AI<br><span style="color: var(--color-terminal-green); text-shadow: 0 0 40px rgba(var(--color-terminal-green-rgb),0.3);">hands.</span></span>
           <span class="lang-de">Gib deiner KI<br><span style="color: var(--color-terminal-green); text-shadow: 0 0 40px rgba(var(--color-terminal-green-rgb),0.3);">Hände.</span></span>
         </h1>
         <p style="font-size: 1.125rem; color: var(--color-terminal-dim); line-height: 1.65; margin: 0 0 2rem; max-width: 480px;">
-          <span class="lang-en">66 MCP tools across 9 terminal apps. Local-first. No subscriptions.
+          <span class="lang-en">67 MCP tools across 9 terminal apps. Local-first. No subscriptions.
           Your AI can now read email, manage your calendar, handle tasks, write notes, track spending, log time, track habits, keep a diary, and schedule posts.</span>
-          <span class="lang-de">66 MCP-Tools über 9 Terminal-Apps. Local-first. Keine Abos.
+          <span class="lang-de">67 MCP-Tools über 9 Terminal-Apps. Local-first. Keine Abos.
           Deine KI kann jetzt E-Mails lesen, deinen Kalender verwalten, Aufgaben erledigen, Notizen schreiben, Ausgaben verfolgen, Zeit erfassen, Gewohnheiten tracken, Tagebuch führen und Posts planen.</span>
         </p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
@@ -428,8 +429,8 @@ const faqLd = {
         <div class="how-step-num">02</div>
         <h3 class="how-title" style="color:var(--color-terminal-green);"><span class="lang-en">Claude calls MCP tools</span><span class="lang-de">Claude ruft MCP-Tools auf</span></h3>
         <p class="how-desc">
-          <span class="lang-en">66 tools across 9 apps,<br>running locally on your machine</span>
-          <span class="lang-de">66 Tools über 9 Apps,<br>laufen lokal auf deinem Rechner</span>
+          <span class="lang-en">67 tools across 9 apps,<br>running locally on your machine</span>
+          <span class="lang-de">67 Tools über 9 Apps,<br>laufen lokal auf deinem Rechner</span>
         </p>
       </div>
 
@@ -492,7 +493,7 @@ const faqLd = {
   <section style="padding: 5rem 1.5rem; max-width: 1200px; margin: 0 auto;">
     <div style="text-align: center; margin-bottom: 3rem;">
       <h2 style="font-size: clamp(1.5rem, 3vw, 2rem); font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.75rem; letter-spacing: -0.02em;">
-        <span class="lang-en">66 tools. One config.</span><span class="lang-de">66 Tools. Eine Config.</span>
+        <span class="lang-en">67 tools. One config.</span><span class="lang-de">67 Tools. Eine Config.</span>
       </h2>
       <p style="color: var(--color-terminal-dim); font-size: 1rem; max-width: 500px; margin: 0 auto;">
         <span class="lang-en">Hover any chip to see what it does. Every tool is callable from Claude Desktop.</span><span class="lang-de">Fahre über einen Chip, um zu sehen, was er tut. Jedes Tool ist aus Claude Desktop aufrufbar.</span>
@@ -538,7 +539,7 @@ const faqLd = {
 
       <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;" class="mcp-stats-grid">
         {[
-          { n: '66', label_en: 'MCP tools total', label_de: 'MCP-Tools gesamt' },
+          { n: '67', label_en: 'MCP tools total', label_de: 'MCP-Tools gesamt' },
           { n: '9', label_en: 'local-first apps', label_de: 'local-first Apps' },
           { n: '0', label_en: 'cloud dependencies', label_de: 'Cloud-Abhängigkeiten' },
         ].map(stat => (

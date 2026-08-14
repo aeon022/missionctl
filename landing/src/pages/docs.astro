@@ -92,8 +92,8 @@ const navSections = [
     <div class="docs-main">
       <h1><span class="lang-en">missionctl Documentation</span><span class="lang-de">missionctl-Dokumentation</span></h1>
       <p style="color:var(--color-terminal-dim); margin-bottom:2rem;">
-        <span class="lang-en">66 MCP tools across 9 terminal apps. Local-first, no cloud, no subscriptions.</span>
-        <span class="lang-de">66 MCP-Tools über 9 Terminal-Apps. Local-first, keine Cloud, keine Abos.</span>
+        <span class="lang-en">67 MCP tools across 9 terminal apps. Local-first, no cloud, no subscriptions.</span>
+        <span class="lang-de">67 MCP-Tools über 9 Terminal-Apps. Local-first, keine Cloud, keine Abos.</span>
       </p>
 
       <!-- ── GETTING STARTED ───────────────── -->
@@ -132,7 +132,7 @@ notectl sync      # Obsidian, Apple Notes, or Joplin → local index`}</code></p
         <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>:</span>
       </p>
       <pre><code set:text={mcpConfig}></code></pre>
-      <p><span class="lang-en">Restart Claude Desktop. All 66 MCP tools appear automatically in every conversation.</span><span class="lang-de">Starte Claude Desktop neu. Alle 66 MCP-Tools erscheinen automatisch in jeder Unterhaltung.</span></p>
+      <p><span class="lang-en">Restart Claude Desktop. All 67 MCP tools appear automatically in every conversation.</span><span class="lang-de">Starte Claude Desktop neu. Alle 67 MCP-Tools erscheinen automatisch in jeder Unterhaltung.</span></p>
 
       <!-- ── SYNC ACROSS DEVICES ────────────── -->
       <h2 id="sync-across-devices"><span class="lang-en">Sync Across Devices</span><span class="lang-de">Sync über mehrere Geräte</span></h2>
@@ -695,6 +695,7 @@ notectl vault use work                                     # switch active vault
         <span class="docs-tool-tag">sync_notes</span>
         <span class="docs-tool-tag">get_daily_note</span>
         <span class="docs-tool-tag">append_daily_note</span>
+        <span class="docs-tool-tag">delete_note</span>
       </div>
 
       <!-- ── BUDGETCTL ─────────────────────── -->
@@ -1055,7 +1056,7 @@ q       quit`}</code></pre>
 
       <!-- ── MCP REFERENCE ─────────────────── -->
       <h2 id="mcp-reference"><span class="lang-en">MCP Reference</span><span class="lang-de">MCP-Referenz</span></h2>
-      <p><span class="lang-en">All 66 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</span><span class="lang-de">Alle 66 Tools nach App gruppiert. Jedes Tool ist aus Claude Desktop aufrufbar, sobald die Config eingerichtet ist.</span></p>
+      <p><span class="lang-en">All 67 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</span><span class="lang-de">Alle 67 Tools nach App gruppiert. Jedes Tool ist aus Claude Desktop aufrufbar, sobald die Config eingerichtet ist.</span></p>
 
       {[
         { app: 'mailctl', color: 'var(--color-terminal-green)', tools: [
@@ -1092,6 +1093,7 @@ q       quit`}</code></pre>
           ['sync_notes', 'Sync Obsidian vault into cache'],
           ['get_daily_note', "Get today's daily note (creates from template if missing)"],
           ['append_daily_note', 'Append content under a named section'],
+          ['delete_note', 'Delete a note by title (folder disambiguates duplicates)'],
         ]},
         { app: 'budgetctl', color: '#10b981', tools: [
           ['list_transactions', 'List transactions, filter by month/category/query'],

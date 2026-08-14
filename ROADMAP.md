@@ -1,8 +1,14 @@
 # missionctl — Roadmap
 
-> Last updated: 2026-07-11 · Model: claude-sonnet-4-6
-
----
+> Last updated: 2026-08-14 · Model: claude-sonnet-5
+>
+> This table had drifted badly by the previous update (2026-07-11): habctl
+> and missionctl were both still marked "Building" here well after they'd
+> actually shipped (habctl has its own priced landing page and GitHub
+> releases; missionctl has doctor/init/status/dashboard/agenda/settings/
+> license/update, not just doctor). MCP tool counts below are re-verified
+> directly against each app's `internal/mcpserver/*.go` (excluding test
+> files, which had silently doubled an earlier manual count for diaryctl).
 
 ## Status Overview
 
@@ -11,55 +17,26 @@
 | mailctl         | ✅ Shipped   | 6         | Unsubscribe, templates, TUI, AI draft reply |
 | calctl          | ✅ Shipped   | 7         | Free slots, event create, TUI |
 | taskctl         | ✅ Shipped   | 7         | Pomodoro, daemon, batch ops |
-| notectl         | ✅ Shipped   | 7         | Daily notes, Obsidian vault |
-| budgetctl       | ✅ Shipped   | 9         | Goals, recurring detection, export |
-| postctl         | ✅ Shipped   | 7         | Own site: postctl.sh |
+| notectl         | ✅ Shipped   | 8         | Daily notes, Obsidian/Apple Notes/Joplin vault, delete_note |
+| budgetctl       | ✅ Shipped   | 11        | Goals, recurring detection, export |
+| postctl         | ✅ Shipped   | 7         | Own site: postctl.sh (live) |
 | diaryctl        | ✅ Shipped   | 5         | Daemon, AI streaming, suite integration, TUI polish, notectl write-back |
 | timectl         | ✅ Shipped   | 4         | Heatmap, duration bars, taskctl link, invoice export |
-| habctl          | 🔨 Building  | 3         | Habit tracker, streak integration with diaryctl |
-| missionctl      | 🔨 Building  | —         | Umbrella CLI: doctor, init, status |
-| landing         | ✅ Built     | —         | deploy/landing branch, not live yet |
+| habctl          | ✅ Shipped   | 12        | Habit tracker, streaks, AI weekly review, habit chains, Ollama support |
+| missionctl      | ✅ Shipped   | —         | Umbrella CLI: doctor (now reports real daemon liveness), init, status, dashboard, agenda, settings, license, update |
+| landing         | ✅ Live      | —         | deploy/landing branch, missionctl.sh serving |
 
-**Total shipped: 52 MCP tools across 8 apps.**
+**Total shipped: 67 MCP tools across 9 apps.**
 
 ---
 
-## ⚡ Sofort — Wird gerade umgesetzt
+## ⚡ Sofort — erledigt, Abschnitt aufgelöst
 
-### ⚡ missionctl — Umbrella CLI
-Einstiegspunkt für die gesamte Suite. Höchste Priorität.
-
-- [ ] `missionctl doctor` — prüft ob alle Tools installiert + konfiguriert sind
-- [ ] `missionctl init` — interaktiver Setup-Wizard (registriert repos, vault, APIs)
-- [ ] `missionctl status` — Tages-Briefing: offene Tasks, nächster Termin, laufender Timer, Budget-Stand, Diary-Streak
-- [ ] Cobra Root mit Sub-Commands
-- [ ] Registriert in PATH via setup.sh
-
-### ⚡ habctl — Habit Tracker (vor Go-Live)
-Einfach, täglich nützlich, natürlich mit diaryctl verknüpft.
-
-```bash
-habctl check "Sport"        # heute abhaken
-habctl list                 # alle Habits + Streaks
-habctl stats [--days 30]    # Balkendiagramm + Streak-History
-habctl mcp                  # MCP Server
-```
-
-- [ ] SQLite store (`~/.local/share/habctl/habits.db`)
-- [ ] Habits + daily check-ins
-- [ ] Streak-Berechnung (wie diaryctl)
-- [ ] MCP Tools: `check_habit`, `get_habit_stats`, `list_habits`
-- [ ] Diary-Integration: offene Habits erscheinen im Diary-Template
-
-### ⚡ budgetctl — Auto-Kategorisierung via Claude
-- [ ] `budgetctl import <file.csv> --ai` — Claude kategorisiert alle Transaktionen ohne Kategorie
-- [ ] Lernend: bestehende Kategorien als Few-Shot-Beispiele mitgeben
-- [ ] Neue Kategorie-Vorschläge werden bestätigt bevor gespeichert
-
-### ⚡ calctl — Meeting-Zusammenfassung
-- [ ] `calctl summarize [--event-title "..."] [--date YYYY-MM-DD]`
-- [ ] Claude generiert strukturierte Zusammenfassung (Beschlüsse, Todos, Nächste Schritte)
-- [ ] `--email` Flag → mailctl draftet Zusammenfassung an Teilnehmer
+Alle vier Punkte, die hier standen (missionctl Umbrella-CLI inkl. doctor/init/status,
+habctl komplett inkl. SQLite/Streaks/MCP/Diary-Integration, budgetctl `--ai`-Import,
+calctl `summarize`), sind live und geshippt — siehe Status Overview oben bzw.
+"Bestehende Apps" unten, wo sie bereits korrekt als `[x]` geführt werden. Waren hier
+nur als Karteileiche mit `[ ]` stehen geblieben; Abschnitt entfernt statt dupliziert.
 
 ---
 
@@ -70,14 +47,14 @@ habctl mcp                  # MCP Server
 - [x] Alle App-Seiten (8 Apps), Docs, Privacy, Cookies
 - [x] Announcement bar, scroll reveal, typewriter, FAQ, tool grid
 - [x] Page transitions (glitch effect)
-- [ ] **⚡ Deploy zu Vercel / Cloudflare Pages** (User-Action)
-- [ ] **⚡ Polar.sh Produkte anlegen + echte Links** (User-Action)
+- [x] Deploy — live auf missionctl.sh (eigener Server via nginx, nicht Vercel/Cloudflare wie ursprünglich geplant; deploy/landing Branch)
+- [x] Polar.sh Produkte + echte Checkout-Links live (5 Tools mit AI-Feature-Add-on + $39 Lifetime-Bundle, siehe Monetarisierung unten)
 
 ### diaryctl — v0.2 ✅
 - [x] TUI polish: search highlight, word goal bar, markdown rendering, today summary
 - [x] notectl write-back (diary entries → Obsidian vault)
 - [x] `diaryctl export [--format post]` für postctl Pipeline
-- [ ] notectl → postctl Pipeline (best entries → social posts)
+- [x] notectl → postctl Pipeline (`diaryctl export --format post | postctl import -`)
 - [ ] Stimmungs-Tracker (1-5 Skala)
 
 ### timectl — v0.2 ✅
@@ -181,7 +158,7 @@ curl -s https://missionctl.sh/install.sh | bash
 - [ ] In Landing Page eingebettet (ersetzt statische Terminal-Mock)
 
 ### Blog via diaryctl + postctl
-- [ ] `diaryctl export --date X | postctl import -` Pipeline live
+- [x] `diaryctl export --date X --format post | postctl import -` Pipeline live
 - [ ] dev.to / Medium Cross-Post
 
 ### Dokumentation
@@ -190,23 +167,22 @@ curl -s https://missionctl.sh/install.sh | bash
 
 ---
 
-## Monetarisierung (polar.sh)
+## Monetarisierung (polar.sh) — live, anderes Modell als ursprünglich geplant
 
-| Produkt               | Preis   | Status         |
-|-----------------------|---------|----------------|
-| mailctl               | $9      | ⬜ Anlegen      |
-| calctl                | $9      | ⬜ Anlegen      |
-| taskctl               | $9      | ⬜ Anlegen      |
-| notectl               | $9      | ⬜ Anlegen      |
-| budgetctl             | $9      | ⬜ Anlegen      |
-| postctl               | $9      | ⬜ Anlegen      |
-| diaryctl              | $9      | ⬜ Anlegen      |
-| timectl               | $9      | ⬜ Anlegen      |
-| habctl                | $9      | ⬜ Nach v0.1    |
-| **missionctl Bundle** | **$39** | ⬜ Anlegen (9 Tools) |
-| **Bundle + Diary**    | **$49** | ⬜ Anlegen      |
-| Go Tutorial           | $19     | ⬜ Anlegen      |
-| Tutorial + Bundle     | $49     | ⬜ Anlegen      |
+Tatsächliches Modell auf missionctl.sh: alle 9 Tools sind einzeln **kostenlos**
+herunterladbar; bezahlt wird für AI-Feature-Add-ons bei einzelnen Tools oder für
+das Lifetime-Bundle. Kein separates $9-pro-Tool-Produkt, kein "Bundle + Diary",
+kein Tutorial-Produkt — die Zeilen dazu unten waren reine Planung, nie umgesetzt.
+
+| Produkt                        | Preis                  | Status                          |
+|---------------------------------|------------------------|----------------------------------|
+| mailctl — AI features           | Add-on                 | ✅ Live (Polar-Checkout-Link)   |
+| calctl — AI features            | Add-on                 | ✅ Live (Polar-Checkout-Link)   |
+| budgetctl — AI features         | Add-on                 | ✅ Live (Polar-Checkout-Link)   |
+| notectl — 2. Vault              | Add-on                 | ✅ Live (Polar-Checkout-Link)   |
+| habctl — AI features            | Add-on                 | ✅ Live (Polar-Checkout-Link)   |
+| taskctl, postctl, diaryctl, timectl | —                   | Kein Add-on-Produkt derzeit     |
+| **missionctl Bundle (9 Tools, lifetime)** | **$39** (Launch: -30% mit Code `L4uNch26`) | ✅ Live (Polar-Checkout-Link) |
 
 ---
 
@@ -216,7 +192,7 @@ A complete suite of local-first CLI tools that form the "hands" of an AI agent.
 One sentence to Claude → digital week planned, posted, scheduled, tracked — without touching a browser.
 
 **By end of 2026:**
-- 10 tools (9 shipped + missionctl umbrella)
-- 60+ MCP tools
-- Homebrew tap
-- 100+ paying users
+- [x] 10 tools (9 shipped + missionctl umbrella)
+- [x] 60+ MCP tools (67 live)
+- [ ] Homebrew tap
+- [ ] 100+ paying users

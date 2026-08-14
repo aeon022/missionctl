@@ -10,6 +10,7 @@ const mcpTools = [
   { name: "sync_notes", desc: "Sync the configured source(s) into the local cache — one or several at once" },
   { name: "get_daily_note", desc: "Get today's daily note, created from template if missing" },
   { name: "append_daily_note", desc: "Append content to today's daily note under a named section" },
+  { name: "delete_note", desc: "Delete a note by title — refuses to guess if the title isn't unique, so you can pass a folder to disambiguate" },
 ];
 const features = [
   { title: "Obsidian Vault Support", title_de: "Obsidian-Vault-Unterstützung", desc: "Works directly with your existing Obsidian vault. No migration, no sync conflicts — reads and writes standard Markdown files.", desc_de: "Funktioniert direkt mit deinem bestehenden Obsidian-Vault. Keine Migration, keine Sync-Konflikte — liest und schreibt Standard-Markdown-Dateien." },
@@ -27,7 +28,7 @@ const features = [
 
 <Layout
   title="notectl — Notes from your Terminal"
-  description="notectl — notes from your terminal via Obsidian, Apple Notes, or Joplin, daily notes included. 7 MCP tools for Claude Desktop. Works on macOS and Linux."
+  description="notectl — notes from your terminal via Obsidian, Apple Notes, or Joplin, daily notes included. 8 MCP tools for Claude Desktop. Works on macOS and Linux."
   type="software"
   appName="notectl"
 >
@@ -42,7 +43,7 @@ const features = [
           <span style="font-family: 'JetBrains Mono', monospace; color: #a78bfa;">notectl</span>
         </h1>
         <p style="font-size: 1.25rem; font-weight: 600; color: var(--color-terminal-text); margin: 0 0 0.75rem;"><span class="lang-en">Notes from your Terminal</span><span class="lang-de">Notizen aus deinem Terminal</span></p>
-        <p style="color: var(--color-terminal-dim); font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Notes and daily notes via MCP — Obsidian, Apple Notes, or Joplin, synced individually or together. Works on macOS and Linux. 7 MCP tools for AI-powered note-taking.</span><span class="lang-de">Notizen und Daily Notes über MCP — Obsidian, Apple Notizen oder Joplin, einzeln oder gemeinsam gesynct. Läuft unter macOS und Linux. 7 MCP-Tools für KI-gestütztes Notieren.</span></p>
+        <p style="color: var(--color-terminal-dim); font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Notes and daily notes via MCP — Obsidian, Apple Notes, or Joplin, synced individually or together. Works on macOS and Linux. 8 MCP tools for AI-powered note-taking.</span><span class="lang-de">Notizen und Daily Notes über MCP — Obsidian, Apple Notizen oder Joplin, einzeln oder gemeinsam gesynct. Läuft unter macOS und Linux. 8 MCP-Tools für KI-gestütztes Notieren.</span></p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://github.com/aeon022/notectl/releases/latest" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #a78bfa; color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"

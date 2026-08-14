@@ -75,6 +75,14 @@ const isAppPage = apps.some(a => a.href === currentPath);
         <span class="lang-en">docs</span><span class="lang-de">doku</span>
       </a>
 
+      <!-- Changelog link -->
+      <a
+        href="/changelog"
+        class={`nav-link${currentPath.startsWith('/changelog') ? ' nav-link--active' : ''}`}
+      >
+        <span class="lang-en">changelog</span><span class="lang-de">changelog</span>
+      </a>
+
     </div>
 
     <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -128,6 +136,7 @@ const isAppPage = apps.some(a => a.href === currentPath);
   <div class="mobile-menu-panel" id="mobile-menu-panel" role="menu">
     <a href="/" class={`mobile-menu-link${currentPath === '/' ? ' mobile-menu-link--active' : ''}`} role="menuitem"><span class="lang-en">home</span><span class="lang-de">start</span></a>
     <a href="/docs" class={`mobile-menu-link${currentPath.startsWith('/docs') ? ' mobile-menu-link--active' : ''}`} role="menuitem"><span class="lang-en">docs</span><span class="lang-de">doku</span></a>
+    <a href="/changelog" class={`mobile-menu-link${currentPath.startsWith('/changelog') ? ' mobile-menu-link--active' : ''}`} role="menuitem"><span class="lang-en">changelog</span><span class="lang-de">changelog</span></a>
     <button id="lang-toggle-mobile" class="mobile-menu-link" role="menuitem" type="button" style="background:none;border:none;text-align:left;cursor:pointer;width:100%;">
       <span class="lang-en">Deutsch</span><span class="lang-de">English</span>
     </button>

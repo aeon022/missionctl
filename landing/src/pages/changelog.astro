@@ -1,0 +1,157 @@
+---
+import Layout from '../components/Layout.astro';
+
+type Entry = {
+  tool: string;
+  color: string;
+  en: string;
+  de: string;
+};
+
+type Group = {
+  date: string;
+  entries: Entry[];
+};
+
+const groups: Group[] = [
+  {
+    date: '2026-08-14',
+    entries: [
+      {
+        tool: 'habctl', color: '#84cc16',
+        en: '<code>habctl add &lt;N&gt;</code> — add a suggested habit by number instead of retyping emoji-heavy titles',
+        de: '<code>habctl add &lt;N&gt;</code> — einen vorgeschlagenen Habit per Nummer hinzufügen, statt emoji-lastige Titel abzutippen',
+      },
+      {
+        tool: 'missionctl', color: '#00d97e',
+        en: '<code>missionctl doctor</code> now reports real daemon status (running / crashed / idle), not just "loaded"',
+        de: '<code>missionctl doctor</code> zeigt jetzt den echten Daemon-Status (läuft / abgestürzt / wartend), nicht nur "geladen"',
+      },
+    ],
+  },
+  {
+    date: '2026-08-13',
+    entries: [
+      {
+        tool: 'notectl', color: '#a78bfa',
+        en: 'New <code>delete_note</code> MCP tool (8 tools total)',
+        de: 'Neues <code>delete_note</code> MCP-Tool (8 Tools insgesamt)',
+      },
+      {
+        tool: 'notectl', color: '#a78bfa',
+        en: 'Notebook navigation redesigned: explicit expand/collapse, dedicated account line, fixed-width tabs',
+        de: 'Notizbuch-Navigation neu gestaltet: explizites Ein-/Ausklappen, eigene Account-Zeile, feste Tab-Breite',
+      },
+      {
+        tool: 'notectl', color: '#a78bfa',
+        en: 'Fixed a bug where landing on certain tabs could collapse the whole notebook tree',
+        de: 'Bug behoben, bei dem bestimmte Tabs das ganze Notizbuch-Baumdiagramm kollabieren ließen',
+      },
+    ],
+  },
+  {
+    date: '2026-08-12',
+    entries: [
+      {
+        tool: 'diaryctl / timectl', color: '#fb923c',
+        en: 'Fixed the MCP server holding its database lock for its entire lifetime, which could block the CLI',
+        de: 'Bug behoben: der MCP-Server hielt seinen Datenbank-Lock über die gesamte Laufzeit und blockierte dadurch die CLI',
+      },
+      {
+        tool: 'mailctl', color: '#00d97e',
+        en: 'Faster inbox sync — bounded message access, lower default count',
+        de: 'Schnellerer Inbox-Sync — begrenzter Nachrichtenzugriff, niedrigere Standardanzahl',
+      },
+    ],
+  },
+  {
+    date: '2026-08-07',
+    entries: [
+      {
+        tool: 'postctl', color: '#ec4899',
+        en: 'Fixed a license-status caching edge case around rate-limited validation calls',
+        de: 'Randfall im License-Status-Cache behoben, der bei ratenbegrenzten Validierungs-Aufrufen auftrat',
+      },
+    ],
+  },
+  {
+    date: '2026-08-06',
+    entries: [
+      {
+        tool: 'taskctl', color: '#f59e0b',
+        en: 'Fixed a bug where deleting a task could silently fail to remove the underlying reminder',
+        de: 'Bug behoben, bei dem das Löschen eines Tasks die zugehörige Erinnerung stillschweigend nicht entfernte',
+      },
+    ],
+  },
+  {
+    date: '2026-08-05',
+    entries: [
+      {
+        tool: 'suite-wide', color: '#22d3ee',
+        en: 'Local AI via Ollama rolled out across the suite — every tool can now run entirely on a local model (e.g. Mistral) instead of a cloud API key, with a per-tool model override',
+        de: 'Lokale KI via Ollama in der ganzen Suite ausgerollt — jedes Tool kann jetzt komplett mit einem lokalen Modell (z.B. Mistral) statt einem Cloud-API-Key laufen, mit Modell-Override pro Tool',
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Changelog — missionctl"
+  description="What shipped recently across the missionctl suite: mailctl, calctl, taskctl, notectl, budgetctl, postctl, diaryctl, timectl, habctl."
+>
+  <article style="max-width: 760px; margin: 0 auto; padding: 5rem 1.5rem;">
+    <header style="margin-bottom: 3rem;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--color-terminal-green); margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+        <span class="lang-en">Changelog</span><span class="lang-de">Changelog</span>
+      </div>
+      <h1 style="font-size: 2rem; font-weight: 900; color: var(--color-terminal-text); margin: 0 0 1rem; letter-spacing: -0.02em;">
+        <span class="lang-en">What shipped recently</span><span class="lang-de">Was zuletzt geshippt wurde</span>
+      </h1>
+      <p style="color: var(--color-terminal-muted); font-size: 0.95rem; max-width: 560px;">
+        <span class="lang-en">A running log of fixes and features across all missionctl tools, newest first. For the full roadmap of what's planned next, see the project's public <a href="https://github.com/aeon022/missionctl" target="_blank" rel="noopener" style="color: var(--color-terminal-green); text-decoration: none;">GitHub repo</a>.</span>
+        <span class="lang-de">Ein laufendes Log aus Fixes und Features über alle missionctl-Tools hinweg, neueste zuerst. Für die volle Roadmap siehe das öffentliche <a href="https://github.com/aeon022/missionctl" target="_blank" rel="noopener" style="color: var(--color-terminal-green); text-decoration: none;">GitHub-Repo</a>.</span>
+      </p>
+    </header>
+
+    <div style="display: flex; flex-direction: column; gap: 2.5rem;">
+      {groups.map(group => (
+        <section>
+          <h2 style="font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; font-weight: 700; color: var(--color-terminal-muted); margin: 0 0 1rem; letter-spacing: 0.04em;">
+            {group.date}
+          </h2>
+          <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+            {group.entries.map(entry => (
+              <div style="display: flex; gap: 0.75rem; align-items: flex-start; background: var(--color-terminal-surface); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1rem 1.1rem;">
+                <span style={`flex-shrink: 0; margin-top: 0.3rem; font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; white-space: nowrap; color: ${entry.color}; background: color-mix(in srgb, ${entry.color} 12%, transparent); border: 1px solid color-mix(in srgb, ${entry.color} 25%, transparent);`}>
+                  {entry.tool}
+                </span>
+                <p style="margin: 0; color: var(--color-terminal-code-text); line-height: 1.6; font-size: 0.9rem;">
+                  <span class="lang-en" set:html={entry.en} />
+                  <span class="lang-de" set:html={entry.de} />
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      ))}
+    </div>
+
+    <p style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-terminal-border); color: var(--color-terminal-muted); font-size: 0.85rem;">
+      <span class="lang-en">Missing something you'd expect? Reach out at <a href="mailto:contact@missionctl.sh" style="color: var(--color-terminal-green); text-decoration: none;">contact@missionctl.sh</a>.</span>
+      <span class="lang-de">Fehlt dir etwas, das du erwartet hättest? Melde dich unter <a href="mailto:contact@missionctl.sh" style="color: var(--color-terminal-green); text-decoration: none;">contact@missionctl.sh</a>.</span>
+    </p>
+  </article>
+</Layout>
+
+<style>
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85em;
+    background: var(--color-terminal-bg);
+    border: 1px solid var(--color-terminal-border);
+    border-radius: 4px;
+    padding: 0.1em 0.4em;
+  }
+</style>
