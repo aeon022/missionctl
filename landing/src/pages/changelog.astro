@@ -27,6 +27,21 @@ const groups: Group[] = [
         en: 'mailctl, calctl, taskctl, budgetctl, timectl, diaryctl: preventive fix for the same rendering issue found in notectl — a status bar could very rarely overflow its width as a sync timestamp or counter changed, with no resize involved',
         de: 'mailctl, calctl, taskctl, budgetctl, timectl, diaryctl: vorbeugender Fix für dasselbe Rendering-Problem wie bei notectl — eine Statusleiste konnte in seltenen Fällen ihre Breite überschreiten, wenn sich ein Sync-Zeitstempel oder Zähler änderte, ganz ohne Fenstergrößenänderung',
       },
+      {
+        tool: 'mailctl', color: '#00d97e',
+        en: 'Same rendering engine upgrade as notectl (bubbletea v2), plus a specific fix: long, multi-paragraph HTML emails could break the detail view\'s scrollbar partway down the message. Root cause was Apple Mail\'s HTML-to-text conversion leaving invisible line-break characters in the body — not a terminal or font issue, so no amount of column-width tweaking had fixed it before.',
+        de: 'Gleiches Rendering-Engine-Upgrade wie bei notectl (bubbletea v2), dazu ein konkreter Fix: lange, mehrabsätzige HTML-Mails konnten die Scrollbar in der Detailansicht ab einer bestimmten Stelle im Text zerreißen. Ursache waren unsichtbare Zeilenumbruch-Zeichen, die Apple Mails HTML-zu-Text-Konvertierung im Text hinterlässt — kein Terminal- oder Font-Problem, weshalb bisherige Versuche mit Spaltenbreiten-Korrekturen nichts gebracht hatten.',
+      },
+      {
+        tool: 'mailctl', color: '#00d97e',
+        en: '<code>mailctl search --live</code> now actually works — it previously failed with a syntax error on every single call (Mail.app has no scriptable "search" command). Live search now matches by subject, typically in 6-7 seconds.',
+        de: '<code>mailctl search --live</code> funktioniert jetzt tatsächlich — vorher schlug es bei jedem Aufruf mit einem Syntaxfehler fehl (Mail.app hat gar keinen scriptbaren "search"-Befehl). Die Live-Suche matcht jetzt nach Betreff, typischerweise in 6-7 Sekunden.',
+      },
+      {
+        tool: 'timectl', color: '#fb923c',
+        en: '<code>timectl start --notes</code> now actually attaches the note — the flag was accepted but silently dropped before',
+        de: '<code>timectl start --notes</code> hängt die Notiz jetzt tatsächlich an — das Flag wurde zuvor akzeptiert, aber stillschweigend verworfen',
+      },
     ],
   },
   {
