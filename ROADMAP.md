@@ -203,13 +203,18 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   `renderList()` (`listStartRow()`), damit ein Klick immer auf die Zeile trifft,
   die visuell darunter liegt — gegen den echten Render-Output verifiziert, nicht
   nur isoliert getestet.
-- [ ] Mehrere Themes zur Auswahl (wie btop/starship) — aktuell nur EINE feste Palette
-  in `missionctl-core/theme`. Idee: benannte Presets (Default, Dracula, Nord,
-  Gruvbox, Solarized, …) + `~/.config/missionctl/theme.yaml` mit `name:`-Feld,
-  optional eigene Farb-Overrides. Jetzt entsperrt, da `theme` bereits in 7
-  Tools adoptiert ist (siehe "Schnell") — ein Preset-Wechsel würde automatisch
-  überall greifen.
-- [ ] Mehrstufiges Undo statt Einzel-Undo (aktuell nur taskctl mit `u`)
+- [~] Mehrere Themes zur Auswahl (wie btop/starship) — Stand 2026-08-21: `theme.yaml`
+  (`missionctl-core/theme/config.go`) erlaubt bereits Farbe-für-Farbe-Overrides
+  (`blue:`, `green:`, …), aber keine benannten Presets — kein `name:`-Feld, keine
+  Auswahl zwischen Dracula/Nord/Gruvbox/Solarized. `theme/v2.go` ist KEIN zweites
+  Theme, nur ein interner API-Spiegel für lipgloss-v2-Konsumenten (mailctl, notectl),
+  dieselben Farbwerte. Bleibt eine feste Palette, jetzt mit Overrides statt fixen
+  Literalen.
+- [~] Mehrstufiges Undo statt Einzel-Undo — Stand 2026-08-21: Einzel-Undo (5s-Fenster,
+  nur Delete) ist inzwischen in 7 von 8 Tools (calctl, taskctl, notectl, budgetctl,
+  habctl, timectl, diaryctl — nicht mehr nur taskctl, Roadmap-Text war hier
+  veraltet), aber überall weiterhin EIN Schritt zurück, keine Historie. Nur mailctl
+  hat noch kein Undo. Mehrstufig ist nirgends umgesetzt.
 
 ---
 
@@ -253,7 +258,10 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
 - [x] Apple Calendar read via EventKit
 - [x] `calctl list --today --json`
 - [x] `calctl import event.md` — create event from Markdown frontmatter
-- [ ] `calctl free --next 7d --json` — Tests für free-slot-Logik noch offen
+- [x] `calctl free --next 7d --json` — war bei Prüfung 2026-08-21 bereits fertig:
+  `--next` (Tage) existiert, `internal/calendar/free_test.go` hat 5 dedizierte Tests
+  (leerer Tag, Lücken, Mindestdauer-Filter, Ganztags-Termine ignoriert,
+  Überlappungs-Zusammenfassung) — nur die Doku hier war stehen geblieben.
 
 ### v0.5 — Google Calendar (Q4 2026)
 - [ ] Google Calendar OAuth2 integration
@@ -263,9 +271,17 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
 
 ### v1.0 — MCP + AI Scheduling (Q1 2027)
 - [x] `calctl mcp` — MCP server
-- [ ] Natural language scheduling via MCP
-- [ ] Recurring event support
-- [ ] Time zone awareness
+- [ ] Natural language scheduling via MCP — `dateutil.ParseDateArg` (CLI und MCP
+  identisch) akzeptiert nur strikt `YYYY-MM-DD`, kein "nächsten Dienstag" o.ä.
+- [x] Recurring event support — war bei Prüfung 2026-08-21 bereits fertig, Ende-zu-Ende
+  verifiziert: `buildCreateScriptIndexed` (`internal/calendar/apple.go`) baut die
+  Recurrence-Zeile aus `--repeat`/`--count`/`--until` und splict sie tatsächlich ins
+  ausgeführte AppleScript ein, wird nicht nur gebaut und verworfen.
+- [~] Time zone awareness — Stand 2026-08-21: `Event.Timezone` wird beim Sync aus
+  EventKit übernommen und gespeichert, aber `StartTime`/`EndTime` laufen überall
+  fest über `time.Local` (kein `--timezone`-Flag bei `add`, keine Umrechnung in
+  Free-Slot-/List-Logik) — reine Metadaten-Erfassung, noch keine echte
+  Zeitzonen-Behandlung.
 
 UI/UX (Suche, Help-Overlay, Empty States) ✅ vorhanden/nachgezogen.
 
@@ -278,7 +294,11 @@ UI/UX (Suche, Help-Overlay, Empty States) ✅ vorhanden/nachgezogen.
 ### v0.1 — Send (Q4 2026)
 - [x] `mailctl send draft.md` — send from Markdown
 - [x] `mailctl draft draft.md` — save to Drafts folder
-- [ ] Template variables: `{{name}}`, `{{date}}` etc.
+- [x] Template variables — war bei Prüfung 2026-08-21 bereits fertig:
+  `internal/markdown/parse.go` baut eine vars-Map (`date`, `year`, plus Frontmatter-
+  Custom-Vars) und expandiert per Go `text/template`. Syntax ist `{{.name}}`
+  (Go-Template, Punkt-Präfix), nicht `{{name}}` wie hier ursprünglich notiert —
+  rein kosmetischer Unterschied zur Roadmap-Formulierung.
 
 ### v0.5 — Read & Context (Q4 2026)
 - [x] `mailctl inbox --unread --json`
@@ -290,8 +310,15 @@ UI/UX (Suche, Help-Overlay, Empty States) ✅ vorhanden/nachgezogen.
 ### v1.0 — MCP (Q1 2027)
 - [x] `mailctl mcp` — MCP server
 - [x] AI workflow: Claude reads inbox → drafts replies → user approves → mailctl sends
-- [ ] Attachment support (local file → attach)
-- [ ] Unsubscribe helper: detect newsletter patterns
+- [x] Attachment support — war bei Prüfung 2026-08-21 bereits fertig:
+  `Draft.Attachments []string` (Frontmatter `attachments:`) baut AppleScript
+  `make new attachment`-Zeilen fürs Senden/Drafts; TUI hat ein eigenes,
+  kommagetrenntes Attach-Feld.
+- [x] Unsubscribe helper — war bei Prüfung 2026-08-21 bereits fertig, aber enger als
+  hier formuliert: `findUnsubscribeURL` erkennt "unsubscribe" + einen nahen
+  `https://`-Link in der GEÖFFNETEN Nachricht (`U`-Taste in der Detailansicht) —
+  Einzel-Nachricht, Einzel-URL. Kein Cross-Inbox-"Newsletter-Pattern"-Scan
+  (keine Absender-/Frequenz-Heuristik, kein Bulk-Scan über die ganze Inbox).
 
 UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
 
@@ -316,9 +343,15 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
 
 ### v1.0 — MCP + AI Analysis (Q2 2027)
 - [x] `budgetctl mcp` — MCP server, 66 Tools
-- [ ] AI workflow: export → Claude analyzes → suggests cuts → user approves
-- [ ] Year-end tax report export (CSV/PDF)
-- [ ] Recurring payment detection
+- [ ] AI workflow: export → Claude analyzes → suggests cuts → user approves — nur
+  Kategorisierung existiert (`internal/budget/ai_categorize.go`), keine
+  Spending-Analyse/Kürzungsvorschläge
+- [ ] Year-end tax report export (CSV/PDF) — `cmd/export.go` exportiert rohe
+  Transaktionen als CSV/JSON (`--year`-Filter), kein Steuer-Report
+  (Jahres-Summen pro Kategorie), keine PDF-Erzeugung
+- [x] Recurring payment detection — war bei Prüfung 2026-08-21 bereits fertig:
+  `internal/budget/recurring.go`, `cmd/recurring.go`, MCP-Tool
+  `detect_recurring_payments`
 
 ### v1.1 — Import-Assistent & Mehrkonten (Q3 2026)
 - [x] In-TUI CSV-Import-Assistent (`i`): Filepicker → Vorschau (Datumsbereich,
@@ -454,14 +487,23 @@ UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown, Detail-Popup) ✅ vorha
 
 ### v0.5 — Apple Notes (Q1 2027)
 - [x] Apple Notes read/write via AppleScript — Markdown-Round-Trip, Editor-Preview + Mouse
-- [ ] `notectl sync` — sync between Obsidian and Apple Notes
-- [ ] Tag support, folder organization
+- [x] `notectl sync` — war bei Prüfung 2026-08-21 bereits fertig, echte bidirektionale
+  Synchronisierung: bei aktiviertem `mirror_apple_obsidian` diffed `internal/mirror`
+  beide Seiten gegen eine persistierte Link-Tabelle und pusht Creates/Updates zur
+  jeweils veralteten Seite; Deletes werden über `--apply-deletes` angewendet.
+- [~] Tag support, folder organization — Stand 2026-08-21: Ordner-Organisation ist
+  fertig (`--folder`/`-f` bei `write`, `--folder`-Filter bei `list`), aber Tags
+  nicht — `Note.Tags []string` existiert im Modell, ist aber nirgends in CLI/TUI
+  verdrahtet (kein `--tag`-Filter, keine Tag-Suche).
 
 ### v1.0 — MCP (Q2 2027)
 - [x] `notectl mcp` — MCP server
 - [ ] AI workflow: Claude writes meeting notes → notectl saves to vault → linked to calendar event
 - [ ] Bear Notes support
-- [ ] Daily note template automation
+- [x] Daily note template automation — war bei Prüfung 2026-08-21 bereits fertig:
+  `notectl daily` erstellt die heutige Notiz aus einem festen Template
+  (Focus/Tasks/Notes/Log), Tag `daily`, `--folder`/`--open`-Flags, nutzt eine
+  vorhandene Notiz wieder statt zu duplizieren.
 
 ---
 
