@@ -15,6 +15,21 @@ type Group = {
 
 const groups: Group[] = [
   {
+    date: '2026-08-21',
+    entries: [
+      {
+        tool: 'notectl', color: '#a78bfa',
+        en: 'Fixed a serious bug where the terminal UI could show duplicated or stuck content — headers/tabs lingering, footers overlapping — especially with a lot of mouse movement or right after a sync. Rebuilt on a newer, more robust rendering engine.',
+        de: 'Ernsten Bug behoben, bei dem die Terminal-Oberfläche doppelten oder hängengebliebenen Inhalt zeigen konnte — Header/Tabs blieben stehen, Fußzeilen überlappten — besonders bei viel Mausbewegung oder direkt nach einem Sync. Auf eine neuere, robustere Rendering-Engine umgestellt.',
+      },
+      {
+        tool: 'suite-wide', color: '#22d3ee',
+        en: 'mailctl, calctl, taskctl, budgetctl, timectl, diaryctl: preventive fix for the same rendering issue found in notectl — a status bar could very rarely overflow its width as a sync timestamp or counter changed, with no resize involved',
+        de: 'mailctl, calctl, taskctl, budgetctl, timectl, diaryctl: vorbeugender Fix für dasselbe Rendering-Problem wie bei notectl — eine Statusleiste konnte in seltenen Fällen ihre Breite überschreiten, wenn sich ein Sync-Zeitstempel oder Zähler änderte, ganz ohne Fenstergrößenänderung',
+      },
+    ],
+  },
+  {
     date: '2026-08-14',
     entries: [
       {
