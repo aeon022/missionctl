@@ -203,13 +203,12 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
   `renderList()` (`listStartRow()`), damit ein Klick immer auf die Zeile trifft,
   die visuell darunter liegt — gegen den echten Render-Output verifiziert, nicht
   nur isoliert getestet.
-- [~] Mehrere Themes zur Auswahl (wie btop/starship) — Stand 2026-08-21: `theme.yaml`
-  (`missionctl-core/theme/config.go`) erlaubt bereits Farbe-für-Farbe-Overrides
-  (`blue:`, `green:`, …), aber keine benannten Presets — kein `name:`-Feld, keine
-  Auswahl zwischen Dracula/Nord/Gruvbox/Solarized. `theme/v2.go` ist KEIN zweites
-  Theme, nur ein interner API-Spiegel für lipgloss-v2-Konsumenten (mailctl, notectl),
-  dieselben Farbwerte. Bleibt eine feste Palette, jetzt mit Overrides statt fixen
-  Literalen.
+- [x] Mehrere Themes zur Auswahl (wie btop/starship) — umgesetzt 2026-08-22:
+  `theme.yaml` unterstützt jetzt `preset: <name>` (catppuccin, dracula, gruvbox,
+  nord, one-dark, solarized, tokyo-night — die 7 YAMLs aus `themes/` in
+  missionctl-core eingebettet), Auflösung defaults → Preset → Farbe-für-Farbe-
+  Override (Override gewinnt immer). Automatisch in allen 7 Tools mit
+  `missionctl-core/theme` wirksam, kein Tool-seitiger Code nötig.
 - [~] Mehrstufiges Undo statt Einzel-Undo — Stand 2026-08-21: Einzel-Undo (5s-Fenster,
   nur Delete) ist inzwischen in 7 von 8 Tools (calctl, taskctl, notectl, budgetctl,
   habctl, timectl, diaryctl — nicht mehr nur taskctl, Roadmap-Text war hier
@@ -266,7 +265,11 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
 ### v0.5 — Google Calendar (Q4 2026)
 - [ ] Google Calendar OAuth2 integration
 - [ ] Two-way sync: Apple ↔ Google
-- [ ] `calctl export --week --json`
+- [x] `calctl export --week --json` — umgesetzt 2026-08-22: `calctl export
+  [--week | --from/--to] [--output/-o <pfad>]`, nutzt das bestehende globale
+  `--format human|json` statt ein eigenes zu erfinden. Schreibt in eine Datei
+  statt stdout — das war der eigentliche Mehrwert gegenüber `list`, das schon
+  vorher `--week --format json` konnte.
 - [x] TUI: week view, event creation, quick navigation
 
 ### v1.0 — MCP + AI Scheduling (Q1 2027)
@@ -343,12 +346,18 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
 
 ### v1.0 — MCP + AI Analysis (Q2 2027)
 - [x] `budgetctl mcp` — MCP server, 66 Tools
-- [ ] AI workflow: export → Claude analyzes → suggests cuts → user approves — nur
-  Kategorisierung existiert (`internal/budget/ai_categorize.go`), keine
-  Spending-Analyse/Kürzungsvorschläge
-- [ ] Year-end tax report export (CSV/PDF) — `cmd/export.go` exportiert rohe
-  Transaktionen als CSV/JSON (`--year`-Filter), kein Steuer-Report
-  (Jahres-Summen pro Kategorie), keine PDF-Erzeugung
+- [~] AI workflow: export → Claude analyzes → suggests cuts → user approves —
+  Stand 2026-08-22: kein dedizierter Code, aber schon heute vollständig über
+  bestehende MCP-Tools machbar (`budget_summary` für Kategorie-Aufschlüsselung,
+  `set_budget_goal` fürs Umsetzen genehmigter Kürzungen) — braucht keine neue
+  "AI-Orchestrierung", nur eine Chat-Session mit Claude, die diese Tools nutzt.
+  Bleibt offen als eigener Punkt nur falls ein dediziertes CLI-Kommando
+  (`budgetctl suggest-cuts`) gewünscht ist statt Chat-getrieben.
+- [x] Year-end tax report export — umgesetzt 2026-08-22: `budgetctl export --summary`
+  (mit `--year`, `--format csv|json`, `--output`) aggregiert auf Kategorie-Summen
+  (Betrag + Anzahl), sortiert. PDF bewusst ausgelassen (keine PDF-Dependency im
+  Repo, kein Mehrwert für ein paar Zeilen Code) — `// ponytail:`-Kommentar im
+  Code markiert das als Nachrüst-Option, falls je gebraucht.
 - [x] Recurring payment detection — war bei Prüfung 2026-08-21 bereits fertig:
   `internal/budget/recurring.go`, `cmd/recurring.go`, MCP-Tool
   `detect_recurring_payments`
@@ -491,14 +500,22 @@ UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown, Detail-Popup) ✅ vorha
   Synchronisierung: bei aktiviertem `mirror_apple_obsidian` diffed `internal/mirror`
   beide Seiten gegen eine persistierte Link-Tabelle und pusht Creates/Updates zur
   jeweils veralteten Seite; Deletes werden über `--apply-deletes` angewendet.
-- [~] Tag support, folder organization — Stand 2026-08-21: Ordner-Organisation ist
-  fertig (`--folder`/`-f` bei `write`, `--folder`-Filter bei `list`), aber Tags
-  nicht — `Note.Tags []string` existiert im Modell, ist aber nirgends in CLI/TUI
-  verdrahtet (kein `--tag`-Filter, keine Tag-Suche).
+- [x] Tag support, folder organization — Tags umgesetzt 2026-08-22 (Ordner-Organisation
+  war schon fertig): `--tag` bei `list`/`search` (exakt, case-insensitive, kein
+  Substring-Leck — `--tag dai` matched nicht "daily"), MCP `list_notes`/`search_notes`
+  bekamen denselben `tag`-Parameter. TUI-Filter bewusst ausgelassen — Tags würden
+  keinen kleinen Hook in die bestehende Ordner-Tab-UI/Fuzzy-Filter-Infrastruktur finden.
 
 ### v1.0 — MCP (Q2 2027)
 - [x] `notectl mcp` — MCP server
-- [ ] AI workflow: Claude writes meeting notes → notectl saves to vault → linked to calendar event
+- [x] AI workflow: Claude writes meeting notes → notectl saves to vault → linked to
+  calendar event — umgesetzt 2026-08-22: `Note.EventID` (Frontmatter `event_id`),
+  `notectl write --event-id <id>`, `notectl list --event <id>` (exakter,
+  case-sensitiver Match, kein Case-Folding wie bei Tags — ist eine opake ID, kein
+  getipptes Wort), MCP `write_note`/`list_notes` bekamen denselben Parameter. Reine
+  Speicher-/Filter-Plumbing — die "AI"-Seite läuft schon heute über eine
+  Chat-Session, die calctls `create_event` + notectls `write_note` kombiniert,
+  keine neue Orchestrierung nötig.
 - [ ] Bear Notes support
 - [x] Daily note template automation — war bei Prüfung 2026-08-21 bereits fertig:
   `notectl daily` erstellt die heutige Notiz aus einem festen Template
@@ -526,7 +543,11 @@ UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown, Detail-Popup) ✅ vorha
 
 ### v1.0 — MCP (Q2 2027)
 - [x] `taskctl mcp` — MCP server
-- [ ] AI workflow: Claude reviews your week → creates follow-up tasks → assigns due dates
+- [~] AI workflow: Claude reviews your week → creates follow-up tasks → assigns
+  due dates — Stand 2026-08-22: kein dedizierter Code, aber schon heute vollständig
+  über bestehende MCP-Tools machbar (`week_tasks` zum Review, `create_task` inkl.
+  Fälligkeitsdatum fürs Anlegen) — braucht keine neue "AI-Orchestrierung", nur eine
+  Chat-Session mit Claude, die diese Tools nutzt.
 - [ ] Project grouping, dependencies
 - [ ] Integration with calctl: task with due date → calendar block
 
