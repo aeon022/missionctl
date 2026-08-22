@@ -15,6 +15,41 @@ type Group = {
 
 const groups: Group[] = [
   {
+    date: '2026-08-22',
+    entries: [
+      {
+        tool: 'suite-wide', color: '#22d3ee',
+        en: 'Named theme presets — set <code>preset: dracula</code> (or catppuccin, gruvbox, nord, one-dark, solarized, tokyo-night) in <code>~/.config/missionctl/theme.yaml</code>. Applies automatically to every tool sharing the suite palette; your own per-color overrides still win on top.',
+        de: 'Benannte Theme-Presets — <code>preset: dracula</code> (oder catppuccin, gruvbox, nord, one-dark, solarized, tokyo-night) in <code>~/.config/missionctl/theme.yaml</code> setzen. Greift automatisch in jedem Tool mit der gemeinsamen Palette; eigene Farb-Overrides gewinnen weiterhin darüber.',
+      },
+      {
+        tool: 'budgetctl', color: '#10b981',
+        en: '<code>budgetctl suggest-cuts</code> — AI reviews this month\'s category spend against your trailing 3-month average and suggests up to 5 budget cuts; approve each one individually before it sets a real goal. missionctl Bundle feature.',
+        de: '<code>budgetctl suggest-cuts</code> — KI vergleicht die Kategorie-Ausgaben dieses Monats mit dem 3-Monats-Schnitt und schlägt bis zu 5 Kürzungen vor; jede einzeln zu bestätigen, bevor ein echtes Ziel gesetzt wird. missionctl-Bundle-Feature.',
+      },
+      {
+        tool: 'budgetctl', color: '#10b981',
+        en: '<code>budgetctl export --summary</code> — year-end category totals for tax filing, instead of a raw transaction dump',
+        de: '<code>budgetctl export --summary</code> — Kategorie-Jahressummen für die Steuererklärung, statt eines rohen Transaktions-Exports',
+      },
+      {
+        tool: 'taskctl', color: '#f59e0b',
+        en: '<code>taskctl review</code> — AI reviews this week\'s completed and pending tasks and suggests follow-ups with concrete due dates; approve each one before it creates anything',
+        de: '<code>taskctl review</code> — KI schaut sich diese Woche erledigte und offene Tasks an und schlägt Folge-Tasks mit konkretem Fälligkeitsdatum vor; jeder wird einzeln bestätigt, bevor er angelegt wird',
+      },
+      {
+        tool: 'calctl', color: '#6366f1',
+        en: '<code>calctl export</code> — write a week or date range of events to a file (<code>--output</code>), instead of only printing to the terminal',
+        de: '<code>calctl export</code> — einen Wochen- oder Datumsbereich an Terminen in eine Datei schreiben (<code>--output</code>), statt nur ins Terminal zu drucken',
+      },
+      {
+        tool: 'notectl', color: '#a78bfa',
+        en: '<code>--tag</code> filter on <code>list</code>/<code>search</code>, and a new <code>--event-id</code> on <code>write</code> to link a note to a calctl calendar event (find it back with <code>list --event &lt;id&gt;</code>)',
+        de: '<code>--tag</code>-Filter bei <code>list</code>/<code>search</code>, und ein neues <code>--event-id</code> bei <code>write</code>, um eine Notiz mit einem calctl-Termin zu verknüpfen (wiederfinden mit <code>list --event &lt;id&gt;</code>)',
+      },
+    ],
+  },
+  {
     date: '2026-08-21',
     entries: [
       {

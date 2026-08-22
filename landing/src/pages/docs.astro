@@ -514,6 +514,7 @@ calctl sync --days 90 # sync 90 days`}</code></pre>
 calctl list --from 2026-07-01       # events from date
 calctl add "Team sync" --time 14:00 # create event
 calctl free --from today --to +7d   # find free slots
+calctl export --week -o week.json   # write a range's events to a file
 calctl sync                         # sync calendar
 calctl summarize --event-title "Standup"   # AI meeting summary — missionctl Bundle
 calctl license activate <key>       # activate missionctl Bundle
@@ -576,6 +577,7 @@ taskctl today                        # today's tasks
 taskctl week                         # this week's tasks
 taskctl add "Review PR" --due today  # create task
 taskctl done <id>                    # mark complete
+taskctl review                       # AI reviews this week, suggests follow-ups (approve each)
 taskctl lists                        # list reminder lists
 taskctl daemon                       # background daemon
 taskctl mcp                          # start MCP server`}</code></pre>
@@ -645,9 +647,13 @@ joplin_token: <token from Joplin's Web Clipper settings>`}</code></pre>
 
       <h3><span class="lang-en">CLI commands</span><span class="lang-de">CLI-Befehle</span></h3>
       <pre><code>{`notectl list                    # list notes
+notectl list --tag work         # notes tagged "work"
+notectl list --event <id>       # notes linked to a calctl event
 notectl read "Note title"       # read a note
 notectl write "New note"        # create/update note
+notectl write "Meeting" --event-id <id>  # link a note to a calctl event
 notectl search "keyword"        # full-text search
+notectl search "keyword" --tag work      # search within a tag
 notectl daily                   # open today's daily note
 notectl license activate <key>  # activate missionctl Bundle
 notectl license status          # check license status
@@ -729,11 +735,13 @@ budgetctl goal set --category food --limit 400
 budgetctl goal list                 # show goals + progress
 budgetctl goal delete --category food
 budgetctl recurring                 # detect recurring payments — missionctl Bundle
+budgetctl suggest-cuts              # AI suggests budget cuts, approve each — missionctl Bundle
 budgetctl export --format csv       # export data
+budgetctl export --summary --year 2026   # year-end category totals (tax report)
 budgetctl license activate <key>    # activate missionctl Bundle
 budgetctl license status            # check license status
 budgetctl mcp                       # start MCP server`}</code></pre>
-      <p><span class="lang-en">See <a href="#licensing" style="color:var(--color-terminal-green);">Licensing</a> above — everything except <code>--ai</code> and <code>recurring</code> is free.</span><span class="lang-de">Siehe <a href="#licensing" style="color:var(--color-terminal-green);">Lizenzierung</a> oben — alles außer <code>--ai</code> und <code>recurring</code> ist kostenlos.</span></p>
+      <p><span class="lang-en">See <a href="#licensing" style="color:var(--color-terminal-green);">Licensing</a> above — everything except <code>--ai</code>, <code>recurring</code>, and <code>suggest-cuts</code> is free.</span><span class="lang-de">Siehe <a href="#licensing" style="color:var(--color-terminal-green);">Lizenzierung</a> oben — alles außer <code>--ai</code>, <code>recurring</code> und <code>suggest-cuts</code> ist kostenlos.</span></p>
 
       <h3><span class="lang-en">Profiles</span><span class="lang-de">Profile</span></h3>
       <p>
