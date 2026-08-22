@@ -346,13 +346,16 @@ UI/UX (Suche, Help, Confirm, Sync-Spinner) ✅ vorhanden.
 
 ### v1.0 — MCP + AI Analysis (Q2 2027)
 - [x] `budgetctl mcp` — MCP server, 66 Tools
-- [~] AI workflow: export → Claude analyzes → suggests cuts → user approves —
-  Stand 2026-08-22: kein dedizierter Code, aber schon heute vollständig über
-  bestehende MCP-Tools machbar (`budget_summary` für Kategorie-Aufschlüsselung,
-  `set_budget_goal` fürs Umsetzen genehmigter Kürzungen) — braucht keine neue
-  "AI-Orchestrierung", nur eine Chat-Session mit Claude, die diese Tools nutzt.
-  Bleibt offen als eigener Punkt nur falls ein dediziertes CLI-Kommando
-  (`budgetctl suggest-cuts`) gewünscht ist statt Chat-getrieben.
+- [x] AI workflow: export → Claude analyzes → suggests cuts → user approves —
+  umgesetzt 2026-08-22 als dediziertes CLI-Kommando `budgetctl suggest-cuts
+  [--month YYYY-MM]` (missionctl-Bundle-Feature, wie `category translate`).
+  Holt Kategorie-Ausgaben + 3-Monats-Trend über `Store.Summary`, lässt den
+  konfigurierten AI-Provider (Anthropic/OpenAI/Gemini/lokales Ollama) bis zu 5
+  Kürzungsvorschläge machen, fragt pro Vorschlag interaktiv y/N ab, setzt bei
+  Zustimmung das Goal über `SaveGoal`. Kein `--yes`-Flag — die Genehmigung ist
+  der Punkt des Features. End-to-Ende mit echtem lokalem Ollama gegen echte
+  Transaktionsdaten verifiziert (Ablehnungs- und Zustimmungspfad, danach
+  aufgeräumt).
 - [x] Year-end tax report export — umgesetzt 2026-08-22: `budgetctl export --summary`
   (mit `--year`, `--format csv|json`, `--output`) aggregiert auf Kategorie-Summen
   (Betrag + Anzahl), sortiert. PDF bewusst ausgelassen (keine PDF-Dependency im
@@ -543,11 +546,14 @@ UI/UX (Suche, Help, Delete-Confirm, Kategorie-Breakdown, Detail-Popup) ✅ vorha
 
 ### v1.0 — MCP (Q2 2027)
 - [x] `taskctl mcp` — MCP server
-- [~] AI workflow: Claude reviews your week → creates follow-up tasks → assigns
-  due dates — Stand 2026-08-22: kein dedizierter Code, aber schon heute vollständig
-  über bestehende MCP-Tools machbar (`week_tasks` zum Review, `create_task` inkl.
-  Fälligkeitsdatum fürs Anlegen) — braucht keine neue "AI-Orchestrierung", nur eine
-  Chat-Session mit Claude, die diese Tools nutzt.
+- [x] AI workflow: Claude reviews your week → creates follow-up tasks → assigns
+  due dates — umgesetzt 2026-08-22 als dediziertes CLI-Kommando `taskctl review`.
+  Holt diese Woche erledigte + offene Tasks (`dateutil.WeekRange`), lässt den
+  konfigurierten AI-Provider bis zu 5 Folge-Tasks mit konkretem YYYY-MM-DD-
+  Fälligkeitsdatum + Begründung vorschlagen, fragt pro Vorschlag interaktiv y/N
+  ab, legt bei Zustimmung über `internal/tasks.Create` an. Kein Auto-Approve.
+  End-to-Ende mit echtem lokalem Ollama gegen eine isolierte Test-DB verifiziert
+  (nicht die echte Dropbox-Task-DB).
 - [ ] Project grouping, dependencies
 - [ ] Integration with calctl: task with due date → calendar block
 
