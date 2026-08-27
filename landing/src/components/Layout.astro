@@ -31,12 +31,14 @@ const siteUrl = 'https://missionctl.sh';
 const canonicalURL = canonical ?? new URL(Astro.url.pathname, siteUrl).href;
 
 // SoftwareApplication JSON-LD used to hardcode operatingSystem: 'macOS' for
-// every app — wrong for the 5 apps that also run on Linux (they only bridge
-// Apple frameworks where an app genuinely needs to, e.g. mailctl→Apple Mail).
+// every app — wrong for the apps that also run on Linux (they only bridge
+// Apple frameworks where an app genuinely needs to, e.g. calctl→Calendar).
 // A search/AI engine reading the structured data would report the wrong OS
-// support for those 5. See each app's own hero copy ("macOS + Linux") for
+// support for those. See each app's own hero copy ("macOS + Linux") for
 // the source of truth this table mirrors.
-const macOnlyApps = new Set(['mailctl', 'calctl', 'taskctl']);
+// mailctl gained a Linux backend (Thunderbird, currently in testing) on
+// 2026-08-26 — no longer macOS-only.
+const macOnlyApps = new Set(['calctl', 'taskctl']);
 const operatingSystem = appName && !macOnlyApps.has(appName) ? 'macOS, Linux' : 'macOS';
 
 const organizationLd = {

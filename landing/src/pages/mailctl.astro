@@ -6,15 +6,15 @@ const mcpTools = [
   { name: "inbox", desc: "List recent inbox messages — sender, subject, date, read status, body preview" },
   { name: "search_email", desc: "Search emails by keyword across subject, sender, and body" },
   { name: "email_thread", desc: "Retrieve all messages in a thread, matched by subject" },
-  { name: "send_email", desc: "Send an email via Apple Mail (user confirms before sending)" },
-  { name: "draft_email", desc: "Save an email to Apple Mail Drafts for review before sending" },
-  { name: "sync_inbox", desc: "Sync the inbox from Apple Mail into the local cache" },
+  { name: "send_email", desc: "Send an email via your mail client (user confirms before sending)" },
+  { name: "draft_email", desc: "Save an email to Drafts for review before sending" },
+  { name: "sync_inbox", desc: "Sync the inbox from your mail client into the local cache" },
 ];
 const features = [
   { title: "TUI Inbox", title_de: "TUI-Posteingang", desc: "Full-featured terminal UI for browsing, threading, and managing your inbox. Keyboard-driven, fast, no mouse required.", desc_de: "Vollwertige Terminal-UI zum Durchsuchen, Threaden und Verwalten deines Posteingangs. Tastaturgesteuert, schnell, keine Maus nötig." },
   { title: "Compose & Reply", title_de: "Verfassen & Antworten", desc: "Compose new emails or reply to threads directly from the terminal. Supports template variables for personalization.", desc_de: "Neue E-Mails verfassen oder direkt aus dem Terminal auf Threads antworten. Unterstützt Template-Variablen zur Personalisierung." },
   { title: "AI Draft Reply (Bundle)", title_de: "KI-Antwortentwurf (Bundle)", desc: "Press \"a\" on an open email and get a drafted reply — via Anthropic, OpenAI, a free Gemini key, or a local Ollama model. Unlocks with the missionctl Bundle.", desc_de: "Drücke \"a\" bei einer geöffneten E-Mail und erhalte einen Antwortentwurf — via Anthropic, OpenAI, einem kostenlosen Gemini-Key oder einem lokalen Ollama-Modell. Schaltet mit dem missionctl-Bundle frei." },
-  { title: "Apple Mail Sync", title_de: "Apple-Mail-Sync", desc: "Syncs your Apple Mail inbox to a local SQLite database. All data stays on your machine — no IMAP credentials sent anywhere.", desc_de: "Synchronisiert deinen Apple-Mail-Posteingang in eine lokale SQLite-Datenbank. Alle Daten bleiben auf deinem Rechner — keine IMAP-Zugangsdaten werden irgendwohin gesendet." },
+  { title: "Apple Mail & Thunderbird Sync", title_de: "Apple-Mail- & Thunderbird-Sync", desc: "Syncs your inbox to a local SQLite database — Apple Mail on macOS, Thunderbird on Linux (beta, in testing). All data stays on your machine — no IMAP credentials sent anywhere.", desc_de: "Synchronisiert deinen Posteingang in eine lokale SQLite-Datenbank — Apple Mail unter macOS, Thunderbird unter Linux (Beta, in der Testphase). Alle Daten bleiben auf deinem Rechner — keine IMAP-Zugangsdaten werden irgendwohin gesendet." },
   { title: "MCP Server", title_de: "MCP-Server", desc: "6 MCP tools expose your email to Claude Desktop. AI can read, search, compose, and send — with your approval.", desc_de: "6 MCP-Tools stellen deine E-Mails für Claude Desktop bereit. Die KI kann lesen, suchen, verfassen und senden — mit deiner Zustimmung." },
   { title: "Command Palette", title_de: "Befehlspalette", desc: "Press \":\" and type an action by name — new message, sync, unread filter — instead of memorizing shortcuts. Live-filtered as you type.", desc_de: "Drücke \":\" und tippe eine Aktion nach Namen — neue Nachricht, Sync, Ungelesen-Filter — statt Shortcuts auswendig zu lernen. Filtert live beim Tippen." },
 ];
@@ -31,13 +31,13 @@ const features = [
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
       <div>
         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--color-terminal-green); margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
-          missionctl suite &middot; macOS
+          missionctl suite &middot; macOS &amp; Linux (beta)
         </div>
         <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: var(--color-terminal-text); margin: 0 0 1rem;">
           <span style="font-family: 'JetBrains Mono', monospace; color: var(--color-terminal-green);">mailctl</span>
         </h1>
         <p style="font-size: 1.25rem; font-weight: 600; color: var(--color-terminal-text); margin: 0 0 0.75rem;"><span class="lang-en">Email from your Terminal</span><span class="lang-de">E-Mail aus deinem Terminal</span></p>
-        <p style="color: var(--color-terminal-dim); font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Read, compose, and send email. Syncs your Apple Mail inbox to a local SQLite database. 6 MCP tools for AI-powered email workflows.</span><span class="lang-de">E-Mails lesen, verfassen und senden. Synchronisiert deinen Apple-Mail-Posteingang in eine lokale SQLite-Datenbank. 6 MCP-Tools für KI-gestützte E-Mail-Workflows.</span></p>
+        <p style="color: var(--color-terminal-dim); font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Read, compose, and send email. Syncs your inbox to a local SQLite database — Apple Mail on macOS, Thunderbird on Linux (new, currently in testing). 6 MCP tools for AI-powered email workflows.</span><span class="lang-de">E-Mails lesen, verfassen und senden. Synchronisiert deinen Posteingang in eine lokale SQLite-Datenbank — Apple Mail unter macOS, Thunderbird unter Linux (neu, derzeit in der Testphase). 6 MCP-Tools für KI-gestützte E-Mail-Workflows.</span></p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://github.com/aeon022/mailctl/releases/latest" target="_blank" rel="noopener"
             style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: var(--color-terminal-green); color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
@@ -69,8 +69,21 @@ const features = [
   <span style="color:var(--color-terminal-dim)">  New purchase: missionctl Bundle</span>
 
 <span style="color:var(--color-terminal-muted)">$ </span>mailctl reply --id 1 --body <span style="color:var(--color-terminal-code-text)">"Approved!"</span>
-<span style="color:var(--color-terminal-green)">&#x2713;</span> <span style="color:var(--color-terminal-code-text)">Reply sent via Apple Mail</span><span class="cursor-blink" style="color:var(--color-terminal-green)">&#x2588;</span>`} />
+<span style="color:var(--color-terminal-green)">&#x2713;</span> <span style="color:var(--color-terminal-code-text)">Reply sent</span><span class="cursor-blink" style="color:var(--color-terminal-green)">&#x2588;</span>`} />
       </div>
+    </div>
+  </section>
+
+  <!-- LINUX BETA NOTE -->
+  <section style="padding: 0 1.5rem; max-width: 1100px; margin: 0 auto 3rem;">
+    <div style="background: var(--color-terminal-surface); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start;">
+      <span style="font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: 700; color: var(--color-terminal-green); background: color-mix(in srgb, var(--color-terminal-green) 12%, transparent); border: 1px solid color-mix(in srgb, var(--color-terminal-green) 25%, transparent); border-radius: 4px; padding: 0.15rem 0.5rem; white-space: nowrap; margin-top: 0.15rem;">
+        <span class="lang-en">NEW</span><span class="lang-de">NEU</span>
+      </span>
+      <p style="margin: 0; color: var(--color-terminal-dim); font-size: 0.9rem; line-height: 1.6;">
+        <span class="lang-en"><strong style="color: var(--color-terminal-text);">Linux support via Thunderbird</strong> — reads your default Thunderbird profile's local mbox files, sends via that account's own SMTP server. Currently in testing on real hardware; feedback and bug reports welcome. Known limits for now: mbox format only, inbox only, no attachments on send, and no draft-saving or delete/mark-unread from mailctl (avoids writing into a file Thunderbird may have open). See the <a href="/docs#mailctl" style="color: var(--color-terminal-green); text-decoration: none;">docs</a> for setup.</span>
+        <span class="lang-de"><strong style="color: var(--color-terminal-text);">Linux-Unterstützung via Thunderbird</strong> — liest direkt aus den lokalen mbox-Dateien deines Standard-Thunderbird-Profils, sendet über den eigenen SMTP-Server des Kontos. Derzeit in der Testphase auf echter Hardware; Feedback und Bug-Reports willkommen. Aktuelle Einschränkungen: nur mbox-Format, nur Posteingang, keine Anhänge beim Senden, kein Entwurf-Speichern oder Löschen/Ungelesen-Markieren aus mailctl heraus (vermeidet Schreibzugriffe auf eine Datei, die Thunderbird eventuell offen hält). Setup siehe <a href="/docs#mailctl" style="color: var(--color-terminal-green); text-decoration: none;">Doku</a>.</span>
+      </p>
     </div>
   </section>
 

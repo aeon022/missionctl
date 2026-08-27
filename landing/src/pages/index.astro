@@ -18,8 +18,8 @@ const apps = [
   {
     name: 'mailctl',
     href: '/mailctl',
-    description: 'Read inbox, compose and send email via Apple Mail. AI draft replies with one keystroke.',
-    description_de: 'Posteingang lesen, E-Mails verfassen und senden über Apple Mail. KI-Antwortentwürfe mit einem Tastendruck.',
+    description: 'Read inbox, compose and send email — Apple Mail (macOS) or Thunderbird (Linux, beta). AI draft replies with one keystroke.',
+    description_de: 'Posteingang lesen, E-Mails verfassen und senden — Apple Mail (macOS) oder Thunderbird (Linux, Beta). KI-Antwortentwürfe mit einem Tastendruck.',
     mcpCount: 6,
     features: ['TUI inbox with threading', 'AI draft reply (a-key, Bundle)', 'Full-text search', 'MCP server for AI access'],
     features_de: ['TUI-Posteingang mit Threading', 'KI-Antwortentwurf (a-Taste, Bundle)', 'Volltextsuche', 'MCP-Server für KI-Zugriff'],
@@ -151,9 +151,9 @@ const toolGroups = [
       { name: 'inbox',      desc: 'List recent inbox messages with sender, subject, preview' },
       { name: 'search_email', desc: 'Search by keyword across subject, sender, body' },
       { name: 'email_thread', desc: 'Get all messages in a thread matched by subject' },
-      { name: 'send_email', desc: 'Send an email via Apple Mail' },
-      { name: 'draft_email', desc: 'Save a composed message to Apple Mail Drafts' },
-      { name: 'sync_inbox', desc: 'Sync from Apple Mail into local cache' },
+      { name: 'send_email', desc: 'Send an email via your mail client' },
+      { name: 'draft_email', desc: 'Save a composed message to Drafts' },
+      { name: 'sync_inbox', desc: 'Sync from your mail client into local cache' },
     ],
   },
   {
@@ -287,8 +287,8 @@ const faqs = [
   {
     q_en: 'Does it work on Linux?',
     q_de: 'Funktioniert es unter Linux?',
-    a_en: 'notectl, budgetctl, diaryctl, timectl, and habctl work on macOS and Linux. mailctl, calctl, and taskctl require macOS (they bridge Apple Mail, Calendar, and Reminders).',
-    a_de: 'notectl, budgetctl, diaryctl, timectl und habctl laufen unter macOS und Linux. mailctl, calctl und taskctl benötigen macOS (sie binden Apple Mail, Kalender und Erinnerungen an).',
+    a_en: 'notectl, budgetctl, diaryctl, timectl, and habctl work on macOS and Linux. mailctl now does too, via a Thunderbird backend (currently in testing — see the mailctl page for details). calctl and taskctl still require macOS (they bridge Calendar and Reminders).',
+    a_de: 'notectl, budgetctl, diaryctl, timectl und habctl laufen unter macOS und Linux. mailctl jetzt auch, über eine Thunderbird-Anbindung (derzeit in der Testphase — Details auf der mailctl-Seite). calctl und taskctl benötigen weiterhin macOS (sie binden Kalender und Erinnerungen an).',
   },
   {
     q_en: 'Is my data safe?',

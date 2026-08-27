@@ -15,6 +15,16 @@ type Group = {
 
 const groups: Group[] = [
   {
+    date: '2026-08-26',
+    entries: [
+      {
+        tool: 'mailctl', color: '#00d97e',
+        en: 'New: Linux support via Thunderbird — reads your default Thunderbird profile\'s local mbox files and sends via the account\'s own SMTP server (STARTTLS + password, stored in the OS keyring via the new <code>mailctl account set-password</code> command). Same CLI/TUI/MCP surface as the existing Apple Mail backend. Currently in testing on real hardware — inbox only for now (no other folders), no attachments on send, no draft-saving or delete/mark-unread from mailctl (avoids writing into a Thunderbird mbox file it may have open). Feedback welcome.',
+        de: 'Neu: Linux-Unterstützung via Thunderbird — liest direkt aus den lokalen mbox-Dateien deines Standard-Thunderbird-Profils und sendet über den eigenen SMTP-Server des Kontos (STARTTLS + Passwort, gespeichert im OS-Keyring über den neuen Befehl <code>mailctl account set-password</code>). Gleiche CLI-/TUI-/MCP-Oberfläche wie das bestehende Apple-Mail-Backend. Derzeit auf echter Hardware in der Testphase — vorerst nur Posteingang (keine anderen Ordner), keine Anhänge beim Senden, kein Entwurf-Speichern oder Löschen/Ungelesen-Markieren aus mailctl heraus (vermeidet Schreibzugriffe auf eine Thunderbird-mbox-Datei, die eventuell noch offen ist). Feedback willkommen.',
+      },
+    ],
+  },
+  {
     date: '2026-08-22',
     entries: [
       {
