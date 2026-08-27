@@ -2,6 +2,8 @@
 
 Gedächtnis-Datei für zukünftige Sessions. Alles hier ist verifiziert (live getestet oder per Build/Test bestätigt), nicht nur behauptet — Pfade, Commits und Befehle sind exakt genug, um selbst nachzuprüfen, ob sie noch stimmen.
 
+**Wiederkehrender Fehler, siehe [AGENTS.md](AGENTS.md):** `deploy/landing-src` pushen deployt NICHTS — die Live-Seite hängt an `deploy/landing` (gebauter Output). Immer beide Schritte, nie nur den ersten.
+
 ## Was heute passiert ist (chronologisch, grob)
 
 1. postctl-Kampagne für die Feature-Updates (Command Palette, diaryctl-Facelift) fertig durchgezogen
