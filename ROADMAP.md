@@ -226,10 +226,12 @@ Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` =
 - [x] **Dashboard:** paralleles, nicht blockierendes Laden (vorher 8 Subprozesse nacheinander in
   `Update` → Einfrieren beim Start und alle 30 s), Klick/Doppelklick/Hover auf Karten,
   Reload bei Fenster-Fokus, Hilfe-Popup (`?`), kürzere Fußzeile. `missionctl` `9fba38c`.
-- [ ] **Fokus-Reload in allen Tools** (`View.ReportFocus` + `tea.FocusMsg`): nach dem
-  Zurückwechseln ins Fenster Daten neu laden, statt auf `r` zu warten.
-- [ ] **Clipboard über OSC 52** (`tea.SetClipboard`) zusätzlich zu `pbcopy` — funktioniert auch
-  über SSH/tmux. Betrifft die `y`-Kürzel in taskctl/mailctl/notectl/calctl/habctl/timectl.
+- [x] **Fokus-Reload in allen Tools** (`View.ReportFocus` + `tea.FocusMsg`): nach dem
+  Zurückwechseln ins Fenster Daten neu laden (nur im Browse-Zustand, max. alle 5 s, nie mitten
+  in einer Eingabe). 8 Tools + Dashboard.
+- [x] **Clipboard über OSC 52** (`tea.SetClipboard`) zusätzlich zu `pbcopy` — funktioniert auch
+  über SSH/tmux (taskctl, calctl, mailctl, notectl, habctl, timectl, diaryctl; budgetctl hat
+  keine Kopierfunktion). Ob das Terminal OSC 52 durchlässt, bei der Sichtprüfung testen.
 - [ ] **Gemeinsamer Statusbalken in `missionctl-core`** (Sync-Alter, aktives Profil, Fehler,
   Kurzhinweise) — heute baut jedes Tool das selbst.
 - [ ] **Einheitliche Lade- und Leerzustände** (Spinner-Platzierung, „Nichts da“-Texte) über
