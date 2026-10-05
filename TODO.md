@@ -42,6 +42,8 @@ Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 - [x] Abdeckung: diaryctl store 0→86 %, render 27→98 %; habctl store 43→88 %, ai 16→69 %, config 0→86 %; notectl config 0→83 %, notes 47→69 %; missionctl-cli cmd 27→39 %; Leertasten-Regressionstests in taskctl, budgetctl, mailctl, habctl, notectl.
 - [x] notectl: `resolveAccountCursor` gelöscht (nur Tests riefen es auf).
 
+- [x] taskctl: `Init/Update/handleKey` nach `update.go`; postctl: `gofmt` (49 Dateien, reiner Format-Commit).
+
 ## Bewusst nicht gemacht (mit Begründung)
 
 - **notectl-Config → Core-`Store`:** notectl braucht Mutex (TUI-Goroutinen), typisiertes `getBool` und `map[string]string`-Overrides. Der Core-Store ist absichtlich klein und nicht thread-safe; Angleichen würde ihn aufblähen. Zwei Implementierungen bleiben, bis ein zweites Tool Thread-Safety braucht.
@@ -50,7 +52,6 @@ Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 - **MCP-Result-Helper in Core:** `jsonResult` existiert nur in 2 Tools — spart ~20 Zeilen, nicht der Aufwand.
 - **`nlpdate`-Abdeckung:** meine erste Auswertung war falsch, das Paket hat 100 %.
 - **postctl `internal/platforms` (14 %):** fast nur Live-API-Calls für 10 Dienste; sinnvolle Tests brauchen pro Dienst einen HTTP-Mock — eigenes Projekt, bei Bedarf pro Plattform.
-- **postctl `gofmt`:** ~45 Dateien betroffen → riesiger Format-Diff, bewusst separat.
 
 ## Offen
 
@@ -58,7 +59,5 @@ Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 - [ ] diaryctl `suite`: `TodayEvents/TodayTimeEntries/TodayHabits` brauchen die Schemas der anderen Tools (21 % Abdeckung); fremde Config-Layer außer `data_dir` werden nicht gelesen.
 - [ ] habctl: `GetStats` setzt bei Weekly-Habits `longestStreak = streak` („simplified“) — Produktentscheidung, ob die längste Wochenserie ausgewiesen werden soll.
 - [ ] Abdeckung weiter: diaryctl/habctl/taskctl **TUI**-Pakete (Render/Maus), postctl `internal/platforms` (Live-API, braucht HTTP-Mocks pro Plattform), notectl `mirror`/`syncdispatch` (brauchen Notes/Joplin).
-- [ ] taskctl: `Update` liegt noch in `view.go` (Banner „Init / Update / View“) — nach `update.go` verschieben.
 - [ ] **Thunderbird-Backend (Linux)** in mailctl: laut README nicht gegen echte Installation getestet.
 - [ ] Produkt-Features aus `SUITE_AUDIT.md` (Snapshot): Unsubscribe-Helper, Gmail-OAuth.
-- [ ] postctl: `gofmt` (~45 Dateien) als eigener Commit.
