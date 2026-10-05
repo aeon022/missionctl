@@ -4,15 +4,12 @@ Quelle: `ponytail-audit` + `deadcode` + `go test -cover` über die ganze Suite.
 Nichts hiervon ist gepusht (Regel: lokal committen, Push nur auf Zuruf).
 Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 
-## ⚠ Vor dem Push: Reihenfolge
+## ⚠ Stand vor dem Push
 
-Mehrere Tool-Commits brauchen neuen `missionctl-core`-Code (`config.Store`, `applescript`,
-`humanize.Truncate`, `ai`-Hooks). Deren `go.mod` zeigt noch auf den alten Core-Stand, sie bauen
-lokal nur über das (ungetrackte) `go.work`.
-
-1. `missionctl-core` pushen.
-2. `scripts/bump-core.sh` — pinnt jedes Tool auf Core-`main`, tidy, build+test, committet.
-3. Tool-Repos pushen, danach Root (`./sync.sh` bzw. Pointer committen).
+- `missionctl-core` ist **gepusht** (`5936b00`), alle Tools sind darauf gepinnt (`scripts/bump-core.sh`).
+- Alle **Tool-Repos sind lokal committet, aber nicht gepusht** (4–12 Commits vor `origin/main`), ebenso der Root.
+- Vor dem Push einmal **von Hand im Terminal prüfen** (nicht headless testbar): Rendering, Maus (Klick/Doppelklick/Hover/Rad), Alt-Screen, Hell/Dunkel-Farben, budgetctl-Dateiwähler, postctl-Boxen (`StyleBox` `+2`), diaryctl-Vim-Modus der Textfelder.
+- Reihenfolge: Tool-Repos pushen, dann Root (`git submodule`-Pointer sind committet).
 
 ## Erledigt (lokal committet)
 
@@ -33,6 +30,18 @@ lokal nur über das (ungetrackte) `go.work`.
 - [x] Neue Tests: taskctl Store (0 → 88 %), calctl `parseEvents` + Create-Script, postctl MCP-Handler (0 → 70 %), core `config.Store`, `applescript`, `Truncate`.
 - [x] postctl: `ci.yml` (vet/test/build) wie bei den anderen Tools.
 
+**Bubble Tea v2 + TUI-Aufteilung (2026-10-05)**
+- [x] Alle 8 v1-Tools auf `charm.land/*/v2` (timectl, taskctl, calctl, diaryctl, budgetctl, habctl, postctl, missionctl-cli). Es gibt nur noch eine Generation (v1 bleibt nur indirekt über `missionctl-core/theme`).
+- [x] `tui.go` in allen 8 Tools aufgeteilt in `tui/styles/update/view/commands/helpers` (reine Verschiebung; taskctl: Update steckt noch in `view.go`).
+- [x] v2-Fallen behoben: Leertaste ist `"space"` (auch schon in mailctl/notectl kaputt gewesen), Textfeld-Breite 0 kürzt Placeholder auf 1 Zeichen, lipgloss v2 strippt ANSI nicht mehr beim Pipen (habctl-CLI, missionctl-cli über `colorprofile`), `Width/Height` schließen den Rahmen ein (postctl).
+- [x] Echte Fehler, die beim Testschreiben auffielen und behoben sind:
+  - diaryctl: Streak überbrückte Lücken / war um Mitternacht 0 (UTC vs. lokal) / `|` in Commit-Betreffen zerlegte den git-Reader / `suite` las fremde DBs von festen Pfaden (ignorierte `*_DATA_DIR`, Dropbox-Daten unsichtbar) und verglich „heute“ in UTC.
+  - habctl: Streak stand jeden Morgen auf 0 bis zum ersten Check-in (`streak_at_risk` damit unbrauchbar); archivierte Habits verhinderten 100 %-Tage im Kalender.
+  - notectl: `Vaults()` leer direkt nach `VaultAdd` (Free-Limit nie durchgesetzt); `contractHome` kürzte fremde Pfade; Leerzeile mit Spaces trennte keine Blöcke; Nicht-ASCII-Titel → Dateiname `.md` (Notizen überschrieben sich); `notes.Delete` konnte aus dem Vault ausbrechen.
+  - missionctl-cli: „1 events today“.
+- [x] Abdeckung: diaryctl store 0→86 %, render 27→98 %; habctl store 43→88 %, ai 16→69 %, config 0→86 %; notectl config 0→83 %, notes 47→69 %; missionctl-cli cmd 27→39 %; Leertasten-Regressionstests in taskctl, budgetctl, mailctl, habctl, notectl.
+- [x] notectl: `resolveAccountCursor` gelöscht (nur Tests riefen es auf).
+
 ## Bewusst nicht gemacht (mit Begründung)
 
 - **notectl-Config → Core-`Store`:** notectl braucht Mutex (TUI-Goroutinen), typisiertes `getBool` und `map[string]string`-Overrides. Der Core-Store ist absichtlich klein und nicht thread-safe; Angleichen würde ihn aufblähen. Zwei Implementierungen bleiben, bis ein zweites Tool Thread-Safety braucht.
@@ -43,11 +52,13 @@ lokal nur über das (ungetrackte) `go.work`.
 - **postctl `internal/platforms` (14 %):** fast nur Live-API-Calls für 10 Dienste; sinnvolle Tests brauchen pro Dienst einen HTTP-Mock — eigenes Projekt, bei Bedarf pro Plattform.
 - **postctl `gofmt`:** ~45 Dateien betroffen → riesiger Format-Diff, bewusst separat.
 
-## Offen — eigene Projekte (nicht „mal eben“)
+## Offen
 
-- [ ] **Bubbletea v1 → v2** für die 7 Tools, die noch auf `charmbracelet/*` v1 sind (mailctl + notectl sind auf `charm.land/*/v2`). Danach nur noch eine Generation.
-- [ ] **TUI-Monolithen aufteilen** (`tui.go` je 1,6–4,4k Zeilen: habctl, notectl, budgetctl, mailctl, taskctl …) nach Views; am besten zusammen mit dem v2-Umzug.
-- [ ] **Abdeckung** weiter heben: diaryctl 19 %, missionctl 14 %, habctl 24 %, notectl 27 % (Paket-Schnitt; TUI-Pakete drücken ihn).
-- [ ] **Thunderbird-Backend (Linux)** in mailctl: laut README noch nicht gegen echte Installation getestet; `deadcode` unter macOS sieht es als ungenutzt, ist es aber nicht.
-- [ ] **Produkt-Lücken** aus `SUITE_AUDIT.md` (Snapshot, ggf. veraltet): mailctl-Sync ohne Lade-Feedback, Attachments/Unsubscribe/Gmail-OAuth.
-- [ ] `resolveAccountCursor` (notectl) wird nur von Tests genutzt — Funktion + Test streichen oder verdrahten.
+- [ ] **Sichtprüfung der v2-Migration** (siehe oben) — danach pushen.
+- [ ] diaryctl `suite`: `TodayEvents/TodayTimeEntries/TodayHabits` brauchen die Schemas der anderen Tools (21 % Abdeckung); fremde Config-Layer außer `data_dir` werden nicht gelesen.
+- [ ] habctl: `GetStats` setzt bei Weekly-Habits `longestStreak = streak` („simplified“) — Produktentscheidung, ob die längste Wochenserie ausgewiesen werden soll.
+- [ ] Abdeckung weiter: diaryctl/habctl/taskctl **TUI**-Pakete (Render/Maus), postctl `internal/platforms` (Live-API, braucht HTTP-Mocks pro Plattform), notectl `mirror`/`syncdispatch` (brauchen Notes/Joplin).
+- [ ] taskctl: `Update` liegt noch in `view.go` (Banner „Init / Update / View“) — nach `update.go` verschieben.
+- [ ] **Thunderbird-Backend (Linux)** in mailctl: laut README nicht gegen echte Installation getestet.
+- [ ] Produkt-Features aus `SUITE_AUDIT.md` (Snapshot): Unsubscribe-Helper, Gmail-OAuth.
+- [ ] postctl: `gofmt` (~45 Dateien) als eigener Commit.
