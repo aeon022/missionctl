@@ -265,8 +265,9 @@ Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` =
 - [ ] **Aktivitätslog über die Suite** + suiteweites Undo.
 - [x] **Benachrichtigungen** (`missionctl notify`: Termin in 10 min, Streak ab 18 Uhr, Morgen-Digest
   fällige Aufgaben; je einmal; `--install` schreibt LaunchAgent, `--dry-run`). Offen: Rechnungen.
-- [ ] **Dashboard-Ausbau:** Verlauf/Sparklines auf den Karten, Karten konfigurierbar/
-  ausblendbar, Drill-down ohne das Tool zu starten, universelle Suche als `/`.
+- [~] **Dashboard-Ausbau:** Karten konfigurierbar/umsortierbar (`~/.config/missionctl/dashboard.yaml`:
+  `cards: [tasks, habits, notes]`) ✓, universelle Suche als `/` ✓. Offen: Verlauf/Sparklines auf den
+  Karten, Drill-down ohne das Tool zu starten.
 
 ### D. Neue Tools
 - [ ] **healthctl**, **investctl** (siehe „Neue Tools“ oben, `proposals/`).
