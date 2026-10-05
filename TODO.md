@@ -44,6 +44,15 @@ Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 
 - [x] taskctl: `Init/Update/handleKey` nach `update.go`; postctl: `gofmt` (49 Dateien, reiner Format-Commit).
 
+**Zweite Test-Runde (2026-10-05, nach dem v2-Push)**
+- [x] postctl `platforms` 14→64 % mit HTTP-Mocks (Basis-URLs injizierbar). Fehler behoben: fällige Posts wurden bei Dev.to/Medium als Entwurf gespeichert; Discord-Posts ohne Message-ID (nie löschbar); Twitter-`Delete` war ein Stub; XSS im OAuth-Callback.
+- [x] diaryctl: `suite` 21→90 % (echte Schemas der anderen Tools), TUI 25→55 %. Fehler behoben: archivierte Habits im Tagebuch, Streak morgens 0, Suche/Palette verschluckten Leerzeichen/Umlaute, Editor-Taste `a` startete KI beim Tippen (**KI jetzt auf `ctrl+g`**).
+- [x] habctl: längste Wochenserie berechnet statt Platzhalter; TUI 11→25 %.
+- [x] taskctl TUI 23→76 %, calctl TUI 34→83 %. Fehler behoben: Bearbeiten verlor Unteraufgaben (taskctl) bzw. Notizen/Teilnehmer/Ganztag (calctl); `firstURL` bei `İ`; Daemon-PID ≤ 0; DST-Tage (25 h/23 h) in calctl; negative Dauer; `--until` ohne letzten Tag; YAML-Kopf bei `"` im Titel; `wordWrap` bytes statt Runen.
+- [x] budgetctl TUI 46→59 %, mailctl 58→75 %, notectl 58→67 %. Fehler behoben: Löschen aktualisierte nur die gefilterte Liste (Duplikate/Wiederauftauchen, mailctl+notectl); Gelesen-Status ging verloren; `runeLimit(s,0)` Absturz.
+- [x] calctl: Draft-Datei über `os.CreateTemp` statt vorhersehbarem `/tmp`-Pfad; `./config.yaml` nicht mehr im Config-Suchpfad.
+- [x] Geprüft: das Listenkopie-Muster (`all*` + gefilterte Liste) kommt in budgetctl/habctl/timectl nicht vor (sie laden nach Änderungen neu).
+
 ## Bewusst nicht gemacht (mit Begründung)
 
 - **notectl-Config → Core-`Store`:** notectl braucht Mutex (TUI-Goroutinen), typisiertes `getBool` und `map[string]string`-Overrides. Der Core-Store ist absichtlich klein und nicht thread-safe; Angleichen würde ihn aufblähen. Zwei Implementierungen bleiben, bis ein zweites Tool Thread-Safety braucht.
@@ -56,8 +65,9 @@ Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 ## Offen
 
 - [ ] **Sichtprüfung der v2-Migration** (siehe oben) — danach pushen.
-- [ ] diaryctl `suite`: `TodayEvents/TodayTimeEntries/TodayHabits` brauchen die Schemas der anderen Tools (21 % Abdeckung); fremde Config-Layer außer `data_dir` werden nicht gelesen.
-- [ ] habctl: `GetStats` setzt bei Weekly-Habits `longestStreak = streak` („simplified“) — Produktentscheidung, ob die längste Wochenserie ausgewiesen werden soll.
-- [ ] Abdeckung weiter: diaryctl/habctl/taskctl **TUI**-Pakete (Render/Maus), postctl `internal/platforms` (Live-API, braucht HTTP-Mocks pro Plattform), notectl `mirror`/`syncdispatch` (brauchen Notes/Joplin).
+- [ ] diaryctl `suite`: fremde Config-Layer außer `data_dir` werden nicht gelesen.
+- [ ] habctl: `skip_allowed` wird bei Weekly-Habits in der aktuellen Serie ignoriert (bewusst unverändert) — Produktentscheidung.
+- [ ] Abdeckung weiter: Render-/Mauscode der TUIs, postctl `platforms` Rest (Twitter-Cookie/chromedp, Browser-Auth, Threads-Bildupload), notectl `mirror`/`syncdispatch` (brauchen Notes/Joplin), budgetctl-Import-Assistent mit Dateiwähler, AppleScript-nahe Befehle.
+- [ ] Offene Beobachtungen: `budgetctl` liest weiter `./budgetctl.yaml` aus dem Arbeitsverzeichnis (spezifischer Name, bewusst belassen); postctl-OAuth-Callbacktest bindet festen Port 8753.
 - [ ] **Thunderbird-Backend (Linux)** in mailctl: laut README nicht gegen echte Installation getestet.
 - [ ] Produkt-Features aus `SUITE_AUDIT.md` (Snapshot): Unsubscribe-Helper, Gmail-OAuth.
