@@ -9,6 +9,13 @@ Nichts hiervon ist gepusht (Regel: lokal committen, Push nur auf Zuruf).
 - [x] **notectl:** `muesli/reflow` entfernt, `ansi.Hardwrap` (aus `charmbracelet/x/ansi`, war schon Dependency) statt `wrap.String`.
 - [x] `go mod tidy` in allen Tools.
 
+- [x] **viper entfernt** (budgetctl, calctl, mailctl, taskctl): neuer `missionctl-core/config.Store` (YAML + `<TOOL>_<KEY>`-Env, Env-Präfix erst nach `Load()` aktiv wie bei viper), Tools umgestellt, `mapstructure`- → `yaml`-Tags. Tests grün (mit lokalem `go.work`).
+- [x] **Core-Bug behoben:** `keymap.Help.Text()` war als „ungenutzt“ gelöscht worden, budgetctl ruft es aber auf → Core-HEAD brach den budgetctl-Build. Wiederhergestellt.
+
+## ⚠ Vor dem nächsten Build: `missionctl-core` pushen und Tools bumpen
+
+Die 4 Tool-Commits brauchen den neuen Core (`config.Store`). Deren `go.mod` zeigt noch auf den alten Core-Stand → ohne Push + `go get github.com/aeon022/missionctl-core@main` + `go mod tidy` je Tool baut es dort nicht. Danach `./sync.sh`-artig die Pointer im Root bumpen.
+
 ## Offen — braucht Push von `missionctl-core` (Consumer ziehen Core per Pseudo-Version)
 
 - [ ] **`truncate()` 4× dupliziert** (missionctl `cmd/dashboard.go`, timectl, habctl, calctl `internal/tui/tui.go`). Zwei Semantiken: rune-basiert (timectl/habctl/calctl) vs. breiten-basiert mit `lipgloss.Width` (missionctl). Eine breiten-basierte Version nach `missionctl-core` (z. B. `humanize`), Core pushen, Tools bumpen. `wordWrap` ebenfalls (2×, calctl + 1).
@@ -16,7 +23,6 @@ Nichts hiervon ist gepusht (Regel: lokal committen, Push nur auf Zuruf).
 
 ## Offen — Verhalten ändert sich, braucht Entscheidung
 
-- [ ] **`viper` entfernen** (budgetctl 4 Dateien/30 Aufrufe + 13 Test-Aufrufe, calctl 21, mailctl 16, taskctl 12). Core hat nur `config.DataDir/ResolveDir`, keinen Loader. Zuerst kleinen YAML+Env-Loader (`yaml.v3` + `os.Getenv`, Präfix `<TOOL>_`) in Core, dann je Tool umstellen. Risiko: Env-Override-Verhalten (`AutomaticEnv`) muss 1:1 bleiben.
 - [ ] **habctl `internal/ai` (271 Z.) vs. `missionctl-core/ai` (320 Z.):** nicht einfach austauschbar — habctl hat Gemini über Google-OAuth (`GOOGLE_REFRESH_TOKEN`, `internal/auth/google.go`, vom TUI genutzt). Entweder Token-Hook in Core-`ai` (`Detect(prefix, opts)`) oder OAuth-Pfad streichen. Danach `anthropic-sdk-go`, `openai-go`, ggf. `oauth2` aus habctl entfernen.
 - [ ] **`google/uuid`** (11 Dateien): nur ersetzen, wenn nirgends UUID-Format nötig ist (`crypto/rand` + `hex`). Kandidat, kein sicherer Schnitt.
 - [ ] **`termenv` als direkte Dependency** (5 Tools): `go mod tidy` behält sie, also wird sie importiert. Prüfen, ob lipgloss reicht.
