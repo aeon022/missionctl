@@ -12,3 +12,6 @@
 /.worktree-landing-publish/
 # separate repo (github.com/aeon022/postctl), not a submodule
 postctl/
+.dev/
+go.work
+go.work.sum
