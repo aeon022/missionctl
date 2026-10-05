@@ -60,9 +60,10 @@ Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 - **`termenv` als direkte Dependency:** wird nur in den `tui_test.go` importiert (Farbprofil für Tests) → korrekt direkt. Kein Handlungsbedarf.
 - **MCP-Result-Helper in Core:** `jsonResult` existiert nur in 2 Tools — spart ~20 Zeilen, nicht der Aufwand.
 - **`nlpdate`-Abdeckung:** meine erste Auswertung war falsch, das Paket hat 100 %.
-- **postctl `internal/platforms` (14 %):** fast nur Live-API-Calls für 10 Dienste; sinnvolle Tests brauchen pro Dienst einen HTTP-Mock — eigenes Projekt, bei Bedarf pro Plattform.
 
 ## Offen
+
+- [ ] **Zeitstempel-Format `RFC3339Nano` als TEXT sortiert/verglichen** (habctl: behoben, Sortierung nach `id`; **timectl**: `started_at`-Sortierung/Bereiche haben dasselbe Risiko, praktisch nur relevant bei Einträgen im selben Sekundenbruchteil auf UTC-Rechnern, `Z` sortiert hinter Ziffern). Falls nötig: Fixed-Width-Layout (`.000000000`) fürs Schreiben.
 
 - [ ] **Sichtprüfung der v2-Migration** (siehe oben) — danach pushen.
 - [ ] diaryctl `suite`: fremde Config-Layer außer `data_dir` werden nicht gelesen.
