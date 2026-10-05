@@ -232,36 +232,39 @@ Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` =
 - [x] **Clipboard über OSC 52** (`tea.SetClipboard`) zusätzlich zu `pbcopy` — funktioniert auch
   über SSH/tmux (taskctl, calctl, mailctl, notectl, habctl, timectl, diaryctl; budgetctl hat
   keine Kopierfunktion). Ob das Terminal OSC 52 durchlässt, bei der Sichtprüfung testen.
-- [ ] **Gemeinsamer Statusbalken in `missionctl-core`** (Sync-Alter, aktives Profil, Fehler,
-  Kurzhinweise) — heute baut jedes Tool das selbst.
-- [ ] **Einheitliche Lade- und Leerzustände** (Spinner-Platzierung, „Nichts da“-Texte) über
-  `missionctl-core`.
-- [ ] **Overlay-Compositing mit Abdunkeln** des Hintergrunds hinter Popups (lipgloss v2),
-  statt dass `overlay.Center` ihn ersetzt.
+- [x] **Gemeinsamer Statusbalken in `missionctl-core`** (`statusbar.Hints/Line`: Hinweise nach
+  Priorität, letzte fallen bei schmalem Terminal zuerst weg, nie breiter als das Terminal);
+  in 8 TUIs übernommen (postctl bewusst nicht: eigene Palette/78-Zeichen-Boxen).
+- [x] **Einheitliche Lade- und Leerzustände** (`emptystate.Render/Loading`) in den TUIs.
+- [x] **Abgedunkelter Hintergrund hinter Hilfe-Popups** (`overlay.CenterDim`; Hintergrund verliert
+  dabei seine Farben). Weitere Popups (Detail, Templates, Tags) noch auf `Center`.
 - [ ] **Konfliktfreie Kürzel** mit v2-Tasten (`shift+enter`, `ctrl+…`); Kürzelbelegung je Tool
   vereinheitlichen und aus einer Tabelle in Core ableiten.
-- [ ] **timectl:** Zeitstempel fixed-width schreiben (`RFC3339Nano` schneidet Nullen ab, als
-  TEXT mis-sortiert; siehe `TODO.md`).
+- [x] **timectl:** Zeitstempel fixed-width (`writeLayout`), einmalige Migration alter Zeilen
+  (`PRAGMA user_version`).
 
 ### B. Qualität, die man spürt
-- [ ] **Smoke-Test-CI:** jedes TUI headless starten, ein paar Tasten drücken, prüfen dass nichts
-  abstürzt (hätte den Leertasten-/`i`-Fehler früh gefangen).
-- [ ] **Test-Helferpaket in Core** (`tuitest`: Taste/Maus/Resize-Messages bauen, Update treiben,
-  Zustand prüfen) statt je Tool eine eigene Version.
+- [x] **Smoke-Tests für alle 9 TUIs** (`tuitest.Smoke`/`SmokeSize`, jede Ansicht bei 100×30 und
+  60×15, plus leere Daten) und `scripts/first-run.sh` (jedes Tool in einem frischen `HOME`;
+  fand den fehlenden-Datenordner-Absturz in habctl/timectl/diaryctl, behoben in `syncdir`).
+- [x] **Test-Helferpaket in Core** (`tuitest`: Key/Click/Motion/Wheel/Resize, `Send/Keys/Text`,
+  `Smoke`).
 - [ ] **`missionctl doctor` ausbauen:** DB-Integrität, Sync-Konflikte, veraltete Core-Pins,
   Konfig-Plausibilität.
 
 ### C. Tool-übergreifend (die Suite als ein System)
-- [ ] **Universelle Suche/Befehlspalette in `missionctl`:** eine Suche über Aufgaben, Notizen,
+- [x] **Universelle Suche** (`missionctl search`, Dashboard `/`; nativ bei notectl/mailctl/budgetctl,
+  sonst `--json`-Liste + Filter; Treffer springen ins Tool, kein Deep-Link). Ursprünglich: eine Suche über Aufgaben, Notizen,
   Termine, Habits, Mails; Sprung ins jeweilige Tool (Verallgemeinerung der `g`-Sprünge).
   Offene Frage: direkt aus den DBs lesen oder über die `--json`-CLIs.
-- [ ] **Tagesplan-Assistent (`missionctl plan`):** aus Kalender, offenen Aufgaben und
+- [x] **Tagesplan-Assistent** (`missionctl plan`, nur Ausgabe, `--show-prompt` zeigt die Daten; nichts
+  wird automatisch eingetragen). Ursprünglich: aus Kalender, offenen Aufgaben und
   Habit-Serien einen Tagesvorschlag erzeugen, nach Bestätigung in die Tools eintragen.
-- [ ] **Wochenreview über alles:** Zeit pro Projekt vs. erledigte Aufgaben vs. Habits
+- [x] **Wochenreview** (`missionctl review`). Ursprünglich: Zeit pro Projekt vs. erledigte Aufgaben vs. Habits
   (diaryctl liest schon aus den anderen Tools).
 - [ ] **Aktivitätslog über die Suite** + suiteweites Undo.
-- [ ] **Benachrichtigungen:** Habit-Serie in Gefahr (`streak_at_risk` existiert), Termin in
-  10 min, Rechnung fällig — Auslöser fehlt.
+- [x] **Benachrichtigungen** (`missionctl notify`: Termin in 10 min, Streak ab 18 Uhr, Morgen-Digest
+  fällige Aufgaben; je einmal; `--install` schreibt LaunchAgent, `--dry-run`). Offen: Rechnungen.
 - [ ] **Dashboard-Ausbau:** Verlauf/Sparklines auf den Karten, Karten konfigurierbar/
   ausblendbar, Drill-down ohne das Tool zu starten, universelle Suche als `/`.
 

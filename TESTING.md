@@ -36,6 +36,12 @@ Das Skript tauscht `HOME` gegen ein Wegwerf-Verzeichnis und löscht `*_DATA_DIR`
 zeigt auf die echte Dropbox-Datenbank — ein normaler `go test` kann dort schreiben.
 **Tests immer über das Skript starten**, nicht per nacktem `go test` in der Shell.
 
+```sh
+scripts/dev-build.sh && scripts/first-run.sh   # jedes Tool in einem brandneuen HOME
+```
+
+`first-run.sh` fängt „funktioniert nur auf meinem Rechner“-Fehler (z. B. fehlendes Datenverzeichnis).
+
 ## 2. Von Hand ausprobieren (TUI, CLI, MCP)
 
 ```sh
