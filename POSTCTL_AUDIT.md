@@ -1,3 +1,5 @@
+> **Historischer Snapshot (Stand siehe unten).** Nicht fortgeschrieben — aktueller Arbeitsstand steht in `TODO.md` und `ROADMAP.md`.
+
 # postctl — Roadmap Audit
 > Stand: 2026-07-21 (Retry-Standardisierung erledigt; Rest unverändert seit 2026-07-15)
 

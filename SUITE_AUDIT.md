@@ -1,3 +1,5 @@
+> **Historischer Snapshot (Stand siehe unten).** Nicht fortgeschrieben — aktueller Arbeitsstand steht in `TODO.md` und `ROADMAP.md`.
+
 # missionctl — Suite-Audit & Arbeitsplan
 
 > Stand: 2026-07-15 · Alle Apps außer postctl (siehe POSTCTL_AUDIT.md)
