@@ -217,6 +217,62 @@ nach abgearbeitet: erst Schnell, dann Mittel, dann Aufwendig.
 
 ---
 
+## Ideen-Backlog (2026-10-05)
+
+Nach dem Bubble-Tea-v2-Umzug und der Test-Runde gesammelt. Reihenfolge: erst Polish und
+Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` = offen.
+
+### A. Polish (klein, wirkt in allen Tools)
+- [x] **Dashboard:** paralleles, nicht blockierendes Laden (vorher 8 Subprozesse nacheinander in
+  `Update` → Einfrieren beim Start und alle 30 s), Klick/Doppelklick/Hover auf Karten,
+  Reload bei Fenster-Fokus, Hilfe-Popup (`?`), kürzere Fußzeile. `missionctl` `9fba38c`.
+- [ ] **Fokus-Reload in allen Tools** (`View.ReportFocus` + `tea.FocusMsg`): nach dem
+  Zurückwechseln ins Fenster Daten neu laden, statt auf `r` zu warten.
+- [ ] **Clipboard über OSC 52** (`tea.SetClipboard`) zusätzlich zu `pbcopy` — funktioniert auch
+  über SSH/tmux. Betrifft die `y`-Kürzel in taskctl/mailctl/notectl/calctl/habctl/timectl.
+- [ ] **Gemeinsamer Statusbalken in `missionctl-core`** (Sync-Alter, aktives Profil, Fehler,
+  Kurzhinweise) — heute baut jedes Tool das selbst.
+- [ ] **Einheitliche Lade- und Leerzustände** (Spinner-Platzierung, „Nichts da“-Texte) über
+  `missionctl-core`.
+- [ ] **Overlay-Compositing mit Abdunkeln** des Hintergrunds hinter Popups (lipgloss v2),
+  statt dass `overlay.Center` ihn ersetzt.
+- [ ] **Konfliktfreie Kürzel** mit v2-Tasten (`shift+enter`, `ctrl+…`); Kürzelbelegung je Tool
+  vereinheitlichen und aus einer Tabelle in Core ableiten.
+- [ ] **timectl:** Zeitstempel fixed-width schreiben (`RFC3339Nano` schneidet Nullen ab, als
+  TEXT mis-sortiert; siehe `TODO.md`).
+
+### B. Qualität, die man spürt
+- [ ] **Smoke-Test-CI:** jedes TUI headless starten, ein paar Tasten drücken, prüfen dass nichts
+  abstürzt (hätte den Leertasten-/`i`-Fehler früh gefangen).
+- [ ] **Test-Helferpaket in Core** (`tuitest`: Taste/Maus/Resize-Messages bauen, Update treiben,
+  Zustand prüfen) statt je Tool eine eigene Version.
+- [ ] **`missionctl doctor` ausbauen:** DB-Integrität, Sync-Konflikte, veraltete Core-Pins,
+  Konfig-Plausibilität.
+
+### C. Tool-übergreifend (die Suite als ein System)
+- [ ] **Universelle Suche/Befehlspalette in `missionctl`:** eine Suche über Aufgaben, Notizen,
+  Termine, Habits, Mails; Sprung ins jeweilige Tool (Verallgemeinerung der `g`-Sprünge).
+  Offene Frage: direkt aus den DBs lesen oder über die `--json`-CLIs.
+- [ ] **Tagesplan-Assistent (`missionctl plan`):** aus Kalender, offenen Aufgaben und
+  Habit-Serien einen Tagesvorschlag erzeugen, nach Bestätigung in die Tools eintragen.
+- [ ] **Wochenreview über alles:** Zeit pro Projekt vs. erledigte Aufgaben vs. Habits
+  (diaryctl liest schon aus den anderen Tools).
+- [ ] **Aktivitätslog über die Suite** + suiteweites Undo.
+- [ ] **Benachrichtigungen:** Habit-Serie in Gefahr (`streak_at_risk` existiert), Termin in
+  10 min, Rechnung fällig — Auslöser fehlt.
+- [ ] **Dashboard-Ausbau:** Verlauf/Sparklines auf den Karten, Karten konfigurierbar/
+  ausblendbar, Drill-down ohne das Tool zu starten, universelle Suche als `/`.
+
+### D. Neue Tools
+- [ ] **healthctl**, **investctl** (siehe „Neue Tools“ oben, `proposals/`).
+- [ ] Kleinere Kandidaten: Kontakte („wann zuletzt gesprochen“), Lese-/Linkliste,
+  Fokus-Timer der timectl und habctl verbindet.
+
+### E. Features aus alten Audits (Snapshot, ggf. veraltet)
+- [ ] mailctl: Unsubscribe-Helper, Gmail-OAuth; Linux/Thunderbird gegen echte Installation testen.
+
+---
+
 ## postctl — Social Media from Terminal
 
 **Status: Existing (Go, Bubble Tea) — zurückgestellt, Details in `POSTCTL_AUDIT.md`**
