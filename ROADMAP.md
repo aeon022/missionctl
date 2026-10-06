@@ -283,6 +283,53 @@ Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` =
 
 ---
 
+## UX-Ideen aus dem Vergleich mit anderen Terminal-Apps (2026-10-06)
+
+Verglichen: lazygit, k9s, btop, yazi, atuin, fzf, hledger-ui und der TUI-Ausgabentracker
+[Bagels](https://github.com/EnhancedJax/Bagels) (Python/Textual) gegen den heutigen Stand von
+budgetctl (Liste: Datum, Betrag, Kategorie, unbeschriftete Konto-Spalte, Beschreibung; Zusammenfassung
+in eigener Ansicht; darunter oft viel leerer Platz; zweizeilige Hinweisleiste).
+
+### budgetctl
+- [ ] **Kopfzeile mit Monatsbilanz** über der Liste: Einnahmen · Ausgaben · Saldo · Sparquote, farbig;
+  Monats-Tabs zeigen den Saldo des Monats (`2026-10 +412€`).
+- [ ] **Spaltenköpfe** (Date · Amount · Category · Account · Description) und eine **beschriftete
+  Konto-Spalte** (heute steht dort nur „—“); Betragsspalte rechtsbündig, Summe der Auswahl im Footer.
+- [ ] **Geteilte Ansicht** (ab ~120 Spalten, wie yazi/lazygit): links Liste, rechts Panel mit Vorschau
+  der Buchung *oder* Insights; unter 120 Spalten wie bisher.
+- [ ] **Insights-Panel:** Balken je Kategorie (Anteil/Ziel, rot ab 100 %), 12-Monats-Sparkline der
+  Ausgaben, Prognose „Monatsende bei aktuellem Tempo“ (Bagels: Forecast), größte Posten.
+- [ ] **Vorlagen für wiederkehrende Buchungen auf Zifferntasten** (Bagels: Templates auf Number-Keys):
+  `1`–`9` legt „Miete“, „Spotify“, … mit einem Tastendruck an (Vorlage aus `recurring` ableiten).
+- [ ] **Jump-Modus** (Bagels/vim-easymotion): Taste `;`, dann Buchstabe pro Zeile/Spalte springt dorthin —
+  schneller als `j` 40-mal.
+- [ ] **Einnahmen/Ausgaben-Umschalter** (`I`/`E`/`A`) und **Filter-Chips** oben (`Groceries ×`,
+  `> 50€ ×`), per Klick/Taste entfernbar, statt nur `f` + Popup.
+- [ ] **Drill-down** (hledger-ui, k9s): Summary → Kategorie → Buchungen → Detail, `esc` zurück,
+  Pfad als Breadcrumb in der Kopfzeile.
+- [ ] **Unkategorisierte Buchungen** als Zähler-Badge (`3 offen`) mit `c`-Schnellkorrektur-Schleife
+  (nächste unkategorisierte, Vorschlag aus Regeln/KI vorbelegt).
+- [ ] **Teilbuchungen sichtbar** (Bagels: „togglable splits“): `⊢`-Unterzeilen, ein-/ausklappbar.
+
+### Alle Tools (Muster aus lazygit/k9s/btop/atuin)
+- [ ] **Kontextabhängige Fußzeile** (lazygit): zeigt nur die Tasten, die im aktuell fokussierten Bereich
+  gelten, statt immer alles; die volle Liste bleibt unter `?`.
+- [ ] **`:`-Befehlszeile mit Tab-Vervollständigung** und Verlauf (k9s); heute Palette ohne Verlauf.
+- [ ] **Fuzzy-Suche mit Treffer-Hervorhebung** überall gleich (fzf/atuin) und **Suche als Popup** über
+  der Liste statt die Liste zu ersetzen.
+- [ ] **Kopfzeile mit Kontext** (k9s): aktives Profil/Konto/Ordner, Sync-Alter, Anzahl, Filter — in Core
+  als `header`-Baustein neben `statusbar`.
+- [ ] **Vorschau-Panel** (yazi): Detail rechts neben der Liste in mailctl, notectl, taskctl, diaryctl.
+- [ ] **Mini-Diagramme** (btop): Sparklines/Balken in timectl (Woche), habctl (Heatmap in der Liste),
+  taskctl (erledigt pro Tag), diaryctl (Schreib-Streak).
+- [ ] **Themes** (btop/posting): zusätzlich zu `theme.yaml` Presets per Taste durchschalten, Vorschau live.
+- [ ] **Mausunterstützung ausbauen:** klickbare Footer-Hinweise, Tabs, Filter-Chips, Scrollbalken.
+- [ ] **Undo-Toast** („Gelöscht · `u` zum Rückgängig · 5 s“) einheitlich in Core statt je Tool.
+- [ ] **Leichte Animation** (btop): sanfte Zähl-Animation von Summen beim Monatswechsel, Spinner statt
+  „loading…“ — nur wenn `reduce_motion` nicht gesetzt ist.
+
+---
+
 ## postctl — Social Media from Terminal
 
 **Status: Existing (Go, Bubble Tea) — zurückgestellt, Details in `POSTCTL_AUDIT.md`**
