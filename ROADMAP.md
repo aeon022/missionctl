@@ -330,6 +330,54 @@ in eigener Ansicht; darunter oft viel leerer Platz; zweizeilige Hinweisleiste).
 
 ---
 
+## TUI-Verschönerung / Design-System (2026-10-06)
+
+Ziel: alle 10 Tools sehen aus wie *ein* Produkt — ruhig, lesbar, mit Charakter. Vorgehen: erst ein
+gemeinsamer `ui`-Baustein in `missionctl-core` samt Showcase (`missionctl ui-demo`, alle Bausteine in
+allen Themes nebeneinander), dann Tool für Tool übernehmen (budgetctl und taskctl zuerst).
+
+### A. Gemeinsames Vokabular (`missionctl-core/ui`)
+- [ ] **Pills/Badges** (`[ overdue ]`, `● unread`, `P1`, Plattform-Marken): farbiger Hintergrund statt nacktem Wort.
+- [ ] **Tastenkappen** im Footer (`enter` als invertiertes Feld, Beschriftung gedimmt) — ersetzt `key:text`.
+- [ ] **Fortschrittsbalken** mit Achtel-Blöcken (`▏▎▍▌▋▊▉█`), Farbstufen (grün → amber → rot) für Budgetziele,
+  Habit-Quoten, Pomodoro, Zeichenlimit.
+- [ ] **Sparkline** und **Heatmap-Zellen** (Abstufungen) als Funktion; Dashboard-Sparkline nach Core verlegen.
+- [ ] **Toast** (Icon, Typ info/ok/warn/err, Auto-Ausblenden) statt Statuszeile; einheitlicher **Undo-Toast**.
+- [ ] **Kopfzeile** (Tool links, Kontext Mitte: Profil/Ordner/Filter, Sync-Alter rechts).
+- [ ] **Trenner mit Label**, **Auswahlzeile** (voller Balken + Akzentstreifen `▌`, Hover dezenter).
+- [ ] **Hilfsfunktionen:** relative Zeit (`today`, `tomorrow`, `in 3d`, `3d ago`), Mittel-Auslassung
+  (`Rechnung…Q3.pdf`), rechtsbündige Zahlen (Minus rot, Plus grün, Cent gedimmt).
+- [ ] **Icons** mit Unicode-Standard und optionalem Nerd-Font-Satz (`icons: nerd|unicode` in
+  `~/.config/missionctl/ui.yaml`, `MISSIONCTL_ICONS`), nie kaputt ohne Nerd Font.
+- [ ] **`missionctl ui-demo`:** Showcase aller Bausteine, `--theme NAME` bzw. alle Presets nacheinander.
+
+### B. Lesbarkeit der Listen
+- [ ] Auswahl als volle Zeile mit Akzentbalken statt nur Farbwechsel.
+- [ ] Sanfte Zebra-Streifen oder Trenner nach Tag/Gruppe in langen Listen.
+- [ ] Relative Zeitangaben in Listen, exaktes Datum im Detail.
+- [ ] Zahlen rechtsbündig mit Farbsemantik; Sekundärtext gedimmt, Primärtext hell.
+- [ ] Mittel-Auslassung statt Abschneiden hinten; Spaltenköpfe in gedimmter Zeile (budgetctl hat keine).
+
+### C. Pro Tool
+- [ ] **taskctl:** Fälligkeit als Pill (`today` amber, `overdue` rot), Priorität als Farbpunkt, Unteraufgaben-Fortschritt `▰▰▱`.
+- [ ] **habctl:** Heatmap in Abstufungen (wie GitHub), Streak-Stufen, Wochenraster.
+- [ ] **calctl:** Wochenraster mit Zeitblöcken je Kalenderfarbe, „jetzt“-Linie, überlappende Termine nebeneinander.
+- [ ] **notectl:** Markdown-Vorschau mit Überschriften-Hierarchie, Code-Blöcke mit Hintergrund, Tags als Pills, Link-Graph mit Linien.
+- [ ] **mailctl:** Ungelesen als Punkt + fetter Betreff, Absender-Initialen, Anhang-/Thread-Symbole.
+- [ ] **timectl:** Tagesband als Zeitleiste (`██░░███`), laufender Timer pulsiert leicht.
+- [ ] **diaryctl:** Schreib-Streak als Kalenderband, Wortzahl-Balken, Stimmungsfarben.
+- [ ] **postctl:** Plattform-Badges in Markenfarben, Zeichenlimit-Balken (Twitter 280, Bluesky 300).
+- [ ] **budgetctl:** Bilanz-Kopfzeile, Spaltenköpfe, Insights-Panel (siehe „UX-Ideen“ oben).
+- [ ] **Dashboard:** Karten mit farbigem Kopfband, Mini-Diagramme auf jeder Karte, große Uhr in der Kopfzeile.
+
+### D. Atmosphäre
+- [ ] **Themes live durchschalten** (`T`) mit Vorschau; ruhiges Standardthema; Kontraste für Farbenblindheit prüfen.
+- [ ] **Willkommensbildschirm** beim ersten Start (kleines ASCII-Logo, drei Tastenhinweise, Beispieldatensatz).
+- [ ] **Leere Zustände mit Charakter** (kleines Zeichen-Bild).
+- [ ] **Dezente Animation:** Spinner, weiches Einblenden von Popups, Zählanimation bei Summen; abschaltbar (`reduce_motion`).
+
+---
+
 ## postctl — Social Media from Terminal
 
 **Status: Existing (Go, Bubble Tea) — zurückgestellt, Details in `POSTCTL_AUDIT.md`**
