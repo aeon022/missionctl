@@ -420,9 +420,9 @@ ohne), Fußzeilen (1–2 Zeilen, `key:desc` vs `key desc`, verschiedene Trenner)
 - [x] Entscheidung: Balken-Track `░` bleibt.
 
 **Runde 2 — Übersicht & Filter**
-- [ ] **taskctl-Ansichten** als Tabs mit Zählern: `All 75 · Today 1 · Overdue 5 · Next 7 days · No date · Done`.
-- [ ] **taskctl-Filter-Chips** (`Baby ×`, `P1 ×`, `overdue ×`), `f` zum Hinzufügen; Listen-Leiste mit Zählern ab ~140 Spalten; Mini-Übersicht im Detail-Panel, wenn nichts Besonderes gewählt ist.
-- [ ] **Dashboard:** Karten füllen die Breite (3 Spalten ab ~150), unten Panel „Today“ mit Agenda + letzten Aktivitäten (`activity`-Log); neutrale Kartenrahmen mit farbigem Titel, Rot nur bei Dringlichkeit.
+- [x] **taskctl-Ansichten** als Tabs mit Zählern: `All 75 · Today 1 · Overdue 5 · Next 7 days · No date · Done`.
+- [x] **taskctl-Filter-Chips** (`Baby ×`, `P1 ×`, `overdue ×`), `f` zum Hinzufügen; Listen-Leiste mit Zählern ab ~140 Spalten; Mini-Übersicht im Detail-Panel, wenn nichts Besonderes gewählt ist.
+- [x] **Dashboard:** Karten füllen die Breite (3 Spalten ab ~150), unten Panel „Today“ mit Agenda + letzten Aktivitäten (`activity`-Log); neutrale Kartenrahmen mit farbigem Titel, Rot nur bei Dringlichkeit.
 
 **Runde 3 — übrige Tools aufs neue Layout:** diaryctl, calctl, mailctl, notectl, timectl, postctl (Header, Row, Panel, einzeilige Fußzeile, Detail ab 120 Spalten).
 - [ ] **Datumsformat vereinheitlichen** (`Tue 06 Oct` überall; heute drei Varianten).
