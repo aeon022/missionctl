@@ -171,6 +171,7 @@ missionctl status                             Plain-text daily briefing across a
 missionctl search QUERY [--per-tool 5] [--json]   Search tasks, events, notes, mail, budget, diary, time, habits at once
 missionctl plan [--lang German] [--show-prompt]   AI day plan from calendar, open tasks and habits (prints only)
 missionctl review [--lang German] [--show-prompt] AI weekly review across time, tasks, habits, budget, diary
+missionctl log [--since 7d] [--tool T]        Activity log: what you did across the suite
 missionctl notify [--dry-run] [--install]     macOS notifications: event in 10 min, streak at risk, task digest
 missionctl doctor                             Check install, MCP registration, DB sync health
 ```
@@ -371,6 +372,11 @@ Besides the dashboard, `missionctl` has four commands that work across all tools
   the AI; `--lang German` forces the answer language (default: the language of your data).
 - **`missionctl review`** — the same for a weekly review (time tracked, tasks, habits,
   budget, diary). Same `--lang` / `--show-prompt`.
+- **`missionctl log`** — the suite's activity log: every tool records titles (never contents or
+  amounts) when you add, complete, delete, check, start, stop, write, send or publish something.
+  `--since today|yesterday|7d|YYYY-MM-DD`, `--tool`, `--json`; `--disable`/`--enable` and
+  `--diary ask|auto|off` (diaryctl offers or automatically adds the day's activity to your
+  diary entry). Details: [missionctl/README.md](missionctl/README.md#missionctl-log---since-window---tool-tool---json).
 - **`missionctl notify`** — checks once and posts a macOS banner for: a calendar event
   starting within 10 minutes, a habit with a streak you haven't checked in after 18:00,
   and (from 09:00) a digest of tasks due or overdue. Each banner fires only once.

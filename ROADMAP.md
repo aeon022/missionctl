@@ -262,7 +262,9 @@ Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` =
   Habit-Serien einen Tagesvorschlag erzeugen, nach Bestätigung in die Tools eintragen.
 - [x] **Wochenreview** (`missionctl review`). Ursprünglich: Zeit pro Projekt vs. erledigte Aufgaben vs. Habits
   (diaryctl liest schon aus den anderen Tools).
-- [ ] **Aktivitätslog über die Suite** + suiteweites Undo.
+- [x] **Aktivitätslog über die Suite** (`missionctl-core/activity`; `missionctl log`; Hooks in allen 9 Tools;
+  diaryctl: Modus `ask` (Popup nach 18 Uhr) / `auto` (Daemon) / `off`). Nicht umgesetzt: suiteweites **Undo** —
+  tool-übergreifendes Rückgängigmachen hat keine saubere Semantik (jedes Tool hat sein eigenes Undo).
 - [x] **Benachrichtigungen** (`missionctl notify`: Termin in 10 min, Streak ab 18 Uhr, Morgen-Digest
   fällige Aufgaben; je einmal; `--install` schreibt LaunchAgent, `--dry-run`). Offen: Rechnungen.
 - [x] **Dashboard-Ausbau:** Karten konfigurierbar/umsortierbar (`~/.config/missionctl/dashboard.yaml`),
