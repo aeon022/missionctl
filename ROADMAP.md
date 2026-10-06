@@ -407,16 +407,17 @@ ohne), Fußzeilen (1–2 Zeilen, `key:desc` vs `key desc`, verschiedene Trenner)
 ### F. Feedback aus den Screenshots (Catppuccin/kitty, 2026-10-06)
 
 **Runde 1 — sofort sichtbar**
-- [ ] **Gruppenabstand:** Leerzeile vor jedem Gruppen-/Tageskopf (taskctl, calctl: „(no events)“ klebte an „TODAY“).
-- [ ] **taskctl:** Pills nur für `overdue`/`today`, Späteres als gedimmter Text; Datumsspalte fester Breite; „synced Nd ago“ amber ab 1 Tag.
-- [ ] **calctl:** eine Sprache (Wochenleiste „Di 06“ vs. Überschrift „Tue, Oct 06“), Tagesblöcke klar getrennt.
-- [ ] **mailctl:** Auswahl durchgehend einfärben (war in Stücken), „Today“ nicht in jeder Zeile unter der Gruppe „Today“, Konto als Punkt/Pill statt `[Brücke ]`, `ui.Tabs`.
-- [ ] **notectl:** `ui.Tabs` (statt schwarzer Gleichbreit-Kästen), einzeilige Fußzeile, Markdown-Codeblöcke/Überschriften in der Vorschau prüfen.
-- [ ] **budgetctl:** `ui.Tabs` für Monate/Konten (einheitliche Pill-Farbe), Empfänger gedimmt, Insights-Labels nicht abschneiden, echtes Säulendiagramm mit Monatsnamen statt Klecks.
-- [ ] **diaryctl:** `[AI]` bricht bei langen Titeln um → Titel kürzen statt umbrechen; doppelte „Recent Entries“-Liste entfernen; Fußzeile/Kopfzeile im neuen Stil.
-- [ ] **habctl:** Fortschrittsbalken in der Kopfzeile (0/6 war ein grauer Block).
-- [ ] **Dashboard:** „synced just now **ago**“ → „synced just now“.
-- [x] **Theme `terminal`** (nur ANSI 0–15, folgt dem Terminal-Theme; `preset: terminal`); `preset: catppuccin` gibt die weiche Surface-Auswahlfarbe statt Marineblau.
+- [x] **Gruppenabstand:** Leerzeile vor jedem Gruppen-/Tageskopf (taskctl, calctl: „(no events)“ klebte an „TODAY“).
+- [x] **taskctl:** Pills nur für `overdue`/`today`, Späteres als gedimmter Text; Datumsspalte fester Breite; „synced Nd ago“ amber ab 1 Tag.
+- [x] **calctl:** eine Sprache (Wochenleiste „Di 06“ vs. Überschrift „Tue, Oct 06“), Tagesblöcke klar getrennt.
+- [x] **mailctl:** Auswahl durchgehend einfärben (war in Stücken), „Today“ nicht in jeder Zeile unter der Gruppe „Today“, Konto als Punkt/Pill statt `[Brücke ]`, `ui.Tabs`.
+- [x] **notectl:** `ui.Tabs` (statt schwarzer Gleichbreit-Kästen), einzeilige Fußzeile, Markdown-Codeblöcke/Überschriften in der Vorschau prüfen.
+- [x] **budgetctl:** `ui.Tabs` für Monate/Konten (einheitliche Pill-Farbe), Empfänger gedimmt, Insights-Labels nicht abschneiden, echtes Säulendiagramm mit Monatsnamen statt Klecks.
+- [x] **diaryctl:** `[AI]` bricht bei langen Titeln um → Titel kürzen statt umbrechen; doppelte „Recent Entries“-Liste entfernen; Fußzeile/Kopfzeile im neuen Stil.
+- [x] **habctl:** Fortschrittsbalken in der Kopfzeile (0/6 war ein grauer Block).
+- [x] **Dashboard:** „synced just now **ago**“ → „synced just now“.
+- [x] **Theme `terminal` ist jetzt der Standard** (nur ANSI 0–15, folgt dem Terminal-Theme); `preset: classic` bringt die alte 256-Farben-Palette zurück, `preset: catppuccin` etc. bleiben wählbar.
+- [x] Entscheidung: Balken-Track `░` bleibt.
 
 **Runde 2 — Übersicht & Filter**
 - [ ] **taskctl-Ansichten** als Tabs mit Zählern: `All 75 · Today 1 · Overdue 5 · Next 7 days · No date · Done`.
