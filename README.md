@@ -355,6 +355,25 @@ Things you can ask Claude once all nine MCP servers are connected.
 
 ---
 
+## Themes
+
+The suite's colors come from `missionctl-core/theme`. **By default (`terminal`) it uses your terminal's
+own 16 ANSI colors**, so every tool automatically follows whatever theme the terminal runs
+(Catppuccin in kitty, Solarized in iTerm2, …). To change it, create `~/.config/missionctl/theme.yaml`:
+
+```yaml
+preset: catppuccin        # terminal (default) · classic · catppuccin · dracula · gruvbox · nord
+                          # · one-dark · solarized · tokyo-night
+blue:                     # optional per-color overrides win over the preset
+  dark: "#89b4fa"
+```
+
+`classic` is the original fixed 256-color palette; a misspelled preset name falls back to the default.
+Colors available to override: `blue`, `green`, `red`, `amber`, `muted`, `subtle`, `selected_bg`,
+`selected_fg`, `hover_bg`, `on_accent` (each with `light:` and `dark:`). `missionctl ui-demo --all` shows
+every preset. Panel borders: `MISSIONCTL_BORDERS=rounded|sharp|none`; icons: `MISSIONCTL_ICONS=nerd`.
+habctl and postctl keep their own palettes.
+
 ## New umbrella commands
 
 Besides the dashboard, `missionctl` has four commands that work across all tools
