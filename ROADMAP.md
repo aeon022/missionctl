@@ -376,6 +376,34 @@ allen Themes nebeneinander), dann Tool für Tool übernehmen (budgetctl und task
 - [ ] **Leere Zustände mit Charakter** (kleines Zeichen-Bild).
 - [ ] **Dezente Animation:** Spinner, weiches Einblenden von Popups, Zählanimation bei Summen; abschaltbar (`reduce_motion`).
 
+### E. Rahmen & Aufbau (aus dem Layout-Vergleich aller Tools, 2026-10-06)
+
+Befund: drei verschiedene Layout-Sprachen — flach mit Linien (taskctl, budgetctl, mailctl, calctl), voll
+gerahmt (habctl: ein großer Rahmen um alles, meist leer), Kästen (timectl, diaryctl, postctl), notectl nur
+mit senkrechtem Trenner. Kopfzeilen (Einrückung 0/1/4, Datum `Tue, 06 Oct` vs `Tue, Oct 06`, teils ganz
+ohne), Fußzeilen (1–2 Zeilen, `key:desc` vs `key desc`, verschiedene Trenner) und Auswahlmarkierung
+(`▎`, Farbwechsel, nichts) unterscheiden sich.
+
+- [ ] **Ein Grundgerüst für alle:** Kopfzeile (`ui.Header`: Tool · Kontext · Datum/Sync) → Inhalt →
+  einzeilige Statusleiste (`statusbar`); einheitliche Einrückung (2) und Datumsformat.
+- [ ] **Rahmen-Sprache:** kein Rahmen um die ganze App (habctl: entfernen oder abschaltbar); Rahmen nur
+  für **Panels mit Titel in der Rand-Zeile** (`╭─ Tasks ────╮`, Stil lazygit) — fokussiertes Panel mit
+  Akzentfarbe, andere gedimmt; einheitlich abgerundet. Einstellung `borders: rounded|sharp|none`
+  (`ui.yaml`).
+- [ ] **Breakpoints:** < 80 Spalten einspaltig, 80–119 Liste + Statusleiste, ≥ 120 Zweispalter
+  (Liste + Detail/Insights/Vorschau; notectl hat das schon).
+- [ ] **Einheitliche Tabs** (`ui.Tabs`: aktiver Tab als Pill, andere gedimmt, optional Zähler) für
+  postctl-Tabs, budgetctl-Monate, mailctl-Konten, notectl-Notizbücher.
+- [ ] **Platz nutzen:** habctl — Detail/Heatmap-Panel rechts statt leerem Rahmen; timectl — rechter Kasten
+  unten mit Wochenband; diaryctl — Vorschau des gewählten Eintrags statt doppelter „Recent Entries“-Liste;
+  postctl-Dashboard — Spalten nach Inhalt.
+- [ ] **Gruppen-Köpfe** mit Zähler als Pill (`Home ②`) über `ui.Divider(label)` (taskctl, calctl-Tage).
+- [ ] **Dauern knapp:** timectl `2h 0m 0s` → `2h`, `1h 05m` (`ui.Duration`); Summen/Ziel als Balken + Prozent.
+- [ ] **Auswahlzeile überall gleich** (`ui.Row`: Akzentbalken + Hintergrund), auch Hover.
+- [x] Gefundene Fehler: postctl-Dashboard zeigte rohe Übersetzungs-Schlüssel (`stats_posted0`) →
+  behoben + Test, der jeden `Tr()`-Schlüssel prüft (`e94a62d`); calctl druckte `00:00–00:00` vor
+  `(no events)` an leeren Tagen → behoben (`31f2c08`).
+
 ---
 
 ## postctl — Social Media from Terminal
