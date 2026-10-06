@@ -336,20 +336,20 @@ Ziel: alle 10 Tools sehen aus wie *ein* Produkt — ruhig, lesbar, mit Charakter
 gemeinsamer `ui`-Baustein in `missionctl-core` samt Showcase (`missionctl ui-demo`, alle Bausteine in
 allen Themes nebeneinander), dann Tool für Tool übernehmen (budgetctl und taskctl zuerst).
 
-### A. Gemeinsames Vokabular (`missionctl-core/ui`)
-- [ ] **Pills/Badges** (`[ overdue ]`, `● unread`, `P1`, Plattform-Marken): farbiger Hintergrund statt nacktem Wort.
-- [ ] **Tastenkappen** im Footer (`enter` als invertiertes Feld, Beschriftung gedimmt) — ersetzt `key:text`.
-- [ ] **Fortschrittsbalken** mit Achtel-Blöcken (`▏▎▍▌▋▊▉█`), Farbstufen (grün → amber → rot) für Budgetziele,
+### A. Gemeinsames Vokabular (`missionctl-core/ui`) — Bausteine fertig (2026-10-06), Übernahme in die Tools offen
+- [x] **Pills/Badges** (`[ overdue ]`, `● unread`, `P1`, Plattform-Marken): farbiger Hintergrund statt nacktem Wort.
+- [x] **Tastenkappen** im Footer (`enter` als invertiertes Feld, Beschriftung gedimmt) — ersetzt `key:text`.
+- [x] **Fortschrittsbalken** mit Achtel-Blöcken (`▏▎▍▌▋▊▉█`), Farbstufen (grün → amber → rot) für Budgetziele,
   Habit-Quoten, Pomodoro, Zeichenlimit.
-- [ ] **Sparkline** und **Heatmap-Zellen** (Abstufungen) als Funktion; Dashboard-Sparkline nach Core verlegen.
-- [ ] **Toast** (Icon, Typ info/ok/warn/err, Auto-Ausblenden) statt Statuszeile; einheitlicher **Undo-Toast**.
-- [ ] **Kopfzeile** (Tool links, Kontext Mitte: Profil/Ordner/Filter, Sync-Alter rechts).
-- [ ] **Trenner mit Label**, **Auswahlzeile** (voller Balken + Akzentstreifen `▌`, Hover dezenter).
-- [ ] **Hilfsfunktionen:** relative Zeit (`today`, `tomorrow`, `in 3d`, `3d ago`), Mittel-Auslassung
+- [x] **Sparkline** und **Heatmap-Zellen** (Abstufungen) als Funktion; Dashboard-Sparkline nach Core verlegen.
+- [x] **Toast** (Icon, Typ info/ok/warn/err, Auto-Ausblenden) statt Statuszeile; einheitlicher **Undo-Toast**.
+- [x] **Kopfzeile** (Tool links, Kontext Mitte: Profil/Ordner/Filter, Sync-Alter rechts).
+- [x] **Trenner mit Label**, **Auswahlzeile** (voller Balken + Akzentstreifen `▌`, Hover dezenter).
+- [x] **Hilfsfunktionen:** relative Zeit (`today`, `tomorrow`, `in 3d`, `3d ago`), Mittel-Auslassung
   (`Rechnung…Q3.pdf`), rechtsbündige Zahlen (Minus rot, Plus grün, Cent gedimmt).
-- [ ] **Icons** mit Unicode-Standard und optionalem Nerd-Font-Satz (`icons: nerd|unicode` in
+- [x] **Icons** mit Unicode-Standard und optionalem Nerd-Font-Satz (`icons: nerd|unicode` in
   `~/.config/missionctl/ui.yaml`, `MISSIONCTL_ICONS`), nie kaputt ohne Nerd Font.
-- [ ] **`missionctl ui-demo`:** Showcase aller Bausteine, `--theme NAME` bzw. alle Presets nacheinander.
+- [x] **`missionctl ui-demo`:** Showcase aller Bausteine, `--theme NAME` bzw. alle Presets nacheinander.
 
 ### B. Lesbarkeit der Listen
 - [ ] Auswahl als volle Zeile mit Akzentbalken statt nur Farbwechsel.
