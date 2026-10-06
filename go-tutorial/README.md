@@ -116,6 +116,14 @@ By the end of this tutorial you'll have built a working, shippable CLI tool that
 
 *Exercise: release v0.1 of your tool with a Homebrew formula*
 
+### Bonus — Testing a Bubble Tea v2 TUI Without a Terminal
+- Drive `Update` with real key/mouse/resize messages, assert state instead of screenshots
+- Commands are collected, never executed; isolation with temp dirs and `*_DATA_DIR`
+- Smoke tests that visit every view, wide, small and with empty data
+- Regression tests for the v2 traps (the space bar is `"space"`, placeholder width, …)
+
+Read it: [testing-tuis.md](testing-tuis.md) (companion to Chapter 7).
+
 ---
 
 ## Prerequisites

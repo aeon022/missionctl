@@ -164,9 +164,14 @@ postctl campaign list                         List campaigns
 postctl import FILE.md                        Import from Markdown
 
 # Mission Control (all tools at once)
-missionctl                                    Dashboard TUI — 8 cards, x quick action, s sync all, a agenda view
+missionctl                                    Dashboard TUI — cards load in the background; click/double-click or 1-9 to open a tool,
+                                              x quick action, s sync all, a agenda, / search, ? help
 missionctl agenda                             Today's calendar + tasks + timer, one timeline
 missionctl status                             Plain-text daily briefing across all 8 tools
+missionctl search QUERY [--per-tool 5] [--json]   Search tasks, events, notes, mail, budget, diary, time, habits at once
+missionctl plan [--lang German] [--show-prompt]   AI day plan from calendar, open tasks and habits (prints only)
+missionctl review [--lang German] [--show-prompt] AI weekly review across time, tasks, habits, budget, diary
+missionctl notify [--dry-run] [--install]     macOS notifications: event in 10 min, streak at risk, task digest
 missionctl doctor                             Check install, MCP registration, DB sync health
 ```
 
@@ -349,6 +354,107 @@ Things you can ask Claude once all nine MCP servers are connected.
 
 ---
 
+## New umbrella commands
+
+Besides the dashboard, `missionctl` has four commands that work across all tools
+(full reference: [`missionctl/README.md`](missionctl/README.md)):
+
+- **`missionctl search QUERY`** — one search over tasks, calendar, notes, mail, budget,
+  diary, time log and habits. notectl, mailctl and budgetctl search natively; for the
+  rest the tool's `--json` list is fetched and filtered. A tool that isn't installed or
+  times out (8 s) is skipped. `--per-tool N` caps hits per tool (default 5), `--json`
+  prints machine-readable output. In the dashboard press `/`, type, `enter`, pick a hit
+  with the arrow keys and `enter` to jump into that tool (it opens the tool, not the item).
+- **`missionctl plan`** — asks the AI for a plan of the rest of today from your calendar,
+  open tasks and the habits you haven't checked yet. It only prints; nothing is written
+  into your tools. `--show-prompt` prints exactly what would be sent instead of calling
+  the AI; `--lang German` forces the answer language (default: the language of your data).
+- **`missionctl review`** — the same for a weekly review (time tracked, tasks, habits,
+  budget, diary). Same `--lang` / `--show-prompt`.
+- **`missionctl notify`** — checks once and posts a macOS banner for: a calendar event
+  starting within 10 minutes, a habit with a streak you haven't checked in after 18:00,
+  and (from 09:00) a digest of tasks due or overdue. Each banner fires only once.
+  `--dry-run` shows what would fire without posting. `missionctl notify --install`
+  writes a LaunchAgent (`sh.missionctl.notify`, every 5 minutes) and prints the
+  `launchctl load` command to activate it; `--uninstall` removes it.
+
+`plan` and `review` use the suite's shared AI layer: `MISSIONCTL_PROVIDER` forces a
+provider, otherwise the first of `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GEMINI_API_KEY`
+is used, else a local Ollama.
+
+**Dashboard.** Cards load in parallel in the background (the UI never freezes), the data
+reloads every 30 s and whenever the terminal window regains focus. Mouse: click selects a
+card, double-click opens it. `?` shows all keys. To choose and order the cards, create
+`~/.config/missionctl/dashboard.yaml`:
+
+```yaml
+cards: [tasks, habits, notes]   # ids: tasks calendar timer diary budget habits notes mail
+```
+
+Unknown ids are ignored; no file (or no valid id) means all cards.
+
+---
+
+## Development
+
+How to work on the suite without touching your real data. Details and a German-language
+walkthrough: [`TESTING.md`](TESTING.md); a tutorial on writing TUI tests:
+[`go-tutorial/testing-tuis.md`](go-tutorial/testing-tuis.md); the shared building blocks:
+[`missionctl-core/README.md`](missionctl-core/README.md).
+
+### Workflow with unpushed core changes
+
+Every tool pins `missionctl-core` by version. While a core change isn't pushed yet, create a
+`go.work` in the repo root (it is git-ignored) so the tools build against your local core:
+
+```bash
+cat > go.work <<'EOF'
+go 1.26.5
+
+use (
+	./missionctl-core ./budgetctl ./calctl ./mailctl ./taskctl
+	./notectl ./habctl ./timectl ./diaryctl ./missionctl ./postctl
+)
+EOF
+```
+
+Delete it to go back to the pinned, pushed versions (that is also what CI builds).
+After you push `missionctl-core`, run `scripts/bump-core.sh`: it points every tool at core
+`main`, runs `go mod tidy`, builds and tests, and commits `chore: bump missionctl-core` per
+tool. It refuses to run while core has unpushed commits and never pushes.
+
+### Scripts
+
+| Script | What it does |
+|---|---|
+| `scripts/test-all.sh [tool …]` | `go vet` + `go test` for every tool (or the named ones) **in an isolated environment**: a throwaway `HOME`, and every `*_DATA_DIR`, `*_PROVIDER`, `*_API_KEY`, `*_REFRESH_TOKEN`, `*_HOST` variable (and `OLLAMA_MODEL`) unset. Always run tests through this script: a plain `go test` with e.g. `BUDGETCTL_DATA_DIR` set in your shell can point a test at your real database. |
+| `scripts/dev-build.sh` | Builds all ten tools into `./.dev/bin`. Installs nothing, doesn't touch `~/.local/bin` or `~/.claude.json`. |
+| `source scripts/dev-env.sh` | Switches the current shell into a sandbox: `HOME=./.dev/home`, `./.dev/bin` first on `PATH`, data-dir/API variables unset. Open a new terminal (or `exec zsh`) to leave it. |
+| `scripts/first-run.sh` | Runs a plain read command of every tool in a brand-new `HOME` (needs `dev-build.sh` first) and fails on any `Error:`/panic. Catches first-run bugs such as a missing data directory. |
+| `scripts/bump-core.sh` | See above. |
+
+### Bubble Tea v2 baseline
+
+All TUIs run on Bubble Tea v2 (`charm.land/bubbletea/v2`, `charm.land/bubbles/v2`,
+`charm.land/lipgloss/v2`). Things that differ from v1 and bit us:
+
+- **The space bar is `"space"`**, not `" "`. `case " ":` silently never matches; use
+  `case "space":` (a space press has `Text: " "`, but `String()` returns `"space"`).
+- **A `textinput` without a width clips its placeholder to one character.** Always call
+  `SetWidth(n)` when you create one.
+- **Lip Gloss v2 always emits ANSI**, also when stdout is a pipe or `NO_COLOR` is set. For
+  plain CLI output (not the TUI) write through a `colorprofile` writer, e.g.
+  `colorprofile.NewWriter(os.Stdout, os.Environ())`, which strips or downsamples it.
+- **`Width()`/`Height()` include the border.** `Style.Border(...).Width(10)` renders 10
+  columns; v1 rendered 12 (width excluded the border), so add the border size when you
+  want the old outer size.
+- `View()` returns `tea.View`; alt-screen, mouse mode and focus reporting are fields of
+  that view (`v.AltScreen`, `v.MouseMode`, `v.ReportFocus`), not program options. Key
+  messages are `tea.KeyPressMsg`, and mouse input is split into click, wheel and motion
+  messages.
+
+---
+
 ## Design Principles
 
 **Local-first.** All data lives in SQLite on your machine. Nothing is sent to external servers except when you explicitly publish (postctl) or send (mailctl).
@@ -367,10 +473,10 @@ Things you can ask Claude once all nine MCP servers are connected.
 
 | Component | Library |
 |-----------|---------|
-| Language | Go 1.21+ |
-| TUI | [Bubble Tea](https://github.com/charmbracelet/bubbletea) |
+| Language | Go 1.26+ (see each `go.mod`) |
+| TUI | [Bubble Tea v2](https://github.com/charmbracelet/bubbletea) (`charm.land/bubbletea/v2`, `bubbles/v2`) |
 | CLI | [Cobra](https://github.com/spf13/cobra) |
-| Styling | [Lip Gloss](https://github.com/charmbracelet/lipgloss) |
+| Styling | [Lip Gloss v2](https://github.com/charmbracelet/lipgloss) (`charm.land/lipgloss/v2`) |
 | Storage | SQLite via `modernc.org/sqlite` (pure Go, no CGo) |
 | MCP | `github.com/mark3labs/mcp-go` |
 | macOS bridge | AppleScript + Swift EventKit |
