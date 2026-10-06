@@ -249,8 +249,8 @@ Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` =
   fand den fehlenden-Datenordner-Absturz in habctl/timectl/diaryctl, behoben in `syncdir`).
 - [x] **Test-Helferpaket in Core** (`tuitest`: Key/Click/Motion/Wheel/Resize, `Send/Keys/Text`,
   `Smoke`).
-- [ ] **`missionctl doctor` ausbauen:** DB-Integrität, Sync-Konflikte, veraltete Core-Pins,
-  Konfig-Plausibilität.
+- [~] **`missionctl doctor` ausbauen:** `<tool> doctor` je Tool (5 s Timeout) und `PRAGMA quick_check`
+  je DB ✓. Offen: Sync-Konflikte, veraltete Core-Pins, Konfig-Plausibilität.
 
 ### C. Tool-übergreifend (die Suite als ein System)
 - [x] **Universelle Suche** (`missionctl search`, Dashboard `/`; nativ bei notectl/mailctl/budgetctl,
@@ -265,9 +265,9 @@ Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` =
 - [ ] **Aktivitätslog über die Suite** + suiteweites Undo.
 - [x] **Benachrichtigungen** (`missionctl notify`: Termin in 10 min, Streak ab 18 Uhr, Morgen-Digest
   fällige Aufgaben; je einmal; `--install` schreibt LaunchAgent, `--dry-run`). Offen: Rechnungen.
-- [~] **Dashboard-Ausbau:** Karten konfigurierbar/umsortierbar (`~/.config/missionctl/dashboard.yaml`:
-  `cards: [tasks, habits, notes]`) ✓, universelle Suche als `/` ✓. Offen: Verlauf/Sparklines auf den
-  Karten, Drill-down ohne das Tool zu starten.
+- [x] **Dashboard-Ausbau:** Karten konfigurierbar/umsortierbar (`~/.config/missionctl/dashboard.yaml`),
+  universelle Suche `/`, Sparklines (Tasks: erledigt pro Tag, Timer: Minuten pro Tag; Habits ohne, habctl
+  liefert keinen Verlauf), Drill-down `d`/`space` (read-only Liste der Karten-Einträge).
 
 ### D. Neue Tools
 - [ ] **healthctl**, **investctl** (siehe „Neue Tools“ oben, `proposals/`).
@@ -275,7 +275,9 @@ Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` =
   Fokus-Timer der timectl und habctl verbindet.
 
 ### E. Features aus alten Audits (Snapshot, ggf. veraltet)
-- [ ] mailctl: Unsubscribe-Helper, Gmail-OAuth; Linux/Thunderbird gegen echte Installation testen.
+- [x] mailctl: Unsubscribe-Helper (`U`, `mailctl unsubscribe`; One-Click/Link/mailto, immer mit Bestätigung).
+- [ ] mailctl: Gmail-OAuth (braucht ein Google-Cloud-Projekt mit Client-ID); Linux/Thunderbird gegen echte
+  Installation testen; Apple-Mail-Header-Abruf gegen echtes Mail.app prüfen.
 
 ---
 
