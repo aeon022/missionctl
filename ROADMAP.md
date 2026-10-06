@@ -404,6 +404,29 @@ ohne), Fußzeilen (1–2 Zeilen, `key:desc` vs `key desc`, verschiedene Trenner)
   behoben + Test, der jeden `Tr()`-Schlüssel prüft (`e94a62d`); calctl druckte `00:00–00:00` vor
   `(no events)` an leeren Tagen → behoben (`31f2c08`).
 
+### F. Feedback aus den Screenshots (Catppuccin/kitty, 2026-10-06)
+
+**Runde 1 — sofort sichtbar**
+- [ ] **Gruppenabstand:** Leerzeile vor jedem Gruppen-/Tageskopf (taskctl, calctl: „(no events)“ klebte an „TODAY“).
+- [ ] **taskctl:** Pills nur für `overdue`/`today`, Späteres als gedimmter Text; Datumsspalte fester Breite; „synced Nd ago“ amber ab 1 Tag.
+- [ ] **calctl:** eine Sprache (Wochenleiste „Di 06“ vs. Überschrift „Tue, Oct 06“), Tagesblöcke klar getrennt.
+- [ ] **mailctl:** Auswahl durchgehend einfärben (war in Stücken), „Today“ nicht in jeder Zeile unter der Gruppe „Today“, Konto als Punkt/Pill statt `[Brücke ]`, `ui.Tabs`.
+- [ ] **notectl:** `ui.Tabs` (statt schwarzer Gleichbreit-Kästen), einzeilige Fußzeile, Markdown-Codeblöcke/Überschriften in der Vorschau prüfen.
+- [ ] **budgetctl:** `ui.Tabs` für Monate/Konten (einheitliche Pill-Farbe), Empfänger gedimmt, Insights-Labels nicht abschneiden, echtes Säulendiagramm mit Monatsnamen statt Klecks.
+- [ ] **diaryctl:** `[AI]` bricht bei langen Titeln um → Titel kürzen statt umbrechen; doppelte „Recent Entries“-Liste entfernen; Fußzeile/Kopfzeile im neuen Stil.
+- [ ] **habctl:** Fortschrittsbalken in der Kopfzeile (0/6 war ein grauer Block).
+- [ ] **Dashboard:** „synced just now **ago**“ → „synced just now“.
+- [x] **Theme `terminal`** (nur ANSI 0–15, folgt dem Terminal-Theme; `preset: terminal`); `preset: catppuccin` gibt die weiche Surface-Auswahlfarbe statt Marineblau.
+
+**Runde 2 — Übersicht & Filter**
+- [ ] **taskctl-Ansichten** als Tabs mit Zählern: `All 75 · Today 1 · Overdue 5 · Next 7 days · No date · Done`.
+- [ ] **taskctl-Filter-Chips** (`Baby ×`, `P1 ×`, `overdue ×`), `f` zum Hinzufügen; Listen-Leiste mit Zählern ab ~140 Spalten; Mini-Übersicht im Detail-Panel, wenn nichts Besonderes gewählt ist.
+- [ ] **Dashboard:** Karten füllen die Breite (3 Spalten ab ~150), unten Panel „Today“ mit Agenda + letzten Aktivitäten (`activity`-Log); neutrale Kartenrahmen mit farbigem Titel, Rot nur bei Dringlichkeit.
+
+**Runde 3 — übrige Tools aufs neue Layout:** diaryctl, calctl, mailctl, notectl, timectl, postctl (Header, Row, Panel, einzeilige Fußzeile, Detail ab 120 Spalten).
+- [ ] **Datumsformat vereinheitlichen** (`Tue 06 Oct` überall; heute drei Varianten).
+- [ ] **Farbdisziplin pro Zeile** (max. 2–3 Akzente; Kategorie dezent, Empfänger/Absender nicht in Link-Blau).
+
 ---
 
 ## postctl — Social Media from Terminal
