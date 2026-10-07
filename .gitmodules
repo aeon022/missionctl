@@ -28,3 +28,9 @@
 [submodule "missionctl-core"]
 	path = missionctl-core
 	url = https://github.com/aeon022/missionctl-core.git
+[submodule "healthctl"]
+	path = healthctl
+	url = https://github.com/aeon022/healthctl.git
+[submodule "investctl"]
+	path = investctl
+	url = https://github.com/aeon022/investctl.git

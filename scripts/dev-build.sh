@@ -4,6 +4,6 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 mkdir -p .dev/bin
-for t in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl postctl missionctl; do
+for t in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl healthctl investctl postctl missionctl; do
   (cd "$t" && go build -o "../.dev/bin/$t" .) && echo "✓ $t"
 done

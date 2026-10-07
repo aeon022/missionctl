@@ -24,14 +24,14 @@ timectl Invoice-Refinement, habctl Yearly-Heatmap+Correlations) fertig war. Beid
 **reine Design-Outlines, noch nicht implementiert** — kein Code, kein Repo, kein
 Submodule. Volle Ausschreibung liegt in `proposals/<name>/README.md`.
 
-- [ ] **healthctl** — Terminal-first Medikamenten-Planer (`proposals/healthctl/`).
+- [x] **healthctl** — Terminal-first Medikamenten-Planer (`proposals/healthctl/`).
   Kernfrage: HealthKit hat *keine* AppleScript/EventKit-Bridge wie Calendar/
   Reminders/Notes/Mail — Apple-Health-Sync braucht entweder eine native App, einen
   Shortcuts-CLI-Spike, oder bleibt v1 ganz außen vor (empfohlen: v1 lokal-only,
   Planer+Reminder+Adherence-Tracking steht als eigenständiger Wert). Name bewusst
   breiter als "medctl" gewählt, falls später allgemeines Health-Tracking dazukommt —
   das ist aber explizit nicht Teil von v1.
-- [ ] **investctl** — Aktien/Fonds-Tracking (`proposals/investctl/`), am
+- [x] **investctl** — Aktien/Fonds-Tracking (`proposals/investctl/`), am
   2026-07-30 bewusst von budgetctl abgegrenzt (kein Holdings/Kurs-Konzept im
   `Transaction`-Modell). Kernfrage: erstes Tool der Suite mit echter
   Drittanbieter-Netzwerk-Abhängigkeit (Kursdaten-API) — bricht bewusst mit dem
@@ -272,7 +272,7 @@ Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` =
   liefert keinen Verlauf), Drill-down `d`/`space` (read-only Liste der Karten-Einträge).
 
 ### D. Neue Tools
-- [ ] **healthctl**, **investctl** (siehe „Neue Tools“ oben, `proposals/`).
+- [x] **healthctl**, **investctl** (siehe „Neue Tools“ oben, `proposals/`).
 - [ ] Kleinere Kandidaten: Kontakte („wann zuletzt gesprochen“), Lese-/Linkliste,
   Fokus-Timer der timectl und habctl verbindet.
 

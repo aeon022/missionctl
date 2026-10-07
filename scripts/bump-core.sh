@@ -19,7 +19,7 @@ export GOCACHE="$(go env GOCACHE)" GOMODCACHE="$(go env GOMODCACHE)" GOPATH="$(g
 REAL_HOME="$HOME"; export HOME="$(mktemp -d)"; trap 'rm -rf "$HOME"' EXIT
 export GIT_CONFIG_GLOBAL="$REAL_HOME/.gitconfig"
 for v in $(env | cut -d= -f1 | grep -E '_(DATA_DIR|PROVIDER|API_KEY|REFRESH_TOKEN|HOST)$'); do unset "$v"; done
-for t in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl postctl missionctl; do
+for t in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl healthctl investctl postctl missionctl; do
   (
     cd "$t"
     go get github.com/aeon022/missionctl-core@main >/dev/null

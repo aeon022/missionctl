@@ -6,7 +6,7 @@
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
-ALL=(missionctl-core mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl postctl missionctl)
+ALL=(missionctl-core mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl healthctl investctl postctl missionctl)
 TOOLS=("${@:-${ALL[@]}}")
 
 # Go's caches live under the real HOME — pin them before HOME is swapped.

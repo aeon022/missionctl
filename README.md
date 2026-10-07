@@ -18,6 +18,8 @@ No SaaS. No cloud. No subscriptions. Your data stays on your machine.
 | [notectl](notectl/) | Read and write notes, daily notes — Obsidian, Apple Notes, or Joplin | 7 | Obsidian vault, Apple Notes, or Joplin (local Data API) |
 | [budgetctl](budgetctl/) | Track income & expenses, import bank CSVs, goals, subscriptions | 11 | Manual entries + bank CSV |
 | [habctl](habctl/) | Track habits, streaks, AI coaching reviews | 12 | Local SQLite |
+| [healthctl](healthctl/) | Medication planner: schedules, dose log, reminders (private data, never in search/activity) | MCP | Local SQLite (0600) |
+| [investctl](investctl/) | Stocks/funds/ETF portfolio tracker, Stooq prices | MCP | Local SQLite |
 | [timectl](timectl/) | Start/stop timers, weekly breakdown, invoice export | 4 | Local SQLite |
 | [diaryctl](diaryctl/) | Developer diary from git history, AI-written narrative | 5 | git repos + suite DBs |
 | [postctl](https://github.com/aeon022/postctl) | Schedule and publish social media posts | 7 | Local SQLite + platform APIs |
@@ -43,7 +45,7 @@ Already in this monorepo (submodules checked out)? Install everything, including
 Starting from scratch instead — clone each tool's own repo:
 
 ```bash
-for repo in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl postctl missionctl; do
+for repo in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl healthctl investctl postctl missionctl; do
   git clone https://github.com/aeon022/$repo && cd $repo && ./setup.sh && cd ..
 done
 ```
