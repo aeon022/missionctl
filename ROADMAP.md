@@ -424,9 +424,12 @@ ohne), Fußzeilen (1–2 Zeilen, `key:desc` vs `key desc`, verschiedene Trenner)
 - [x] **taskctl-Filter-Chips** (`Baby ×`, `P1 ×`, `overdue ×`), `f` zum Hinzufügen; Listen-Leiste mit Zählern ab ~140 Spalten; Mini-Übersicht im Detail-Panel, wenn nichts Besonderes gewählt ist.
 - [x] **Dashboard:** Karten füllen die Breite (3 Spalten ab ~150), unten Panel „Today“ mit Agenda + letzten Aktivitäten (`activity`-Log); neutrale Kartenrahmen mit farbigem Titel, Rot nur bei Dringlichkeit.
 
-**Runde 3 — übrige Tools aufs neue Layout:** diaryctl, calctl, mailctl, notectl, timectl, postctl (Header, Row, Panel, einzeilige Fußzeile, Detail ab 120 Spalten).
-- [ ] **Datumsformat vereinheitlichen** (`Tue 06 Oct` überall; heute drei Varianten).
-- [ ] **Farbdisziplin pro Zeile** (max. 2–3 Akzente; Kategorie dezent, Empfänger/Absender nicht in Link-Blau).
+**Runde 3 — übrige Tools aufs neue Layout (erledigt 2026-10-07):** diaryctl, calctl, mailctl, notectl, timectl, postctl (Header, Row, Panel, einzeilige Fußzeile, Detail ab 120 Spalten).
+- [x] **Datumsformat vereinheitlichen** (`Tue 06 Oct` überall; heute drei Varianten).
+- [x] **Farbdisziplin pro Zeile** (max. 2–3 Akzente; Kategorie dezent, Empfänger/Absender nicht in Link-Blau).
+
+- [x] Redesign nach Screenshot-Feedback 2026-10-07: budgetctl luftiger Kopf (Kennzahlen-Streifen), calctl neu (Pill-Wochenleiste, Kalenderpunkte, now-Linie, Monats-Minikalender), notectl Notebooks/Folders-Zeilen + durchgehende Auswahl, Dashboard-Titel/Kartenfarben themenfähig, gedimmter Text auf Auswahl lesbar.
+- [ ] Rest: Ansichten außer der Hauptliste (Detail-/Editor-/Formular-/Statistik-Ansichten) tragen noch das alte Kopfzeilen-Layout; notectl-Hover verliert Datum-/Pfadfarbe; taskctl-README-Tastentabellen teils älter als der Code; `ui.TabsLayout` (Spaltenbereiche für Klicks) in Core, damit die duplizierten Tab-Hit-Test-Helfer entfallen.
 
 ---
 
