@@ -106,6 +106,6 @@ scripts/bump-core.sh            # Tools auf gepushten Core heben (verweigert bei
 ## 6. Nächste sinnvolle Schritte
 
 1. Sichtprüfung im echten Terminal nach `TESTING.md` §5 (v. a. Dashboard bei der eigenen Fenstergröße).
-2. `gh run list` für `missionctl`, `healthctl` und `missionctl-cli` nach den letzten Pushes.
+2. CI des CLI-Repos (Submodule `missionctl`) nach `ae3375b` prüfen; healthctl (`dcc49fc`) und postctl (`b613b4d`) sind grün.
 3. `proposals/healthctl` und `proposals/investctl` als „umgesetzt“ markieren.
 4. Entscheiden, welche Roadmap-Punkte aus C/D als Nächstes drankommen.
