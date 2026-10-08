@@ -272,7 +272,7 @@ Einfaches, dann Tool-übergreifendes, dann neue Tools. `[x]` = erledigt, `[ ]` =
   liefert keinen Verlauf), Drill-down `d`/`space` (read-only Liste der Karten-Einträge).
 
 ### D. Neue Tools
-- [x] **healthctl**, **investctl** (siehe „Neue Tools“ oben, `proposals/`).
+- [x] **healthctl**, **investctl** (siehe „Neue Tools“ oben, `proposals/`; private Repos, Submodule, Dashboard-Karten, `notify`-Banner ohne Namen — 2026-10-08).
 - [ ] Kleinere Kandidaten: Kontakte („wann zuletzt gesprochen“), Lese-/Linkliste,
   Fokus-Timer der timectl und habctl verbindet.
 
@@ -317,14 +317,14 @@ in eigener Ansicht; darunter oft viel leerer Platz; zweizeilige Hinweisleiste).
 - [ ] **`:`-Befehlszeile mit Tab-Vervollständigung** und Verlauf (k9s); heute Palette ohne Verlauf.
 - [ ] **Fuzzy-Suche mit Treffer-Hervorhebung** überall gleich (fzf/atuin) und **Suche als Popup** über
   der Liste statt die Liste zu ersetzen.
-- [ ] **Kopfzeile mit Kontext** (k9s): aktives Profil/Konto/Ordner, Sync-Alter, Anzahl, Filter — in Core
+- [x] **Kopfzeile mit Kontext** (k9s): aktives Profil/Konto/Ordner, Sync-Alter, Anzahl, Filter — in Core
   als `header`-Baustein neben `statusbar`.
 - [ ] **Vorschau-Panel** (yazi): Detail rechts neben der Liste in mailctl, notectl, taskctl, diaryctl.
 - [ ] **Mini-Diagramme** (btop): Sparklines/Balken in timectl (Woche), habctl (Heatmap in der Liste),
   taskctl (erledigt pro Tag), diaryctl (Schreib-Streak).
 - [ ] **Themes** (btop/posting): zusätzlich zu `theme.yaml` Presets per Taste durchschalten, Vorschau live.
 - [ ] **Mausunterstützung ausbauen:** klickbare Footer-Hinweise, Tabs, Filter-Chips, Scrollbalken.
-- [ ] **Undo-Toast** („Gelöscht · `u` zum Rückgängig · 5 s“) einheitlich in Core statt je Tool.
+- [x] **Undo-Toast** („Gelöscht · `u` zum Rückgängig · 5 s“) einheitlich in Core statt je Tool.
 - [ ] **Leichte Animation** (btop): sanfte Zähl-Animation von Summen beim Monatswechsel, Spinner statt
   „loading…“ — nur wenn `reduce_motion` nicht gesetzt ist.
 
@@ -336,7 +336,7 @@ Ziel: alle 10 Tools sehen aus wie *ein* Produkt — ruhig, lesbar, mit Charakter
 gemeinsamer `ui`-Baustein in `missionctl-core` samt Showcase (`missionctl ui-demo`, alle Bausteine in
 allen Themes nebeneinander), dann Tool für Tool übernehmen (budgetctl und taskctl zuerst).
 
-### A. Gemeinsames Vokabular (`missionctl-core/ui`) — Bausteine fertig (2026-10-06), Übernahme in die Tools offen
+### A. Gemeinsames Vokabular (`missionctl-core/ui`) — Bausteine fertig (2026-10-06), in allen 12 Tools übernommen (Stand 2026-10-08)
 - [x] **Pills/Badges** (`[ overdue ]`, `● unread`, `P1`, Plattform-Marken): farbiger Hintergrund statt nacktem Wort.
 - [x] **Tastenkappen** im Footer (`enter` als invertiertes Feld, Beschriftung gedimmt) — ersetzt `key:text`.
 - [x] **Fortschrittsbalken** mit Achtel-Blöcken (`▏▎▍▌▋▊▉█`), Farbstufen (grün → amber → rot) für Budgetziele,
@@ -352,11 +352,11 @@ allen Themes nebeneinander), dann Tool für Tool übernehmen (budgetctl und task
 - [x] **`missionctl ui-demo`:** Showcase aller Bausteine, `--theme NAME` bzw. alle Presets nacheinander.
 
 ### B. Lesbarkeit der Listen
-- [ ] Auswahl als volle Zeile mit Akzentbalken statt nur Farbwechsel.
+- [x] Auswahl als volle Zeile mit Akzentbalken statt nur Farbwechsel.
 - [ ] Sanfte Zebra-Streifen oder Trenner nach Tag/Gruppe in langen Listen.
-- [ ] Relative Zeitangaben in Listen, exaktes Datum im Detail.
-- [ ] Zahlen rechtsbündig mit Farbsemantik; Sekundärtext gedimmt, Primärtext hell.
-- [ ] Mittel-Auslassung statt Abschneiden hinten; Spaltenköpfe in gedimmter Zeile (budgetctl hat keine).
+- [x] Relative Zeitangaben in Listen, exaktes Datum im Detail.
+- [x] Zahlen rechtsbündig mit Farbsemantik; Sekundärtext gedimmt, Primärtext hell.
+- [x] Mittel-Auslassung statt Abschneiden hinten; Spaltenköpfe in gedimmter Zeile (budgetctl hat keine).
 
 ### C. Pro Tool
 - [ ] **taskctl:** Fälligkeit als Pill (`today` amber, `overdue` rot), Priorität als Farbpunkt, Unteraufgaben-Fortschritt `▰▰▱`.
@@ -384,22 +384,22 @@ mit senkrechtem Trenner. Kopfzeilen (Einrückung 0/1/4, Datum `Tue, 06 Oct` vs `
 ohne), Fußzeilen (1–2 Zeilen, `key:desc` vs `key desc`, verschiedene Trenner) und Auswahlmarkierung
 (`▎`, Farbwechsel, nichts) unterscheiden sich.
 
-- [ ] **Ein Grundgerüst für alle:** Kopfzeile (`ui.Header`: Tool · Kontext · Datum/Sync) → Inhalt →
+- [x] **Ein Grundgerüst für alle:** Kopfzeile (`ui.Header`: Tool · Kontext · Datum/Sync) → Inhalt →
   einzeilige Statusleiste (`statusbar`); einheitliche Einrückung (2) und Datumsformat.
-- [ ] **Rahmen-Sprache:** kein Rahmen um die ganze App (habctl: entfernen oder abschaltbar); Rahmen nur
+- [x] **Rahmen-Sprache:** kein Rahmen um die ganze App (habctl: entfernen oder abschaltbar); Rahmen nur
   für **Panels mit Titel in der Rand-Zeile** (`╭─ Tasks ────╮`, Stil lazygit) — fokussiertes Panel mit
   Akzentfarbe, andere gedimmt; einheitlich abgerundet. Einstellung `borders: rounded|sharp|none`
   (`ui.yaml`).
-- [ ] **Breakpoints:** < 80 Spalten einspaltig, 80–119 Liste + Statusleiste, ≥ 120 Zweispalter
-  (Liste + Detail/Insights/Vorschau; notectl hat das schon).
-- [ ] **Einheitliche Tabs** (`ui.Tabs`: aktiver Tab als Pill, andere gedimmt, optional Zähler) für
+- [x] **Breakpoints:** < 80 Spalten einspaltig, 80–119 Liste + Statusleiste, ≥ 120 Zweispalter
+  (Liste + Detail/Insights/Vorschau; notectl hat das schon). _(per Smoke-Tests/Render geprüft, Live-Sichtprüfung offen)_
+- [x] **Einheitliche Tabs** (`ui.Tabs`: aktiver Tab als Pill, andere gedimmt, optional Zähler) für
   postctl-Tabs, budgetctl-Monate, mailctl-Konten, notectl-Notizbücher.
-- [ ] **Platz nutzen:** habctl — Detail/Heatmap-Panel rechts statt leerem Rahmen; timectl — rechter Kasten
+- [x] **Platz nutzen:** habctl — Detail/Heatmap-Panel rechts statt leerem Rahmen; timectl — rechter Kasten
   unten mit Wochenband; diaryctl — Vorschau des gewählten Eintrags statt doppelter „Recent Entries“-Liste;
-  postctl-Dashboard — Spalten nach Inhalt.
-- [ ] **Gruppen-Köpfe** mit Zähler als Pill (`Home ②`) über `ui.Divider(label)` (taskctl, calctl-Tage).
-- [ ] **Dauern knapp:** timectl `2h 0m 0s` → `2h`, `1h 05m` (`ui.Duration`); Summen/Ziel als Balken + Prozent.
-- [ ] **Auswahlzeile überall gleich** (`ui.Row`: Akzentbalken + Hintergrund), auch Hover.
+  postctl-Dashboard — Spalten nach Inhalt. _(per Smoke-Tests/Render geprüft, Live-Sichtprüfung offen)_
+- [x] **Gruppen-Köpfe** mit Zähler als Pill (`Home ②`) über `ui.Divider(label)` (taskctl, calctl-Tage).
+- [x] **Dauern knapp:** timectl `2h 0m 0s` → `2h`, `1h 05m` (`ui.Duration`); Summen/Ziel als Balken + Prozent.
+- [x] **Auswahlzeile überall gleich** (`ui.Row`: Akzentbalken + Hintergrund), auch Hover.
 - [x] Gefundene Fehler: postctl-Dashboard zeigte rohe Übersetzungs-Schlüssel (`stats_posted0`) →
   behoben + Test, der jeden `Tr()`-Schlüssel prüft (`e94a62d`); calctl druckte `00:00–00:00` vor
   `(no events)` an leeren Tagen → behoben (`31f2c08`).
@@ -429,7 +429,7 @@ ohne), Fußzeilen (1–2 Zeilen, `key:desc` vs `key desc`, verschiedene Trenner)
 - [x] **Farbdisziplin pro Zeile** (max. 2–3 Akzente; Kategorie dezent, Empfänger/Absender nicht in Link-Blau).
 
 - [x] Redesign nach Screenshot-Feedback 2026-10-07: budgetctl luftiger Kopf (Kennzahlen-Streifen), calctl neu (Pill-Wochenleiste, Kalenderpunkte, now-Linie, Monats-Minikalender), notectl Notebooks/Folders-Zeilen + durchgehende Auswahl, Dashboard-Titel/Kartenfarben themenfähig, gedimmter Text auf Auswahl lesbar.
-- [ ] Rest: Ansichten außer der Hauptliste (Detail-/Editor-/Formular-/Statistik-Ansichten) tragen noch das alte Kopfzeilen-Layout; notectl-Hover verliert Datum-/Pfadfarbe; taskctl-README-Tastentabellen teils älter als der Code; `ui.TabsLayout` (Spaltenbereiche für Klicks) in Core, damit die duplizierten Tab-Hit-Test-Helfer entfallen.
+- [x] Rest (erledigt 2026-10-07/08, `ui.TabsLayout` in Core `82edca7`, Nebenansichten in allen 10 Tools): Ansichten außer der Hauptliste (Detail-/Editor-/Formular-/Statistik-Ansichten) tragen noch das alte Kopfzeilen-Layout; notectl-Hover verliert Datum-/Pfadfarbe; taskctl-README-Tastentabellen teils älter als der Code; `ui.TabsLayout` (Spaltenbereiche für Klicks) in Core, damit die duplizierten Tab-Hit-Test-Helfer entfallen.
 
 ---
 

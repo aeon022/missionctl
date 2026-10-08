@@ -4,12 +4,11 @@ Quelle: `ponytail-audit` + `deadcode` + `go test -cover` über die ganze Suite.
 Nichts hiervon ist gepusht (Regel: lokal committen, Push nur auf Zuruf).
 Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 
-## ⚠ Stand vor dem Push
+## Stand 2026-10-08
 
-- `missionctl-core` ist **gepusht** (`5936b00`), alle Tools sind darauf gepinnt (`scripts/bump-core.sh`).
-- Alle **Tool-Repos sind lokal committet, aber nicht gepusht** (4–12 Commits vor `origin/main`), ebenso der Root.
-- Vor dem Push einmal **von Hand im Terminal prüfen** (nicht headless testbar): Rendering, Maus (Klick/Doppelklick/Hover/Rad), Alt-Screen, Hell/Dunkel-Farben, budgetctl-Dateiwähler, postctl-Boxen (`StyleBox` `+2`), diaryctl-Vim-Modus der Textfelder.
-- Reihenfolge: Tool-Repos pushen, dann Root (`git submodule`-Pointer sind committet).
+- Alles ist **gepusht** (Core `82edca7`, alle 12 Tool-Repos + Root); CI war nach dem letzten Push in Core, den 8 Tool-Repos, postctl, healthctl und investctl grün. Für die allerletzten Pushes (Dashboard-Fix `ae3375b`, healthctl `dcc49fc`) wurde die CI nicht abgewartet — `gh run list` prüfen.
+- Detaillierter Stand und Änderungsprotokoll: [stage.md](stage.md). Der Stand vom 2026-08-04 liegt in `docs/archive/stage-2026-08-04.md`.
+- Offen bleibt die **Sichtprüfung im echten Terminal** (Checkliste: `TESTING.md` Abschnitt 5).
 
 ## Erledigt (lokal committet)
 
@@ -63,12 +62,17 @@ Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 
 ## Offen
 
-- [ ] **Zeitstempel-Format `RFC3339Nano` als TEXT sortiert/verglichen** (habctl: behoben, Sortierung nach `id`; **timectl**: `started_at`-Sortierung/Bereiche haben dasselbe Risiko, praktisch nur relevant bei Einträgen im selben Sekundenbruchteil auf UTC-Rechnern, `Z` sortiert hinter Ziffern). Falls nötig: Fixed-Width-Layout (`.000000000`) fürs Schreiben.
+- [x] ~~Zeitstempel `RFC3339Nano` als TEXT~~ — timectl schreibt fixed-width (`writeLayout`) mit einmaliger Migration; habctl sortiert nach `id`.
 
-- [ ] **Sichtprüfung der v2-Migration** (siehe oben) — danach pushen.
+- [ ] **Sichtprüfung** (v2-Migration, drei Layout-Runden, healthctl/investctl) — gepusht ist bereits, Sichtprüfung steht aus: `TESTING.md` Abschnitt 5.
 - [ ] diaryctl `suite`: fremde Config-Layer außer `data_dir` werden nicht gelesen.
 - [ ] habctl: `skip_allowed` wird bei Weekly-Habits in der aktuellen Serie ignoriert (bewusst unverändert) — Produktentscheidung.
 - [ ] Abdeckung weiter: Render-/Mauscode der TUIs, postctl `platforms` Rest (Twitter-Cookie/chromedp, Browser-Auth, Threads-Bildupload), notectl `mirror`/`syncdispatch` (brauchen Notes/Joplin), budgetctl-Import-Assistent mit Dateiwähler, AppleScript-nahe Befehle.
 - [ ] Offene Beobachtungen: `budgetctl` liest weiter `./budgetctl.yaml` aus dem Arbeitsverzeichnis (spezifischer Name, bewusst belassen); postctl-OAuth-Callbacktest bindet festen Port 8753.
 - [ ] **Thunderbird-Backend (Linux)** in mailctl: laut README nicht gegen echte Installation getestet.
-- [ ] Produkt-Features aus `SUITE_AUDIT.md` (Snapshot): Unsubscribe-Helper, Gmail-OAuth.
+- [x] Unsubscribe-Helper (mailctl `U`) erledigt.
+- [ ] **Gmail-OAuth** (mailctl) — braucht eine Google-Cloud-Client-ID vom Nutzer; bewusst ausgenommen.
+- [ ] Neu 2026-10-08: habctl-Langansichten werden von `ui.Frame` auf winzigen Terminals abgeschnitten; postctl-Lade-/Fehlerbildschirme umgehen den Rahmen und einige deutsche `statusMessage`-Texte fehlen in `Tr()`; timectl-Eingabeprompts bleiben Fußzeilen-Prompts; notectl-Link-Graph scrollt nicht; taskctl zeigt die Done-Zahl erst nach dem Öffnen des Done-Tabs; Dashboard-Today-Panel ist nicht klickbar.
+- [ ] Unverifiziert (braucht Live-Test): echte Stooq-Kurse (investctl), `healthctl remind`-Benachrichtigungen, Farben/Maus im echten Terminal.
+- [ ] Dashboard-Raster: Invest-Karte hat keine Zifferntaste (nur 1–9); bei sehr niedrigen Terminals mit 10 Karten bleibt das Today-Panel ausgeblendet.
+- [ ] `proposals/healthctl` und `proposals/investctl` als „umgesetzt“ markieren.
