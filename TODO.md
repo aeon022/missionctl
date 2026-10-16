@@ -87,3 +87,5 @@ postctl ist gepusht (`b838b8b`), Core `f71f85d` auch. Für die übrigen Tools:
 - [ ] Unverifiziert (braucht Live-Test): echte Stooq-Kurse (investctl), `healthctl remind`-Benachrichtigungen, Farben/Maus im echten Terminal.
 - [ ] Dashboard-Raster: Invest-Karte hat keine Zifferntaste (nur 1–9); bei sehr niedrigen Terminals mit 10 Karten bleibt das Today-Panel ausgeblendet.
 - [ ] `proposals/healthctl` und `proposals/investctl` als „umgesetzt“ markieren.
+
+- [ ] postctl: neue Screenshots für postctl.sh und missionctl.sh (neue TUI: Kalender, Profile, Themes) — morgen
