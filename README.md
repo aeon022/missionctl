@@ -22,7 +22,7 @@ No SaaS. No cloud. No subscriptions. Your data stays on your machine.
 | [investctl](investctl/) | Stocks/funds/ETF portfolio tracker, Stooq prices | MCP | Local SQLite |
 | [timectl](timectl/) | Start/stop timers, weekly breakdown, invoice export | 4 | Local SQLite |
 | [diaryctl](diaryctl/) | Developer diary from git history, AI-written narrative | 5 | git repos + suite DBs |
-| [postctl](https://github.com/aeon022/postctl) | Schedule and publish social media posts | 7 | Local SQLite + platform APIs |
+| [postctl](https://github.com/aeon022/postctl) | Schedule and publish social media posts (Instagram, Facebook, Threads, X, LinkedIn, Bluesky, …) with profiles, calendar and a scheduler service | 7 | Local SQLite + platform APIs |
 
 Plus [missionctl](missionctl/), the umbrella CLI: bare `missionctl` opens a live dashboard TUI (8 cards, one per tool, with quick actions, sync-all, and an in-place agenda view), `missionctl agenda` merges today's calendar events, due tasks, and timer sessions into one timeline, `missionctl status` is the plain-text daily briefing, `missionctl doctor` checks installation/MCP registration/DB sync health, `missionctl init` is the setup wizard.
 
