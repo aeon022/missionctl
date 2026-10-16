@@ -60,6 +60,17 @@ Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 - **MCP-Result-Helper in Core:** `jsonResult` existiert nur in 2 Tools — spart ~20 Zeilen, nicht der Aufwand.
 - **`nlpdate`-Abdeckung:** meine erste Auswertung war falsch, das Paket hat 100 %.
 
+## Aus dem postctl-Update (2026-10-16) — Übertrag auf die anderen Tools (morgen)
+
+postctl ist gepusht (`b838b8b`), Core `f71f85d` auch. Für die übrigen Tools:
+
+- [ ] **Core bumpen** auf `f71f85d` (live Themes: `theme.Apply/Presets/Current/OnChange/Save`): mailctl, calctl, taskctl, notectl, budgetctl, timectl, diaryctl, healthctl, investctl, missionctl-cli (habctl behält seine eigene Palette).
+- [ ] **Theme-Zeile in den Settings** jedes Tools (Muster: postctl `cycleSettingDir` + `refreshStyles` über `theme.OnChange`). Achtung: Styles, die ein Tool auf Package-Ebene aus Theme-Farben baut (z. B. `dimStyle`), müssen beim Wechsel neu gebaut werden, sonst bleiben sie auf der alten Palette.
+- [ ] **Root-Zeiger** auf `missionctl-core` anheben (`git add missionctl-core && git commit`) — steht gerade als `M missionctl-core` offen.
+- [ ] **Testregel in jedem Tool:** `TestMain` mit Wegwerf-`HOME` (Vorlage: postctl `*/testmain_test.go`). Vorfall 2026-10-16: ein Test (Enter auf eine per Zeilennummer gewählte Settings-Zeile) überschrieb die echte `~/.config/postctl/config.yaml` und rief Mastodon im Netz auf. Alle Tools prüfen: Tests, die `Save*`/Config/`exec` ohne `t.Setenv("HOME")` nutzen; Settings-Zeilen in Tests nie per Index wählen.
+- [ ] **UI-Ideen aus postctl zum Übertragen:** Gesundheits-Panel (Token-/Sync-Alter), einheitliche `:`-Palette, Spinner nur während des Ladens, Logs-Kopfbereich, Settings als mehrere umrandete Bereiche, Klick-Raster mit gemeinsamem Layout für Zeichnen und Hit-Test (Kalender-Muster), Onboarding-Checkliste im leeren Dashboard.
+- [ ] stage.md / ROADMAP für die Suite nachziehen (postctl: Kalender-Tab, Profil-Schutz, Editor-Vorschau, Composer, Stats, Palette, Suche).
+
 ## Offen
 
 - [x] ~~Zeitstempel `RFC3339Nano` als TEXT~~ — timectl schreibt fixed-width (`writeLayout`) mit einmaliger Migration; habctl sortiert nach `id`.
