@@ -910,11 +910,11 @@ habctl mcp                           # start MCP server`}</code></pre>
       <!-- ── POSTCTL ───────────────────────── -->
       <h2 id="postctl">postctl</h2>
       <p>
-        <span class="lang-en">Social media scheduling for Threads, Bluesky, Mastodon, Twitter, LinkedIn, Telegram, and Discord. Manage posts,
-        campaigns, and drafts from your terminal.
+        <span class="lang-en">Social media scheduling for Instagram, Facebook, Threads, X, LinkedIn, Bluesky, Mastodon, Telegram, and Discord. Manage posts,
+        campaigns, and drafts from your terminal — with separate profiles per account, a calendar view, and a per-profile scheduler service.
         Available at <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:var(--color-terminal-green);">postctl.sh</a>.</span>
-        <span class="lang-de">Social-Media-Planung für Threads, Bluesky, Mastodon, Twitter, LinkedIn, Telegram und Discord. Verwalte Posts,
-        Kampagnen und Entwürfe direkt aus dem Terminal.
+        <span class="lang-de">Social-Media-Planung für Instagram, Facebook, Threads, X, LinkedIn, Bluesky, Mastodon, Telegram und Discord. Verwalte Posts,
+        Kampagnen und Entwürfe direkt aus dem Terminal — mit getrennten Profilen pro Konto, Kalenderansicht und Scheduler-Dienst pro Profil.
         Verfügbar unter <a href="https://postctl.sh" target="_blank" rel="noopener" style="color:var(--color-terminal-green);">postctl.sh</a>.</span>
       </p>
 
@@ -963,6 +963,7 @@ postctl mcp                          # start MCP server`}</code></pre>
         <li><span class="lang-en"><strong>Queue spacing:</strong> Scheduled queue slots are spaced out automatically.</span><span class="lang-de"><strong>Warteschlangen-Abstand:</strong> Geplante Slots werden automatisch zeitlich verteilt.</span></li>
         <li><span class="lang-en"><strong>Overdue protection:</strong> If multiple scheduled posts become overdue (e.g., system was offline), only the oldest is posted immediately. The subsequent posts are automatically rescheduled in 20-minute intervals.</span><span class="lang-de"><strong>Überfälligkeitsschutz:</strong> Werden mehrere geplante Posts überfällig (z.B. weil das System offline war), wird nur der älteste sofort gepostet. Die restlichen werden automatisch in 20-Minuten-Intervallen neu geplant.</span></li>
         <li><span class="lang-en"><strong>Safe remote deletion:</strong> Deleting a post locally automatically issues API delete calls to the remote platforms to keep feeds in sync.</span><span class="lang-de"><strong>Sichere Remote-Löschung:</strong> Das lokale Löschen eines Posts löst automatisch API-Löschaufrufe an die Plattformen aus, um die Feeds synchron zu halten.</span></li>
+        <li><span class="lang-en"><strong>X minimum gap:</strong> At least 60 minutes must pass between two published X posts; a post that comes due earlier waits for a later check.</span><span class="lang-de"><strong>X-Mindestabstand:</strong> Zwischen zwei veröffentlichten X-Posts liegen mindestens 60 Minuten; ein früher fälliger Post wartet auf einen späteren Check.</span></li>
       </ul>
 
       <h3><span class="lang-en">MCP tools</span><span class="lang-de">MCP-Tools</span></h3>
