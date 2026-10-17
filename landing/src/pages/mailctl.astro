@@ -6,7 +6,7 @@ const mcpTools = [
   { name: "inbox", desc: "List recent inbox messages — sender, subject, date, read status, body preview" },
   { name: "search_email", desc: "Search emails by keyword across subject, sender, and body" },
   { name: "email_thread", desc: "Retrieve all messages in a thread, matched by subject" },
-  { name: "send_email", desc: "Send an email via your mail client (user confirms before sending)" },
+  { name: "send_email", desc: "Send an email — disabled by default: without MAILCTL_MCP_ALLOW_SEND=1 it only saves a draft for you to review" },
   { name: "draft_email", desc: "Save an email to Drafts for review before sending" },
   { name: "sync_inbox", desc: "Sync the inbox from your mail client into the local cache" },
 ];

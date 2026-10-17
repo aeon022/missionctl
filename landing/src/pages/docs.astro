@@ -1088,6 +1088,10 @@ q       quit`}</code></pre>
 
       <!-- ── MCP REFERENCE ─────────────────── -->
       <h2 id="mcp-reference"><span class="lang-en">MCP Reference</span><span class="lang-de">MCP-Referenz</span></h2>
+      <p style="margin-bottom: 1rem;">
+        <span class="lang-en"><strong>Safety by default:</strong> an AI agent that reads untrusted text can be tricked, so <code>send_email</code> only saves a draft unless you set <code>MAILCTL_MCP_ALLOW_SEND=1</code> in the MCP server's environment, postctl's publish/schedule tools need <code>POSTCTL_MCP_ALLOW_PUBLISH=1</code>, and every <code>delete_*</code> tool requires <code>confirm=true</code> (the model must ask you first).</span>
+        <span class="lang-de"><strong>Sicher als Standard:</strong> Ein KI-Agent, der fremde Texte liest, lässt sich austricksen. Darum speichert <code>send_email</code> nur einen Entwurf, außer du setzt <code>MAILCTL_MCP_ALLOW_SEND=1</code> in der Umgebung des MCP-Servers; die Veröffentlichen-/Planen-Tools von postctl brauchen <code>POSTCTL_MCP_ALLOW_PUBLISH=1</code>, und jedes <code>delete_*</code>-Tool verlangt <code>confirm=true</code> (das Modell muss dich vorher fragen).</span>
+      </p>
       <p><span class="lang-en">All 67 tools grouped by app. Each tool is callable from Claude Desktop once the config is in place.</span><span class="lang-de">Alle 67 Tools nach App gruppiert. Jedes Tool ist aus Claude Desktop aufrufbar, sobald die Config eingerichtet ist.</span></p>
 
       {[
@@ -1095,7 +1099,7 @@ q       quit`}</code></pre>
           ['inbox', 'List recent inbox messages with sender, subject, preview'],
           ['search_email', 'Search by keyword across subject, sender, body'],
           ['email_thread', 'Get all messages in a thread matched by subject'],
-          ['send_email', 'Send an email via Apple Mail'],
+          ['send_email', 'Send an email via Apple Mail (opt-in: MAILCTL_MCP_ALLOW_SEND=1, otherwise saves a draft)'],
           ['draft_email', 'Save a composed message to Apple Mail Drafts'],
           ['sync_inbox', 'Sync from Apple Mail into local cache'],
         ]},
