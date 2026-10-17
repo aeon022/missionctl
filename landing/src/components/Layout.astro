@@ -12,7 +12,6 @@ import '@fontsource/jetbrains-mono/latin-600.css';
 import '@fontsource/jetbrains-mono/latin-700.css';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
-import CookieNotice from './CookieNotice.astro';
 import AnnouncementBar from './AnnouncementBar.astro';
 import StickyPricingBar from './StickyPricingBar.astro';
 import { ClientRouter } from 'astro:transitions';
@@ -210,6 +209,19 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
     <!-- LLM-readable site summary -->
     <link rel="llms.txt" href="/llms.txt" />
 
+
+    <script is:inline>
+      // Scroll reveal for every section after the hero (re-run after each ClientRouter navigation).
+      document.addEventListener('astro:page-load', function () {
+        if (!('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var secs = Array.prototype.slice.call(document.querySelectorAll('main > section')).slice(1);
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        secs.forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+      });
+    </script>
+
     <!-- Page transitions -->
     <ClientRouter />
   </head>
@@ -235,7 +247,6 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
       <slot />
     </main>
     <Footer />
-    <CookieNotice />
     <StickyPricingBar />
 
     <!-- Back to top — circular scroll-progress ring -->

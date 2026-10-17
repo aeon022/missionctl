@@ -18,7 +18,7 @@ import Layout from '../components/Layout.astro';
 
       <section style="margin-bottom: 2.5rem;">
         <h2 style="font-size: 1.2rem; font-weight: 700; color: var(--color-terminal-text); margin: 0 0 1rem;"><span class="lang-en">What are cookies?</span><span class="lang-de">Was sind Cookies?</span></h2>
-        <p><span class="lang-en">Cookies are small text files stored in your browser. This site uses localStorage (similar to cookies) to remember your preferences. We do not use any third-party tracking cookies.</span><span class="lang-de">Cookies sind kleine Textdateien, die in deinem Browser gespeichert werden. Diese Website nutzt localStorage (ähnlich wie Cookies), um deine Einstellungen zu speichern. Wir verwenden keine Tracking-Cookies von Drittanbietern.</span></p>
+        <p><span class="lang-en">Cookies are small text files stored in your browser. This site uses localStorage (similar to cookies) only to remember the preferences you choose (theme, closed announcement bar). We set no cookies and use no tracking, so no cookie banner is needed.</span><span class="lang-de">Cookies sind kleine Textdateien, die in deinem Browser gespeichert werden. Diese Website nutzt localStorage (ähnlich wie Cookies), um deine Einstellungen zu speichern. Wir verwenden keine Tracking-Cookies von Drittanbietern.</span></p>
       </section>
 
       <section style="margin-bottom: 2.5rem;">
@@ -35,12 +35,6 @@ import Layout from '../components/Layout.astro';
               </tr>
             </thead>
             <tbody>
-              <tr style="border-bottom: 1px solid var(--color-terminal-border); background: var(--color-terminal-surface);">
-                <td style="padding: 0.75rem 1rem; color: var(--color-terminal-green); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-word;">cookie-accepted</td>
-                <td style="padding: 0.75rem 1rem; color: var(--color-terminal-text); font-size: 0.85rem; word-break: break-word;"><span class="lang-en">Essential</span><span class="lang-de">Essenziell</span></td>
-                <td style="padding: 0.75rem 1rem; color: var(--color-terminal-dim); word-break: break-word;"><span class="lang-en">Remembers that you acknowledged the cookie notice</span><span class="lang-de">Speichert, dass du den Cookie-Hinweis bestätigt hast</span></td>
-                <td style="padding: 0.75rem 1rem; color: var(--color-terminal-dim); font-size: 0.85rem; word-break: break-word;"><span class="lang-en">Persistent (localStorage)</span><span class="lang-de">Dauerhaft (localStorage)</span></td>
-              </tr>
               <tr style="border-bottom: 1px solid var(--color-terminal-border); background: var(--color-terminal-surface);">
                 <td style="padding: 0.75rem 1rem; color: var(--color-terminal-green); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-word;">missionctl_theme</td>
                 <td style="padding: 0.75rem 1rem; color: var(--color-terminal-text); font-size: 0.85rem; word-break: break-word;"><span class="lang-en">Preference</span><span class="lang-de">Einstellung</span></td>
@@ -71,8 +65,8 @@ import Layout from '../components/Layout.astro';
 
       <section style="margin-bottom: 2.5rem;">
         <h2 style="font-size: 1.2rem; font-weight: 700; color: var(--color-terminal-text); margin: 0 0 1rem;"><span class="lang-en">How to clear cookies / localStorage</span><span class="lang-de">Cookies / localStorage löschen</span></h2>
-        <p><span class="lang-en">To clear the cookie notice setting, open your browser's developer tools, go to Application &rarr; Local Storage &rarr; missionctl.sh, and delete the <code style="font-family: 'JetBrains Mono', monospace; background: var(--color-terminal-surface); padding: 0.1em 0.4em; border-radius: 3px; color: var(--color-terminal-green);">cookie-accepted</code> entry.</span>
-        <span class="lang-de">Um die Cookie-Hinweis-Einstellung zu löschen, öffne die Entwicklertools deines Browsers, gehe zu Application &rarr; Local Storage &rarr; missionctl.sh und lösche den Eintrag <code style="font-family: 'JetBrains Mono', monospace; background: var(--color-terminal-surface); padding: 0.1em 0.4em; border-radius: 3px; color: var(--color-terminal-green);">cookie-accepted</code>.</span></p>
+        <p><span class="lang-en">To clear your saved preferences, open your browser's developer tools, go to Application &rarr; Local Storage &rarr; missionctl.sh and delete the <code style="font-family: 'JetBrains Mono', monospace; background: var(--color-terminal-surface); padding: 0.1em 0.4em; border-radius: 3px; color: var(--color-terminal-green);">missionctl_*</code> entries.</span>
+        <span class="lang-de">Um deine gespeicherten Einstellungen zu löschen, öffne die Entwicklertools deines Browsers, gehe zu Application &rarr; Local Storage &rarr; missionctl.sh und lösche die Einträge <code style="font-family: 'JetBrains Mono', monospace; background: var(--color-terminal-surface); padding: 0.1em 0.4em; border-radius: 3px; color: var(--color-terminal-green);">missionctl_*</code>.</span></p>
       </section>
 
       <section>
