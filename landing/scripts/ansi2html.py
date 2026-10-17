@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ANSI screenshot -> HTML fragment (inline-styled spans). Usage: ansi2html.py in.ansi > out.html"""
-import html, re, sys
+import html, re, sys, unicodedata
 
 P16 = ["#1e1e2e", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#cba6f7", "#94e2d5", "#bac2de",
        "#585b70", "#f38ba8", "#a6e3a1", "#f9e2af", "#89b4fa", "#cba6f7", "#94e2d5", "#cdd6f4"]
@@ -13,6 +13,19 @@ def c256(n):
         f = lambda v: 0 if v == 0 else 55 + 40 * v
         return "#%02x%02x%02x" % (f(r), f(g), f(b))
     v = 8 + 10 * (n - 232); return "#%02x%02x%02x" % (v, v, v)
+
+def pin(text):
+    """HTML-escape text; pin every glyph a mono font may not give exactly 1 cell (emoji, symbols) to a fixed
+    width (2ch for wide emoji, 1ch otherwise) so the box-drawing borders line up like in the real terminal."""
+    out = []
+    for ch in text:
+        o = ord(ch)
+        if ch.isascii() or 0x00A0 <= o <= 0x024F or 0x2010 <= o <= 0x2027 or 0x2500 <= o <= 0x259F:
+            out.append(html.escape(ch))
+        else:
+            w = 2 if unicodedata.east_asian_width(ch) in ("W", "F") else 1
+            out.append('<span style="display:inline-block;vertical-align:top;width:%dch;height:1.32em;line-height:1.32em;text-align:center;overflow:hidden">%s</span>' % (w, html.escape(ch)))
+    return "".join(out)
 
 def convert(text):
     st = dict(fg=None, bg=None, bold=False, dim=False, ul=False, it=False, rev=False)
@@ -31,7 +44,7 @@ def convert(text):
     def emit(s):
         if not s: return
         css = style()
-        s = html.escape(s)
+        s = pin(s)
         out.append('<span style="%s">%s</span>' % (css, s) if css else s)
     for m in re.finditer(r"\x1b\[([0-9;:]*)([A-Za-z])|\x1b\][^\x07\x1b]*(?:\x07|\x1b\\)|\x1b[()][A-Za-z0-9]", text):
         emit(text[pos:m.start()]); pos = m.end()

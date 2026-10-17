@@ -601,27 +601,32 @@ pre { position: relative; }
 .mock-window { container-type: inline-size; background: #11111b; border: 1px solid var(--color-terminal-border); border-radius: 12px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,.35); }
 .mock-chrome { display: flex; align-items: center; gap: 6px; padding: .55rem .8rem; background: #181825; border-bottom: 1px solid #2a2b3a; }
 .mock-title { margin-left: .6rem; font-family: var(--font-mono); font-size: .72rem; color: rgba(255,255,255,.45); }
-.mock-pre { margin: 0; padding: .9rem 1rem 1.1rem; overflow-x: auto; background: #11111b; color: #cdd6f4; font-family: var(--font-mono); font-size: clamp(5px, 1.3cqw, 12px); line-height: 1.32; white-space: pre; }
+.mock-pre { margin: 0; padding: .9rem 1rem 1.1rem; overflow-x: auto; background: #11111b; color: #cdd6f4; font-family: 'JB Mock', var(--font-mono); font-size: clamp(5px, 1.3cqw, 12px); line-height: 1.32; white-space: pre; }
 @media (max-width: 760px) { .mock-pre { font-size: 8.5px; } }
 kbd { font-family: var(--font-mono); font-size: .85em; padding: .05em .4em; border: 1px solid var(--color-terminal-border); border-radius: 4px; background: var(--color-terminal-code-bg); color: var(--color-terminal-text); }
 
 /* Moving selection on the dashboard mockup: walks through the cards like a user pressing the arrow keys. */
 .mock-body { position: relative; }
-.mock-hl { position: absolute; top: 0; left: 0; width: 0; height: 0; pointer-events: none; border: 2px solid var(--color-terminal-green); border-radius: 4px; background: rgba(var(--color-terminal-green-rgb), .07); box-shadow: 0 0 18px rgba(var(--color-terminal-green-rgb), .25); font-family: var(--font-mono); font-size: clamp(5px, 1.3cqw, 12px); animation: mock-hl-walk 18s steps(1, end) infinite; }
+.mock-hl { position: absolute; top: 0; left: 0; width: 0; height: 0; pointer-events: none; border: 2px solid var(--color-terminal-green); border-radius: 4px; background: rgba(var(--color-terminal-green-rgb), .07); box-shadow: 0 0 18px rgba(var(--color-terminal-green-rgb), .25); font-family: 'JB Mock', var(--font-mono); font-size: clamp(5px, 1.3cqw, 12px); animation: mock-hl-walk 18s steps(1, end) infinite; }
 @keyframes mock-hl-walk {
-  0.00% { top: calc(.9rem + 4 * 1.32em); left: calc(1rem + 2ch); width: 40ch; height: calc(6 * 1.32em); }
-  11.11% { top: calc(.9rem + 4 * 1.32em); left: calc(1rem + 45ch); width: 40ch; height: calc(6 * 1.32em); }
-  22.22% { top: calc(.9rem + 4 * 1.32em); left: calc(1rem + 88ch); width: 40ch; height: calc(6 * 1.32em); }
-  33.33% { top: calc(.9rem + 10 * 1.32em); left: calc(1rem + 2ch); width: 40ch; height: calc(6 * 1.32em); }
-  44.44% { top: calc(.9rem + 10 * 1.32em); left: calc(1rem + 45ch); width: 40ch; height: calc(6 * 1.32em); }
-  55.56% { top: calc(.9rem + 10 * 1.32em); left: calc(1rem + 88ch); width: 40ch; height: calc(6 * 1.32em); }
-  66.67% { top: calc(.9rem + 16 * 1.32em); left: calc(1rem + 2ch); width: 40ch; height: calc(6 * 1.32em); }
-  77.78% { top: calc(.9rem + 16 * 1.32em); left: calc(1rem + 45ch); width: 40ch; height: calc(6 * 1.32em); }
-  88.89% { top: calc(.9rem + 22 * 1.32em); left: calc(1rem + 2ch); width: 83ch; height: calc(8 * 1.32em); }
-  }
+  0.00% { top: calc(.9rem + 3.5 * 1.32em); left: calc(1rem + 2.5ch); width: 39ch; height: calc(5 * 1.32em); }
+  11.11% { top: calc(.9rem + 3.5 * 1.32em); left: calc(1rem + 45.5ch); width: 39ch; height: calc(5 * 1.32em); }
+  22.22% { top: calc(.9rem + 3.5 * 1.32em); left: calc(1rem + 88.5ch); width: 39ch; height: calc(5 * 1.32em); }
+  33.33% { top: calc(.9rem + 9.5 * 1.32em); left: calc(1rem + 2.5ch); width: 39ch; height: calc(5 * 1.32em); }
+  44.44% { top: calc(.9rem + 9.5 * 1.32em); left: calc(1rem + 45.5ch); width: 39ch; height: calc(5 * 1.32em); }
+  55.56% { top: calc(.9rem + 9.5 * 1.32em); left: calc(1rem + 88.5ch); width: 39ch; height: calc(5 * 1.32em); }
+  66.67% { top: calc(.9rem + 15.5 * 1.32em); left: calc(1rem + 2.5ch); width: 39ch; height: calc(5 * 1.32em); }
+  77.78% { top: calc(.9rem + 15.5 * 1.32em); left: calc(1rem + 45.5ch); width: 39ch; height: calc(5 * 1.32em); }
+  88.89% { top: calc(.9rem + 21.5 * 1.32em); left: calc(1rem + 2.5ch); width: 82ch; height: calc(7 * 1.32em); }
+}
 @media (max-width: 760px) { .mock-hl { display: none; } }
 
 /* Sections fade/rise in as they scroll into view (added by the script in Layout.astro). */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.16,1,.3,1); }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .mock-hl { animation: none; display: none; } .reveal { opacity: 1; transform: none; transition: none; } }
+
+/* Full JetBrains Mono (OFL) for the TUI mockups: the npm subsets lack box-drawing/block glyphs, so the borders
+   fell back to a system font and broke (gaps between rows). */
+@font-face { font-family: 'JB Mock'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/JetBrainsMono-Regular.woff2) format('woff2'); }
+@font-face { font-family: 'JB Mock'; font-style: normal; font-weight: 700; font-display: swap; src: url(/fonts/JetBrainsMono-Bold.woff2) format('woff2'); }

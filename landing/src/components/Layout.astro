@@ -352,7 +352,7 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
       });
 
       // ── Copy buttons on all <pre> elements ───────────────────
-      document.querySelectorAll('pre').forEach(pre => {
+      document.querySelectorAll('pre:not(.mock-pre)').forEach(pre => { // TUI mockups are pictures, not code to copy
         const btn = document.createElement('button');
         btn.className = 'copy-btn';
         btn.textContent = 'Copy';
