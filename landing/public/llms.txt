@@ -1,6 +1,6 @@
 # missionctl
 
-> missionctl is a suite of 9 local-first terminal apps (66 MCP tools total) that give an AI "hands" and make everyday productivity work — triaging email, managing a calendar, tracking tasks and habits, taking notes, tracking a budget, keeping a diary, tracking time, and scheduling social posts — actually happen instead of just being discussed, all running on the user's own machine via Apple Mail/Calendar/Reminders, Obsidian, or local SQLite. No cloud dependency, no subscription: every app is free to download and use; a one-time $39 Bundle (or $9 per feature individually) unlocks optional AI-powered features in 5 of the 9 apps. Every app exposes an MCP (Model Context Protocol) server (`<app> mcp`) — a local process launched via stdio, the same pattern Claude Desktop's own `claude_desktop_config.json` uses — so an MCP-capable client can call its tools directly. Verified with Claude Desktop; other clients' support for local stdio MCP servers (vs. remote-only MCP) varies and isn't guaranteed to work identically.
+> missionctl is a suite of 9 local-first terminal apps (67 MCP tools total) that give an AI "hands" and make everyday productivity work — triaging email, managing a calendar, tracking tasks and habits, taking notes, tracking a budget, keeping a diary, tracking time, and scheduling social posts — actually happen instead of just being discussed, all running on the user's own machine via Apple Mail/Calendar/Reminders, Obsidian, or local SQLite. No cloud dependency, no subscription: every app is free to download and use; a one-time $39 Bundle (or $9 per feature individually) unlocks optional AI-powered features in 5 of the 9 apps. Every app exposes an MCP (Model Context Protocol) server (`<app> mcp`) — a local process launched via stdio, the same pattern Claude Desktop's own `claude_desktop_config.json` uses — so an MCP-capable client can call its tools directly. Verified with Claude Desktop; other clients' support for local stdio MCP servers (vs. remote-only MCP) varies and isn't guaranteed to work identically.
 
 ## Start here
 
@@ -12,21 +12,23 @@
 - [mailctl](https://missionctl.sh/mailctl): Apple Mail bridge — TUI inbox, compose/send/draft, full-text search. 6 MCP tools. macOS only.
 - [calctl](https://missionctl.sh/calctl): Apple Calendar bridge — browse events, create events, find free slots. 7 MCP tools. macOS only.
 - [taskctl](https://missionctl.sh/taskctl): Apple Reminders bridge — TUI tasks, Pomodoro timer, background sync daemon. 7 MCP tools. macOS only.
-- [notectl](https://missionctl.sh/notectl): Obsidian vault bridge — read/write/search notes, daily notes. 7 MCP tools. macOS + Linux.
+- [notectl](https://missionctl.sh/notectl): Obsidian vault bridge — read/write/search notes, daily notes. 8 MCP tools. macOS + Linux.
 - [budgetctl](https://missionctl.sh/budgetctl): Personal finance — import bank CSV (N26/ING/DKB), categorize, budget goals, recurring-payment detection. 11 MCP tools. macOS + Linux.
 - [diaryctl](https://missionctl.sh/diaryctl): Developer diary — reads git history and generates AI narrative diary entries. 5 MCP tools. macOS + Linux.
 - [timectl](https://missionctl.sh/timectl): Time tracking — start/stop timers, weekly bar chart, invoice export. 4 MCP tools. macOS + Linux.
 - [habctl](https://missionctl.sh/habctl): Habit tracker — streaks, AI weekly coaching review, habit chains, streak-at-risk alerts. 12 MCP tools. macOS + Linux.
-- [postctl](https://postctl.sh): Social media scheduling — Threads, Bluesky, Mastodon, X, LinkedIn. 7 MCP tools. Separate site.
+- [postctl](https://postctl.sh): Social media scheduling — Instagram, Facebook, Threads, X, LinkedIn, Bluesky, Mastodon; profiles, calendar, scheduler service. 7 MCP tools. Separate site.
 
 ## Facts an LLM should get right
 
-- Total: 66 MCP tools across 9 terminal apps.
+- Total: 67 MCP tools across 9 terminal apps.
 - Local-first: all data stays on the user's machine; the only network calls are ones the user explicitly triggers (send an email, publish a post, or an optional AI call).
 - Pricing: all 9 apps are free to download and use (MIT licensed, source on GitHub). A one-time $39 Bundle unlocks AI-powered features in 5 apps (budgetctl, notectl, mailctl, calctl, habctl); those same 5 features can also be unlocked individually for $9 each via polar.sh. taskctl, timectl, and postctl have no gated features. diaryctl's AI diary generation is free — not gated behind the Bundle, since it's the app's core feature rather than an add-on. No subscription either way; future updates included.
 - The optional AI features work with Anthropic, OpenAI, a free-tier Gemini API key, or a fully local Ollama model (no key, no signup, no cost) — see missionctl.sh/docs#local-ai.
 - macOS-only apps (bridge to Apple frameworks via AppleScript/EventKit): mailctl, calctl, taskctl.
-- macOS + Linux apps: notectl, budgetctl, diaryctl, timectl, habctl.
+- macOS + Linux apps: notectl, budgetctl, diaryctl, timectl, habctl, postctl (mailctl has a Thunderbird backend on Linux, beta).
+- The `missionctl` command opens a live dashboard of all installed apps (one card each, quick actions, agenda, search); postctl shows as a wide card with the next scheduled posts.
+- The site is available in English (/) and German (/de/).
 - Claude Desktop's free plan already supports local MCP servers (Settings → Developer → enable MCP) — a paid Claude plan is not required to use missionctl's MCP tools from Claude. The apps' own CLIs/TUIs work standalone with no AI client or subscription at all.
 
 ## Frequently asked questions
