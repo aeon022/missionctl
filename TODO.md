@@ -64,10 +64,10 @@ Lokal testen ohne `setup.sh`: siehe [TESTING.md](TESTING.md).
 
 postctl ist gepusht (`b838b8b`), Core `f71f85d` auch. Für die übrigen Tools:
 
-- [ ] **Core bumpen** auf `f71f85d` (live Themes: `theme.Apply/Presets/Current/OnChange/Save`): mailctl, calctl, taskctl, notectl, budgetctl, timectl, diaryctl, healthctl, investctl, missionctl-cli (habctl behält seine eigene Palette).
+- [x] ~~**Core bumpen** auf `f71f85d`~~ — erledigt 2026-10-17 (alle Tools sind auf Core `9de8a0e`, das f71f85d enthält); ursprünglich: (live Themes: `theme.Apply/Presets/Current/OnChange/Save`): mailctl, calctl, taskctl, notectl, budgetctl, timectl, diaryctl, healthctl, investctl, missionctl-cli (habctl behält seine eigene Palette).
 - [ ] **Theme-Zeile in den Settings** jedes Tools (Muster: postctl `cycleSettingDir` + `refreshStyles` über `theme.OnChange`). Achtung: Styles, die ein Tool auf Package-Ebene aus Theme-Farben baut (z. B. `dimStyle`), müssen beim Wechsel neu gebaut werden, sonst bleiben sie auf der alten Palette.
-- [ ] **Root-Zeiger** auf `missionctl-core` anheben (`git add missionctl-core && git commit`) — steht gerade als `M missionctl-core` offen.
-- [ ] **Testregel in jedem Tool:** `TestMain` mit Wegwerf-`HOME` (Vorlage: postctl `*/testmain_test.go`). Vorfall 2026-10-16: ein Test (Enter auf eine per Zeilennummer gewählte Settings-Zeile) überschrieb die echte `~/.config/postctl/config.yaml` und rief Mastodon im Netz auf. Alle Tools prüfen: Tests, die `Save*`/Config/`exec` ohne `t.Setenv("HOME")` nutzen; Settings-Zeilen in Tests nie per Index wählen.
+- [x] ~~**Root-Zeiger** auf `missionctl-core` anheben~~ — mit dem Sicherheits-Commit erledigt; ursprünglich: (`git add missionctl-core && git commit`) — steht gerade als `M missionctl-core` offen.
+- [~] **Testregel in jedem Tool:** *teilweise* — Core `syncdir` entfernt in jedem Test-Binary die exportierten `*_DATA_DIR`-Variablen (2026-10-17). Offen: `TestMain` mit Wegwerf-`HOME` pro Paket. Ursprünglich: `TestMain` mit Wegwerf-`HOME` (Vorlage: postctl `*/testmain_test.go`). Vorfall 2026-10-16: ein Test (Enter auf eine per Zeilennummer gewählte Settings-Zeile) überschrieb die echte `~/.config/postctl/config.yaml` und rief Mastodon im Netz auf. Alle Tools prüfen: Tests, die `Save*`/Config/`exec` ohne `t.Setenv("HOME")` nutzen; Settings-Zeilen in Tests nie per Index wählen.
 - [ ] **UI-Ideen aus postctl zum Übertragen:** Gesundheits-Panel (Token-/Sync-Alter), einheitliche `:`-Palette, Spinner nur während des Ladens, Logs-Kopfbereich, Settings als mehrere umrandete Bereiche, Klick-Raster mit gemeinsamem Layout für Zeichnen und Hit-Test (Kalender-Muster), Onboarding-Checkliste im leeren Dashboard.
 - [ ] stage.md / ROADMAP für die Suite nachziehen (postctl: Kalender-Tab, Profil-Schutz, Editor-Vorschau, Composer, Stats, Palette, Suche).
 
@@ -89,3 +89,7 @@ postctl ist gepusht (`b838b8b`), Core `f71f85d` auch. Für die übrigen Tools:
 - [ ] `proposals/healthctl` und `proposals/investctl` als „umgesetzt“ markieren.
 
 - [ ] postctl: neue Screenshots für postctl.sh und missionctl.sh (neue TUI: Kalender, Profile, Themes) — morgen
+
+## Sicherheits-Audit der Suite (2026-10-17) — Stand
+Behoben (lokal committet, siehe `git log` je Tool): owner-only Dateien (Core `secure.Init`, Aktivitätslog 0600), mailctl `send_email` nur per Opt-in (`MAILCTL_MCP_ALLOW_SEND=1`), taskctl AppleScript-Escaping in der Pomodoro-Benachrichtigung, notectl `Write` nur innerhalb des Vaults, `confirm=true` für alle `delete_*`-MCP-Tools, budgetctl Import nur CSV/TSV/TXT, Lizenz-HTTP mit Timeout.
+Bewusst offen: `syncdir.Acquire` hält die Sperrdatei prozesslang (TUI kann Daemon aussperren, wie bei postctl vor dem Fix) — Abschaffung wäre ein eigener Umbau mit Tests je Tool.

@@ -191,7 +191,7 @@ missionctl doctor                             Check install, MCP registration, D
 | `inbox` | List recent inbox messages with sender, subject, preview |
 | `search_email` | Search by keyword across subject, sender, body |
 | `email_thread` | Get all messages in a thread matched by subject |
-| `send_email` | Send an email via Apple Mail |
+| `send_email` | Send an email via Apple Mail — **off by default** (saves a draft unless `MAILCTL_MCP_ALLOW_SEND=1`) |
 | `draft_email` | Save a composed message to Apple Mail Drafts |
 | `sync_inbox` | Sync from Apple Mail into local cache |
 
@@ -356,6 +356,13 @@ Things you can ask Claude once all nine MCP servers are connected.
 `streak_at_risk` → `check_habit` × N → `stop_timer` → `get_today_stats` → `write_diary_entry`.
 
 ---
+
+## Security
+
+- **Owner-only data:** every tool starts with `umask 077` and tightens older world-readable config/data files (databases, activity log) to `0700`/`0600`. Your own `data_dir` folders are left alone.
+- **MCP safety:** an AI agent that reads untrusted text (mail, web pages, shared lists) can be tricked. So **sending mail through MCP is opt-in** (`MAILCTL_MCP_ALLOW_SEND=1` in the MCP server's environment; otherwise `send_email` saves a draft), **publishing/scheduling through postctl's MCP is opt-in** (`POSTCTL_MCP_ALLOW_PUBLISH=1`), and every **delete tool needs `confirm=true`** (the model must ask you first).
+- **Input hardening:** AppleScript strings are always escaped (task titles from shared lists cannot run code), `notectl` refuses note folders outside the vault, `budgetctl import_transactions` only reads CSV/TSV/TXT files.
+- Report vulnerabilities privately — see each repo's `SECURITY.md` (postctl) or e-mail post@abteilung83.com.
 
 ## Themes
 
