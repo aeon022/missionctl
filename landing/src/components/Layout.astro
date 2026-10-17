@@ -1,5 +1,15 @@
 ---
 import '../styles/global.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/inter/latin-800.css';
+import '@fontsource/inter/latin-900.css';
+import '@fontsource/jetbrains-mono/latin-400.css';
+import '@fontsource/jetbrains-mono/latin-500.css';
+import '@fontsource/jetbrains-mono/latin-600.css';
+import '@fontsource/jetbrains-mono/latin-700.css';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
 import CookieNotice from './CookieNotice.astro';
@@ -69,11 +79,6 @@ const primaryLd = type === 'software' && appName ? {
   name: 'missionctl',
   url: siteUrl,
   description,
-  potentialAction: {
-    '@type': 'SearchAction',
-    target: `${siteUrl}/?q={search_term_string}`,
-    'query-input': 'required name=search_term_string',
-  },
 };
 
 // Auto breadcrumbs from the URL path — every non-root page gets one for free.
@@ -92,6 +97,10 @@ const breadcrumbLd = pathSegments.length > 0 ? {
   ],
 } : null;
 
+const pathNorm = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : Astro.url.pathname + '/';
+const enUrl = new URL(pathNorm, siteUrl).href;
+const deUrl = new URL('/de' + pathNorm, siteUrl).href;
+
 const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
 ---
 <!doctype html>
@@ -106,30 +115,6 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
           document.documentElement.classList.add('bar-closed');
         }
       } catch (_) {}
-    </script>
-
-    <!-- EN/DE language toggle: set <html lang> before paint, and re-apply on
-         every ClientRouter transition (astro:page-load fires on first load
-         and on every subsequent SPA navigation alike). -->
-    <script is:inline>
-      function missionctlApplyLang() {
-        var saved = localStorage.getItem('missionctl_lang');
-        var browserLang = (navigator.language || navigator.userLanguage || '').startsWith('de') ? 'de' : 'en';
-        document.documentElement.setAttribute('lang', saved || browserLang);
-      }
-      missionctlApplyLang();
-      function missionctlToggleLang() {
-        var next = document.documentElement.getAttribute('lang') === 'en' ? 'de' : 'en';
-        localStorage.setItem('missionctl_lang', next);
-        document.documentElement.setAttribute('lang', next);
-      }
-      document.addEventListener('astro:page-load', function () {
-        missionctlApplyLang();
-        var btn = document.getElementById('lang-toggle');
-        if (btn) btn.addEventListener('click', missionctlToggleLang);
-        var btnMobile = document.getElementById('lang-toggle-mobile');
-        if (btnMobile) btnMobile.addEventListener('click', missionctlToggleLang);
-      });
     </script>
 
     <!-- Light/dark theme toggle: dark is the site's native look, so an
@@ -181,15 +166,15 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
       });
     </script>
 
-    <!-- Preconnect for Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="en" href={enUrl} />
+    <link rel="alternate" hreflang="de" href={deUrl} />
+    <link rel="alternate" hreflang="x-default" href={enUrl} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -198,6 +183,8 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(ogImage, siteUrl).href} />
     <meta property="og:site_name" content="missionctl" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="de_DE" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />

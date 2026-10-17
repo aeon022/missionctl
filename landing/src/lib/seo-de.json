@@ -1,0 +1,62 @@
+{
+ "/": {
+  "title": "missionctl — Gib deiner KI Hände",
+  "description": "11 lokale Terminal-Apps mit 79 MCP-Tools: E-Mail, Kalender, Aufgaben, Notizen, Budget, Zeit, Gewohnheiten, Tagebuch, Medikamente, Depot und Social Posts. Lokal, ohne Cloud, ohne Abo."
+ },
+ "/docs/": {
+  "title": "missionctl Doku",
+  "description": "Installation, CLI-Befehle, TUI-Tastenkürzel und die komplette MCP-Tool-Referenz aller missionctl-Apps."
+ },
+ "/changelog/": {
+  "title": "missionctl Changelog",
+  "description": "Neue Funktionen, Verbesserungen und Fixes aller missionctl-Apps im Überblick."
+ },
+ "/privacy/": {
+  "title": "Datenschutz — missionctl",
+  "description": "Datenschutzerklärung für missionctl.sh: lokale Daten, Zahlung über Polar, keine Tracker."
+ },
+ "/cookies/": {
+  "title": "Cookie-Richtlinie — missionctl",
+  "description": "Cookie-Richtlinie für missionctl.sh: nur essenzielle Einstellungen, keine Tracking- oder Werbe-Cookies."
+ },
+ "/mailctl/": {
+  "title": "mailctl — E-Mail im Terminal, per MCP für KI",
+  "description": "Apple Mail (macOS) oder Thunderbird (Linux): Posteingang, Antwortentwürfe und Volltextsuche in der TUI — als MCP-Server für Claude."
+ },
+ "/calctl/": {
+  "title": "calctl — Kalender im Terminal, per MCP für KI",
+  "description": "Apple Kalender im Terminal: Wochen- und Monatsansicht, Termine anlegen, freie Zeitfenster finden — mit MCP-Server für Claude."
+ },
+ "/taskctl/": {
+  "title": "taskctl — Aufgaben im Terminal, per MCP für KI",
+  "description": "Aufgaben mit Apple-Erinnerungen-Sync, Pomodoro-Timer und Hintergrund-Daemon — mit MCP-Server für KI-Assistenten."
+ },
+ "/notectl/": {
+  "title": "notectl — Notizen im Terminal, per MCP für KI",
+  "description": "Notizen und Daily Notes in Obsidian, Apple Notizen oder Joplin lesen, schreiben und durchsuchen — auf macOS und Linux, mit MCP-Server."
+ },
+ "/budgetctl/": {
+  "title": "budgetctl — Haushaltsbuch im Terminal, per MCP für KI",
+  "description": "Bank-CSV importieren (N26, ING, DKB), Ausgaben kategorisieren, Budgetziele setzen und wiederkehrende Zahlungen erkennen — lokal, mit MCP."
+ },
+ "/diaryctl/": {
+  "title": "diaryctl — Entwickler-Tagebuch aus Git, per MCP",
+  "description": "Liest deine Git-Historie und schreibt KI-gestützte Tagebucheinträge, optional zurück in Obsidian — lokal, mit MCP-Server."
+ },
+ "/timectl/": {
+  "title": "timectl — Zeiterfassung im Terminal, per MCP",
+  "description": "Timer starten und stoppen, Wochenübersicht, Verknüpfung mit taskctl und Rechnungsexport — lokal, mit MCP-Server für KI."
+ },
+ "/habctl/": {
+  "title": "habctl — Gewohnheiten und Streaks, per MCP für KI",
+  "description": "Tägliche Check-ins, Streaks, Habit-Chains und KI-Wochenreview im Terminal — lokal, mit MCP-Server für Claude."
+ },
+ "/healthctl/": {
+  "title": "healthctl — Medikamenten-Planer im Terminal, per MCP",
+  "description": "Einnahmepläne, Dosis-Protokoll und Erinnerungen im Terminal. Private Gesundheitsdaten bleiben lokal und tauchen nie in Suche oder Aktivität auf."
+ },
+ "/investctl/": {
+  "title": "investctl — Depot-Tracker im Terminal, per MCP",
+  "description": "Aktien, Fonds und ETFs verfolgen: Positionen, Transaktionen und Kurse (Stooq) lokal im Terminal — mit MCP-Server für KI."
+ }
+}
