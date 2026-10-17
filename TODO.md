@@ -92,4 +92,4 @@ postctl ist gepusht (`b838b8b`), Core `f71f85d` auch. Für die übrigen Tools:
 
 ## Sicherheits-Audit der Suite (2026-10-17) — Stand
 Behoben (lokal committet, siehe `git log` je Tool): owner-only Dateien (Core `secure.Init`, Aktivitätslog 0600), mailctl `send_email` nur per Opt-in (`MAILCTL_MCP_ALLOW_SEND=1`), taskctl AppleScript-Escaping in der Pomodoro-Benachrichtigung, notectl `Write` nur innerhalb des Vaults, `confirm=true` für alle `delete_*`-MCP-Tools, budgetctl Import nur CSV/TSV/TXT, Lizenz-HTTP mit Timeout.
-Bewusst offen: `syncdir.Acquire` hält die Sperrdatei prozesslang (TUI kann Daemon aussperren, wie bei postctl vor dem Fix) — Abschaffung wäre ein eigener Umbau mit Tests je Tool.
+Behoben 2026-10-17 (Core `aaca411`): `syncdir.Acquire` nimmt jetzt eine *geteilte* Sperre — TUI, Daemon, CLI und MCP schließen sich nicht mehr aus (SQLite-Busy-Timeout koordiniert); `syncdir.InUse` für `doctor`. Alle Tools sind auf Core `aaca411` gebumpt.
