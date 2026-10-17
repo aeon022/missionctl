@@ -214,6 +214,7 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
     <ClientRouter />
   </head>
   <body>
+    <a href="#main" class="skip-link"><span class="lang-en">Skip to content</span><span class="lang-de">Zum Inhalt springen</span></a>
     <div id="site-header">
       <AnnouncementBar />
       <Nav />
@@ -230,7 +231,7 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
          this must live here, not inside Nav.astro, or every page's content
          renders underneath the floating header. -->
     <div class="nav-spacer"></div>
-    <main>
+    <main id="main">
       <slot />
     </main>
     <Footer />

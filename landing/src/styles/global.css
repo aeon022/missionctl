@@ -13,7 +13,7 @@
   --color-terminal-blue: #6366f1;
   --color-terminal-amber: #f59e0b;
   --color-terminal-red: #ef4444;
-  --color-terminal-muted: #4a5568;
+  --color-terminal-muted: #6b7a90;
   --color-terminal-text: #e2e8f0;
   --color-terminal-code-text: #a0aec0;
   --color-terminal-dim: #718096;
@@ -37,10 +37,10 @@
   --color-terminal-code-bg: #eef0f3;
   --color-terminal-border: #e2e8f0;
   --color-terminal-border-rgb: 226,232,240;
-  --color-terminal-green: #059862;
-  --color-terminal-green-rgb: 5,152,98;
-  --color-terminal-green-hover: #047a4f;
-  --color-terminal-muted: #8b96a5;
+  --color-terminal-green: #047857;
+  --color-terminal-green-rgb: 4,120,87;
+  --color-terminal-green-hover: #065f46;
+  --color-terminal-muted: #627080;
   --color-terminal-text: #1a1a28;
   --color-terminal-code-text: #3d4451;
   --color-terminal-dim: #5a6472;
@@ -578,3 +578,20 @@ pre { position: relative; }
   .docs-mobile-nav { display: block; }
   .docs-main { padding: 1.5rem 1.25rem 4rem; }
 }
+
+
+/* ===== Accessibility ===== */
+/* Keyboard focus was invisible; give every interactive element a clear ring. */
+:focus-visible { outline: 2px solid var(--color-terminal-green); outline-offset: 2px; border-radius: 3px; }
+.skip-link { position: absolute; left: 1rem; top: -4rem; z-index: 1000; padding: .6rem 1rem; background: var(--color-terminal-green); color: var(--color-terminal-bg); font-family: var(--font-mono); font-weight: 700; border-radius: 6px; text-decoration: none; transition: top .15s; }
+.skip-link:focus { top: 1rem; }
+
+/* The per-app accent colours are bright and fail WCAG AA as TEXT on white; darker equivalents in light mode. */
+:root[data-theme="light"] [style*="color: #00d97e"], :root[data-theme="light"] [style*="color: #10b981"] { color: #047857 !important; }
+:root[data-theme="light"] [style*="color: #6366f1"] { color: #4f46e5 !important; }
+:root[data-theme="light"] [style*="color: #f59e0b"] { color: #b45309 !important; }
+:root[data-theme="light"] [style*="color: #a78bfa"] { color: #6d28d9 !important; }
+:root[data-theme="light"] [style*="color: #fb923c"] { color: #c2410c !important; }
+:root[data-theme="light"] [style*="color: #22d3ee"] { color: #0e7490 !important; }
+:root[data-theme="light"] [style*="color: #84cc16"] { color: #4d7c0f !important; }
+:root[data-theme="light"] [style*="color: #ec4899"] { color: #be185d !important; }
