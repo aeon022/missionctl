@@ -12,6 +12,7 @@ import '@fontsource/jetbrains-mono/latin-600.css';
 import '@fontsource/jetbrains-mono/latin-700.css';
 import Nav from './Nav.astro';
 import Footer from './Footer.astro';
+import CookieNotice from './CookieNotice.astro';
 import AnnouncementBar from './AnnouncementBar.astro';
 import StickyPricingBar from './StickyPricingBar.astro';
 import { ClientRouter } from 'astro:transitions';
@@ -247,6 +248,7 @@ const jsonLdBlocks = [organizationLd, primaryLd, breadcrumbLd].filter(Boolean);
       <slot />
     </main>
     <Footer />
+    <CookieNotice />
     <StickyPricingBar />
 
     <!-- Back to top — circular scroll-progress ring -->
