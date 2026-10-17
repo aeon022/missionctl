@@ -151,8 +151,10 @@
 </style>
 
 <script>
-  document.getElementById('ann-close')?.addEventListener('click', () => {
-    try { localStorage.setItem('missionctl_bar_closed', '1'); } catch (_) {}
-    document.documentElement.classList.add('bar-closed');
+  document.addEventListener('astro:page-load', () => {
+    document.getElementById('ann-close')?.addEventListener('click', () => {
+      try { localStorage.setItem('missionctl_bar_closed', '1'); } catch (_) {}
+      document.documentElement.classList.add('bar-closed');
+    });
   });
 </script>

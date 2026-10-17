@@ -1,6 +1,7 @@
 ---
 import Layout from '../components/Layout.astro';
 import TerminalWindow from '../components/TerminalWindow.astro';
+import HeroScene from '../components/HeroScene.astro';
 import AppCard from '../components/AppCard.astro';
 import mockDashboard from '../mockups/dashboard.html?raw';
 
@@ -379,7 +380,7 @@ const faqLd = {
 
       <!-- Right: Terminal (typewriter) -->
       <div>
-        <TerminalWindow id="hero-terminal" title="~ missionctl" content={`<span class="cursor-blink" style="color:var(--color-terminal-green)">&#x2588;</span>`} />
+        <HeroScene />
       </div>
 
     </div>
@@ -879,6 +880,14 @@ const faqLd = {
 </style>
 
 <script>
+  // ClientRouter swaps the page without a reload and module scripts run only once, so everything is
+  // (re)bound on astro:page-load; global listeners and loops are tied to an AbortController.
+  let pageCtl: AbortController | null = null;
+  document.addEventListener('astro:page-load', () => {
+    pageCtl?.abort();
+    pageCtl = new AbortController();
+    const sig = pageCtl.signal;
+
   // ── Hero background: mouse parallax + scroll drift on the blobs ──
   (() => {
     const section = document.getElementById('hero-section');
@@ -906,10 +915,11 @@ const faqLd = {
       const progress = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)));
       scrollShift = progress * 40; // px of upward drift as the hero scrolls away
     }
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true, signal: sig });
     onScroll();
 
     function tick() {
+      if (sig.aborted) return;
       curPx += (targetPx - curPx) * 0.05;
       curPy += (targetPy - curPy) * 0.05;
 
@@ -920,93 +930,6 @@ const faqLd = {
     }
     requestAnimationFrame(tick);
   })();
-
-  // ── Typewriter animation ────────────────────────────────────
-  interface Segment { text: string; color?: string; blink?: boolean; }
-
-  const lines: Segment[][] = [
-    [{ text: '$ ', color: 'var(--color-terminal-muted)' }, { text: 'mailctl sync && taskctl today', color: 'var(--color-terminal-text)' }],
-    [{ text: '✓', color: 'var(--color-terminal-green)' }, { text: ' Synced 12 messages', color: 'var(--color-terminal-code-text)' }],
-    [{ text: '✓', color: 'var(--color-terminal-green)' }, { text: ' 3 tasks due today', color: 'var(--color-terminal-code-text)' }],
-    [],
-    [{ text: '$ ', color: 'var(--color-terminal-muted)' }, { text: 'calctl free ', color: 'var(--color-terminal-text)' }, { text: '--from', color: '#6366f1' }, { text: ' today ', color: 'var(--color-terminal-text)' }, { text: '--to', color: '#6366f1' }, { text: ' +7d', color: 'var(--color-terminal-text)' }],
-    [{ text: 'Free slots:', color: 'var(--color-terminal-code-text)' }],
-    [{ text: '  Mon', color: '#f59e0b' }, { text: ' 09:00–11:00', color: 'var(--color-terminal-text)' }],
-    [{ text: '  Wed', color: '#f59e0b' }, { text: ' 14:00–16:00', color: 'var(--color-terminal-text)' }],
-    [],
-    [{ text: '$ ', color: 'var(--color-terminal-muted)' }, { text: 'budgetctl summary ', color: 'var(--color-terminal-text)' }, { text: '--month', color: '#6366f1' }, { text: ' 2026-07', color: 'var(--color-terminal-text)' }],
-    [{ text: 'Income:   ', color: 'var(--color-terminal-code-text)' }, { text: '€4,200.00', color: 'var(--color-terminal-green)' }],
-    [{ text: 'Expenses: ', color: 'var(--color-terminal-code-text)' }, { text: '€2,847.35', color: '#ef4444' }],
-    [{ text: 'Saved:    ', color: 'var(--color-terminal-code-text)' }, { text: '€1,352.65 (32.2%)', color: 'var(--color-terminal-green)' }, { text: '█', color: 'var(--color-terminal-green)', blink: true }],
-  ];
-
-  function runTypewriter(pre: HTMLElement) {
-    // Clear initial cursor placeholder
-    pre.innerHTML = '';
-
-    let lineIdx = 0, segIdx = 0, charIdx = 0;
-    let currentSpan: HTMLElement | null = null;
-
-    function typeNext() {
-      if (lineIdx >= lines.length) return;
-
-      const line = lines[lineIdx];
-
-      if (line.length === 0) {
-        pre.appendChild(document.createTextNode('\n'));
-        lineIdx++;
-        segIdx = 0; charIdx = 0;
-        setTimeout(typeNext, 320 + Math.random() * 180);
-        return;
-      }
-
-      if (segIdx >= line.length) {
-        pre.appendChild(document.createTextNode('\n'));
-        lineIdx++;
-        segIdx = 0; charIdx = 0;
-        currentSpan = null;
-        setTimeout(typeNext, 280 + Math.random() * 200);
-        return;
-      }
-
-      const seg = line[segIdx];
-
-      if (charIdx === 0) {
-        currentSpan = document.createElement('span');
-        if (seg.color) currentSpan.style.color = seg.color;
-        if (seg.blink) currentSpan.className = 'cursor-blink';
-        pre.appendChild(currentSpan);
-      }
-
-      if (currentSpan) currentSpan.textContent += seg.text[charIdx];
-      charIdx++;
-
-      if (charIdx >= seg.text.length) {
-        segIdx++; charIdx = 0; currentSpan = null;
-      }
-
-      setTimeout(typeNext, 28 + Math.random() * 22);
-    }
-
-    typeNext();
-  }
-
-  // Start when terminal enters viewport
-  const terminal = document.getElementById('hero-terminal');
-  const pre = terminal?.querySelector('pre');
-
-  if (pre) {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          obs.disconnect();
-          setTimeout(() => runTypewriter(pre as HTMLElement), 400);
-        }
-      },
-      { threshold: 0.3 }
-    );
-    obs.observe(terminal!);
-  }
 
   // ── FAQ accordion ───────────────────────────────────────────
   document.querySelectorAll<HTMLElement>('.faq-question').forEach(btn => {
@@ -1050,5 +973,6 @@ const faqLd = {
       { threshold: 0.5 }
     );
     obs.observe(el);
+  });
   });
 </script>

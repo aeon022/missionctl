@@ -21,7 +21,7 @@
   <p style="color: var(--color-terminal-dim); font-size: 0.8rem; margin: 0; flex: 1; line-height: 1.5;">
     <span class="lang-en">We use essential cookies only. No tracking or analytics.</span>
     <span class="lang-de">Wir verwenden nur essenzielle Cookies. Kein Tracking, keine Analyse.</span>
-    <a href="/cookies" style="color: var(--color-terminal-green); text-decoration: none;"><span class="lang-en">Learn more</span><span class="lang-de">Mehr erfahren</span></a>
+    <a href="/cookies" style="color: var(--color-terminal-green); text-decoration: none; margin-left: 0.35em;"><span class="lang-en">Learn more</span><span class="lang-de">Mehr erfahren</span></a>
   </p>
   <button
     id="cookie-accept"
@@ -42,15 +42,15 @@
 </div>
 
 <script>
-  (function () {
+  document.addEventListener('astro:page-load', () => {
     const banner = document.getElementById('cookie-banner');
     if (!banner) return;
-    if (!localStorage.getItem('cookie-accepted')) {
-      banner.style.display = 'flex';
-    }
-    document.getElementById('cookie-accept')?.addEventListener('click', function () {
-      localStorage.setItem('cookie-accepted', '1');
+    let accepted = false;
+    try { accepted = !!localStorage.getItem('cookie-accepted'); } catch (_) {}
+    banner.style.display = accepted ? 'none' : 'flex';
+    document.getElementById('cookie-accept')?.addEventListener('click', () => {
+      try { localStorage.setItem('cookie-accepted', '1'); } catch (_) {}
       banner.style.display = 'none';
     });
-  })();
+  });
 </script>

@@ -1265,24 +1265,24 @@ q       quit`}</code></pre>
 </Layout>
 
 <script>
-  // Active sidebar link via IntersectionObserver on headings
-  const headings = document.querySelectorAll<HTMLElement>('.docs-main h2[id], .docs-main h3[id]');
-  const navLinks  = document.querySelectorAll<HTMLAnchorElement>('.docs-nav a[data-href]');
-
-  if (headings.length && navLinks.length) {
-    const obs = new IntersectionObserver(
+  // Active sidebar link via IntersectionObserver on headings (rebound after every ClientRouter navigation)
+  let docsObs: IntersectionObserver | null = null;
+  document.addEventListener('astro:page-load', () => {
+    docsObs?.disconnect();
+    const headings = document.querySelectorAll<HTMLElement>('.docs-main h2[id], .docs-main h3[id]');
+    const navLinks = document.querySelectorAll<HTMLAnchorElement>('.docs-nav a[data-href]');
+    if (!headings.length || !navLinks.length) return;
+    docsObs = new IntersectionObserver(
       entries => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const id = entry.target.id;
-            navLinks.forEach(link => {
-              link.classList.toggle('active', link.getAttribute('data-href') === `#${id}`);
-            });
+            navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('data-href') === `#${id}`));
           }
         });
       },
       { rootMargin: '-15% 0% -70% 0%', threshold: 0 }
     );
-    headings.forEach(h => obs.observe(h));
-  }
+    headings.forEach(h => docsObs!.observe(h));
+  });
 </script>
