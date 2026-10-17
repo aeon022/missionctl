@@ -65,6 +65,8 @@ const apps = [
     ))}
   </div>
 
+  <div class="hs-status" id="hs-status" aria-hidden="true"></div>
+
   <div class="hs-brief" id="hs-brief">
     <span class="hs-brief-tag"><span class="lang-en">briefing</span><span class="lang-de">Briefing</span></span>
     <span class="lang-en">7 unread · 4 events · 3 due · 1 streak at risk · €1,240 left</span>
@@ -121,7 +123,15 @@ const apps = [
   .hs-brief.on { opacity: 1; transform: none; }
   .hs-brief-tag { display: inline-block; margin-right: .5rem; padding: .05rem .45rem; border-radius: 4px; background: var(--color-terminal-green); color: var(--color-terminal-bg); font-weight: 700; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; }
 
-  @media (max-width: 640px) { .hs-chip { font-size: .58rem; padding: .12rem .4rem; } .hs-name { font-size: 9px; } .hs-prompt { font-size: .75rem; } }
+  .hs-status { display: none; align-self: center; min-height: 1.9rem; padding: .3rem .8rem; border: 1px solid var(--c, var(--color-terminal-border)); border-radius: 8px; font-family: var(--font-mono); font-size: .8rem; color: var(--color-terminal-text); background: rgba(var(--color-terminal-bg-rgb), .8); opacity: 0; transition: opacity .3s; }
+  .hs-status.on { opacity: 1; }
+  @media (max-width: 640px) {
+    .hs-chip { display: none; }          /* chips would run off the screen on the right-hand nodes */
+    .hs-status { display: block; }
+    .hs-name { font-size: 10.5px; }
+    .hs-prompt { font-size: .8rem; }
+    .hs-brief { font-size: .8rem; }
+  }
   @media (prefers-reduced-motion: reduce) {
     .hs-orbit-outer, .hs-aura, .hs-core-ring, .hs-caret, .hs-beam.on { animation: none !important; }
     .hs-brief { opacity: 1; transform: none; }
@@ -147,6 +157,7 @@ const apps = [
     const beams = Array.from(root.querySelectorAll<SVGPathElement>('.hs-beam'));
     const nodes = Array.from(root.querySelectorAll<SVGElement>('.hs-node'));
     const chips = Array.from(root.querySelectorAll<HTMLElement>('.hs-chip'));
+    const status = document.getElementById('hs-status')!;
     const prompt = (document.getElementById('hs-prompt-src')!.querySelector('span:not([hidden])') as HTMLElement | null)?.textContent
       ?? document.getElementById('hs-prompt-src')!.textContent ?? '';
     // order in which the AI "reaches" for its hands: mail, calendar, tasks, habits, budget, posts
@@ -162,6 +173,7 @@ const apps = [
       nodes.forEach((n) => n.classList.remove('hit'));
       chips.forEach((c) => c.classList.remove('on'));
       packet.style.opacity = '0';
+      status.classList.remove('on');
     };
 
     const fly = (i: number) => new Promise<void>((resolve) => {
@@ -177,7 +189,13 @@ const apps = [
         packet.setAttribute('cx', String(p.x)); packet.setAttribute('cy', String(p.y));
         packet.style.opacity = String(k < 1 ? 1 : 0);
         if (k < 1) requestAnimationFrame(step);
-        else { nodes[i].classList.add('hit'); chips[i].classList.add('on'); resolve(); }
+        else {
+          nodes[i].classList.add('hit'); chips[i].classList.add('on');
+          status.textContent = `${nodes[i].getAttribute('aria-label')?.split(',')[0]} → ${chips[i].textContent?.trim()}`;
+          status.style.setProperty('--c', getComputedStyle(nodes[i]).getPropertyValue('--c'));
+          status.classList.add('on');
+          resolve();
+        }
       };
       requestAnimationFrame(step);
     });

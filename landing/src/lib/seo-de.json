@@ -1,18 +1,18 @@
 {
  "/": {
   "title": "missionctl — Gib deiner KI Hände",
-  "description": "11 lokale Terminal-Apps mit 79 MCP-Tools: E-Mail, Kalender, Aufgaben, Notizen, Budget, Zeit, Gewohnheiten, Tagebuch, Medikamente, Depot und Social Posts. Lokal, ohne Cloud, ohne Abo."
+  "description": "9 lokale Terminal-Apps mit 67 MCP-Tools: E-Mail, Kalender, Aufgaben, Notizen, Budget, Zeit, Gewohnheiten, Tagebuch und Social Posts. Lokal, ohne Cloud, ohne Abo."
  },
  "/docs/": {
-  "title": "missionctl Doku",
+  "title": "missionctl Doku — Installation, CLI und MCP-Referenz",
   "description": "Installation, CLI-Befehle, TUI-Tastenkürzel und die komplette MCP-Tool-Referenz aller missionctl-Apps."
  },
  "/changelog/": {
-  "title": "missionctl Changelog",
-  "description": "Neue Funktionen, Verbesserungen und Fixes aller missionctl-Apps im Überblick."
+  "title": "missionctl Changelog — Neuigkeiten und Änderungen",
+  "description": "Neue Funktionen, Verbesserungen und Fixes aller missionctl-Apps im Überblick — von mailctl bis postctl, mit Datum und Hinweisen zu Updates."
  },
  "/privacy/": {
-  "title": "Datenschutz — missionctl",
+  "title": "Datenschutzerklärung — missionctl Website und Apps",
   "description": "Datenschutzerklärung für missionctl.sh: lokale Daten, Zahlung über Polar, keine Tracker."
  },
  "/cookies/": {

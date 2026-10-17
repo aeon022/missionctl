@@ -630,3 +630,10 @@ kbd { font-family: var(--font-mono); font-size: .85em; padding: .05em .4em; bord
    fell back to a system font and broke (gaps between rows). */
 @font-face { font-family: 'JB Mock'; font-style: normal; font-weight: 400; font-display: swap; src: url(/fonts/JetBrainsMono-Regular.woff2) format('woff2'); }
 @font-face { font-family: 'JB Mock'; font-style: normal; font-weight: 700; font-display: swap; src: url(/fonts/JetBrainsMono-Bold.woff2) format('woff2'); }
+
+/* Touch: footer/legal links and the announcement bar were 17-20px tall; give them a finger-sized hit area. */
+@media (pointer: coarse) {
+  footer a { display: inline-block; padding-block: .5rem; }
+  #announcement-bar .ann-inner { min-height: 40px; }
+  .copy-btn { min-height: 32px; min-width: 48px; }
+}
