@@ -8,6 +8,14 @@ Regeln aus Memory/CLAUDE.md, die weiter gelten: lokal committen, **pushen nur au
 
 ---
 
+
+## Nachtrag 2026-10-18 (Themes, Onboarding, Landing)
+- **Live-Themes in allen TUIs:** `theme.Cycle()` im Core (`cf4b6da`), Taste `T` (timectl `C`), `:theme`; habctl folgt jetzt dem Suite-Theme; Settings-Zeile in habctl/budgetctl (`t`) und notectl (`ctrl+t`); Dashboard `T`. Onboarding-Checkliste („Welcome to …“) in jedem Tool.
+- **Dashboard:** Klick auf das Today-Panel öffnet die Agenda; Ziffern `0` (investctl) und `p` (postctl); taskctl zeigt die Done-Zahl sofort.
+- **Landing missionctl.sh:** Dashboard-Mockup in vier Themes (terminal/nord/dracula/gruvbox, `scripts/ansi2html.py <ansi> <palette>`), Doku-Abschnitt „Colour themes“, Changelog 2026-10-18. Geräte-Matrix (WebKit+Chromium, 33 Viewports) war für beide Sites grün.
+- **postctl (Stand der Suite-Doku):** Kalender-Tab, Profil-Schutz, Editor-Vorschau, Composer, Stats, Palette und Suche sind seit 2026-10-16/17 im Code; Details in `postctl/stage.md`.
+- **Brücke-Social:** Agenten-Handbuch in `bruecke-marketing/AGENTS.md`, siehe Memory `project_bruecke_agent_docs`.
+
 ## 1. Überblick
 
 Die Suite besteht jetzt aus **12 Go-Projekten**:

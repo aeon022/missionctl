@@ -69,8 +69,8 @@ postctl ist gepusht (`b838b8b`), Core `f71f85d` auch. Für die übrigen Tools:
 - [x] ~~**Theme-Zeile in den Settings** jedes Tools (Muster: postctl `cycleSettingDir` + `refreshStyles` über `theme.OnChange`). Achtung: Styles, die ein Tool auf Package-Ebene aus Theme-Farben baut (z. B. `dimStyle`), müssen beim Wechsel neu gebaut werden, sonst bleiben sie auf der alten Palette.
 - [x] ~~**Root-Zeiger** auf `missionctl-core` anheben~~ — mit dem Sicherheits-Commit erledigt; ursprünglich: (`git add missionctl-core && git commit`) — steht gerade als `M missionctl-core` offen.
 - [~] **Testregel in jedem Tool:** *teilweise* — Core `syncdir` entfernt in jedem Test-Binary die exportierten `*_DATA_DIR`-Variablen (2026-10-17). Offen: `TestMain` mit Wegwerf-`HOME` pro Paket. Ursprünglich: `TestMain` mit Wegwerf-`HOME` (Vorlage: postctl `*/testmain_test.go`). Vorfall 2026-10-16: ein Test (Enter auf eine per Zeilennummer gewählte Settings-Zeile) überschrieb die echte `~/.config/postctl/config.yaml` und rief Mastodon im Netz auf. Alle Tools prüfen: Tests, die `Save*`/Config/`exec` ohne `t.Setenv("HOME")` nutzen; Settings-Zeilen in Tests nie per Index wählen.
-- [ ] **UI-Ideen aus postctl zum Übertragen:** Gesundheits-Panel (Token-/Sync-Alter), einheitliche `:`-Palette, Spinner nur während des Ladens, Logs-Kopfbereich, Settings als mehrere umrandete Bereiche, Klick-Raster mit gemeinsamem Layout für Zeichnen und Hit-Test (Kalender-Muster), Onboarding-Checkliste im leeren Dashboard.
-- [ ] stage.md / ROADMAP für die Suite nachziehen (postctl: Kalender-Tab, Profil-Schutz, Editor-Vorschau, Composer, Stats, Palette, Suche).
+- [ ] **UI-Ideen aus postctl zum Übertragen:** Gesundheits-Panel (Token-/Sync-Alter), einheitliche `:`-Palette, Spinner nur während des Ladens, Logs-Kopfbereich, Settings als mehrere umrandete Bereiche, Klick-Raster mit gemeinsamem Layout für Zeichnen und Hit-Test (Kalender-Muster), Onboarding-Checkliste im leeren Dashboard (die Checklisten in den Tools sind seit 2026-10-18 da; das Dashboard hat keinen leeren Zustand).
+- [x] stage.md / ROADMAP für die Suite nachziehen (erledigt 2026-10-18; postctl: Kalender-Tab, Profil-Schutz, Editor-Vorschau, Composer, Stats, Palette, Suche).
 
 ## Offen
 
@@ -84,12 +84,12 @@ postctl ist gepusht (`b838b8b`), Core `f71f85d` auch. Für die übrigen Tools:
 - [ ] **Thunderbird-Backend (Linux)** in mailctl: laut README nicht gegen echte Installation getestet.
 - [x] Unsubscribe-Helper (mailctl `U`) erledigt.
 - [ ] **Gmail-OAuth** (mailctl) — braucht eine Google-Cloud-Client-ID vom Nutzer; bewusst ausgenommen.
-- [ ] Neu 2026-10-08: habctl-Langansichten werden von `ui.Frame` auf winzigen Terminals abgeschnitten; postctl-Lade-/Fehlerbildschirme umgehen den Rahmen und einige deutsche `statusMessage`-Texte fehlen in `Tr()`; timectl-Eingabeprompts bleiben Fußzeilen-Prompts; notectl-Link-Graph scrollt nicht; taskctl zeigt die Done-Zahl erst nach dem Öffnen des Done-Tabs; Dashboard-Today-Panel ist nicht klickbar.
+- [ ] Neu 2026-10-08: habctl-Langansichten werden von `ui.Frame` auf winzigen Terminals abgeschnitten; postctl-Lade-/Fehlerbildschirme umgehen den Rahmen und einige deutsche `statusMessage`-Texte fehlen in `Tr()`; timectl-Eingabeprompts bleiben Fußzeilen-Prompts; notectl-Link-Graph scrollt nicht; ~~taskctl zeigt die Done-Zahl erst nach dem Öffnen des Done-Tabs~~ (behoben 2026-10-18); ~~Dashboard-Today-Panel ist nicht klickbar~~ (Klick öffnet die Agenda, 2026-10-18).
 - [ ] Unverifiziert (braucht Live-Test): echte Stooq-Kurse (investctl), `healthctl remind`-Benachrichtigungen, Farben/Maus im echten Terminal.
-- [ ] Dashboard-Raster: Invest-Karte hat keine Zifferntaste (nur 1–9); bei sehr niedrigen Terminals mit 10 Karten bleibt das Today-Panel ausgeblendet.
-- [ ] `proposals/healthctl` und `proposals/investctl` als „umgesetzt“ markieren.
+- [x] ~~Invest-Karte ohne Zifferntaste~~ — 2026-10-18: `0` (investctl) und `p` (postctl). Offen: bei sehr niedrigen Terminals mit 10 Karten bleibt das Today-Panel ausgeblendet.
+- [x] ~~`proposals/healthctl` und `proposals/investctl` als „umgesetzt“ markieren~~ — 2026-10-18.
 
-- [ ] postctl: neue Screenshots für postctl.sh und missionctl.sh (neue TUI: Kalender, Profile, Themes) — morgen
+- [x] ~~postctl: neue Screenshots für postctl.sh und missionctl.sh~~ — postctl.sh hat Kalender/Einstellungen-Mockups (2026-10-18); missionctl.sh zeigt das Dashboard jetzt in vier Themes mit Umschalter (2026-10-18).
 
 ## Sicherheits-Audit der Suite (2026-10-17) — Stand
 Behoben (lokal committet, siehe `git log` je Tool): owner-only Dateien (Core `secure.Init`, Aktivitätslog 0600), mailctl `send_email` nur per Opt-in (`MAILCTL_MCP_ALLOW_SEND=1`), taskctl AppleScript-Escaping in der Pomodoro-Benachrichtigung, notectl `Write` nur innerhalb des Vaults, `confirm=true` für alle `delete_*`-MCP-Tools, budgetctl Import nur CSV/TSV/TXT, Lizenz-HTTP mit Timeout.

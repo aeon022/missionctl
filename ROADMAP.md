@@ -21,7 +21,7 @@ entire digital week planned, posted, scheduled, and tracked — without touching
 Zwei neue Tool-Ideen wurden ausgeschrieben, nachdem der komplette "Reste"-Backlog
 (calctl Conflict-Detection+Timezone, notectl Link-Graph, diaryctl HTML/PDF-Export,
 timectl Invoice-Refinement, habctl Yearly-Heatmap+Correlations) fertig war. Beide sind
-**reine Design-Outlines, noch nicht implementiert** — kein Code, kein Repo, kein
+**Design-Outlines (inzwischen umgesetzt: healthctl und investctl existieren als Tools, siehe `proposals/*/README.md`)** — kein Code, kein Repo, kein
 Submodule. Volle Ausschreibung liegt in `proposals/<name>/README.md`.
 
 - [x] **healthctl** — Terminal-first Medikamenten-Planer (`proposals/healthctl/`).
@@ -371,8 +371,8 @@ allen Themes nebeneinander), dann Tool für Tool übernehmen (budgetctl und task
 - [ ] **Dashboard:** Karten mit farbigem Kopfband, Mini-Diagramme auf jeder Karte, große Uhr in der Kopfzeile.
 
 ### D. Atmosphäre
-- [ ] **Themes live durchschalten** (`T`) mit Vorschau; ruhiges Standardthema; Kontraste für Farbenblindheit prüfen.
-- [ ] **Willkommensbildschirm** beim ersten Start (kleines ASCII-Logo, drei Tastenhinweise, Beispieldatensatz).
+- [x] **Themes live durchschalten** (`T`, timectl `C`, `:theme`; Theme-Zeile in den Settings von habctl/budgetctl/notectl; Landing-Seite zeigt Dashboard in vier Themes) — erledigt 2026-10-18; offen: Vorschau-Auswahl statt Durchschalten; ruhiges Standardthema; Kontraste für Farbenblindheit prüfen.
+- [x] **Willkommens-Checkliste** im leeren Zustand jedes Tools (erledigt 2026-10-18); ein ASCII-Logo/Beispieldatensatz fehlt noch. Ursprünglich: Willkommensbildschirm beim ersten Start (kleines ASCII-Logo, drei Tastenhinweise, Beispieldatensatz).
 - [ ] **Leere Zustände mit Charakter** (kleines Zeichen-Bild).
 - [ ] **Dezente Animation:** Spinner, weiches Einblenden von Popups, Zählanimation bei Summen; abschaltbar (`reduce_motion`).
 

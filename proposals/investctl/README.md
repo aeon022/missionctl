@@ -1,10 +1,12 @@
-# investctl (proposal — not yet implemented)
+# investctl (proposal — IMPLEMENTED 2026-10; this file is the original design outline)
 
 Terminal-first stocks/funds tracker. Would be part of the **missionctl**
 suite, following the same conventions as every other tool here (Cobra CLI,
 Bubble Tea TUI, local SQLite, `missionctl-core` shared packages, MCP server).
 
-Status: **design outline only**, scoped 2026-08-02 (originally deferred as
+> **Update 2026-10-18:** implemented — see the `investctl` repository / submodule (private until its first release). Everything below is the original 2026-08 outline and may differ from the code.
+
+Status (at the time): **design outline only**, scoped 2026-08-02 (originally deferred as
 its own tool on 2026-07-30 — see the decision recorded then: investment
 tracking does not belong in budgetctl's `Transaction` model, which has no
 concept of holdings, quantities, or market price). No code, no repo, no

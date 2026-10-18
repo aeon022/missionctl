@@ -1,10 +1,12 @@
-# healthctl (proposal — not yet implemented)
+# healthctl (proposal — IMPLEMENTED 2026-10; this file is the original design outline)
 
 Terminal-first medication planner. Would be part of the **missionctl** suite,
 following the same conventions as every other tool here (Cobra CLI, Bubble
 Tea TUI, local SQLite, `missionctl-core` shared packages, MCP server).
 
-Status: **design outline only**, scoped 2026-08-02. No code, no repo, no
+> **Update 2026-10-18:** implemented — see the `healthctl` repository / submodule (private until its first release). Everything below is the original 2026-08 outline and may differ from the code.
+
+Status (at the time): **design outline only**, scoped 2026-08-02. No code, no repo, no
 submodule yet — see "To do before implementation" below.
 
 ---
