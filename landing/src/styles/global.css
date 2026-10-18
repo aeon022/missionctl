@@ -621,6 +621,8 @@ kbd { font-family: var(--font-mono); font-size: .85em; padding: .05em .4em; bord
 }
 @media (max-width: 760px) { .mock-hl { display: none; } }
 .mock-pre[hidden] { display: none; }
+.tui-shot .mock-pre { font-size: clamp(5px, calc(98cqw / (var(--mock-cols, 130) * .6)), 12px); }
+@media (max-width: 760px) { .tui-shot .mock-pre { font-size: 8.5px; } }
 .mock-pre[data-mock="nord"] { background: #2e3440; color: #d8dee9; }
 .mock-pre[data-mock="dracula"] { background: #282a36; color: #f8f8f2; }
 .mock-pre[data-mock="gruvbox"] { background: #282828; color: #ebdbb2; }

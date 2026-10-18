@@ -1,6 +1,8 @@
 ---
 import Layout from '../components/Layout.astro';
 import TerminalWindow from '../components/TerminalWindow.astro';
+import TuiShot from '../components/TuiShot.astro';
+import mockTui from '../mockups/budgetctl.html?raw';
 
 const mcpTools = [
   { name: "list_transactions", desc: "List transactions, filter by month, category, or search term" },
@@ -78,6 +80,13 @@ const features = [
 <span style="color:#10b981">&#x2713;</span> <span style="color:var(--color-terminal-muted)">3 recurring payments detected</span><span class="cursor-blink" style="color:#10b981">&#x2588;</span>`} />
       </div>
     </div>
+  </section>
+
+  <!-- TUI SCREENSHOT -->
+  <section style="padding: 4rem 1.5rem; max-width: 1100px; margin: 0 auto;">
+    <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-terminal-text); margin: 0 0 .5rem; letter-spacing: -0.02em; text-align: center;"><span class="lang-en">The terminal app</span><span class="lang-de">Die Terminal-App</span></h2>
+    <p style="color: var(--color-terminal-dim); font-size: .95rem; text-align: center; margin: 0 0 2rem;"><span class="lang-en">Type <code>budgetctl</code> — this is the real TUI with made-up demo data. <kbd>T</kbd> switches the colour theme.</span><span class="lang-de">Tippe <code>budgetctl</code> — das ist die echte TUI mit erfundenen Demo-Daten. <kbd>T</kbd> wechselt das Farbschema.</span></p>
+    <TuiShot title="budgetctl" html={mockTui} cols={118} />
   </section>
 
   <!-- FEATURES -->

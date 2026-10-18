@@ -1,0 +1,13 @@
+---
+// A real-TUI screenshot (generated from the app with made-up demo data, see scripts/ansi2html.py).
+export interface Props {
+  title: string;
+  html: string;
+  cols?: number; // width of the screenshot in terminal columns (scales the font to fit)
+}
+const { title, html, cols = 118 } = Astro.props;
+---
+<div class="mock-window tui-shot" style={`max-width: 1000px; margin: 0 auto; --mock-cols: ${cols};`}>
+  <div class="mock-chrome"><span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span><span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span><span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span><span class="mock-title">{title}</span></div>
+  <div class="mock-body"><pre class="mock-pre" role="img" aria-label={`${title} — screenshot of the terminal app`} set:html={html}></pre></div>
+</div>
