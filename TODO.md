@@ -77,14 +77,14 @@ postctl ist gepusht (`b838b8b`), Core `f71f85d` auch. Für die übrigen Tools:
 - [x] ~~Zeitstempel `RFC3339Nano` als TEXT~~ — timectl schreibt fixed-width (`writeLayout`) mit einmaliger Migration; habctl sortiert nach `id`.
 
 - [ ] **Sichtprüfung** (v2-Migration, drei Layout-Runden, healthctl/investctl) — gepusht ist bereits, Sichtprüfung steht aus: `TESTING.md` Abschnitt 5.
-- [ ] diaryctl `suite`: fremde Config-Layer außer `data_dir` werden nicht gelesen.
+- [x] ~~diaryctl `suite`: fremde Config-Layer~~ — 2026-10-18: `config.yml` wird wie `config.yaml` gelesen; mehr Layer gibt es bei den vier Tools nicht (nur Env + eine Config-Datei).
 - [ ] habctl: `skip_allowed` wird bei Weekly-Habits in der aktuellen Serie ignoriert (bewusst unverändert) — Produktentscheidung.
 - [ ] Abdeckung weiter: Render-/Mauscode der TUIs, postctl `platforms` Rest (Twitter-Cookie/chromedp, Browser-Auth, Threads-Bildupload), notectl `mirror`/`syncdispatch` (brauchen Notes/Joplin), budgetctl-Import-Assistent mit Dateiwähler, AppleScript-nahe Befehle.
 - [ ] Offene Beobachtungen: `budgetctl` liest weiter `./budgetctl.yaml` aus dem Arbeitsverzeichnis (spezifischer Name, bewusst belassen); postctl-OAuth-Callbacktest bindet festen Port 8753.
 - [ ] **Thunderbird-Backend (Linux)** in mailctl: laut README nicht gegen echte Installation getestet.
 - [x] Unsubscribe-Helper (mailctl `U`) erledigt.
 - [ ] **Gmail-OAuth** (mailctl) — braucht eine Google-Cloud-Client-ID vom Nutzer; bewusst ausgenommen.
-- [ ] Neu 2026-10-08: habctl-Langansichten werden von `ui.Frame` auf winzigen Terminals abgeschnitten; postctl-Lade-/Fehlerbildschirme umgehen den Rahmen und einige deutsche `statusMessage`-Texte fehlen in `Tr()`; timectl-Eingabeprompts bleiben Fußzeilen-Prompts; notectl-Link-Graph scrollt nicht; ~~taskctl zeigt die Done-Zahl erst nach dem Öffnen des Done-Tabs~~ (behoben 2026-10-18); ~~Dashboard-Today-Panel ist nicht klickbar~~ (Klick öffnet die Agenda, 2026-10-18).
+- [ ] Neu 2026-10-08: ~~habctl-Langansichten werden von `ui.Frame` auf winzigen Terminals abgeschnitten~~ (scrollen jetzt mit PgUp/PgDn/Mausrad, 2026-10-18); ~~postctl-Lade-/Fehlerbildschirme umgehen den Rahmen und fehlende `Tr()`-Texte~~ (geprüft 2026-10-18: laufen über `ui.Frame`, alle 280 Schlüssel haben DE+EN); timectl-Eingabeprompts bleiben Fußzeilen-Prompts; ~~notectl-Link-Graph scrollt nicht~~ (scrollt mit dem Cursor, 2026-10-18); ~~taskctl zeigt die Done-Zahl erst nach dem Öffnen des Done-Tabs~~ (behoben 2026-10-18); ~~Dashboard-Today-Panel ist nicht klickbar~~ (Klick öffnet die Agenda, 2026-10-18).
 - [ ] Unverifiziert (braucht Live-Test): echte Stooq-Kurse (investctl), `healthctl remind`-Benachrichtigungen, Farben/Maus im echten Terminal.
 - [x] ~~Invest-Karte ohne Zifferntaste~~ — 2026-10-18: `0` (investctl) und `p` (postctl). Offen: bei sehr niedrigen Terminals mit 10 Karten bleibt das Today-Panel ausgeblendet.
 - [x] ~~`proposals/healthctl` und `proposals/investctl` als „umgesetzt“ markieren~~ — 2026-10-18.
@@ -94,3 +94,6 @@ postctl ist gepusht (`b838b8b`), Core `f71f85d` auch. Für die übrigen Tools:
 ## Sicherheits-Audit der Suite (2026-10-17) — Stand
 Behoben (lokal committet, siehe `git log` je Tool): owner-only Dateien (Core `secure.Init`, Aktivitätslog 0600), mailctl `send_email` nur per Opt-in (`MAILCTL_MCP_ALLOW_SEND=1`), taskctl AppleScript-Escaping in der Pomodoro-Benachrichtigung, notectl `Write` nur innerhalb des Vaults, `confirm=true` für alle `delete_*`-MCP-Tools, budgetctl Import nur CSV/TSV/TXT, Lizenz-HTTP mit Timeout.
 Behoben 2026-10-17 (Core `aaca411`): `syncdir.Acquire` nimmt jetzt eine *geteilte* Sperre — TUI, Daemon, CLI und MCP schließen sich nicht mehr aus (SQLite-Busy-Timeout koordiniert); `syncdir.InUse` für `doctor`. Alle Tools sind auf Core `aaca411` gebumpt.
+
+- [x] 2026-10-18: echte TUI-Screenshots (TuiShot) auf den acht Tool-Seiten der Landingpage; mailctl-Konten-Tab heißt jetzt „All“ statt „Alle“.
+- [ ] Bewusst nicht umgesetzt (2026-10-18): timectl-Eingabeprompts als Popup (Fußzeilen-Prompt ist suite-konsistent und funktioniert); Gesundheits-Panel/Logs-Kopfbereich/Klick-Raster aus postctl für die anderen Tools — Nutzen unklar, bei Bedarf einzeln beauftragen.
