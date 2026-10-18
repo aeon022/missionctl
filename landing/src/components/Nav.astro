@@ -436,7 +436,9 @@ const isAppPage = apps.some(a => a.href === currentPath);
     transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
     z-index: 100;
     max-height: calc(100vh - 5rem);
+    max-height: calc(100dvh - 5rem); /* iOS: the visible height, not the one with the collapsed toolbars */
     overflow-y: auto;
+    overscroll-behavior: contain;
   }
   .mobile-menu-panel.open {
     opacity: 1;
@@ -479,6 +481,16 @@ const isAppPage = apps.some(a => a.href === currentPath);
   }
   @media (max-width: 420px) {
     .mobile-apps-grid { grid-template-columns: 1fr; }
+  }
+  /* 320–400px: logo + menu + language + theme + Buy do not fit in one row. Language and theme are also in the
+     menu, so the header keeps logo, menu button and Buy. */
+  @media (max-width: 340px) {
+    #main-nav nav { padding: 0 0.75rem !important; }
+    .nav-buy { padding: 0.4rem 0.55rem !important; }
+  }
+  @media (max-width: 400px) {
+    #lang-toggle, #theme-toggle { display: none; }
+    .nav-buy { padding: 0.45rem 0.7rem; font-size: 0.75rem; }
   }
 </style>
 

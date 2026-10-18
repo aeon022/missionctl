@@ -82,7 +82,7 @@ const apps = [
   @keyframes hs-blink { 50% { opacity: 0; } }
 
   .hs-stage { position: relative; transition: transform .25s ease-out; transform-style: preserve-3d; will-change: transform; }
-  .hs-svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .hs-svg { width: 100%; height: auto; display: block; overflow: hidden; } /* everything is drawn inside the viewBox; a rotating ring must not widen the page */
   .hs-orbit { fill: none; stroke: var(--color-terminal-border); stroke-width: 1; stroke-dasharray: 3 7; }
   .hs-orbit-outer { stroke-opacity: .5; animation: hs-spin 90s linear infinite; transform-origin: 260px 260px; }
   @keyframes hs-spin { to { transform: rotate(360deg); } }
@@ -125,6 +125,10 @@ const apps = [
 
   .hs-status { display: none; align-self: center; min-height: 1.9rem; padding: .3rem .8rem; border: 1px solid var(--c, var(--color-terminal-border)); border-radius: 8px; font-family: var(--font-mono); font-size: .8rem; color: var(--color-terminal-text); background: rgba(var(--color-terminal-bg-rgb), .8); opacity: 0; transition: opacity .3s; }
   .hs-status.on { opacity: 1; }
+  @media (max-width: 1320px) {
+    .hs-chip { display: none; }          /* chips of the right-hand nodes would run off the screen */
+    .hs-status { display: block; }
+  }
   @media (max-width: 640px) {
     .hs-chip { display: none; }          /* chips would run off the screen on the right-hand nodes */
     .hs-status { display: block; }
