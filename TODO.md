@@ -1,3 +1,39 @@
+# TODO — bis zum Launch am 1. November 2026
+
+Plan und Begründungen: [`docs/LAUNCH-2026-11-01.md`](docs/LAUNCH-2026-11-01.md). **Nichts wird ohne Freigabe veröffentlicht, getaggt oder gepostet.**
+`[C]` = Claude legt an/erledigt (ab 19.10.) · `[N]` = Nutzer (du) · `[N+C]` = gemeinsam
+
+## Mo 19.10. – Sa 24.10.
+- [ ] `[C]` **Family-Rabatt** `FAMILY-100%-all` um postctl Pro Yearly/Monthly erweitern (für den Testkauf) — nach deinem Okay
+- [ ] `[C]` `SUPPORT.md` (Entwurf) in allen Repos + eine Support-Seite; Antwortzeit ehrlich — du nennst die Adresse und Zeit
+- [ ] `[C]` Demo-GIFs mit `vhs`: postctl (Kalender, Planen, Profile), Dashboard (Themes), je Tool 10–15 s
+- [ ] `[C]` READMEs aller Repos: Screenshot/GIF oben, `brew install`, 3 Sätze Nutzen, Link zur Seite, Plattform-Hinweis (macOS/Linux)
+- [ ] `[N]` Entscheiden: Bundle ohne postctl Pro (jetzt so) oder mit? Besitzstand für Bundle vor dem 18.10. ok?
+- [ ] `[N]` Rechtliche Prüfung beauftragen (Bedingungen + Datenschutz postctl.sh, Abo-Klauseln, Widerruf) — Frist 28.10.
+- [ ] `[N]` Brücke fragen: darf sie als Beispiel genannt werden? (nur echte Zahlen)
+
+## So 25.10. – Sa 31.10.
+- [ ] `[N+C]` **Testkauf Ende-zu-Ende** (bis 25.10.): Jahresabo mit Family-Code → Schlüssel → `postctl license activate` → nach 24 h Prüfung → Abo kündigen → `revoked` → Lapse-Verhalten (2 Netzwerke publizieren, Rest bleibt geplant)
+- [ ] `[C]` Fallstudie Brücke (nur bei Zustimmung), Entwurf
+- [ ] `[C]` Beiträge als Entwurf: Show HN, Reddit (r/commandline, r/ClaudeAI, r/selfhosted), Blogartikel (MCP-Sicherheit / Tag im Terminal)
+- [ ] `[C]` Verzeichnisse als Pull-Request-Entwürfe: MCP-Listen, awesome-tui, awesome-cli-apps, awesome-go
+- [ ] `[C]` Messung ohne Tracking: Skript für Stars/Downloads/Polar (read-only), Frage „Wie hast du uns gefunden?“ im Polar-Checkout
+- [ ] `[C]` Landingpages: GIFs einbauen, Preise/Texte final, Geräte-Matrix, Deploy auf deine Freigabe
+- [ ] `[N]` Rechtstexte nach Prüfung übernehmen (ich arbeite Änderungen ein)
+- [ ] `[N]` Zugangsdaten erneuern: Polar-Token (Chat), X-Cookies, Pretix-Token, Threads-App-Secret
+- [ ] `[C]` Letzter Check (31.10.): `scripts/release.sh --check postctl v0.5.0`, Live-Test aller Seiten/Checkout-Links, `missionctl update --check`, Plesk-Header/404 prüfen
+
+## So 1.11. — Live
+- [ ] `[N+C]` **Release** `scripts/release.sh postctl v0.5.0` (nur nach deinem Okay am Tag)
+- [ ] `[C]` Release-Notes: Abo, Besitzstand (Lifetime und Bundle vor 18.10.), Link zu Preisen
+- [ ] `[N+C]` Beiträge freigeben und veröffentlichen (Show HN Di–Do morgens), am selben Tag Fragen beantworten
+- [ ] `[N]` Postctl Scheduler-Dienste auf allen Rechnern auf v0.5.0 aktualisieren (Schlüsseldatei vorhanden!)
+
+## Danach
+- [ ] Woche 1–4: täglich Issues/Mails, wöchentlich Zahlen notieren; nach 4 Wochen Review (Preis, Kanäle), erst dann bezahlte Werbung
+
+---
+
 # TODO — Over-Engineering-Audit (2026-10-05)
 
 Quelle: `ponytail-audit` + `deadcode` + `go test -cover` über die ganze Suite.
