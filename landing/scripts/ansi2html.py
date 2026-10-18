@@ -78,5 +78,18 @@ def convert(text):
     emit(text[pos:])
     return "".join(out)
 
+# Terminal palettes: in a real terminal the ANSI colours (cards use 0-15) follow the terminal's theme, so the
+# per-theme mockups remap them too. Usage: ansi2html.py in.ansi [nord|dracula|gruvbox]
+PALETTES = {
+    "nord": (["#3b4252", "#bf616a", "#a3be8c", "#ebcb8b", "#81a1c1", "#b48ead", "#88c0d0", "#e5e9f0",
+              "#4c566a", "#bf616a", "#a3be8c", "#ebcb8b", "#81a1c1", "#b48ead", "#8fbcbb", "#eceff4"], "#d8dee9", "#2e3440"),
+    "dracula": (["#21222c", "#ff5555", "#50fa7b", "#f1fa8c", "#bd93f9", "#ff79c6", "#8be9fd", "#f8f8f2",
+                 "#6272a4", "#ff6e6e", "#69ff94", "#ffffa5", "#d6acff", "#ff92df", "#a4ffff", "#ffffff"], "#f8f8f2", "#282a36"),
+    "gruvbox": (["#282828", "#cc241d", "#98971a", "#d79921", "#458588", "#b16286", "#689d6a", "#a89984",
+                 "#928374", "#fb4934", "#b8bb26", "#fabd2f", "#83a598", "#d3869b", "#8ec07c", "#ebdbb2"], "#ebdbb2", "#282828"),
+}
+
 if __name__ == "__main__":
+    if len(sys.argv) > 2:
+        P16, FG, BG = PALETTES[sys.argv[2]]
     sys.stdout.write(convert(open(sys.argv[1]).read().rstrip("\n")))

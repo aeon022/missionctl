@@ -135,6 +135,10 @@ notectl sync      # Obsidian, Apple Notes, or Joplin → local index`}</code></p
       <p><span class="lang-en">Restart Claude Desktop. All 67 MCP tools appear automatically in every conversation.</span><span class="lang-de">Starte Claude Desktop neu. Alle 67 MCP-Tools erscheinen automatisch in jeder Unterhaltung.</span></p>
 
       <!-- ── SYNC ACROSS DEVICES ────────────── -->
+      <h3 id="themes"><span class="lang-en">Colour themes</span><span class="lang-de">Farbschemata</span></h3>
+      <p><span class="lang-en">Press <kbd>T</kbd> in any app (in timectl <kbd>C</kbd>, because <kbd>T</kbd> is the task picker) or type <code>:theme</code> to switch to the next palette — it changes live and is saved to <code>~/.config/missionctl/theme.yaml</code>, so every app and the dashboard start in the same colours. Built in: terminal (your terminal's own colours), catppuccin, classic, dracula, gruvbox, nord, one-dark, solarized and tokyo-night. habctl and budgetctl also list the theme in their Settings screens; notectl in Settings with <kbd>ctrl</kbd>+<kbd>t</kbd>. Single colours can be overridden in the same file.</span><span class="lang-de">Drücke in einer App <kbd>T</kbd> (in timectl <kbd>C</kbd>, weil <kbd>T</kbd> dort der Aufgaben-Picker ist) oder tippe <code>:theme</code>, um zur nächsten Palette zu wechseln — sie ändert sich live und wird in <code>~/.config/missionctl/theme.yaml</code> gespeichert, sodass jede App und das Dashboard in denselben Farben starten. Eingebaut: terminal (die Farben deines Terminals), catppuccin, classic, dracula, gruvbox, nord, one-dark, solarized und tokyo-night. habctl und budgetctl zeigen das Theme auch in den Einstellungen; notectl dort mit <kbd>ctrl</kbd>+<kbd>t</kbd>. Einzelne Farben lassen sich in derselben Datei überschreiben.</span></p>
+      <p><span class="lang-en">An empty app greets you with a short <strong>Welcome</strong> checklist (what to press first) instead of a blank screen.</span><span class="lang-de">Eine leere App begrüßt dich statt mit einem leeren Bildschirm mit einer kurzen <strong>Welcome</strong>-Checkliste (was du zuerst drückst).</span></p>
+
       <h2 id="sync-across-devices"><span class="lang-en">Sync Across Devices</span><span class="lang-de">Sync über mehrere Geräte</span></h2>
       <p>
         <span class="lang-en">By default, each tool keeps its SQLite database in a private directory (<code>~/.local/share/&lt;tool&gt;/</code> — <code>~/Library/Application Support/&lt;tool&gt;/</code> on some tools). That's fine for a single machine. To use the same data on a laptop and a desktop, point a tool's database at a folder you already sync yourself — iCloud Drive, Dropbox, Syncthing — via the <code>data_dir</code> config key or a <code>&lt;TOOL&gt;_DATA_DIR</code> environment variable. All 8 dev tools (not postctl, which has its own per-profile setup) support this the same way.</span>
@@ -501,6 +505,7 @@ mailctl mcp                      # start MCP server`}</code></pre>
         <kbd>s</kbd>         <span>Sync inbox</span>
         <kbd>/</kbd>         <span>Search</span>
         <kbd>:</kbd>         <span>Command palette</span>
+        <kbd>T</kbd>         <span>Next colour theme (live, saved for the whole suite)</span>
         <kbd>?</kbd>         <span>Help</span>
         <kbd>q</kbd>         <span>Quit</span>
       </div>
@@ -562,6 +567,7 @@ calctl mcp                          # start MCP server`}</code></pre>
         <kbd>s</kbd>       <span>Sync calendar</span>
         <kbd>/</kbd>       <span>Filter events</span>
         <kbd>:</kbd>       <span>Command palette</span>
+        <kbd>T</kbd>       <span>Next colour theme (live, saved for the whole suite)</span>
         <kbd>?</kbd>       <span>Help</span>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
@@ -627,6 +633,7 @@ taskctl mcp                          # start MCP server`}</code></pre>
         <kbd>s</kbd>       <span>Sync</span>
         <kbd>/</kbd>       <span>Search</span>
         <kbd>:</kbd>       <span>Command palette</span>
+        <kbd>T</kbd>       <span>Next colour theme (live, saved for the whole suite)</span>
         <kbd>?</kbd>       <span>Help</span>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
@@ -711,6 +718,7 @@ notectl vault use work                                     # switch active vault
         <kbd>Tab / Shift+Tab</kbd> <span>Browse folders</span>
         <kbd>&lt; / &gt;</kbd> <span>Resize the two-pane split</span>
         <kbd>:</kbd>       <span>Command palette</span>
+        <kbd>T</kbd>       <span>Next colour theme (live, saved for the whole suite)</span>
         <kbd>?</kbd>       <span>Help</span>
         <kbd>q</kbd>       <span>Quit</span>
       </div>
@@ -814,6 +822,7 @@ budgetctl --profile firma summary`}</code></pre>
         <kbd>o</kbd>             <span>Settings (sync across devices)</span>
         <kbd>p</kbd>             <span>Profiles (switch/create/remove isolated data contexts)</span>
         <kbd>:</kbd>             <span>Command palette</span>
+        <kbd>T</kbd>             <span>Next colour theme (live, saved for the whole suite)</span>
         <kbd>?</kbd>             <span>Help</span>
         <kbd>q</kbd>             <span>Quit</span>
       </div>
@@ -887,6 +896,7 @@ habctl mcp                           # start MCP server`}</code></pre>
         <kbd>S</kbd>       <span>Settings — AI provider &amp; API keys</span>
         <kbd>/</kbd>       <span>Filter habits</span>
         <kbd>:</kbd>       <span>Command palette</span>
+        <kbd>T</kbd>       <span>Next colour theme (live, saved for the whole suite)</span>
         <kbd>?</kbd>       <span>Help</span>
         <kbd>q</kbd>       <span>Quit</span>
       </div>

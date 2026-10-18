@@ -620,6 +620,16 @@ kbd { font-family: var(--font-mono); font-size: .85em; padding: .05em .4em; bord
   88.89% { top: calc(.9rem + 21.5 * 1.32em); left: calc(1rem + 2.5ch); width: 82ch; height: calc(7 * 1.32em); }
 }
 @media (max-width: 760px) { .mock-hl { display: none; } }
+.mock-pre[hidden] { display: none; }
+.mock-pre[data-mock="nord"] { background: #2e3440; color: #d8dee9; }
+.mock-pre[data-mock="dracula"] { background: #282a36; color: #f8f8f2; }
+.mock-pre[data-mock="gruvbox"] { background: #282828; color: #ebdbb2; }
+.theme-tabs { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: .5rem; max-width: 1000px; margin: 1.1rem auto 0; }
+.theme-tabs-label { flex-basis: 100%; text-align: center; color: var(--color-terminal-dim); font-size: .85rem; margin-bottom: .2rem; }
+.theme-tab { font-family: var(--font-mono); font-size: .8rem; padding: .4rem .85rem; min-height: 32px; border-radius: 999px; border: 1px solid var(--color-terminal-border); background: transparent; color: var(--color-terminal-dim); cursor: pointer; transition: color .15s, border-color .15s, background .15s; }
+.theme-tab:hover { color: var(--color-terminal-text); border-color: var(--color-terminal-green); }
+.theme-tab[aria-pressed="true"] { color: var(--color-terminal-bg); background: var(--color-terminal-green); border-color: var(--color-terminal-green); font-weight: 700; }
+@media (pointer: coarse) { .theme-tab { min-height: 44px; padding: .55rem 1rem; } }
 
 /* Sections fade/rise in as they scroll into view (added by the script in Layout.astro). */
 .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s cubic-bezier(.16,1,.3,1); }

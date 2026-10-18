@@ -4,6 +4,15 @@ import TerminalWindow from '../components/TerminalWindow.astro';
 import HeroScene from '../components/HeroScene.astro';
 import AppCard from '../components/AppCard.astro';
 import mockDashboard from '../mockups/dashboard.html?raw';
+import mockNord from '../mockups/dashboard-nord.html?raw';
+import mockDracula from '../mockups/dashboard-dracula.html?raw';
+import mockGruvbox from '../mockups/dashboard-gruvbox.html?raw';
+const dashThemes = [
+  { id: 'terminal', label: 'terminal', html: mockDashboard },
+  { id: 'nord', label: 'nord', html: mockNord },
+  { id: 'dracula', label: 'dracula', html: mockDracula },
+  { id: 'gruvbox', label: 'gruvbox', html: mockGruvbox },
+];
 
 // Standalone $9 checkout links for the 5 tools with AI-gated features —
 // unlocks just that tool's Bundle-gated feature(s), not the full suite.
@@ -472,7 +481,14 @@ const faqLd = {
     </div>
     <div class="mock-window" style="max-width: 1000px; margin: 0 auto;">
       <div class="mock-chrome"><span style="width:10px;height:10px;border-radius:50%;background:#ff5f57;display:inline-block"></span><span style="width:10px;height:10px;border-radius:50%;background:#febc2e;display:inline-block"></span><span style="width:10px;height:10px;border-radius:50%;background:#28c840;display:inline-block"></span><span class="mock-title">missionctl</span></div>
-      <div class="mock-body"><pre class="mock-pre" set:html={mockDashboard}></pre><div class="mock-hl" aria-hidden="true"></div></div>
+      <div class="mock-body">
+        {dashThemes.map((t, i) => (<pre class="mock-pre" data-mock={t.id} hidden={i !== 0} set:html={t.html}></pre>))}
+        <div class="mock-hl" aria-hidden="true"></div>
+      </div>
+    </div>
+    <div class="theme-tabs" role="group" aria-label="Colour theme">
+      <span class="theme-tabs-label"><span class="lang-en">Press <kbd>T</kbd> in any app to switch the colour theme live:</span><span class="lang-de">Drücke <kbd>T</kbd> in jeder App, um das Farbschema live zu wechseln:</span></span>
+      {dashThemes.map((t, i) => (<button type="button" class="theme-tab" data-mock-tab={t.id} aria-pressed={i === 0 ? 'true' : 'false'}>{t.label}</button>))}
     </div>
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: 1rem; margin-top: 2rem;"><div style="background: var(--color-terminal-bg); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.25rem;"><h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: var(--color-terminal-green); margin: 0 0 0.4rem;"><span class="lang-en">Live cards</span><span class="lang-de">Live-Karten</span></h3><p style="color: var(--color-terminal-dim); font-size: 0.85rem; line-height: 1.55; margin: 0;"><span class="lang-en">One card per app with sparklines. Number keys jump into the tool, <kbd>d</kbd> peeks inside, <kbd>x</kbd> completes the next task, stops the timer or checks a habit.</span><span class="lang-de">Eine Karte pro App mit Sparklines. Zifferntasten springen ins Tool, <kbd>d</kbd> wirft einen Blick hinein, <kbd>x</kbd> erledigt die nächste Aufgabe, stoppt den Timer oder hakt eine Gewohnheit ab.</span></p></div><div style="background: var(--color-terminal-bg); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.25rem;"><h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: var(--color-terminal-green); margin: 0 0 0.4rem;"><span class="lang-en">Today at a glance</span><span class="lang-de">Heute auf einen Blick</span></h3><p style="color: var(--color-terminal-dim); font-size: 0.85rem; line-height: 1.55; margin: 0;"><span class="lang-en">Calendar events, due tasks and running timers merged into one timeline, next to the suite's recent activity. <kbd>a</kbd> opens the full agenda.</span><span class="lang-de">Termine, fällige Aufgaben und laufende Timer in einer Zeitleiste, daneben die letzte Aktivität der Suite. <kbd>a</kbd> öffnet die volle Agenda.</span></p></div><div style="background: var(--color-terminal-bg); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.25rem;"><h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: var(--color-terminal-green); margin: 0 0 0.4rem;"><span class="lang-en">Search everything</span><span class="lang-de">Alles durchsuchen</span></h3><p style="color: var(--color-terminal-dim); font-size: 0.85rem; line-height: 1.55; margin: 0;"><span class="lang-en"><kbd>/</kbd> searches mail, notes, tasks and more at once and jumps straight into the right tool.</span><span class="lang-de"><kbd>/</kbd> durchsucht Mail, Notizen, Aufgaben und mehr gleichzeitig und springt direkt ins passende Tool.</span></p></div><div style="background: var(--color-terminal-bg); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.25rem;"><h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; font-weight: 700; color: var(--color-terminal-green); margin: 0 0 0.4rem;"><span class="lang-en">Setup & health</span><span class="lang-de">Einrichtung & Zustand</span></h3><p style="color: var(--color-terminal-dim); font-size: 0.85rem; line-height: 1.55; margin: 0;"><span class="lang-en"><code>missionctl init</code> sets everything up, <code>missionctl doctor</code> checks installs, MCP registration and databases, <code>missionctl status</code> prints a plain-text daily briefing.</span><span class="lang-de"><code>missionctl init</code> richtet alles ein, <code>missionctl doctor</code> prüft Installationen, MCP-Registrierung und Datenbanken, <code>missionctl status</code> gibt ein Tagesbriefing als Text aus.</span></p></div></div>
   </section>
@@ -887,6 +903,27 @@ const faqLd = {
     pageCtl?.abort();
     pageCtl = new AbortController();
     const sig = pageCtl.signal;
+
+  // ── Dashboard mockup: theme tabs (auto-cycles until the visitor picks one) ──
+  (() => {
+    const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('[data-mock-tab]'));
+    const pres = Array.from(document.querySelectorAll<HTMLElement>('pre[data-mock]'));
+    if (!tabs.length || tabs.length !== pres.length) return;
+    const show = (id: string) => {
+      pres.forEach((p) => { p.hidden = p.dataset.mock !== id; });
+      tabs.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.mockTab === id)));
+    };
+    let picked = false;
+    tabs.forEach((b) => b.addEventListener('click', () => { picked = true; show(b.dataset.mockTab!); }, { signal: sig }));
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    let i = 0;
+    const timer = window.setInterval(() => {
+      if (picked || document.hidden) return;
+      i = (i + 1) % tabs.length;
+      show(tabs[i].dataset.mockTab!);
+    }, 4500);
+    sig.addEventListener('abort', () => window.clearInterval(timer));
+  })();
 
   // ── Hero background: mouse parallax + scroll drift on the blobs ──
   (() => {
