@@ -4,11 +4,11 @@ Plan und Begründungen: [`docs/LAUNCH-2026-11-01.md`](docs/LAUNCH-2026-11-01.md)
 `[C]` = Claude legt an/erledigt (ab 19.10.) · `[N]` = Nutzer (du) · `[N+C]` = gemeinsam
 
 ## Mo 19.10. – Sa 24.10.
-- [ ] `[C]` **Family-Rabatt** `FAMILY-100%-all` um postctl Pro Yearly/Monthly erweitern (für den Testkauf) — nach deinem Okay
+- [x] `[C]` **Family-Rabatt** um postctl Pro Yearly/Monthly erweitert (2026-10-18). Der alte Code stand versehentlich im Chat und wurde **ersetzt**; der neue liegt nur in `~/.config/missionctl/family-code` (0600)
 - [ ] `[C]` `SUPPORT.md` (Entwurf) in allen Repos + eine Support-Seite; Antwortzeit ehrlich — du nennst die Adresse und Zeit
 - [ ] `[C]` Demo-GIFs mit `vhs`: postctl (Kalender, Planen, Profile), Dashboard (Themes), je Tool 10–15 s
 - [ ] `[C]` READMEs aller Repos: Screenshot/GIF oben, `brew install`, 3 Sätze Nutzen, Link zur Seite, Plattform-Hinweis (macOS/Linux)
-- [ ] `[N]` Entscheiden: Bundle ohne postctl Pro (jetzt so) oder mit? Besitzstand für Bundle vor dem 18.10. ok?
+- [x] `[N]` Entschieden 2026-10-18: Bundle **ohne** postctl Pro; Bundle-Schlüssel vor dem 18.10. bleiben gültig (Besitzstand); Polar-Beschreibung des Bundles entsprechend ergänzt
 - [ ] `[N]` Rechtliche Prüfung beauftragen (Bedingungen + Datenschutz postctl.sh, Abo-Klauseln, Widerruf) — Frist 28.10.
 - [ ] `[N]` Brücke fragen: darf sie als Beispiel genannt werden? (nur echte Zahlen)
 
