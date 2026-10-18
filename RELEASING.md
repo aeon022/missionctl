@@ -12,7 +12,7 @@ git push origin v0.1.0
 
 Das war's. Der `release`-Workflow baut dann automatisch:
 
-1. macOS-Binaries (arm64 + amd64, CGO-frei, Version per ldflags injiziert)
+1. Binaries für macOS und Linux (arm64 + amd64, CGO-frei, Version per ldflags injiziert)
 2. GitHub Release mit `.tar.gz`-Archiven + `checksums.txt` + Changelog
 3. Homebrew-Formula-Update in [aeon022/homebrew-tap](https://github.com/aeon022/homebrew-tap)
 
@@ -40,6 +40,11 @@ done
 Ohne das Secret schlägt der Homebrew-Publish-Schritt fehl (Release-Assets auf GitHub
 werden trotzdem erstellt).
 
+## Updates für Nutzer ohne Quellcode
+
+`missionctl update` holt für Tools ohne lokalen Checkout das neueste Release (Archiv + `checksums.txt`), prüft SHA-256 und ersetzt
+die installierte Binary. `missionctl update --check` zeigt nur, was neu wäre. Source-Builds (`dev`) werden nie überschrieben.
+
 ## CI
 
 Jedes Repo hat zusätzlich `ci.yml`: `go vet` + `go test` + `go build` auf macos-latest
@@ -55,4 +60,5 @@ bei jedem Push auf `main` und jedem PR.
 
 - [ ] `HOMEBREW_TAP_TOKEN` Secret setzen (siehe oben)
 - [x] ~~LICENSE-Entscheidung~~ ✅ MIT in allen Repos + `license: MIT` in den Brew-Formulas.
-- [ ] Erste Tags setzen (Vorschlag: überall `v0.1.0` nach dem nächsten Commit)
+- [ ] Erste Tags setzen (Vorschlag: überall `v0.1.0` nach dem nächsten Commit); **postctl hat jetzt auch `.goreleaser.yaml` + `release.yml`** (Tag `v0.4.1`, wenn der `--dry-run`-Fix mitgeliefert werden soll)
+- [x] Linux-Builds (amd64/arm64) in allen goreleaser-Konfigurationen (2026-10-18)
