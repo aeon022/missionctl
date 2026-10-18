@@ -292,8 +292,8 @@ const faqs = [
   {
     q_en: 'Is missionctl free? Do I need a Claude subscription?',
     q_de: 'Ist missionctl kostenlos? Brauche ich ein Claude-Abo?',
-    a_en: "All 9 apps are free to download and use (MIT licensed). A one-time $39 Bundle (or $9 per feature individually) unlocks optional AI features in 5 of the apps — no subscription either way. For the AI client side: Claude Desktop's free plan already supports local MCP servers, so no paid Claude plan is required. missionctl's own AI features also work with a free-tier Gemini key or a fully local Ollama model at no cost at all.",
-    a_de: 'Alle 9 Apps sind kostenlos herunterladbar und nutzbar (MIT-lizenziert). Ein einmaliger Kauf des $39-Bundles (oder $9 pro Feature einzeln) schaltet optionale KI-Features in 5 der Apps frei — kein Abo in beiden Fällen. Auf der KI-Client-Seite: Claude Desktops kostenloser Plan unterstützt bereits lokale MCP-Server, ein bezahlter Claude-Plan ist also nicht nötig. missionctls eigene KI-Features funktionieren zudem mit einem kostenlosen Gemini-Key oder einem komplett lokalen Ollama-Modell, völlig kostenlos.',
+    a_en: "All 9 apps are free to download and use (MIT licensed). A one-time $39 Bundle (or $9 per feature individually) unlocks optional AI features in 5 of the apps — no subscription either way. postctl Pro is sold separately on postctl.sh, as a subscription. For the AI client side: Claude Desktop's free plan already supports local MCP servers, so no paid Claude plan is required. missionctl's own AI features also work with a free-tier Gemini key or a fully local Ollama model at no cost at all.",
+    a_de: 'Alle 9 Apps sind kostenlos herunterladbar und nutzbar (MIT-lizenziert). Ein einmaliger Kauf des $39-Bundles (oder $9 pro Feature einzeln) schaltet optionale KI-Features in 5 der Apps frei — kein Abo in beiden Fällen. postctl Pro gibt es separat auf postctl.sh, als Abo. Auf der KI-Client-Seite: Claude Desktops kostenloser Plan unterstützt bereits lokale MCP-Server, ein bezahlter Claude-Plan ist also nicht nötig. missionctls eigene KI-Features funktionieren zudem mit einem kostenlosen Gemini-Key oder einem komplett lokalen Ollama-Modell, völlig kostenlos.',
   },
   {
     q_en: 'Does it work on Linux?',
@@ -680,7 +680,7 @@ const faqLd = {
           app.name === 'postctl' ? (
             <div style="background: var(--color-terminal-surface); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.25rem;">
               <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: var(--color-terminal-text); margin: 0 0 0.5rem;">postctl</h3>
-              <p style="color: var(--color-terminal-dim); font-size: 0.8rem; margin: 0 0 0.75rem; line-height: 1.5;"><span class="lang-en">Own site &middot; free core, optional Pro license</span><span class="lang-de">Eigene Seite &middot; kostenloser Kern, optionale Pro-Lizenz</span></p>
+              <p style="color: var(--color-terminal-dim); font-size: 0.8rem; margin: 0 0 0.75rem; line-height: 1.5;"><span class="lang-en">Own site &middot; free core, optional Pro subscription</span><span class="lang-de">Eigene Seite &middot; kostenloser Kern, optionales Pro-Abo</span></p>
               <a href="https://postctl.sh" target="_blank" rel="noopener" style="color: var(--color-terminal-green); font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; text-decoration: none;">postctl.sh &rarr;</a>
             </div>
           ) : (
