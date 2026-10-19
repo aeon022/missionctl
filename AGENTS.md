@@ -31,3 +31,13 @@ Pushing inside a tool's own repo (e.g. `mailctl/`) does not update
 repo reflecting the new commit, that needs its own `git add <tool> && git
 commit && git push` from the `missionctl` root — see
 [git-deploy.md](git-deploy.md) for the full daily workflow.
+
+## notectl mirror: do NOT enable until checkbox sync is fixed
+
+Do not set `mirror_apple_obsidian` / `sync_sources: apple,obsidian` for the
+user's vault (`/Users/gweiher/Obsidian/Gerwin-Vault/`) before the TODO.md
+section "notectl: Apple↔Obsidian-Mirror mit Checkboxen" is done. Apple
+checklists must always sync as real checkboxes (user requirement, no
+exceptions); the mirror currently loses them (`mirror.go` PushToApple
+overwrites the body, Apple→Obsidian ignores `notes.ChecklistState`).
+Details in stage.md (Nachtrag 2026-10-19).
