@@ -17,6 +17,22 @@ Plan und Begründungen: [`docs/LAUNCH-2026-11-01.md`](docs/LAUNCH-2026-11-01.md)
 - [ ] `[N]` `healthctl remind` einmal live testen (echte Benachrichtigung); investctl-/healthctl-TUIs im echten Terminal ansehen (`TESTING.md` §5)
 - [ ] `[N+C]` Entscheiden: `--lookup` als Standard? investctl/healthctl nach dem Launch veröffentlichen? (Empfehlung: erst ab Woche 3–4)
 
+## Erledigt am 19.10.2026 (Überblick)
+- Support-Seiten + Cookie-Banner/-Seite (postctl.sh), Favicons/App-Icons, README mit GIF/brew in allen Repos, Launch-Entwürfe (`docs/launch/`), `scripts/metrics.sh`
+- MCP-Zahl geprüft: **67 Tools** in 9 öffentlichen Apps (notectl hat 8)
+- Lizenzen **nur über Polar**: feste Dev-/Familien-Schlüssel entfernt (alle Go- und JS-Tools); JS-Tools prüfen direkt gegen Polar
+- investctl: Bank-Import (6 Formate, ISIN, `--lookup`, Duplikat-Schutz) + Yahoo-Fallback (Stooq blockt Skripte); healthctl: CSV-Import
+- budgetctl: Import überlappender Exporte ohne Duplikate; Bruecke-Profil mit 3 Konten aktualisiert, Konfliktkopien gelöscht
+- Completions (bash/zsh/fish) in Archiv + Homebrew-Formel aller Tools (wirken ab dem nächsten Release)
+- missionctl: Abdeckung 58 % → 89 %, Fehler behoben (Lizenzschlüssel maskiert, Quoting in `init`, Plist-Escaping, Notify-Rechte, Tagebuch-Datum), Willkommensbildschirm, Konfliktkopien-Warnung
+- ASCIIForge/TermCast/CMS2MD: Hintertür entfernt, Polar-Produkte (9 € je Tool) + Benefits + Checkout-Links angelegt, Familien-Rabatt erweitert, Installation per GitHub, Tests
+
+## Kleine Tools: ASCIIForge, TermCast, CMS2MD (als Nächstes)
+- [ ] `[N]` Je Tool einen Schlüssel über den Checkout-Link mit dem Familien-Code holen und `license <schlüssel>` testen (Fremdschlüssel wird abgelehnt: geprüft)
+- [ ] `[N]` Entscheiden: auf npm veröffentlichen? (`termcast` ist vergeben → `@abteilung83/termcast`); bis dahin Installation per `github:aeon022/<Tool>`
+- [ ] `[C]` Tools weiter durchsehen: CMS2MD (Directus/Notion-Sync) gegen echte Instanz testen, TermCast GIF-Export, ASCIIForge-Optik; CI (GitHub Actions) für alle drei; README-Politur mit GIFs
+- [ ] `[C]` Landing-Seite oder Abschnitt „Kleine Werkzeuge“ auf missionctl.sh
+
 ## So 25.10. – Sa 31.10.
 - [ ] `[N+C]` **Testkauf Ende-zu-Ende** (bis 25.10.): Jahresabo mit Family-Code → Schlüssel → `postctl license activate` → nach 24 h Prüfung → Abo kündigen → `revoked` → Lapse-Verhalten (2 Netzwerke publizieren, Rest bleibt geplant)
 - [ ] `[C]` Fallstudie Brücke (nur bei Zustimmung), Entwurf
@@ -25,7 +41,8 @@ Plan und Begründungen: [`docs/LAUNCH-2026-11-01.md`](docs/LAUNCH-2026-11-01.md)
 - [~] `[C]` Messung ohne Tracking (`scripts/metrics.sh` fertig; Frage „Wie hast du uns gefunden?“ im Polar-Checkout fehlt): Skript für Stars/Downloads/Polar (read-only), Frage „Wie hast du uns gefunden?“ im Polar-Checkout
 - [ ] `[C]` Landingpages: GIFs einbauen, Preise/Texte final, Geräte-Matrix, Deploy auf deine Freigabe
 - [ ] `[N]` Rechtstexte nach Prüfung übernehmen (ich arbeite Änderungen ein)
-- [ ] `[N]` Zugangsdaten erneuern: Polar-Token (Chat), X-Cookies, Pretix-Token, Threads-App-Secret
+- [x] `[N]` Polar-Token erneuert (2026-10-19)
+- [ ] `[N]` Zugangsdaten erneuern: X-Cookies, Pretix-Token, Threads-App-Secret
 - [ ] `[C]` Letzter Check (31.10.): `scripts/release.sh --check postctl v0.5.0`, Live-Test aller Seiten/Checkout-Links, `missionctl update --check`, Plesk-Header/404 prüfen
 
 ## So 1.11. — Live
@@ -33,6 +50,12 @@ Plan und Begründungen: [`docs/LAUNCH-2026-11-01.md`](docs/LAUNCH-2026-11-01.md)
 - [ ] `[C]` Release-Notes: Abo, Besitzstand (Lifetime und Bundle vor 18.10.), Link zu Preisen
 - [ ] `[N+C]` Beiträge freigeben und veröffentlichen (Show HN Di–Do morgens), am selben Tag Fragen beantworten
 - [ ] `[N]` Postctl Scheduler-Dienste auf allen Rechnern auf v0.5.0 aktualisieren (Schlüsseldatei vorhanden!)
+
+## Offen aus der Verbesserungsliste (nach dem Launch)
+- [ ] Man-Pages, einheitlicher `--json`-Rahmen, Gesundheits-Panel/Logs-Kopf in weiteren Tools, GIFs auf den Tool-Seiten, GIFs für mailctl/calctl (Demo-Quelle nötig)
+- [ ] `missionctl license activate`: Schlüssel nicht als Argument an die Tools reichen (Prozessliste), z. B. per Standardeingabe in allen Tools
+- [ ] Neue Releases der Tools (Completions, Lizenz-Bereinigung); `release.sh` je Tool nach Okay
+- [ ] Raiffeisen/ELBA-Format (Beispieldatei nötig); weitere AT-Banken
 
 ## Danach
 - [ ] Woche 1–4: täglich Issues/Mails, wöchentlich Zahlen notieren; nach 4 Wochen Review (Preis, Kanäle), erst dann bezahlte Werbung
