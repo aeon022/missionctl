@@ -1,7 +1,7 @@
 {
   "name": "missionctl",
   "short_name": "missionctl",
-  "description": "Give your AI hands. 66 MCP tools across 9 local-first terminal apps.",
+  "description": "Give your AI hands. 67 MCP tools across 9 local-first terminal apps.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0a0a0f",
