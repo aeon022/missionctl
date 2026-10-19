@@ -12,6 +12,9 @@ Regeln aus Memory/CLAUDE.md, die weiter gelten: lokal committen, **pushen nur au
 ## Nachtrag 2026-10-19 (notectl Mirror/Checkboxen — offen)
 - notectl-Mirror Apple↔Obsidian ist **nicht aktiviert** und darf es erst nach Umsetzung des TODO-Abschnitts „notectl: Apple↔Obsidian-Mirror mit Checkboxen“ werden. Grund: Apple-Checkboxen müssen zwingend als Checkboxen gesynct werden; der Mirror liest den Checklisten-Zustand nicht (`internal/notes/apple_sqlite.go` `ChecklistState` wird nur von der TUI genutzt) und `mirror.go` `PushToApple` überschreibt den Apple-Body. Vault: `/Users/gweiher/Obsidian/Gerwin-Vault/`. Umsetzung beim nächsten Überarbeiten der Tools (Entscheidung des Nutzers: Option 2, Mirror reparieren).
 
+## Nachtrag 2026-10-19 (Multi-Device-Sync — geplant)
+- Entscheidung: nahtloser Sync auf bis zu 5 Geräten **nur über einen Cloud-Ordner nach Wahl des Nutzers; niemals Server/SaaS/Konto** (auch nicht später). Ansatz: pro Gerät ein eigenes Änderungsprotokoll (nur ein Schreiber je Datei) + HLC-Merge, lokale SQLite je Gerät. Outline und Roadmap: `proposals/multidevice-sync/README.md`, TODO.md-Abschnitt „Multi-Device-Sync“. Die jetzige geteilte-DB-Lösung (`data_dir`, `syncdir`) erzeugt Konfliktkopien und wird bis dahin nur für ein schreibendes Gerät empfohlen.
+
 ## Nachtrag 2026-10-18 (Themes, Onboarding, Landing)
 - **Live-Themes in allen TUIs:** `theme.Cycle()` im Core (`cf4b6da`), Taste `T` (timectl `C`), `:theme`; habctl folgt jetzt dem Suite-Theme; Settings-Zeile in habctl/budgetctl (`t`) und notectl (`ctrl+t`); Dashboard `T`. Onboarding-Checkliste („Welcome to …“) in jedem Tool.
 - **Dashboard:** Klick auf das Today-Panel öffnet die Agenda; Ziffern `0` (investctl) und `p` (postctl); taskctl zeigt die Done-Zahl sofort.

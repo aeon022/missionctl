@@ -66,6 +66,11 @@ Befund im Code: AppleScript-`body` liefert Checklisten und Bullets identisch (`<
 - [ ] `[C]` Tests: Round-Trip Apple→Obsidian→Apple, gemischte Listen, verschachtelt, Emoji; Probelauf nur mit Testnotizen/Wegwerf-Vault, vorher Backup von Vault und Notes
 - [ ] `[N+C]` Danach erst in `notectl.yaml`: `vault_path`, `sync_sources: apple,obsidian`, `mirror_apple_obsidian: true`. Übergang: nur `sync_sources` (lesend, ohne Mirror) wäre risikolos
 
+## Multi-Device-Sync über Cloud-Ordner (nächste Tool-Überarbeitung)
+Anlass 2026-10-19: Lizenz für 5 Geräte, Konfliktkopien der geteilten DBs in Dropbox. Entwurf + Roadmap: [`proposals/multidevice-sync/README.md`](proposals/multidevice-sync/README.md). Leitplanke: nur Nutzer-Cloud-Ordner, **nie** Server/SaaS/Konto.
+- [ ] `[N+C]` Phase 0: Format entscheiden; Cache-Tools (mailctl/calctl/notectl) aus dem geteilten Ordner nehmen; bis Phase 3 nicht mit „nahtlosem 5-Geräte-Sync“ werben; Lizenztext „5 Geräte“ klären
+- [ ] `[C]` Phase 1–5 siehe Proposal (Kern in `missionctl-core/syncdir` mit Simulationstests, Pilot habctl/timectl, dann übrige Tools, Kompaktierung, Härtung)
+
 ## Danach
 - [ ] Woche 1–4: täglich Issues/Mails, wöchentlich Zahlen notieren; nach 4 Wochen Review (Preis, Kanäle), erst dann bezahlte Werbung
 
