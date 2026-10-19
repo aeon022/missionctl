@@ -5,9 +5,9 @@ Plan und Begründungen: [`docs/LAUNCH-2026-11-01.md`](docs/LAUNCH-2026-11-01.md)
 
 ## Mo 19.10. – Sa 24.10.
 - [x] `[C]` **Family-Rabatt** um postctl Pro Yearly/Monthly erweitert (2026-10-18). Der alte Code stand versehentlich im Chat und wurde **ersetzt**; der neue liegt nur in `~/.config/missionctl/family-code` (0600)
-- [ ] `[C]` `SUPPORT.md` (Entwurf) in allen Repos + eine Support-Seite; Antwortzeit ehrlich — du nennst die Adresse und Zeit
-- [ ] `[C]` Demo-GIFs mit `vhs`: postctl (Kalender, Planen, Profile), Dashboard (Themes), je Tool 10–15 s
-- [ ] `[C]` READMEs aller Repos: Screenshot/GIF oben, `brew install`, 3 Sätze Nutzen, Link zur Seite, Plattform-Hinweis (macOS/Linux)
+- [x] `[C]` `SUPPORT.md` in allen Repos + Support-Seiten (beide Sites live, 2026-10-19; hello@abteilung83.com, 3–5 Arbeitstage); Antwortzeit ehrlich — du nennst die Adresse und Zeit
+- [~] `[C]` Demo-GIFs mit `vhs` (fertig: taskctl, habctl, budgetctl, timectl, diaryctl, notectl, postctl, Dashboard; offen: mailctl, calctl — brauchen Demo-Quelle ohne Echtdaten): postctl (Kalender, Planen, Profile), Dashboard (Themes), je Tool 10–15 s
+- [x] `[C]` READMEs aller Repos (GIF, brew, Releases, Support; 2026-10-19): Screenshot/GIF oben, `brew install`, 3 Sätze Nutzen, Link zur Seite, Plattform-Hinweis (macOS/Linux)
 - [x] `[N]` Entschieden 2026-10-18: Bundle **ohne** postctl Pro; Bundle-Schlüssel vor dem 18.10. bleiben gültig (Besitzstand); Polar-Beschreibung des Bundles entsprechend ergänzt
 - [ ] `[N]` Rechtliche Prüfung beauftragen (Bedingungen + Datenschutz postctl.sh, Abo-Klauseln, Widerruf) — Frist 28.10.
 - [ ] `[N]` Brücke fragen: darf sie als Beispiel genannt werden? (nur echte Zahlen)
@@ -20,9 +20,9 @@ Plan und Begründungen: [`docs/LAUNCH-2026-11-01.md`](docs/LAUNCH-2026-11-01.md)
 ## So 25.10. – Sa 31.10.
 - [ ] `[N+C]` **Testkauf Ende-zu-Ende** (bis 25.10.): Jahresabo mit Family-Code → Schlüssel → `postctl license activate` → nach 24 h Prüfung → Abo kündigen → `revoked` → Lapse-Verhalten (2 Netzwerke publizieren, Rest bleibt geplant)
 - [ ] `[C]` Fallstudie Brücke (nur bei Zustimmung), Entwurf
-- [ ] `[C]` Beiträge als Entwurf: Show HN, Reddit (r/commandline, r/ClaudeAI, r/selfhosted), Blogartikel (MCP-Sicherheit / Tag im Terminal)
-- [ ] `[C]` Verzeichnisse als Pull-Request-Entwürfe: MCP-Listen, awesome-tui, awesome-cli-apps, awesome-go
-- [ ] `[C]` Messung ohne Tracking: Skript für Stars/Downloads/Polar (read-only), Frage „Wie hast du uns gefunden?“ im Polar-Checkout
+- [x] `[C]` Beiträge als Entwurf (`docs/launch/`, 2026-10-19): Show HN, Reddit (r/commandline, r/ClaudeAI, r/selfhosted), Blogartikel (MCP-Sicherheit / Tag im Terminal)
+- [x] `[C]` Verzeichnisse, Eintragsentwürfe in `docs/launch/verzeichnisse.md` (PRs erst nach Release): MCP-Listen, awesome-tui, awesome-cli-apps, awesome-go
+- [~] `[C]` Messung ohne Tracking (`scripts/metrics.sh` fertig; Frage „Wie hast du uns gefunden?“ im Polar-Checkout fehlt): Skript für Stars/Downloads/Polar (read-only), Frage „Wie hast du uns gefunden?“ im Polar-Checkout
 - [ ] `[C]` Landingpages: GIFs einbauen, Preise/Texte final, Geräte-Matrix, Deploy auf deine Freigabe
 - [ ] `[N]` Rechtstexte nach Prüfung übernehmen (ich arbeite Änderungen ein)
 - [ ] `[N]` Zugangsdaten erneuern: Polar-Token (Chat), X-Cookies, Pretix-Token, Threads-App-Secret
