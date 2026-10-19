@@ -15,4 +15,6 @@ Faktenbasis (geprüft am 2026-10-19):
 - Veröffentlichen über MCP ist aus, bis `POSTCTL_MCP_ALLOW_PUBLISH=1` gesetzt ist (postctl README).
 - Destruktive MCP-Tools in healthctl verlangen `confirm=true` („Bremse, kein Schloss“, so steht es im Code).
 - Alle Daten bleiben lokal (SQLite); Lizenzprüfung ruft nur die Polar-API (postctl Pro).
+- Ban-Schutz (postctl): überfällige Posts werden in 20-Minuten-Schritten verteilt, X hat 60 Minuten Mindestabstand (`internal/scheduler/scheduler.go`). Keine allgemeinen Rate-Limits behaupten.
+- Scheduler-Dienst: `postctl daemon install` ist nur macOS (launchd); Linux-Binaries gibt es, einen systemd-Dienst nicht.
 - Keine Zahlen zu Nutzern oder Umsatz erfinden.

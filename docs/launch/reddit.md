@@ -15,6 +15,6 @@ Text: Fokus auf die Sicherheitsentscheidung (Publish/Schedule per MCP aus, bis `
 ## r/selfhosted
 **Titel:** postctl: self-hosted social media scheduler, no SaaS, data in local SQLite
 
-Text: Local-first, kein Cloud-Konto, Scheduler als launchd/systemd-Dienst, Daten lokal, Lizenzprüfung nur bei Pro. Klar sagen, dass Plattform-APIs (Meta, X) natürlich eigene Zugangsdaten brauchen. Link GitHub und Docs.
+Text: Local-first, kein Cloud-Konto, Scheduler als launchd-Dienst (macOS; unter Linux `postctl daemon` selbst starten, kein systemd-Dienst vorhanden), Daten lokal, Lizenzprüfung nur bei Pro. Klar sagen, dass Plattform-APIs (Meta, X) natürlich eigene Zugangsdaten brauchen. Link GitHub und Docs.
 
 **Nicht behaupten:** Nutzerzahlen, „beliebt“, Vergleiche mit konkreten Zahlen, die nicht stimmen.

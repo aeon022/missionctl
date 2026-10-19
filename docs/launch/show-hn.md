@@ -10,7 +10,7 @@
 
 Hi HN, I'm Gerwin. I built postctl because I run social media for a small non-profit and got tired of web dashboards for what is really a queue of text files.
 
-What it is: a Go CLI/TUI. You write posts as Markdown with a bit of frontmatter, import them, and a scheduler service publishes at the right time to Instagram, Facebook, Threads, X, LinkedIn, Bluesky and Mastodon. Data stays in a local SQLite file; there are several profiles (we use one per organisation), a calendar view in the TUI, and a safety layer against account bans (rate limits per platform, minimum gaps between posts).
+What it is: a Go CLI/TUI. You write posts as Markdown with a bit of frontmatter, import them, and a scheduler service publishes at the right time to Instagram, Facebook, Threads, X, LinkedIn, Bluesky and Mastodon. Data stays in a local SQLite file; there are several profiles (we use one per organisation), a calendar view in the TUI, a launchd service on macOS (`postctl daemon install`; elsewhere you run `postctl daemon` yourself), and some ban protection: overdue posts are spread out in 20-minute steps instead of going out in a burst, and X keeps a 60-minute minimum gap.
 
 It also ships an MCP server so an AI assistant can draft and schedule posts. One decision I'd like feedback on: publishing and scheduling through MCP is **off by default** and needs an explicit environment variable, because an agent that reads untrusted text (mail, web pages) could be talked into posting. Without the opt-in it saves drafts only.
 
