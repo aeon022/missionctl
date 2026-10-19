@@ -8,4 +8,5 @@ D=$(mktemp -d); trap 'rm -rf "$D"' EXIT
 mkdir -p "$D/home" "$D/data"
 export HOME="$D/home" XDG_CONFIG_HOME="$D/home/.config"
 for v in MAIL CAL TASK NOTE BUDGET HAB TIME DIARY; do export "${v}CTL_DATA_DIR=$D/data"; done
+export DEMO_DIR="$here"
 cd "$D" && vhs "$here/$tool.tape" -o "$out/$tool.gif"
