@@ -12,6 +12,11 @@ Plan und Begründungen: [`docs/LAUNCH-2026-11-01.md`](docs/LAUNCH-2026-11-01.md)
 - [ ] `[N]` Rechtliche Prüfung beauftragen (Bedingungen + Datenschutz postctl.sh, Abo-Klauseln, Widerruf) — Frist 28.10.
 - [ ] `[N]` Brücke fragen: darf sie als Beispiel genannt werden? (nur echte Zahlen)
 
+- [ ] `[N]` **Raiffeisen-Import (investctl)**: echten ELBA-Depotexport (CSV) lokal ablegen, Pfad nennen; vorher Namen und Kontonummern unkenntlich machen. Gebraucht: Kopfzeile, je eine Zeile Kauf/Verkauf/Ertrag, Trennzeichen, Zahlen-/Datumsformat. Gleiches für weitere AT-Banken (Erste/George, Bank Austria, BAWAG, Dadat, flatex AT). `[C]` baut danach das Format
+- [ ] `[N]` Bank-Import testen: eigenen Export (Trade Republic/Scalable/Trading 212/Degiro/Revolut/Portfolio Performance) mit `investctl import DATEI --dry-run --lookup` prüfen, Abweichungen melden
+- [ ] `[N]` `healthctl remind` einmal live testen (echte Benachrichtigung); investctl-/healthctl-TUIs im echten Terminal ansehen (`TESTING.md` §5)
+- [ ] `[N+C]` Entscheiden: `--lookup` als Standard? investctl/healthctl nach dem Launch veröffentlichen? (Empfehlung: erst ab Woche 3–4)
+
 ## So 25.10. – Sa 31.10.
 - [ ] `[N+C]` **Testkauf Ende-zu-Ende** (bis 25.10.): Jahresabo mit Family-Code → Schlüssel → `postctl license activate` → nach 24 h Prüfung → Abo kündigen → `revoked` → Lapse-Verhalten (2 Netzwerke publizieren, Rest bleibt geplant)
 - [ ] `[C]` Fallstudie Brücke (nur bei Zustimmung), Entwurf
