@@ -9,6 +9,12 @@ Status: **Entwurf, nicht begonnen** (2026-10-19). Auslöser: Lizenzen gelten fü
 - Kein Datenverlust, auch nicht bei falsch gehenden Uhren oder gleichzeitigen Änderungen — im Zweifel Änderung **behalten** und den Nutzer informieren, nie still verwerfen.
 - Bestehende Nutzer-DBs werden migriert, nie ohne Backup.
 
+## Nutzungsprofil (Entscheidung 2026-10-19)
+- „5 Geräte“ im Lizenztext = **Aktivierungen** (Polar), **keine** Sync-Zusage. Der Sync wird nicht für fünf gleichzeitige Schreiber verkauft.
+- Typischer Alltag: **zwei Geräte, zeitversetzt.** Zu Hause läuft ein Rechner weiter (TUI, Dashboard, Scheduler), unterwegs wird am Laptop etwas geändert; die Änderung muss zu Hause **von selbst** ankommen. Echt gleichzeitiges Schreiben ist der seltene Randfall: korrekt gelöst (Merge + Konfliktprotokoll), aber nicht das Optimierungsziel. Auslegen auf 2 Geräte, testen bis 5.
+- **Live-Übernahme:** ein laufendes Tool beobachtet fremde Protokolle (Dateiwächter, Polling als Rückfall) und übernimmt neue Zeilen binnen Sekunden; die TUI aktualisiert sich ohne Neustart.
+- **postctl-Scheduler:** liest unmittelbar vor jedem Veröffentlichen die fremden Protokolle neu. Da Dateien verspätet ankommen können, gilt eine Karenz: ist ein anderes Gerät kürzlich aktiv gewesen, wird frühestens 1–2 Minuten nach Fälligkeit veröffentlicht (Wert konfigurierbar). Wer unterwegs einen Post löscht oder verschiebt, soll nicht vom Home-Rechner überholt werden.
+
 ## Warum die jetzige Lösung nicht reicht
 Heute zeigen die Tools per `data_dir` auf **eine** gemeinsame `.db` im Cloud-Ordner. Der Sync-Client kann zwei gleichzeitig geänderte Fassungen nicht mergen und legt Konfliktkopien an; die Datei-Sperre in `syncdir` gilt nur auf einem Rechner. Journal-Wechsel auf DELETE und iCloud-Platzhalter-Erkennung bleiben sinnvoll, lösen aber nicht den Mehrgeräte-Fall.
 
@@ -70,6 +76,7 @@ Heute zeigen die Tools per `data_dir` auf **eine** gemeinsame `.db` im Cloud-Ord
 
 ## Offene Fragen
 - Feldweise oder zeilenweise mergen (Text-Notizen in `diaryctl` brauchen evtl. echtes Text-Merge oder zumindest „beide behalten“)?
-- Was heißt „5 Geräte“ im Lizenztext genau — nur Aktivierungen oder auch Sync-Zusage? Formulierung vor Phase 3 klären.
+- ~~Was heißt „5 Geräte“?~~ Geklärt 2026-10-19: nur Aktivierungen. Offen: Lizenztext/Landing so formulieren, dass daraus keine Sync-Zusage für fünf gleichzeitige Geräte wird.
+- Wie lang darf die Karenz des postctl-Schedulers sein, ohne dass sich pünktliches Posten falsch anfühlt?
 - Wie viele parallele Schreiber pro Tool sind realistisch (Tests auf 5 auslegen)?
 - Migration von Nutzern, die heute schon `data_dir` auf eine gemeinsame DB gesetzt haben: automatisch beim ersten Start, mit Backup, oder ausdrücklicher Befehl?
