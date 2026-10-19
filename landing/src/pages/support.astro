@@ -1,0 +1,39 @@
+---
+import Layout from '../components/Layout.astro';
+---
+
+<Layout
+  title="Support — missionctl"
+  description="How to get help with missionctl: GitHub issues for bugs, email for licences and billing, and what response time to expect."
+>
+  <article style="max-width: 760px; margin: 0 auto; padding: 5rem 1.5rem;">
+    <header style="margin-bottom: 3rem;">
+      <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--color-terminal-green); margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">Support</div>
+      <h1 style="font-size: 2rem; font-weight: 900; color: var(--color-terminal-text); margin: 0 0 1rem; letter-spacing: -0.02em;"><span class="lang-en">Get help</span><span class="lang-de">Hilfe bekommen</span></h1>
+      <p style="color: var(--color-terminal-muted);"><span class="lang-en">missionctl is built and supported by one person. I answer within 3 to 5 working days; there is no 24/7 support.</span><span class="lang-de">missionctl wird von einer Person entwickelt und betreut. Ich antworte innerhalb von 3 bis 5 Arbeitstagen; einen 24/7-Support gibt es nicht.</span></p>
+    </header>
+
+    <div style="color: var(--color-terminal-code-text); line-height: 1.75; font-size: 0.95rem;">
+
+      <section style="margin-bottom: 2.5rem;">
+        <h2 style="font-size: 1.2rem; font-weight: 700; color: var(--color-terminal-text); margin: 0 0 1rem;"><span class="lang-en">Bugs and feature requests</span><span class="lang-de">Fehler und Wünsche</span></h2>
+        <p><span class="lang-en">Open an issue in the tool's GitHub repository, e.g. <a href="https://github.com/aeon022/taskctl/issues" style="color: var(--color-terminal-green);">taskctl</a>, <a href="https://github.com/aeon022/mailctl/issues" style="color: var(--color-terminal-green);">mailctl</a> or <a href="https://github.com/aeon022/missionctl-cli/issues" style="color: var(--color-terminal-green);">the dashboard</a>. Please include the version (<code>toolname --version</code>), your operating system, and the exact steps. Do not paste passwords, tokens or personal data.</span><span class="lang-de">Eröffne ein Issue im GitHub-Repository des Tools, z. B. <a href="https://github.com/aeon022/taskctl/issues" style="color: var(--color-terminal-green);">taskctl</a>, <a href="https://github.com/aeon022/mailctl/issues" style="color: var(--color-terminal-green);">mailctl</a> oder <a href="https://github.com/aeon022/missionctl-cli/issues" style="color: var(--color-terminal-green);">das Dashboard</a>. Bitte nenne die Version (<code>toolname --version</code>), dein Betriebssystem und die genauen Schritte. Füge keine Passwörter, Tokens oder persönlichen Daten ein.</span></p>
+      </section>
+
+      <section style="margin-bottom: 2.5rem;">
+        <h2 style="font-size: 1.2rem; font-weight: 700; color: var(--color-terminal-text); margin: 0 0 1rem;"><span class="lang-en">Licences and billing</span><span class="lang-de">Lizenzen und Abrechnung</span></h2>
+        <p><span class="lang-en">Purchases and licence keys are handled by Polar. For a lost key or a billing question, email <a href="mailto:hello@abteilung83.com" style="color: var(--color-terminal-green);">hello@abteilung83.com</a> from the address you bought with.</span><span class="lang-de">Käufe und Lizenzschlüssel werden über Polar abgewickelt. Bei einem verlorenen Schlüssel oder Fragen zur Abrechnung schreib an <a href="mailto:hello@abteilung83.com" style="color: var(--color-terminal-green);">hello@abteilung83.com</a>, von der Adresse, mit der du gekauft hast.</span></p>
+      </section>
+
+      <section style="margin-bottom: 2.5rem;">
+        <h2 style="font-size: 1.2rem; font-weight: 700; color: var(--color-terminal-text); margin: 0 0 1rem;"><span class="lang-en">Security</span><span class="lang-de">Sicherheit</span></h2>
+        <p><span class="lang-en">Report vulnerabilities privately by email to <a href="mailto:hello@abteilung83.com" style="color: var(--color-terminal-green);">hello@abteilung83.com</a>, not in a public issue.</span><span class="lang-de">Melde Sicherheitslücken privat per E-Mail an <a href="mailto:hello@abteilung83.com" style="color: var(--color-terminal-green);">hello@abteilung83.com</a>, nicht in einem öffentlichen Issue.</span></p>
+      </section>
+
+      <section style="margin-bottom: 2.5rem;">
+        <h2 style="font-size: 1.2rem; font-weight: 700; color: var(--color-terminal-text); margin: 0 0 1rem;"><span class="lang-en">Docs first</span><span class="lang-de">Erst die Doku</span></h2>
+        <p><span class="lang-en">Setup, key bindings and the tool-by-tool reference are in the <a href="/docs" style="color: var(--color-terminal-green);">documentation</a>; recent changes are in the <a href="/changelog" style="color: var(--color-terminal-green);">changelog</a>.</span><span class="lang-de">Einrichtung, Tastenbelegung und die Referenz zu jedem Tool findest du in der <a href="/docs" style="color: var(--color-terminal-green);">Dokumentation</a>; aktuelle Änderungen im <a href="/changelog" style="color: var(--color-terminal-green);">Changelog</a>.</span></p>
+      </section>
+    </div>
+  </article>
+</Layout>
