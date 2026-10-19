@@ -85,7 +85,7 @@ Add all nine servers to `~/Library/Application Support/Claude/claude_desktop_con
 }
 ```
 
-Restart Claude Desktop. All 66 tools appear automatically.
+Restart Claude Desktop. All 67 tools appear automatically.
 
 ---
 
@@ -182,7 +182,7 @@ missionctl doctor                             Check install, MCP registration, D
 
 ## MCP Tools Reference
 
-66 tools across all nine apps, available to Claude once all servers are configured.
+67 tools across all nine apps, available to Claude once all servers are configured.
 
 ### mailctl (6)
 
@@ -219,7 +219,7 @@ missionctl doctor                             Check install, MCP registration, D
 | `complete_task` | Mark a task completed |
 | `delete_task` | Delete a task |
 
-### notectl (7)
+### notectl (8)
 
 | Tool | Description |
 |------|-------------|
@@ -230,6 +230,7 @@ missionctl doctor                             Check install, MCP registration, D
 | `sync_notes` | Sync the configured source(s) into cache — one or several at once, see `sync_sources` |
 | `get_daily_note` | Get today's daily note (creates from template if missing) |
 | `append_daily_note` | Append content under a named section |
+| `delete_note` | Delete a note by title from the configured source — destructive |
 
 ### budgetctl (11)
 
