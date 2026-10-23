@@ -17,6 +17,9 @@ Plan und Begründungen: [`docs/LAUNCH-2026-11-01.md`](docs/LAUNCH-2026-11-01.md)
 - [ ] `[N]` `healthctl remind` einmal live testen (echte Benachrichtigung); investctl-/healthctl-TUIs im echten Terminal ansehen (`TESTING.md` §5)
 - [ ] `[N+C]` Entscheiden: `--lookup` als Standard? investctl/healthctl nach dem Launch veröffentlichen? (Empfehlung: erst ab Woche 3–4)
 
+## Erledigt am 23.10.2026
+- healthctl/investctl: Demo-GIFs (`scripts/demo/*.tape`, erfundene Daten), `SUPPORT.md`, README-Links; Tests für investctl-Store (0 → 80 %) und healthctl-Slotlogik (`ResolveSlot`, `NextOpenSlot`, `UpdateMedication`). Lokal committet, **noch nicht gepusht**
+
 ## Erledigt am 19.10.2026 (Überblick)
 - Support-Seiten + Cookie-Banner/-Seite (postctl.sh), Favicons/App-Icons, README mit GIF/brew in allen Repos, Launch-Entwürfe (`docs/launch/`), `scripts/metrics.sh`
 - MCP-Zahl geprüft: **67 Tools** in 9 öffentlichen Apps (notectl hat 8)
