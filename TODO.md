@@ -22,7 +22,8 @@ Entwürfe: `proposals/{belegctl,rolodexctl,invoicectl,review,networth}/`. Namen 
 - [x] `[C]` **Vermögen**: `budgetctl balance` (Anfangsbestand pro Konto, nie geraten) + Zeile „Wealth“ in `missionctl status` (Kasse + Depot, EUR; andere Währungen aufgelistet, nicht umgerechnet). Noch offen: Dashboard-Karte (Tastenbelegung 1–9/0/p ist voll), MCP-Tool `balances`
 - [~] `[C]` **belegctl** (Belegscanner, 0.1 Vorschau): CLI, Parser (AT/DE), OCR (macOS Vision), Abgleich mit budgetctl, Export, MCP — lokal committet in `belegctl/`, Opus-Review (22 Funde, 20 behoben). **Wartet auf:** `[N]` Okay für privates GitHub-Repo `aeon022/belegctl` + Submodul + `setup.sh`/README-Eintrag
   - Zurückgestellt aus dem Review: Löschen ohne Papierkorb (`files/.trash`); Prüf-/Nutzungs-Race beim MCP-`add_receipt` (Datei-Handle statt Pfad weiterreichen); TUI; GIF; Raiffeisen-Beispielbelege zum Testen des Parsers mit echten Rechnungen (`[N]`: 5–10 anonymisierte PDFs)
-- [ ] `[C]` **`missionctl review`** (als Nächstes) · **invoicectl** — nur Entwürfe
+- [x] `[C]` **`missionctl review --plain`** (2026-10-24): lokaler Wochenrückblick ohne KI (`--json`, `--days`, `--money`); neu `habctl stats --json`, `healthctl adherence --json`. Offen: `--to-note`, MCP-Prompt `weekly_review`, Monat/Trends
+- [ ] `[C]` **invoicectl** (als Nächstes) — nur Entwurf
 - [-] **rolodexctl** (Kontakte, früher peoplectl) — Arbeitstitel, **zurückgestellt** bis review + invoicectl stehen; Gründe in `proposals/rolodexctl/README.md`
 - [ ] `[N+C]` Subagents `pruefer`/`go-kleinkram` liegen in `.claude/agents/` (wirken ab dem nächsten Sitzungsstart)
 

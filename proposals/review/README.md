@@ -1,4 +1,7 @@
-# `missionctl review` — Wochen-/Monatsrückblick (Entwurf, 2026-10-24)
+# `missionctl review` — Wochenrückblick (umgesetzt 2026-10-24 als `--plain`)
+
+> **Stand:** `missionctl review` gab es schon (KI-Rückblick). Statt eines zweiten Befehls wurde er erweitert: `--plain`/`--json` (lokal, ohne KI, ohne Netzwerk), `--days`, `--money`. Neu dafür: `habctl stats --json`, `healthctl adherence --json` (nur Summen, nie Namen). Health und Investments gehen **nie** an einen KI-Anbieter (Test sichert das). Offen aus dem Entwurf: `--month`/Trends, `--to-note` (Daily Note), MCP-Prompt `weekly_review`, Diary-Highlights im Plain-Modus.
+
 
 Aus den Daten aller Tools ein Rückblick: erledigte Aufgaben, Zeit pro Projekt, Gewohnheiten, Ausgaben, (nur Anzahl) Medikamente, Belege offen, Tagebuch-Highlights. Erweitert `missionctl status`/`agenda`, kein neues Tool.
 
