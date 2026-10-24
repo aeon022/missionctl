@@ -41,3 +41,8 @@ checklists must always sync as real checkboxes (user requirement, no
 exceptions); the mirror currently loses them (`mirror.go` PushToApple
 overwrites the body, Apple→Obsidian ignores `notes.ChecklistState`).
 Details in stage.md (Nachtrag 2026-10-19).
+
+## Modellwahl (Skill `modell-wahl`)
+- Neues Tool: Entwurf und Datenmodell mit Opus, Umsetzung mit Sonnet, Kleinkram an `go-kleinkram` (Haiku).
+- Vor jedem Push eines neuen Tools `pruefer` (Opus) aufrufen.
+- Nur betroffene Dateien lesen; pro Tool ein Proposal unter `proposals/<name>/`.
