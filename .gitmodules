@@ -37,3 +37,6 @@
 [submodule "belegctl"]
 	path = belegctl
 	url = https://github.com/aeon022/belegctl.git
+[submodule "invoicectl"]
+	path = invoicectl
+	url = https://github.com/aeon022/invoicectl.git

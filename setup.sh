@@ -7,7 +7,7 @@
 
 cd "$(dirname "$0")"
 
-TOOLS=(mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl healthctl investctl belegctl postctl missionctl)
+TOOLS=(mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl healthctl investctl belegctl invoicectl postctl missionctl)
 FAILED=()
 
 for t in "${TOOLS[@]}"; do
