@@ -20,11 +20,12 @@ No SaaS. No cloud. No subscriptions. Your data stays on your machine.
 | [habctl](habctl/) | Track habits, streaks, AI coaching reviews | 12 | Local SQLite |
 | [healthctl](healthctl/) **(preview)** | Medication planner: schedules, dose log, reminders (private data, never in search/activity) | MCP | Local SQLite (0600) |
 | [investctl](investctl/) **(preview)** | Stocks/funds/ETF portfolio tracker, Stooq prices | MCP | Local SQLite |
+| [belegctl](belegctl/) **(preview)** | Receipt scanner: read invoices (PDF/photo), check, match to budgetctl bookings, export | 6 | Local files + SQLite, on-device OCR |
 | [timectl](timectl/) | Start/stop timers, weekly breakdown, invoice export | 4 | Local SQLite |
 | [diaryctl](diaryctl/) | Developer diary from git history, AI-written narrative | 5 | git repos + suite DBs |
 | [postctl](https://github.com/aeon022/postctl) | Schedule and publish social media posts (Instagram, Facebook, Threads, X, LinkedIn, Bluesky, …) with profiles, calendar and a scheduler service | 7 | Local SQLite + platform APIs |
 
-> **healthctl and investctl are preview versions.** They build and pass their tests, but have only been exercised with synthetic data and are not yet released: expect rough edges, and check import results (`--dry-run`) before relying on them. healthctl is a planning aid, not a medical device; investctl gives no financial advice and does no tax calculation.
+> **healthctl, investctl and belegctl are preview versions.** They build and pass their tests, but have only been exercised with synthetic data and are not yet released: expect rough edges, and check import results (`--dry-run`) before relying on them. healthctl is a planning aid, not a medical device; investctl gives no financial advice and does no tax calculation; belegctl is a bookkeeping aid, not tax advice.
 
 Plus [missionctl](missionctl/), the umbrella CLI: bare `missionctl` opens a live dashboard TUI (8 cards, one per tool, with quick actions, sync-all, and an in-place agenda view), `missionctl agenda` merges today's calendar events, due tasks, and timer sessions into one timeline, `missionctl status` is the plain-text daily briefing, `missionctl doctor` checks installation/MCP registration/DB sync health, `missionctl init` is the setup wizard.
 
@@ -47,7 +48,7 @@ Already in this monorepo (submodules checked out)? Install everything, including
 Starting from scratch instead — clone each tool's own repo:
 
 ```bash
-for repo in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl healthctl investctl postctl missionctl; do
+for repo in mailctl calctl taskctl notectl budgetctl habctl timectl diaryctl healthctl investctl belegctl postctl missionctl; do
   git clone https://github.com/aeon022/$repo && cd $repo && ./setup.sh && cd ..
 done
 ```
