@@ -23,7 +23,7 @@ Entwürfe: `proposals/{belegctl,rolodexctl,invoicectl,review,networth}/`. Namen 
 - [~] `[C]` **belegctl** (Belegscanner, 0.1 Vorschau): CLI, Parser (AT/DE), OCR (macOS Vision), Abgleich mit budgetctl, Export, MCP — lokal committet in `belegctl/`, Opus-Review (22 Funde, 20 behoben). **Wartet auf:** `[N]` Okay für privates GitHub-Repo `aeon022/belegctl` + Submodul + `setup.sh`/README-Eintrag
   - Zurückgestellt aus dem Review: Löschen ohne Papierkorb (`files/.trash`); Prüf-/Nutzungs-Race beim MCP-`add_receipt` (Datei-Handle statt Pfad weiterreichen); TUI; GIF; Raiffeisen-Beispielbelege zum Testen des Parsers mit echten Rechnungen (`[N]`: 5–10 anonymisierte PDFs)
 - [x] `[C]` **`missionctl review --plain`** (2026-10-24): lokaler Wochenrückblick ohne KI (`--json`, `--days`, `--money`); neu `habctl stats --json`, `healthctl adherence --json`. Offen: `--to-note`, MCP-Prompt `weekly_review`, Monat/Trends
-- [ ] `[C]` **invoicectl** (als Nächstes) — nur Entwurf
+- [~] `[N+C]` **invoicectl** — Entwurf v2 fertig (`proposals/invoicectl/README.md`), wartet auf deine Entscheidungen (Abschnitt 9: Aussteller/Kleinunternehmer, Nummernformat, PDF-Option, Umfang v1, Steuerberatung für `rules/at.go`)
 - [-] **rolodexctl** (Kontakte, früher peoplectl) — Arbeitstitel, **zurückgestellt** bis review + invoicectl stehen; Gründe in `proposals/rolodexctl/README.md`
 - [ ] `[N+C]` Subagents `pruefer`/`go-kleinkram` liegen in `.claude/agents/` (wirken ab dem nächsten Sitzungsstart)
 
