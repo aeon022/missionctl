@@ -138,7 +138,11 @@ invoicectl doctor | mcp
 
 Lückenlosigkeit (Fehlschlag verbraucht keine Nummer, parallele `issue`-Aufrufe vergeben nie dieselbe Nummer), Unveränderlichkeit auf SQL-Ebene, Storno-Summen, Rundungsfälle (mehrere Sätze), Prüfliste je Regime, Matching (stark/schwach/mehrdeutig), CSV-Escaping (wie belegctl), Zeit-Doppelabrechnung. Danach **Opus-Review** (`pruefer`) und **Steuerberatung liest `rules/at.go`** — erst dann echte Rechnungen.
 
-## 9. Offene Entscheidungen für dich
+## 9. Entscheidungen (2026-10-24)
+
+Entschieden: Aussteller **privat = Kleinunternehmer**, **Brücke = Non-Profit, USt-befreit** (Regime `exempt`, Pflichttext kommt von der Steuerberatung); Format **`2026-001`**; PDF **A (reines Go)**; Umfang v1: **Inland und Ausland** (Kunden mit `--country`/`--lang en`), ohne Regelbesteuerung, Reverse Charge, innergemeinschaftlich. Phase 1 ist gebaut (siehe `invoicectl/README.md`). Offen bleibt Punkt 5 (Steuerberatung).
+
+### Ursprüngliche Fragen
 
 1. **Aussteller:** Welche Profile zuerst — Abteilung 83, Brücke, beide? Sind sie **Kleinunternehmer** oder regelbesteuert (UID vorhanden)? Das bestimmt Standard-Regime und Pflichttexte.
 2. **Nummernformat:** `2026-001` (Vorschlag) oder z. B. `RE-2026-0001`; ein Kreis je Jahr oder durchgehend?
