@@ -17,6 +17,14 @@ Plan und Begründungen: [`docs/LAUNCH-2026-11-01.md`](docs/LAUNCH-2026-11-01.md)
 - [ ] `[N]` `healthctl remind` einmal live testen (echte Benachrichtigung); investctl-/healthctl-TUIs im echten Terminal ansehen (`TESTING.md` §5)
 - [ ] `[N+C]` Entscheiden: `--lookup` als Standard? investctl/healthctl nach dem Launch veröffentlichen? (Empfehlung: erst ab Woche 3–4)
 
+## Neue Tools & Funktionen (Stand 2026-10-24) — Reihenfolge nach Wichtigkeit
+Entwürfe: `proposals/{belegctl,peoplectl,invoicectl,review,networth}/`. Namen geprüft (GitHub/npm/Homebrew): `belegctl`, `peoplectl`, `invoicectl` frei; `contactctl` vergeben → `peoplectl`.
+- [x] `[C]` **Vermögen**: `budgetctl balance` (Anfangsbestand pro Konto, nie geraten) + Zeile „Wealth“ in `missionctl status` (Kasse + Depot, EUR; andere Währungen aufgelistet, nicht umgerechnet). Noch offen: Dashboard-Karte (Tastenbelegung 1–9/0/p ist voll), MCP-Tool `balances`
+- [~] `[C]` **belegctl** (Belegscanner, 0.1 Vorschau): CLI, Parser (AT/DE), OCR (macOS Vision), Abgleich mit budgetctl, Export, MCP — lokal committet in `belegctl/`, Opus-Review (22 Funde, 20 behoben). **Wartet auf:** `[N]` Okay für privates GitHub-Repo `aeon022/belegctl` + Submodul + `setup.sh`/README-Eintrag
+  - Zurückgestellt aus dem Review: Löschen ohne Papierkorb (`files/.trash`); Prüf-/Nutzungs-Race beim MCP-`add_receipt` (Datei-Handle statt Pfad weiterreichen); TUI; GIF; Raiffeisen-Beispielbelege zum Testen des Parsers mit echten Rechnungen (`[N]`: 5–10 anonymisierte PDFs)
+- [ ] `[C]` **peoplectl** (Kontakte) · **`missionctl review`** · **invoicectl** — nur Entwürfe; je nach Rückmeldung zum Belegscanner
+- [ ] `[N+C]` Subagents `pruefer`/`go-kleinkram` liegen in `.claude/agents/` (wirken ab dem nächsten Sitzungsstart)
+
 ## Erledigt am 23.10.2026
 - healthctl/investctl: Demo-GIFs (`scripts/demo/*.tape`, erfundene Daten), `SUPPORT.md`, README-Links; Tests für investctl-Store (0 → 80 %) und healthctl-Slotlogik (`ResolveSlot`, `NextOpenSlot`, `UpdateMedication`). Lokal committet, **noch nicht gepusht**
 
