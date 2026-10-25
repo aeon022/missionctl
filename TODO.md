@@ -31,10 +31,10 @@ Entwürfe: `proposals/{receiptctl,rolodexctl,invoicectl,review,networth}/`. Name
   - [x] receiptctl: Papierkorb statt Sofort-Löschen, `add_receipt` ohne Pfad-Race, Dashboard-Karte
   - [x] budgetctl: MCP `balances` + Dashboard-Karte
   - [x] `missionctl review`: Zeilen für invoicectl (überfällig, Entwürfe) und receiptctl (ungeprüft, ohne Buchung)
-  - [ ] invoicectl: Mahnentwürfe (`remind`; nur Text/Entwurf, nie automatisch senden)
-  - [ ] invoicectl: wiederkehrende Rechnungen (Vorlage → monatlich ein Entwurf, Ausstellen bleibt manuell)
-  - [ ] Jahrespaket für die Steuerberatung (Einnahmen invoicectl + Ausgaben receiptctl/budgetctl in einem Export)
-  - [ ] receiptctl ↔ invoicectl: Belege einem Projekt/einer Rechnung zuordnen und anzeigen
+  - [x] invoicectl: Mahnentwürfe (`remind`; nur Text/Entwurf, nie automatisch senden)
+  - [x] invoicectl: wiederkehrende Rechnungen (Vorlage → monatlich ein Entwurf, Ausstellen bleibt manuell)
+  - [x] Jahrespaket für die Steuerberatung (Einnahmen invoicectl + Ausgaben receiptctl/budgetctl in einem Export)
+  - [ ] receiptctl ↔ invoicectl: Belege einem Projekt/einer Rechnung zuordnen und anzeigen — **Entscheidung nötig:** Rechnungen haben kein Projektfeld; Schemaänderung an gesperrten Tabellen, deshalb nicht auf Verdacht gebaut
   - [ ] einheitliches `--json`-Rahmenformat, Man-Pages
   - [ ] später: rolodexctl (Kontakte) — invoicectl steht, review steht; E-Rechnung/Reverse Charge erst nach Steuerberatung
 - [ ] `[N+C]` Subagents `pruefer`/`go-kleinkram` liegen in `.claude/agents/` (wirken ab dem nächsten Sitzungsstart)
