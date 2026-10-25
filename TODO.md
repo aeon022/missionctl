@@ -27,8 +27,8 @@ Entwürfe: `proposals/{receiptctl,rolodexctl,invoicectl,review,networth}/`. Name
 - [-] **rolodexctl** (Kontakte, früher peoplectl) — Arbeitstitel, **zurückgestellt** bis review + invoicectl stehen; Gründe in `proposals/rolodexctl/README.md`
 - [x] `[C]` Umbenennung **belegctl → receiptctl** (2026-10-25): alle Namen der Suite englisch; Repo, Submodul, Docs, Review, MCP umgestellt
 - [ ] `[C]` Ideen 2026-10-25 (alle aufgenommen, Reihenfolge = Abarbeitung):
-  - [ ] Lizenzschlüssel nicht mehr als Argument an die Tools reichen (Standardeingabe)
-  - [ ] receiptctl: Papierkorb statt Sofort-Löschen, `add_receipt` ohne Pfad-Race, Dashboard-Karte
+  - [x] Lizenzschlüssel nicht mehr als Argument an die Tools reichen (Standardeingabe)
+  - [x] receiptctl: Papierkorb statt Sofort-Löschen, `add_receipt` ohne Pfad-Race, Dashboard-Karte
   - [ ] budgetctl: MCP `balances` + Dashboard-Karte
   - [ ] `missionctl review`: Zeilen für invoicectl (überfällig, Entwürfe) und receiptctl (ungeprüft, ohne Buchung)
   - [ ] invoicectl: Mahnentwürfe (`remind`; nur Text/Entwurf, nie automatisch senden)
