@@ -24,7 +24,7 @@ Entwürfe: `proposals/{receiptctl,rolodexctl,invoicectl,review,networth}/`. Name
   - Zurückgestellt aus dem Review: Löschen ohne Papierkorb (`files/.trash`); Prüf-/Nutzungs-Race beim MCP-`add_receipt` (Datei-Handle statt Pfad weiterreichen); TUI; GIF; Raiffeisen-Beispielbelege zum Testen des Parsers mit echten Rechnungen (`[N]`: 5–10 anonymisierte PDFs)
 - [x] `[C]` **`missionctl review --plain`** (2026-10-24): lokaler Wochenrückblick ohne KI (`--json`, `--days`, `--money`); neu `habctl stats --json`, `healthctl adherence --json`. Offen: `--to-note`, MCP-Prompt `weekly_review`, Monat/Trends
 - [~] `[N+C]` **invoicectl** — Phase 1 gebaut (privates Repo aeon022/invoicectl, Submodul): Store + Trigger + lückenlose Nummern + Regeln + Pure-Go-PDF + CLI + Tests; Entscheidungen 2026-10-24: Kleinunternehmer (privat), Brücke USt-befreit (`exempt`, Wortlaut der Steuerberatung), Format `2026-001`, PDF rein Go, Inland + Ausland (de/en). Opus-Review durch und eingearbeitet (u. a. `INSERT OR REPLACE` umging die Trigger → `recursive_triggers`). Offen: Steuerberatung liest `internal/rules/at.go`, Phase 2: `match` mit budgetctl und `line from-time`, MCP-Server (confirm-Pflicht) Dashboard-Karte und Doppelt-Abrechnen-Schutz gebaut (2026-10-24/25), (timectl), MCP, Dashboard-Karte, E-Rechnung
-- [-] **rolodexctl** (Kontakte, früher peoplectl) — Arbeitstitel, **zurückgestellt** bis review + invoicectl stehen; Gründe in `proposals/rolodexctl/README.md`
+- [~] **rolodexctl** (Kontakte) — v0.1 gebaut 2026-10-25 (Repo aeon022/rolodexctl, Submodul): Apple Contacts lesend, Rhythmus, `due`, `scan` über mailctl, MCP, Dashboard-Karte `c`. **Offen:** `[N]` echter Lauf `rolodexctl doctor`/`sync` (macOS fragt einmal nach Zugriff), TUI, Termine (calctl), Link zu notectl
 - [x] `[C]` Umbenennung **belegctl → receiptctl** (2026-10-25): alle Namen der Suite englisch; Repo, Submodul, Docs, Review, MCP umgestellt
 - [ ] `[C]` Ideen 2026-10-25 (alle aufgenommen, Reihenfolge = Abarbeitung):
   - [x] Lizenzschlüssel nicht mehr als Argument an die Tools reichen (Standardeingabe)
@@ -37,7 +37,7 @@ Entwürfe: `proposals/{receiptctl,rolodexctl,invoicectl,review,networth}/`. Name
   - [x] receiptctl ↔ invoicectl über das Projektlabel verknüpft (2026-10-25): `invoicectl new … --project X`, `invoicectl project X` zeigt Umsatz neben den Belegen
   - [x] Man-Pages (2026-10-25, `TOOL man DIR`, setup.sh installiert nach ~/.local/share/man/man1)
   - [ ] einheitliches `--json`-Rahmenformat (bricht Dashboard/Review, gemeinsam planen)
-  - [ ] später: rolodexctl (Kontakte) — invoicectl steht, review steht; E-Rechnung/Reverse Charge erst nach Steuerberatung
+  - [x] rolodexctl gebaut (s. u.); E-Rechnung/Reverse Charge erst nach Steuerberatung
 - [ ] `[N+C]` Subagents `pruefer`/`go-kleinkram` liegen in `.claude/agents/` (wirken ab dem nächsten Sitzungsstart)
 
 ## Erledigt am 23.10.2026

@@ -1,6 +1,8 @@
-# rolodexctl — Kontakte (Arbeitstitel, **zurückgestellt**, 2026-10-24)
+# rolodexctl — Kontakte (**v0.1 gebaut 2026-10-25**)
 
-> **Status: zurückgestellt.** Entscheidung 2026-10-24: Arbeitstitel `rolodexctl` (früher `rolodexctl`), wird nicht gebaut, bevor `missionctl review` und `invoicectl` stehen. Gründe: Kernfunktion („melde dich mal wieder“) lässt sich mit Erinnerungen/taskctl grob abdecken; Nutzen hängt an der Verknüpfung mit Mail/Kalender; AppleScript-Freigabe und Performance bei großen Adressbüchern; sensible Daten. Alternativnamen: `circlectl`, `kontaktctl`. Name vor dem Bau erneut prüfen.
+> **Status 2026-10-25: gebaut** (privates Repo aeon022/rolodexctl, Submodul): sync, list, show, touch, rhythm, note, due, scan (mailctl), doctor, MCP (find_person, due_contacts, touch_contact), Man-Pages, Dashboard-Karte. Der Apple-Contacts-Zugriff ist nur gegen Beispieldaten getestet; offen: echter Lauf, TUI, Termine aus calctl, Link zu notectl.
+>
+> *(Ursprünglicher Stand:)* **zurückgestellt.** Entscheidung 2026-10-24: Arbeitstitel `rolodexctl` (früher `rolodexctl`), wird nicht gebaut, bevor `missionctl review` und `invoicectl` stehen. Gründe: Kernfunktion („melde dich mal wieder“) lässt sich mit Erinnerungen/taskctl grob abdecken; Nutzen hängt an der Verknüpfung mit Mail/Kalender; AppleScript-Freigabe und Performance bei großen Adressbüchern; sensible Daten. Alternativnamen: `circlectl`, `kontaktctl`. Name vor dem Bau erneut prüfen.
 
 Name: `contactctl` ist auf npm vergeben und hat ein GitHub-Repo; `rolodexctl` war frei, klang aber nicht nach der Suite → Arbeitstitel **`rolodexctl`** (Karteikartenbox).
 

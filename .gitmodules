@@ -40,3 +40,6 @@
 [submodule "invoicectl"]
 	path = invoicectl
 	url = https://github.com/aeon022/invoicectl.git
+[submodule "rolodexctl"]
+	path = rolodexctl
+	url = https://github.com/aeon022/rolodexctl.git
