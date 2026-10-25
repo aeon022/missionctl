@@ -34,7 +34,7 @@ Entwürfe: `proposals/{receiptctl,rolodexctl,invoicectl,review,networth}/`. Name
   - [x] invoicectl: Mahnentwürfe (`remind`; nur Text/Entwurf, nie automatisch senden)
   - [x] invoicectl: wiederkehrende Rechnungen (Vorlage → monatlich ein Entwurf, Ausstellen bleibt manuell)
   - [x] Jahrespaket für die Steuerberatung (Einnahmen invoicectl + Ausgaben receiptctl/budgetctl in einem Export)
-  - [ ] receiptctl ↔ invoicectl: Belege einem Projekt/einer Rechnung zuordnen und anzeigen — **Entscheidung nötig:** Rechnungen haben kein Projektfeld; Schemaänderung an gesperrten Tabellen, deshalb nicht auf Verdacht gebaut
+  - [x] receiptctl ↔ invoicectl über das Projektlabel verknüpft (2026-10-25): `invoicectl new … --project X`, `invoicectl project X` zeigt Umsatz neben den Belegen
   - [x] Man-Pages (2026-10-25, `TOOL man DIR`, setup.sh installiert nach ~/.local/share/man/man1)
   - [ ] einheitliches `--json`-Rahmenformat (bricht Dashboard/Review, gemeinsam planen)
   - [ ] später: rolodexctl (Kontakte) — invoicectl steht, review steht; E-Rechnung/Reverse Charge erst nach Steuerberatung
