@@ -29,8 +29,8 @@ Entwürfe: `proposals/{receiptctl,rolodexctl,invoicectl,review,networth}/`. Name
 - [ ] `[C]` Ideen 2026-10-25 (alle aufgenommen, Reihenfolge = Abarbeitung):
   - [x] Lizenzschlüssel nicht mehr als Argument an die Tools reichen (Standardeingabe)
   - [x] receiptctl: Papierkorb statt Sofort-Löschen, `add_receipt` ohne Pfad-Race, Dashboard-Karte
-  - [ ] budgetctl: MCP `balances` + Dashboard-Karte
-  - [ ] `missionctl review`: Zeilen für invoicectl (überfällig, Entwürfe) und receiptctl (ungeprüft, ohne Buchung)
+  - [x] budgetctl: MCP `balances` + Dashboard-Karte
+  - [x] `missionctl review`: Zeilen für invoicectl (überfällig, Entwürfe) und receiptctl (ungeprüft, ohne Buchung)
   - [ ] invoicectl: Mahnentwürfe (`remind`; nur Text/Entwurf, nie automatisch senden)
   - [ ] invoicectl: wiederkehrende Rechnungen (Vorlage → monatlich ein Entwurf, Ausstellen bleibt manuell)
   - [ ] Jahrespaket für die Steuerberatung (Einnahmen invoicectl + Ausgaben receiptctl/budgetctl in einem Export)
