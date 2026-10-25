@@ -73,9 +73,9 @@ Entwürfe: `proposals/{belegctl,rolodexctl,invoicectl,review,networth}/`. Namen 
 ## notectl: Apple↔Obsidian-Mirror mit Checkboxen (nächste Tool-Überarbeitung, vor Aktivierung)
 Anlass 2026-10-19: Obsidian-Notiz (`/Users/gweiher/Obsidian/Gerwin-Vault/`) erschien nicht in notectl/Apple Notes, weil `~/.config/notectl/notectl.yaml` nur `source: apple` hat (kein `vault_path`, `sync_sources`, `mirror_apple_obsidian`). **Config bewusst noch nicht geändert** — Anforderung des Nutzers: Apple-Checkboxen müssen **immer** als Checkboxen gesynct werden, keine Ausnahmen, keine Unfälle.
 Befund im Code: AppleScript-`body` liefert Checklisten und Bullets identisch (`<ul><li>`); der echte Zustand steht nur in der Notes-SQLite (`notes.ChecklistState`), das der Mirror nicht nutzt. `PushToApple` ersetzt den ganzen Body → native Checkboxen gehen verloren; `TextToHTML` kann native Checkboxen nicht erzeugen (nur ☐/☑-Text).
-- [ ] `[C]` Apple→Obsidian: `ChecklistState` im Mirror nutzen, Checklisten als `- [ ]`/`- [x]` schreiben; schlägt das Lesen fehl → Notiz überspringen und melden, nie als Bullets schreiben
-- [ ] `[C]` Schutz: Apple-Notiz mit nativer Checkliste wird nie per `PushToApple`/`UpdateBody` überschrieben (Konflikt melden statt schreiben); Test dafür
-- [ ] `[C]` Entscheiden/prüfen, ob native Checkboxen aus Obsidian heraus überhaupt erzeugbar sind (AppleScript wohl nein); sonst Obsidian→Apple für Notizen mit Checkboxen sperren
+- [x] `[C]` (2026-10-25) Apple→Obsidian: `ChecklistState` im Mirror nutzen, Checklisten als `- [ ]`/`- [x]` schreiben; schlägt das Lesen fehl → Notiz überspringen und melden, nie als Bullets schreiben
+- [x] `[C]` (2026-10-25, auch `notectl write`/MCP `write_note`) Schutz: Apple-Notiz mit nativer Checkliste wird nie per `PushToApple`/`UpdateBody` überschrieben (Konflikt melden statt schreiben); Test dafür
+- [x] `[C]` (entschieden: Obsidian→Apple sperrt Checklisten-Notizen, Konflikt wird gemeldet) Entscheiden/prüfen, ob native Checkboxen aus Obsidian heraus überhaupt erzeugbar sind (AppleScript wohl nein); sonst Obsidian→Apple für Notizen mit Checkboxen sperren
 - [ ] `[C]` Tests: Round-Trip Apple→Obsidian→Apple, gemischte Listen, verschachtelt, Emoji; Probelauf nur mit Testnotizen/Wegwerf-Vault, vorher Backup von Vault und Notes
 - [ ] `[N+C]` Danach erst in `notectl.yaml`: `vault_path`, `sync_sources: apple,obsidian`, `mirror_apple_obsidian: true`. Übergang: nur `sync_sources` (lesend, ohne Mirror) wäre risikolos
 
