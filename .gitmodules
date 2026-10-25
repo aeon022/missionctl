@@ -34,9 +34,9 @@
 [submodule "investctl"]
 	path = investctl
 	url = https://github.com/aeon022/investctl.git
-[submodule "belegctl"]
-	path = belegctl
-	url = https://github.com/aeon022/belegctl.git
+[submodule "receiptctl"]
+	path = receiptctl
+	url = https://github.com/aeon022/receiptctl.git
 [submodule "invoicectl"]
 	path = invoicectl
 	url = https://github.com/aeon022/invoicectl.git

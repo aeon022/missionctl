@@ -14,7 +14,7 @@ Name `invoicectl` ist auf GitHub, npm und Homebrew frei (geprüft 2026-10-24).
 1. **Eine ausgestellte Rechnung ist unveränderlich.** Korrektur nur per **Storno** (eigene Rechnung mit eigener Nummer, negative Positionen, Verweis auf das Original) und ggf. neue Rechnung. Nichts wird gelöscht oder überschrieben. Durchgesetzt **in der Datenbank** (SQLite-Trigger), nicht nur im Code.
 2. **Nummern sind lückenlos.** Entwürfe haben **keine** Nummer. Die Nummer wird erst beim Ausstellen vergeben, in derselben Transaktion, die den Status ändert: scheitert etwas, wird keine Nummer verbraucht.
 3. **Nichts Unvollständiges wird ausgestellt.** `issue` läuft zuerst die Prüfliste (Abschnitt 4) und listet **alle** Fehler auf; ohne Fehler keine Nummer.
-4. **Nie raten.** Zahlungszuordnung nur eindeutig (wie bei belegctl); Mehrdeutiges wird gemeldet.
+4. **Nie raten.** Zahlungszuordnung nur eindeutig (wie bei receiptctl); Mehrdeutiges wird gemeldet.
 5. **Lokal.** Kein Netzwerk, DB und Dateien 0600, Activity-Log nur „an invoice“ (nie Kunde oder Betrag).
 6. **Kein Versand.** invoicectl erzeugt das PDF; verschicken tust du.
 
@@ -114,7 +114,7 @@ invoicectl export --from --to --out FOLDER                # Rechnungsausgangsbuc
 invoicectl doctor | mcp
 ```
 
-**Zahlungszuordnung (`match`):** nur Buchungen mit **positivem** Betrag ab Ausstellungsdatum. *Starker* Treffer: Rechnungsnummer steht im Verwendungszweck **und** Betrag = offener Betrag. *Schwacher* Treffer: nur Betrag, eindeutig (genau eine Rechnung, genau eine Buchung). Alles andere wird aufgelistet, nicht verknüpft. Buchungs-IDs mit Profil-Präfix (`firma:id`) wie bei belegctl. Liste ≥ Limit = Fehler, nicht still abschneiden.
+**Zahlungszuordnung (`match`):** nur Buchungen mit **positivem** Betrag ab Ausstellungsdatum. *Starker* Treffer: Rechnungsnummer steht im Verwendungszweck **und** Betrag = offener Betrag. *Schwacher* Treffer: nur Betrag, eindeutig (genau eine Rechnung, genau eine Buchung). Alles andere wird aufgelistet, nicht verknüpft. Buchungs-IDs mit Profil-Präfix (`firma:id`) wie bei receiptctl. Liste ≥ Limit = Fehler, nicht still abschneiden.
 
 **Zeitquelle:** `timectl log --json` je Projekt/Monat; eine Zeile je Aufgabe (Stunden, optional auf 15 min aufgerundet); `source_ref` merkt die Einträge, damit dieselbe Zeit **nicht doppelt** abgerechnet wird (Warnung, wenn Einträge schon auf einer ausgestellten Rechnung stehen).
 
@@ -123,7 +123,7 @@ invoicectl doctor | mcp
 | Option | Pro | Contra |
 |---|---|---|
 | **A. Reines Go** (`go-pdf/fpdf` + eingebettete Schrift) | läuft auch unter Linux, deterministisch, keine Hilfsprogramme, Hash stabil | Layout von Hand; Schrift (Umlaute) muss eingebettet werden (~300 KB, Lizenz prüfen) |
-| B. WebKit-Helfer (Swift, wie beim OCR) | HTML/CSS-Layout, schöner | nur macOS, braucht Xcode-Tools, Hilfsprogramm wie bei belegctl absichern, PDF-Hash schwankt |
+| B. WebKit-Helfer (Swift, wie beim OCR) | HTML/CSS-Layout, schöner | nur macOS, braucht Xcode-Tools, Hilfsprogramm wie bei receiptctl absichern, PDF-Hash schwankt |
 | C. Nur HTML, du druckst „Als PDF sichern“ | am einfachsten | Hash/Unveränderlichkeit nicht prüfbar, kein echtes Archiv-PDF |
 
 **Empfehlung: A** (die Suite liefert auch Linux-Builds, und ein stabiler Hash passt zur Unveränderlichkeit). Eine Rechnung ist ein einfaches Layout.
@@ -136,7 +136,7 @@ invoicectl doctor | mcp
 
 ## 8. Tests (vor dem ersten Ausstellen Pflicht)
 
-Lückenlosigkeit (Fehlschlag verbraucht keine Nummer, parallele `issue`-Aufrufe vergeben nie dieselbe Nummer), Unveränderlichkeit auf SQL-Ebene, Storno-Summen, Rundungsfälle (mehrere Sätze), Prüfliste je Regime, Matching (stark/schwach/mehrdeutig), CSV-Escaping (wie belegctl), Zeit-Doppelabrechnung. Danach **Opus-Review** (`pruefer`) und **Steuerberatung liest `rules/at.go`** — erst dann echte Rechnungen.
+Lückenlosigkeit (Fehlschlag verbraucht keine Nummer, parallele `issue`-Aufrufe vergeben nie dieselbe Nummer), Unveränderlichkeit auf SQL-Ebene, Storno-Summen, Rundungsfälle (mehrere Sätze), Prüfliste je Regime, Matching (stark/schwach/mehrdeutig), CSV-Escaping (wie receiptctl), Zeit-Doppelabrechnung. Danach **Opus-Review** (`pruefer`) und **Steuerberatung liest `rules/at.go`** — erst dann echte Rechnungen.
 
 ## 9. Entscheidungen (2026-10-24)
 
