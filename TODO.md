@@ -25,6 +25,18 @@ Entwürfe: `proposals/{receiptctl,rolodexctl,invoicectl,review,networth}/`. Name
 - [x] `[C]` **`missionctl review --plain`** (2026-10-24): lokaler Wochenrückblick ohne KI (`--json`, `--days`, `--money`); neu `habctl stats --json`, `healthctl adherence --json`. Offen: `--to-note`, MCP-Prompt `weekly_review`, Monat/Trends
 - [~] `[N+C]` **invoicectl** — Phase 1 gebaut (privates Repo aeon022/invoicectl, Submodul): Store + Trigger + lückenlose Nummern + Regeln + Pure-Go-PDF + CLI + Tests; Entscheidungen 2026-10-24: Kleinunternehmer (privat), Brücke USt-befreit (`exempt`, Wortlaut der Steuerberatung), Format `2026-001`, PDF rein Go, Inland + Ausland (de/en). Opus-Review durch und eingearbeitet (u. a. `INSERT OR REPLACE` umging die Trigger → `recursive_triggers`). Offen: Steuerberatung liest `internal/rules/at.go`, Phase 2: `match` mit budgetctl und `line from-time`, MCP-Server (confirm-Pflicht) Dashboard-Karte und Doppelt-Abrechnen-Schutz gebaut (2026-10-24/25), (timectl), MCP, Dashboard-Karte, E-Rechnung
 - [-] **rolodexctl** (Kontakte, früher peoplectl) — Arbeitstitel, **zurückgestellt** bis review + invoicectl stehen; Gründe in `proposals/rolodexctl/README.md`
+- [x] `[C]` Umbenennung **belegctl → receiptctl** (2026-10-25): alle Namen der Suite englisch; Repo, Submodul, Docs, Review, MCP umgestellt
+- [ ] `[C]` Ideen 2026-10-25 (alle aufgenommen, Reihenfolge = Abarbeitung):
+  - [ ] Lizenzschlüssel nicht mehr als Argument an die Tools reichen (Standardeingabe)
+  - [ ] receiptctl: Papierkorb statt Sofort-Löschen, `add_receipt` ohne Pfad-Race, Dashboard-Karte
+  - [ ] budgetctl: MCP `balances` + Dashboard-Karte
+  - [ ] `missionctl review`: Zeilen für invoicectl (überfällig, Entwürfe) und receiptctl (ungeprüft, ohne Buchung)
+  - [ ] invoicectl: Mahnentwürfe (`remind`; nur Text/Entwurf, nie automatisch senden)
+  - [ ] invoicectl: wiederkehrende Rechnungen (Vorlage → monatlich ein Entwurf, Ausstellen bleibt manuell)
+  - [ ] Jahrespaket für die Steuerberatung (Einnahmen invoicectl + Ausgaben receiptctl/budgetctl in einem Export)
+  - [ ] receiptctl ↔ invoicectl: Belege einem Projekt/einer Rechnung zuordnen und anzeigen
+  - [ ] einheitliches `--json`-Rahmenformat, Man-Pages
+  - [ ] später: rolodexctl (Kontakte) — invoicectl steht, review steht; E-Rechnung/Reverse Charge erst nach Steuerberatung
 - [ ] `[N+C]` Subagents `pruefer`/`go-kleinkram` liegen in `.claude/agents/` (wirken ab dem nächsten Sitzungsstart)
 
 ## Erledigt am 23.10.2026
