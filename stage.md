@@ -1,4 +1,4 @@
-# missionctl — Stand 2026-10-08
+# missionctl — Stand 2026-10-26
 
 Gedächtnis-Datei für zukünftige Sessions. Pfade, Commits und Befehle sind so genau, dass man nachprüfen kann, ob sie noch stimmen. Der ältere Stand (2026-08-04: postctl-Kampagne, Homebrew, Landing-Page, AI-Gating) steht unverändert in [`docs/archive/stage-2026-08-04.md`](docs/archive/stage-2026-08-04.md) und gilt dort weiter.
 
@@ -8,6 +8,16 @@ Regeln aus Memory/CLAUDE.md, die weiter gelten: lokal committen, **pushen nur au
 
 ---
 
+
+## Nachtrag 2026-10-26 (neue Tools, Dashboard, Probelauf offen)
+- **Neue Tools (je eigenes Repo/Submodul, privat):** `invoicectl` (Rechnungen AT, Cent-Beträge, unveränderliche ausgestellte Rechnungen per SQL-Trigger, lückenlose Zähler; `match`, `line from-time`, `remind`, `recurring`, `project`, MCP; Regeln in `internal/rules/at.go` **noch von der Steuerberatung zu prüfen**, Rechnungen bis dahin nur Entwürfe), `receiptctl` (früher `belegctl`, umbenannt; Papierkorb, TOCTOU-sichere Datei-Aufnahme, Karte im Dashboard), `rolodexctl` (Apple Kontakte, `sync/due/touch/scan`, MCP; **Kontakte-Zugriff nie gegen das echte Adressbuch gelaufen**: erst `rolodexctl doctor`, dann `sync`).
+- **Verknüpfung Belege↔Rechnungen** über das Projekt-Label (`invoicectl project NAME` vergleicht Umsatz mit `receiptctl list --json --project`).
+- **Dashboard:** Body-Cache (`gen`, `bodyKey`) gegen Ruckeln beim Scrollen; neue Karten Invoices (`i`), Receipts (`e`), Wealth (`w`), People (`c`); `missionctl yearpack --out DIR` (Jahrespaket); `review` mit Rechnungs-/Kontakt-Überblick (Beträge nur mit `--money`).
+- **Lizenz:** `<tool> license activate [key|-]` liest den Schlüssel auch von stdin; `missionctl license activate` nutzt das nur, wenn `--help` „standard input“ nennt. Der Bundle-Schlüssel wurde einmal versehentlich im Chat ausgegeben; Gerwin lässt ihn bewusst, so wie er ist (Chat privat, bereits verkauft) — **nicht erneuern/widerrufen**, das würde den verkauften Schlüssel ungültig machen.
+- **notectl:** Apple-Checklisten werden nie überschrieben (`ErrChecklistNote`, `Report.Protected`). **Probelauf des Mirrors steht aus** (Plan: `~/notectl-trial/RUNBOOK.md`, Backup: `~/Backups/notectl-probelauf-2026-10-25/`); `notectl.yaml` erst danach aktivieren.
+- **Alle Tools:** Man-Pages (`<tool> man`), postctl Mausrad. Einheitliches `--json` bewusst **nicht** gebaut (bräche Dashboard/Review/Yearpack).
+- **Offen, Gerwin:** Probelauf, rolodexctl-Erstlauf, Steuerberatung (`at.go`), Testkauf, Rechtsprüfung postctl 28.10., Endkontrolle 31.10., postctl v0.5.0 nur auf Okay. Erinnerung in Apple Erinnerungen („missionctl: offene Punkte“).
+- **Nebenprojekt:** `hatchbay` (macOS-Dock-App, eigenes privates Repo, siehe dessen STAGE.md) ist nicht Teil der Suite.
 
 ## Nachtrag 2026-10-19 (notectl Mirror/Checkboxen — offen)
 - notectl-Mirror Apple↔Obsidian ist **nicht aktiviert** und darf es erst nach Umsetzung des TODO-Abschnitts „notectl: Apple↔Obsidian-Mirror mit Checkboxen“ werden. Grund: Apple-Checkboxen müssen zwingend als Checkboxen gesynct werden; der Mirror liest den Checklisten-Zustand nicht (`internal/notes/apple_sqlite.go` `ChecklistState` wird nur von der TUI genutzt) und `mirror.go` `PushToApple` überschreibt den Apple-Body. Vault: `/Users/gweiher/Obsidian/Gerwin-Vault/`. Umsetzung beim nächsten Überarbeiten der Tools (Entscheidung des Nutzers: Option 2, Mirror reparieren).
