@@ -6,6 +6,8 @@
 > Commit `5dff9ce`) geschrieben und danach nicht mehr nachgezogen. Diese Roadmap spiegelt
 > den Stand nach direkter Code-Verifikation (grep über alle TUIs), nicht mehr den Audit-Text.
 
+> **Nachtrag 2026-10-26:** Seit dem letzten Stand sind `receiptctl`, `invoicectl` und `rolodexctl` dazugekommen (jetzt 14 Tools, Dashboard mit 15 Karten) sowie Man-Pages und `missionctl yearpack`. Der aktuelle Stand steht in [`STAGE.md`](STAGE.md), offene Punkte in [`TODO.md`](TODO.md); die folgenden Abschnitte spiegeln noch den Stand vom 2026-07-20.
+
 ---
 
 ## Vision
