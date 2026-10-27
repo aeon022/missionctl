@@ -57,6 +57,8 @@ calctl — Calendar (Apple Calendar)
   calctl list --week --json             → this week's events
   calctl free --next 7 --min 60         → free slots, next 7 days, ≥60min
   calctl add "Title" --date Y-M-D --time HH:MM --duration 1h [--cal NAME]
+  calctl update "Title" --on Y-M-D [--start Y-M-DTHH:MM] [--end ...] [--title ..] [--location ..] [--notes ..] [--calendar ..]
+                                        → change an existing event on request (MCP: update_event); report before/after to the user
 
 taskctl — Tasks (Apple Reminders)
   taskctl today --json                  → due today + overdue
