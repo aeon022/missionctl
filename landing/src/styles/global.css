@@ -7,13 +7,14 @@
   --color-terminal-code-bg: #0d0d14;
   --color-terminal-border: #1e1e2e;
   --color-terminal-border-rgb: 30,30,46;
+  --color-terminal-border-strong: #585c78; /* controls (ghost buttons, tabs, inputs): 3:1 on the page, the hairline above is for decoration */
   --color-terminal-green: #00d97e;
   --color-terminal-green-rgb: 0,217,126;
   --color-terminal-green-hover: #00c070;
-  --color-terminal-blue: #6366f1;
+  --color-terminal-blue: #818cf8;
   --color-terminal-amber: #f59e0b;
   --color-terminal-red: #ef4444;
-  --color-terminal-muted: #6b7a90;
+  --color-terminal-muted: #8794ab;
   --color-terminal-text: #e2e8f0;
   --color-terminal-code-text: #a0aec0;
   --color-terminal-dim: #718096;
@@ -37,10 +38,14 @@
   --color-terminal-code-bg: #eef0f3;
   --color-terminal-border: #e2e8f0;
   --color-terminal-border-rgb: 226,232,240;
+  --color-terminal-border-strong: #7f8a9a;
+  --color-terminal-blue: #4f46e5;
+  --color-terminal-amber: #92400e;
+  --color-terminal-red: #b91c1c;
   --color-terminal-green: #047857;
   --color-terminal-green-rgb: 4,120,87;
   --color-terminal-green-hover: #065f46;
-  --color-terminal-muted: #627080;
+  --color-terminal-muted: #566273;
   --color-terminal-text: #1a1a28;
   --color-terminal-code-text: #3d4451;
   --color-terminal-dim: #5a6472;
@@ -655,3 +660,7 @@ p code, li code, td code, dd code, .docs-main code { overflow-wrap: anywhere; }
 main { max-width: 100%; }
 
 .docs-main table { display: block; max-width: 100%; overflow-x: auto; }
+
+/* Controls need a visible edge (WCAG 1.4.11, 3:1). The page uses inline styles with the hairline border color, hence !important. */
+.hero-cta-secondary, [class*="cta-secondary"], .theme-tab, input:not([type="checkbox"]):not([type="radio"]), select, textarea { border-color: var(--color-terminal-border-strong) !important; }
+.theme-tab[aria-pressed="true"], .theme-tab:hover { border-color: var(--color-terminal-green) !important; }

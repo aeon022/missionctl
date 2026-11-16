@@ -33,17 +33,17 @@ const features = [
   <section style="padding: 10rem 1.5rem 5rem; max-width: 1100px; margin: 0 auto;">
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;" class="hero-grid">
       <div>
-        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #6366f1; margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
+        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--color-terminal-blue); margin-bottom: 1rem; letter-spacing: 0.1em; text-transform: uppercase;">
           missionctl suite &middot; macOS
         </div>
         <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; line-height: 1.1; letter-spacing: -0.03em; color: var(--color-terminal-text); margin: 0 0 1rem;">
-          <span style="font-family: 'JetBrains Mono', monospace; color: #6366f1;">calctl</span>
+          <span style="font-family: 'JetBrains Mono', monospace; color: var(--color-terminal-blue);">calctl</span>
         </h1>
         <p style="font-size: 1.25rem; font-weight: 600; color: var(--color-terminal-text); margin: 0 0 0.75rem;"><span class="lang-en">Calendar from your Terminal</span><span class="lang-de">Kalender aus deinem Terminal</span></p>
         <p style="color: var(--color-terminal-dim); font-size: 1rem; line-height: 1.65; margin: 0 0 2rem;"><span class="lang-en">Browse calendar, create events, and find free slots via Apple Calendar. 7 MCP tools for AI-powered scheduling.</span><span class="lang-de">Kalender durchsuchen, Termine erstellen und freie Slots finden über Apple Kalender. 7 MCP-Tools für KI-gestützte Terminplanung.</span></p>
         <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
           <a href="https://github.com/aeon022/calctl/releases/latest" target="_blank" rel="noopener"
-            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: #6366f1; color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
+            style="display: inline-flex; align-items: center; padding: 0.75rem 1.25rem; background: var(--color-terminal-blue); color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s;"
             class="cta-primary">
             <span class="lang-en">Download &mdash; Free</span><span class="lang-de">Herunterladen &mdash; Kostenlos</span>
           </a>
@@ -63,13 +63,13 @@ const features = [
 <span style="color:var(--color-terminal-code-text)">Scanning: Work, Personal, Shared</span>
 
 <span style="color:var(--color-terminal-code-text)">Free slots this week:</span>
-  <span style="color:#f59e0b">Mon</span>  <span style="color:#6366f1">09:00-11:00</span>  <span style="color:var(--color-terminal-muted)">2h</span>
-  <span style="color:#f59e0b">Mon</span>  <span style="color:#6366f1">14:30-17:00</span>  <span style="color:var(--color-terminal-muted)">2h30m</span>
-  <span style="color:#f59e0b">Wed</span>  <span style="color:#6366f1">10:00-12:00</span>  <span style="color:var(--color-terminal-muted)">2h</span>
-  <span style="color:#f59e0b">Fri</span>  <span style="color:#6366f1">13:00-17:00</span>  <span style="color:var(--color-terminal-muted)">4h</span>
+  <span style="color:#f59e0b">Mon</span>  <span style="color:var(--color-terminal-blue)">09:00-11:00</span>  <span style="color:var(--color-terminal-muted)">2h</span>
+  <span style="color:#f59e0b">Mon</span>  <span style="color:var(--color-terminal-blue)">14:30-17:00</span>  <span style="color:var(--color-terminal-muted)">2h30m</span>
+  <span style="color:#f59e0b">Wed</span>  <span style="color:var(--color-terminal-blue)">10:00-12:00</span>  <span style="color:var(--color-terminal-muted)">2h</span>
+  <span style="color:#f59e0b">Fri</span>  <span style="color:var(--color-terminal-blue)">13:00-17:00</span>  <span style="color:var(--color-terminal-muted)">4h</span>
 
 <span style="color:var(--color-terminal-muted)">$ </span>calctl add <span style="color:var(--color-terminal-code-text)">"Team sync"</span> --start <span style="color:var(--color-terminal-code-text)">"Mon 10:00"</span> --dur 1h
-<span style="color:#6366f1">&#x2713;</span> <span style="color:var(--color-terminal-code-text)">Created in Apple Calendar</span><span class="cursor-blink" style="color:#6366f1">&#x2588;</span>`} />
+<span style="color:var(--color-terminal-blue)">&#x2713;</span> <span style="color:var(--color-terminal-code-text)">Created in Apple Calendar</span><span class="cursor-blink" style="color:var(--color-terminal-blue)">&#x2588;</span>`} />
       </div>
     </div>
   </section>
@@ -88,7 +88,7 @@ const features = [
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;" class="features-grid">
         {features.map((feat: {title: string; title_de: string; desc: string; desc_de: string}) => (
           <div style="background: var(--color-terminal-bg); border: 1px solid var(--color-terminal-border); border-radius: 8px; padding: 1.5rem; transition: border-color 0.2s;" class="feature-card">
-            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: #6366f1; margin: 0 0 0.5rem;"><span class="lang-en">{feat.title}</span><span class="lang-de">{feat.title_de}</span></h3>
+            <h3 style="font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; font-weight: 700; color: var(--color-terminal-blue); margin: 0 0 0.5rem;"><span class="lang-en">{feat.title}</span><span class="lang-de">{feat.title_de}</span></h3>
             <p style="color: var(--color-terminal-dim); font-size: 0.875rem; line-height: 1.6; margin: 0;"><span class="lang-en">{feat.desc}</span><span class="lang-de">{feat.desc_de}</span></p>
           </div>
         ))}
@@ -126,7 +126,7 @@ const features = [
   <section style="padding: 4rem 1.5rem; background: var(--color-terminal-surface); border-top: 1px solid var(--color-terminal-border); border-bottom: 1px solid var(--color-terminal-border);">
     <div style="max-width: 1100px; margin: 0 auto;">
       <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-terminal-text); margin: 0 0 0.5rem; letter-spacing: -0.02em;"><span class="lang-en">MCP Tools</span><span class="lang-de">MCP-Tools</span></h2>
-      <p style="color: var(--color-terminal-dim); font-size: 0.875rem; margin: 0 0 2rem;"><span class="lang-en">Available via</span><span class="lang-de">Verfügbar über</span> <code style="font-family: 'JetBrains Mono', monospace; background: var(--color-terminal-bg); padding: 0.1em 0.4em; border-radius: 3px; color: #6366f1;">calctl mcp</code></p>
+      <p style="color: var(--color-terminal-dim); font-size: 0.875rem; margin: 0 0 2rem;"><span class="lang-en">Available via</span><span class="lang-de">Verfügbar über</span> <code style="font-family: 'JetBrains Mono', monospace; background: var(--color-terminal-bg); padding: 0.1em 0.4em; border-radius: 3px; color: var(--color-terminal-blue);">calctl mcp</code></p>
       <div style="border: 1px solid var(--color-terminal-border); border-radius: 8px; overflow: hidden;">
         <table style="width: 100%; border-collapse: collapse;">
           <thead>
@@ -138,7 +138,7 @@ const features = [
           <tbody>
             {mcpTools.map((tool: {name: string; desc: string}, i: number) => (
               <tr style={`background: ${i % 2 === 0 ? 'var(--color-terminal-surface)' : 'var(--color-terminal-code-bg)'}; border-bottom: 1px solid var(--color-terminal-border);`}>
-                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-word; color: #6366f1;">{tool.name}</td>
+                <td style="padding: 0.75rem 1.25rem; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; word-break: break-word; color: var(--color-terminal-blue);">{tool.name}</td>
                 <td style="padding: 0.75rem 1.25rem; font-size: 0.875rem; color: var(--color-terminal-dim);">{tool.desc}</td>
               </tr>
             ))}
@@ -159,7 +159,7 @@ const features = [
     </p>
     <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
       <a href="https://github.com/aeon022/calctl/releases/latest" target="_blank" rel="noopener"
-        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: #6366f1; color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(99,102,241,0.2);"
+        style="display: inline-flex; align-items: center; padding: 0.875rem 1.5rem; background: var(--color-terminal-blue); color: var(--color-terminal-bg); border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.875rem; font-weight: 700; text-decoration: none; transition: all 0.15s; box-shadow: 0 4px 20px rgba(99,102,241,0.2);"
             class="cta-primary">
             <span class="lang-en">Download &mdash; Free</span><span class="lang-de">Herunterladen &mdash; Kostenlos</span>
           </a>
@@ -183,6 +183,6 @@ const features = [
     .features-grid { grid-template-columns: 1fr !important; }
   }
   .cta-primary:hover { background: #4f46e5 !important; transform: translateY(-2px); box-shadow: 0 8px 30px rgba(99,102,241,0.3) !important; }
-  .cta-secondary:hover { border-color: rgba(99,102,241,0.3) !important; color: #6366f1 !important; }
+  .cta-secondary:hover { border-color: rgba(99,102,241,0.3) !important; color: var(--color-terminal-blue) !important; }
   .feature-card:hover { border-color: rgba(99,102,241,0.2) !important; }
 </style>
